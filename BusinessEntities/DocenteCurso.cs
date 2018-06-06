@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntities
 {
-    class DocenteCurso
+    class DocenteCurso : BusinessEntity
     {
         private TiposCargos _Cargo;
         public TiposCargos Cargo
