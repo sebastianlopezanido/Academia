@@ -32,7 +32,7 @@ namespace BusinessEntities
             Deleted,
             New,
             Modified,
-            UNmodified
+            Unmodified
         }
     }
 }

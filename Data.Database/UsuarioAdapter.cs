@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Business.Entities;
+using BusinessEntities;
 
 namespace Data.Database
 {
@@ -64,7 +64,7 @@ namespace Data.Database
             return new List<Usuario>(Usuarios);
         }
 
-        public Business.Entities.Usuario GetOne(int ID)
+        public BusinessEntities.Usuario GetOne(int ID)
         {
             return Usuarios.Find(delegate(Usuario u) { return u.ID == ID; });
         }
