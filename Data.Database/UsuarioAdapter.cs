@@ -18,38 +18,38 @@ namespace Data.Database
             {
                 if (_Usuarios == null)
                 {
-                    _Usuarios = new List<Business.Entities.Usuario>();
-                    Business.Entities.Usuario usr;
-                    usr = new Business.Entities.Usuario();
+                    _Usuarios = new List<BusinessEntities.Usuario>();
+                    BusinessEntities.Usuario usr;
+                    usr = new BusinessEntities.Usuario();
                     usr.ID = 1;
-                    usr.State = Business.Entities.BusinessEntity.States.Unmodified;
+                    usr.State = BusinessEntities.BusinessEntity.States.Unmodified;
                     usr.Nombre = "Casimiro";
                     usr.Apellido = "Cegado";
                     usr.NombreUsuario = "casicegado";
                     usr.Clave = "miro";
-                    usr.EMail = "casimirocegado@gmail.com";
+                    usr.Email = "casimirocegado@gmail.com";
                     usr.Habilitado = true;
                     _Usuarios.Add(usr);
 
-                    usr = new Business.Entities.Usuario();
+                    usr = new BusinessEntities.Usuario();
                     usr.ID = 2;
-                    usr.State = Business.Entities.BusinessEntity.States.Unmodified;
+                    usr.State = BusinessEntities.BusinessEntity.States.Unmodified;
                     usr.Nombre = "Armando Esteban";
                     usr.Apellido = "Quito";
                     usr.NombreUsuario = "aequito";
                     usr.Clave = "carpintero";
-                    usr.EMail = "armandoquito@gmail.com";
+                    usr.Email = "armandoquito@gmail.com";
                     usr.Habilitado = true;
                     _Usuarios.Add(usr);
 
-                    usr = new Business.Entities.Usuario();
+                    usr = new BusinessEntities.Usuario();
                     usr.ID = 3;
-                    usr.State = Business.Entities.BusinessEntity.States.Unmodified;
+                    usr.State = BusinessEntities.BusinessEntity.States.Unmodified;
                     usr.Nombre = "Alan";
                     usr.Apellido = "Brado";
                     usr.NombreUsuario = "alanbrado";
                     usr.Clave = "abrete sesamo";
-                    usr.EMail = "alanbrado@gmail.com";
+                    usr.Email = "alanbrado@gmail.com";
                     usr.Habilitado = true;
                     _Usuarios.Add(usr);
 
