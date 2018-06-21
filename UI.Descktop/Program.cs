@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessEntities;
+using BusinessLogic;
 
-namespace UI.Descktop
+namespace UI.Desktop
 {
     static class Program
     {
@@ -16,7 +18,7 @@ namespace UI.Descktop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Usuarios());
+            Application.Run(new UsuarioDesktop());
         }
     }
 }

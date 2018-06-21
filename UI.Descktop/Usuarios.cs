@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using BusinessEntities;
 using BusinessLogic;
 
-namespace UI.Descktop
+namespace UI.Desktop
 {
     public partial class Usuarios : Form
     {

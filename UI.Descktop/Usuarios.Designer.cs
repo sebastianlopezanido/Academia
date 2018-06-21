@@ -1,4 +1,4 @@
-﻿namespace UI.Descktop
+﻿namespace UI.Desktop
 {
     partial class Usuarios
     {

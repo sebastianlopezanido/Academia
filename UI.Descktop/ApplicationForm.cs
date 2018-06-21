@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UI.Descktop
+namespace UI.Desktop
 {
     public partial class ApplicationForm : Form
     {
@@ -44,7 +44,7 @@ namespace UI.Descktop
         public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
             this.Notificar(this.Text, mensaje, botones, icono);
-        }
+        }
 
 
 

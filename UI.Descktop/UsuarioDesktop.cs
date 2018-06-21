@@ -10,9 +10,9 @@ using System.Windows.Forms;
 using BusinessEntities;
 using BusinessLogic;
 
-namespace UI.Descktop
+namespace UI.Desktop
 {
-    public partial class UsuarioDesktop : ApplicationForm
+    public partial class UsuarioDesktop : Form
     {
         public UsuarioDesktop()
         {
@@ -33,7 +33,20 @@ namespace UI.Descktop
             this.MapearDeDatos();
         }
 
+        public enum ModoForm //deberia heredarse
+        {
+            Alta,
+            Baja,
+            Modificacion,
+            Consulta
+        }
 
+        private ModoForm _Modo;
+        public ModoForm Modo
+        {
+            get { return Modo; }
+            set { _Modo = value; }
+        }
 
 
 
@@ -50,7 +63,7 @@ namespace UI.Descktop
 
 
 
-        public override void MapearDeDatos()
+        public void MapearDeDatos()
         {
             this.txtID.Text = this.UsuarioActual.ID.ToString();
             this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
@@ -72,22 +85,44 @@ namespace UI.Descktop
             }
             
         }
-        public void MapearADatos() { }
+        public void MapearADatos()
+        {
+            switch (this.Modo)
+            {
+                case ModoForm.Alta: UsuarioActual = new Usuario();
+                                    this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
+                                    this.UsuarioActual.Nombre = this.txtNombre.Text;
+                                    this.UsuarioActual.Apellido = this.txtApellido.Text;
+                                    this.UsuarioActual.Email = this.txtEmail.Text;
+                                    this.UsuarioActual.Clave = this.txtClave.Text;
+                                    this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
+                                    this.UsuarioActual.State = Usuario.States.New;
+
+                    break;              
+                case ModoForm.Modificacion: this.UsuarioActual.ID = int.Parse(this.txtID.Text);
+                                            this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
+                                            this.UsuarioActual.Nombre = this.txtNombre.Text;
+                                            this.UsuarioActual.Apellido = this.txtApellido.Text;
+                                            this.UsuarioActual.Email = this.txtEmail.Text;
+                                            this.UsuarioActual.Clave = this.txtClave.Text;
+                                            this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
+                                            this.UsuarioActual.State = Usuario.States.Modified;
+                    break;
+                case ModoForm.Baja:
+                    this.UsuarioActual.State = Usuario.States.Deleted;
+                    break;
+                case ModoForm.Consulta:
+                    this.UsuarioActual.State = Usuario.States.Unmodified;
+                    break;
+            }
+
+        }
         public void GuardarCambios() { }
-        public bool Validar() { return false; }
-
-        public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
+        public bool Validar()
         {
-            MessageBox.Show(mensaje, titulo, botones, icono);
-        }
-        public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
-        {
-            this.Notificar(this.Text, mensaje, botones, icono);
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
+            return false;
 
         }
+
     }
 }
