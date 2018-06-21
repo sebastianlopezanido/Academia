@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Descktop", "UI.Descktop\UI.Descktop.csproj", "{CAC10E4A-5387-426E-8EDA-383E3690D63F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Desktop", "UI.Descktop\UI.Desktop.csproj", "{CAC10E4A-5387-426E-8EDA-383E3690D63F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "Business\BusinessLogic.csproj", "{08F4032C-2D84-46CB-A9FD-51F087948C78}"
 EndProject
