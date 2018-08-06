@@ -49,5 +49,39 @@ namespace UI.Desktop
         {
             this.Close();
         }
+
+        private void tbsNuevo_Click(object sender, EventArgs e)
+        {
+            UsuarioDesktop ud = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);
+            ud.ShowDialog();
+            this.Listar();
+
+
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+
+            if(this.dgvUsuarios.SelectedRows != null && this.dgvUsuarios.MultiSelect == false && this.dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            {
+                int ID = ((BusinessEntities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+
+
+            }           
+
+
+        }
+
+        private void tsbEliminar_Click(object sender, EventArgs e)
+        {
+            if (this.dgvUsuarios.SelectedRows != null && this.dgvUsuarios.MultiSelect == false && this.dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            {
+                int ID = ((BusinessEntities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Baja);
+
+
+            }
+        }
     }
 }

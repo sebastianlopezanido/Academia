@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessEntities;
 using BusinessLogic;
+using System.Net.Mail;
 
 namespace UI.Desktop
 {
-    public partial class UsuarioDesktop : Form
+    public partial class UsuarioDesktop : ApplicationForm
     {
         public UsuarioDesktop()
         {
@@ -33,24 +34,8 @@ namespace UI.Desktop
             this.MapearDeDatos();
         }
 
-        public enum ModoForm //deberia heredarse
-        {
-            Alta,
-            Baja,
-            Modificacion,
-            Consulta
-        }
-
-        private ModoForm _Modo;
-        public ModoForm Modo
-        {
-            get { return Modo; }
-            set { _Modo = value; }
-        }
-
-
-
-
+        
+        
 
         private Usuario _UsuarioActual;
         public Usuario UsuarioActual
@@ -60,10 +45,7 @@ namespace UI.Desktop
         }
 
 
-
-
-
-        public void MapearDeDatos()
+        public override void MapearDeDatos()
         {
             this.txtID.Text = this.UsuarioActual.ID.ToString();
             this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
@@ -85,7 +67,7 @@ namespace UI.Desktop
             }
             
         }
-        public void MapearADatos()
+        public override void MapearADatos()
         {
             switch (this.Modo)
             {
@@ -117,12 +99,60 @@ namespace UI.Desktop
             }
 
         }
-        public void GuardarCambios() { }
-        public bool Validar()
+        public override void GuardarCambios()
         {
-            return false;
+            this.MapearADatos();
+            UsuarioLogic ul = new UsuarioLogic();
+            ul.Save(UsuarioActual);
+        }
+        public override bool Validar()
+        {
+            if(string.IsNullOrEmpty(this.txtNombre.Text) || string.IsNullOrEmpty(this.txtApellido.Text) 
+                || string.IsNullOrEmpty(this.txtEmail.Text) || string.IsNullOrEmpty(this.txtClave.Text)
+                || string.IsNullOrEmpty(this.txtConfirmarClave.Text) || string.IsNullOrEmpty(this.txtUsuario.Text))
+            {
+                Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if(this.txtClave.Text != this.txtConfirmarClave.Text )
+            {
+                Notificar("Claves no coinciden", "Las claves deben ser iguales", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (this.txtClave.Text.Length < 8)
+            {
+                Notificar("Clave no segura", "La clave debe ser mayor a 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            try
+            {
+                new MailAddress(this.txtEmail.Text);               
+            }
+            catch (FormatException)
+            {
+                Notificar("Email no valido", "Ingrese un Email valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
 
         }
 
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            if (this.Validar())
+            {
+                this.GuardarCambios();
+                this.Close();
+            }
+            
+        }        
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

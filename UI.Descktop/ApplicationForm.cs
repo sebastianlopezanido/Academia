@@ -14,7 +14,7 @@ namespace UI.Desktop
     {
         public ApplicationForm()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
 
         public enum ModoForm
@@ -28,7 +28,7 @@ namespace UI.Desktop
         private ModoForm _Modo;
         public ModoForm Modo
         {
-            get { return Modo; }
+            get { return _Modo; }
             set { _Modo = value; }
         }
 
