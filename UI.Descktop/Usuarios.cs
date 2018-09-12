@@ -12,7 +12,7 @@ using BusinessLogic;
 
 namespace UI.Desktop
 {
-    public partial class Usuarios : Form
+    public partial class Usuarios : ApplicationForm
     {
         public Usuarios()
         {
@@ -29,10 +29,19 @@ namespace UI.Desktop
         {
 
         }
+
         public void Listar()
         {
-            UsuarioLogic ul = new UsuarioLogic();
-            this.dgvUsuarios.DataSource = ul.GetAll();
+            try
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                this.dgvUsuarios.DataSource = ul.GetAll();
+            }
+            catch (Exception Ex)
+            {               
+                MessageBox.Show(Ex.Message);
+            }
+            
         }
 
         private void Usuarios_Load(object sender, EventArgs e)
@@ -53,6 +62,7 @@ namespace UI.Desktop
         private void tbsNuevo_Click(object sender, EventArgs e)
         {
             UsuarioDesktop ud = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);
+            
             ud.ShowDialog();
             this.Listar();
 
@@ -66,7 +76,8 @@ namespace UI.Desktop
             {
                 int ID = ((BusinessEntities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
                 UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-
+                ud.ShowDialog();
+                this.Listar();
 
             }           
 
@@ -79,9 +90,15 @@ namespace UI.Desktop
             {
                 int ID = ((BusinessEntities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
                 UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Baja);
-
+                ud.ShowDialog();
+                this.Listar();
 
             }
+        }
+
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

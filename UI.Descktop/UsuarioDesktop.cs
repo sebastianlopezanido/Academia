@@ -18,7 +18,6 @@ namespace UI.Desktop
         public UsuarioDesktop()
         {
             InitializeComponent();
-
         }
 
         public UsuarioDesktop(ModoForm modo):this()
@@ -33,10 +32,7 @@ namespace UI.Desktop
             UsuarioActual = cu.GetOne(id);
             this.MapearDeDatos();
         }
-
         
-        
-
         private Usuario _UsuarioActual;
         public Usuario UsuarioActual
         {
@@ -44,8 +40,7 @@ namespace UI.Desktop
             set { _UsuarioActual = value; }
         }
 
-
-        public override void MapearDeDatos()
+         public override void MapearDeDatos()
         {
             this.txtID.Text = this.UsuarioActual.ID.ToString();
             this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
@@ -54,10 +49,12 @@ namespace UI.Desktop
             this.txtEmail.Text = this.UsuarioActual.Email;
             this.txtClave.Text = this.UsuarioActual.Clave;
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
+            this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
 
             switch(this.Modo)
             {
                 case ModoForm.Alta:
+                    break;
                 case ModoForm.Modificacion: this.btnAceptar.Text = "Guardar";
                     break;
                 case ModoForm.Baja: this.btnAceptar.Text = "Eliminar";

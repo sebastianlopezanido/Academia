@@ -87,6 +87,7 @@
             // 
             // txtID
             // 
+            this.txtID.Cursor = System.Windows.Forms.Cursors.No;
             this.txtID.Location = new System.Drawing.Point(130, 3);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
@@ -132,6 +133,7 @@
             // 
             this.txtConfirmarClave.Location = new System.Drawing.Point(384, 138);
             this.txtConfirmarClave.Name = "txtConfirmarClave";
+            this.txtConfirmarClave.PasswordChar = '*';
             this.txtConfirmarClave.Size = new System.Drawing.Size(100, 20);
             this.txtConfirmarClave.TabIndex = 6;
             // 
@@ -236,7 +238,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UsuarioDesktop";
             this.Text = "UsuarioDesktop";
-            //this.Load += new System.EventHandler(this.UsuarioDesktop_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

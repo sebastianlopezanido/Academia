@@ -27,9 +27,19 @@ namespace BusinessLogic
         {
             return UsuarioData.GetOne(ID);
         }
+
         public List<Usuario> GetAll()
         {
-            return UsuarioData.GetAll();
+            try
+            {
+                return UsuarioData.GetAll();               
+            }
+            catch (Exception Ex)
+            {               
+                throw;
+            }
+
+            //return UsuarioData.GetAll();
         }
 
         public void Save(BusinessEntities.Usuario usuario)
