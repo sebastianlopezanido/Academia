@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("UI.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("rg-adguard")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("UI.Web")]
-[assembly: AssemblyCopyright("Copyright © rg-adguard 2018")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("799a3d5c-d81f-4a48-b32a-e3705d90882f")]
+[assembly: Guid("e1f2c74b-ac73-4fa2-a726-d634726507e4")]
 
 // Version information for an assembly consists of the following four values:
 //
