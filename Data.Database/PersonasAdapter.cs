@@ -1,74 +1,77 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using BusinessEntities;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Data.Database
 {
-    public class UsuarioAdapter:Adapter
+    public class PersonasAdapter : Adapter
     {
-        public List<Usuario> GetAll()
+        public List<Personas> GetAll()
         {
-            List<Usuario> usuarios = new List<Usuario>();
+            List<Personas> personas = new List<Personas>();
 
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdUsuarios = new SqlCommand("select * from usuarios", sqlConn);
-                SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
+                SqlCommand cmdPersonas = new SqlCommand("select * from personas", sqlConn);
+                SqlDataReader drPersonas = cmdPersonas.ExecuteReader();
 
-                while (drUsuarios.Read())
+                while (drPersonas.Read())
                 {
-                    Usuario usr = new Usuario();
+                    Personas prs = new Personas();
 
-                    usr.ID = (int)drUsuarios["id_usuario"];
-                    usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
-                    usr.Clave = (string)drUsuarios["clave"];
-                    usr.Habilitado = (bool)drUsuarios["habilitado"];
-                    usr.Nombre = (string)drUsuarios["nombre"];
-                    usr.Apellido = (string)drUsuarios["apellido"];
-                    usr.Email = (string)drUsuarios["email"];
-                    usuarios.Add(usr);
+                    prs.ID = (int)drPersonas["id_persona"];
+                    prs.Apellido = (string)drPersonas["apellido"];
+                    prs.Nombre = (string)drPersonas["nombre"];
+                    prs.Email = (string)drPersonas["email"];
+                    prs.FechaNacimiento = (DateTime)drPersonas["fecha_nac"];
+                    prs.IDPlan = (int)drPersonas["id_plan"];
+                    prs.Legajo = (int)drPersonas["legajo"];
+                    prs.Telefono = (string)drPersonas["telefono"];
+                    prs.TipoPersona = (Personas.TiposPersonas)drPersonas["tipo_persona"];
+                    personas.Add(prs);
                 }
-
-                drUsuarios.Close();
+                drPersonas.Close();
             }
 
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada = new Exception("Error al recuperar lista de usuarios", Ex);
+                Exception ExcepcionManejada = new Exception("Error al recuperar lista de personas", Ex);
                 throw ExcepcionManejada;
             }
 
             finally
             {
                 this.CloseConnection();
-            }            
-            return usuarios;
+            }
+            return personas;
         }
 
         public BusinessEntities.Usuario GetOne(int ID)
         {
-            Usuario usr = new Usuario();
+            Usuario prs = new Usuario();
             try
             {
                 this.OpenConnection();
                 SqlCommand cmdUsuarios = new SqlCommand("select * from usuarios where id_usuario=@id", sqlConn);
                 cmdUsuarios.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
-                if (drUsuarios.Read())
+                SqlDataReader drPersonas = cmdUsuarios.ExecuteReader();
+                if (drPersonas.Read())
                 {
-                    usr.ID = (int)drUsuarios["id_usuario"];
-                    usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
-                    usr.Clave = (string)drUsuarios["clave"];
-                    usr.Habilitado = (bool)drUsuarios["habilitado"];
-                    usr.Nombre = (string)drUsuarios["nombre"];
-                    usr.Apellido = (string)drUsuarios["apellido"];
-                    usr.Email = (string)drUsuarios["email"];
+                    prs.ID = (int)drPersonas["id_usuario"];
+                    prs.NombreUsuario = (string)drPersonas["nombre_usuario"];
+                    prs.Clave = (string)drPersonas["clave"];
+                    prs.Habilitado = (bool)drPersonas["habilitado"];
+                    prs.Nombre = (string)drPersonas["nombre"];
+                    prs.Apellido = (string)drPersonas["apellido"];
+                    prs.Email = (string)drPersonas["email"];
                 }
-                drUsuarios.Close();
+                drPersonas.Close();
             }
             catch (Exception Ex)
             {
@@ -79,7 +82,7 @@ namespace Data.Database
             {
                 this.CloseConnection();
             }
-            return usr;            
+            return prs;
         }
 
         public void Delete(int ID)
@@ -101,11 +104,11 @@ namespace Data.Database
             {
                 this.CloseConnection();
             }
-            
+
 
         }
 
-        protected void Update (Usuario usuario)
+        protected void Update(Usuario usuario)
         {
             try
             {
@@ -177,7 +180,5 @@ namespace Data.Database
             }
             usuario.State = BusinessEntity.States.Unmodified;
         }
-
-        
     }
 }
