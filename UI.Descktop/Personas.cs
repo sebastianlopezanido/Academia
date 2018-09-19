@@ -47,7 +47,7 @@ namespace UI.Desktop
         {
             this.Close();
         }
-        /*
+        
         private void tbsNuevo_Click(object sender, EventArgs e)
         {
             PersonasDesktop ud = new PersonasDesktop(ApplicationForm.ModoForm.Alta);
@@ -77,6 +77,6 @@ namespace UI.Desktop
                 this.Listar();
             }
         }
-        */
+        
     }
 }

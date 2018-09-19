@@ -52,30 +52,32 @@ namespace Data.Database
             return personas;
         }
 
-        public BusinessEntities.Usuario GetOne(int ID)
+        public BusinessEntities.Personas GetOne(int ID)
         {
-            Usuario prs = new Usuario();
+            Personas prs = new Personas();
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdUsuarios = new SqlCommand("select * from usuarios where id_usuario=@id", sqlConn);
-                cmdUsuarios.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drPersonas = cmdUsuarios.ExecuteReader();
+                SqlCommand cmdPersonas = new SqlCommand("select * from personas where id_persona=@id", sqlConn);
+                cmdPersonas.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                SqlDataReader drPersonas = cmdPersonas.ExecuteReader();
                 if (drPersonas.Read())
                 {
-                    prs.ID = (int)drPersonas["id_usuario"];
-                    prs.NombreUsuario = (string)drPersonas["nombre_usuario"];
-                    prs.Clave = (string)drPersonas["clave"];
-                    prs.Habilitado = (bool)drPersonas["habilitado"];
-                    prs.Nombre = (string)drPersonas["nombre"];
+                    prs.ID = (int)drPersonas["id_persona"];
                     prs.Apellido = (string)drPersonas["apellido"];
+                    prs.Nombre = (string)drPersonas["nombre"];
                     prs.Email = (string)drPersonas["email"];
+                    prs.FechaNacimiento = (DateTime)drPersonas["fecha_nac"];
+                    prs.IDPlan = (int)drPersonas["id_plan"];
+                    prs.Legajo = (int)drPersonas["legajo"];
+                    prs.Telefono = (string)drPersonas["telefono"];
+                    prs.TipoPersona = (Personas.TiposPersonas)drPersonas["tipo_persona"];
                 }
                 drPersonas.Close();
             }
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada = new Exception("Error al recuperar datos de usuario", Ex);
+                Exception ExcepcionManejada = new Exception("Error al recuperar datos de persona", Ex);
                 throw ExcepcionManejada;
             }
             finally
@@ -85,19 +87,21 @@ namespace Data.Database
             return prs;
         }
 
+        /*
+
         public void Delete(int ID)
         {
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete usuarios where id_usuario=@id", sqlConn);
+                SqlCommand cmdDelete = new SqlCommand("delete personas where id_persona=@id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 
                 cmdDelete.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada = new Exception("Error al eliminar usuario", Ex);
+                Exception ExcepcionManejada = new Exception("Error al eliminar persona", Ex);
                 throw ExcepcionManejada;
             }
             finally
@@ -108,12 +112,12 @@ namespace Data.Database
 
         }
 
-        protected void Update(Usuario usuario)
+        protected void Update(Personas personas)
         {
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand("UPDATE usuarios SET nombre_usuario = @nombre_usuario, " +
+                SqlCommand cmdSave = new SqlCommand("UPDATE personas SET nombre = @nombre, " +
                     "clave = @clave, habilitado = @habilitado, nombre = @nombre, apellido = @apellido, " +
                     "email = @email WHERE id_usuario = @id", sqlConn);
 
@@ -180,5 +184,7 @@ namespace Data.Database
             }
             usuario.State = BusinessEntity.States.Unmodified;
         }
+    */
     }
+
 }

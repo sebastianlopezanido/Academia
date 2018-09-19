@@ -20,12 +20,12 @@ namespace BusinessLogic
             set { _PersonasData = value; }
             get { return _PersonasData; }
         }
-        /*
+        
         public BusinessEntities.Personas GetOne(int ID)
         {
             return PersonasData.GetOne(ID);
         }
-        */
+        
 
         public List<Personas> GetAll()
         {

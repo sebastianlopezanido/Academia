@@ -80,6 +80,9 @@
     <EmbeddedResource Include="Personas.resx">
       <DependentUpon>Personas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PersonasDesktop.resx">
+      <DependentUpon>PersonasDesktop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UsuarioDesktop.resx">
       <DependentUpon>UsuarioDesktop.cs</DependentUpon>
     </EmbeddedResource>
