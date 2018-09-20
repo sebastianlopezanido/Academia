@@ -100,8 +100,10 @@
             this.tlPersonas.SetColumnSpan(this.dgvPersonas, 2);
             this.dgvPersonas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPersonas.Location = new System.Drawing.Point(3, 3);
+            this.dgvPersonas.MultiSelect = false;
             this.dgvPersonas.Name = "dgvPersonas";
             this.dgvPersonas.ReadOnly = true;
+            this.dgvPersonas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonas.Size = new System.Drawing.Size(544, 390);
             this.dgvPersonas.TabIndex = 0;
             // 
@@ -170,7 +172,7 @@
             this.tsbEliminar});
             this.tsPersonas.Location = new System.Drawing.Point(3, 0);
             this.tsPersonas.Name = "tsPersonas";
-            this.tsPersonas.Size = new System.Drawing.Size(112, 25);
+            this.tsPersonas.Size = new System.Drawing.Size(81, 25);
             this.tsPersonas.TabIndex = 0;
             // 
             // tsbNuevo
@@ -213,7 +215,6 @@
             this.ClientSize = new System.Drawing.Size(550, 450);
             this.Controls.Add(this.tcPersonas);
             this.Name = "Personas";
-            this.Text = "Personas";
             this.Load += new System.EventHandler(this.Personas_Load);
             this.tcPersonas.ContentPanel.ResumeLayout(false);
             this.tcPersonas.TopToolStripPanel.ResumeLayout(false);

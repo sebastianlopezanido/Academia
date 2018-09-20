@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using BusinessEntities;
 using System.Windows.Forms;
 using BusinessLogic;
+using System.Net.Mail;
 
 namespace UI.Desktop
 {
@@ -16,30 +17,32 @@ namespace UI.Desktop
     {
         public PersonasDesktop()
         {
-           
-
-            InitializeComponent();
-            Array valArray = Enum.GetValues(typeof(BusinessEntities.Personas.TiposPersonas));
-            foreach (BusinessEntities.Personas.TiposPersonas enumValue in valArray)
-            {
-                lbxTipo.Items.Add(enumValue);
-            }
-
+           InitializeComponent();
         }
 
-        public PersonasDesktop(ModoForm modo) : this()
+        public PersonasDesktop(ModoForm modo, BusinessEntities.Personas.TiposPersonas tipo) : this()
         {
             Modo = modo;
+            _Tipo = tipo;
         }
 
-        public PersonasDesktop(int id, ModoForm modo) : this()
+        public PersonasDesktop(int id, ModoForm modo, BusinessEntities.Personas.TiposPersonas tipo) : this()
         {
             Modo = modo;
+            _Tipo = tipo;
             PersonasLogic cp = new PersonasLogic(); //controlador :)
             PersonaActual = cp.GetOne(id);
             
             this.MapearDeDatos();
         }
+
+        private BusinessEntities.Personas.TiposPersonas _Tipo;
+        public BusinessEntities.Personas.TiposPersonas Tipo
+        {
+            set { _Tipo = value; }
+            get { return _Tipo; }
+        }
+
 
         private BusinessEntities.Personas _PersonaActual;
         public BusinessEntities.Personas PersonaActual
@@ -57,8 +60,7 @@ namespace UI.Desktop
             this.txtDireccion.Text = this.PersonaActual.Direccion;
             this.txtTelefono.Text = this.PersonaActual.Telefono;
             this.txtFecha.Text = this.PersonaActual.FechaNacimiento.ToString();
-            this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();
-            this.lbxTipo.SelectedItem = this.PersonaActual.TipoPersona.ToString();
+            this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();            
             this.txtIDPlan.Text = this.PersonaActual.IDPlan.ToString();
 
             switch (this.Modo)
@@ -83,32 +85,30 @@ namespace UI.Desktop
             {
                 case ModoForm.Alta:
                     PersonaActual = new BusinessEntities.Personas();
-
-                    this.PersonaActual.ID = int.Parse(this.txtID.Text);
+                    
                     this.PersonaActual.Nombre = this.txtNombre.Text;
                     this.PersonaActual.Apellido = this.txtApellido.Text;
                     this.PersonaActual.Email = this.txtEmail.Text;
                     this.PersonaActual.Direccion = this.txtDireccion.Text;
                     this.PersonaActual.Telefono = this.txtTelefono.Text;
                     this.PersonaActual.FechaNacimiento = DateTime.Parse(this.txtFecha.Text);
-                    this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
-                    this.PersonaActual.TipoPersona = (BusinessEntities.Personas.TiposPersonas)lbxTipo.SelectedItem;
+                    this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);                    
                     this.PersonaActual.IDPlan = int.Parse(this.txtIDPlan.Text);
+                    this.PersonaActual.TipoPersona = this.Tipo;
 
                     
                     this.PersonaActual.State = BusinessEntities.Personas.States.New;
 
                     break;
                 case ModoForm.Modificacion:
-                    this.PersonaActual.ID = int.Parse(this.txtID.Text);
+                    
                     this.PersonaActual.Nombre = this.txtNombre.Text;
                     this.PersonaActual.Apellido = this.txtApellido.Text;
                     this.PersonaActual.Email = this.txtEmail.Text;
                     this.PersonaActual.Direccion = this.txtDireccion.Text;
                     this.PersonaActual.Telefono = this.txtTelefono.Text;
                     this.PersonaActual.FechaNacimiento = DateTime.Parse(this.txtFecha.Text);
-                    this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
-                    this.PersonaActual.TipoPersona = (BusinessEntities.Personas.TiposPersonas)lbxTipo.SelectedItem;
+                    this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);                    
                     this.PersonaActual.IDPlan = int.Parse(this.txtIDPlan.Text);
 
 
@@ -123,7 +123,7 @@ namespace UI.Desktop
             }
 
         }
-        /*
+        
         public override void GuardarCambios()
         {
             this.MapearADatos();
@@ -133,25 +133,14 @@ namespace UI.Desktop
         public override bool Validar()
         {
             if (string.IsNullOrEmpty(this.txtNombre.Text) || string.IsNullOrEmpty(this.txtApellido.Text)
-                || string.IsNullOrEmpty(this.txtEmail.Text) || string.IsNullOrEmpty(this.txtClave.Text)
-                || string.IsNullOrEmpty(this.txtConfirmarClave.Text) || string.IsNullOrEmpty(this.txtPersonas.Text))
+                || string.IsNullOrEmpty(this.txtEmail.Text) || string.IsNullOrEmpty(this.txtDireccion.Text)
+                || string.IsNullOrEmpty(this.txtTelefono.Text) || string.IsNullOrEmpty(this.txtFecha.Text) 
+                || (string.IsNullOrEmpty(this.txtLegajo.Text)) || (string.IsNullOrEmpty(this.txtIDPlan.Text)))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
-            if (this.txtClave.Text != this.txtConfirmarClave.Text)
-            {
-                Notificar("Claves no coinciden", "Las claves deben ser iguales", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (this.txtClave.Text.Length < 8)
-            {
-                Notificar("Clave no segura", "La clave debe ser mayor a 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
+                   
             try
             {
                 new MailAddress(this.txtEmail.Text);
@@ -164,7 +153,7 @@ namespace UI.Desktop
             return true;
 
         }
-        */
+        
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -180,11 +169,7 @@ namespace UI.Desktop
         {
             this.Close();
         }
-
-        private void lbxTipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BusinessEntities.Personas.TiposPersonas tipo = (BusinessEntities.Personas.TiposPersonas)lbxTipo.SelectedItem;
-        }
+               
         
     }
 }

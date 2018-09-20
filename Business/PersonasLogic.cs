@@ -27,11 +27,11 @@ namespace BusinessLogic
         }
         
 
-        public List<Personas> GetAll()
+        public List<Personas> GetAll(BusinessEntities.Personas.TiposPersonas tipo)
         {
             try
             {
-                return PersonasData.GetAll();
+                return PersonasData.GetAll(tipo);
             }
             catch (Exception Ex)
             {
@@ -40,7 +40,7 @@ namespace BusinessLogic
 
             //return PersonasData.GetAll();
         }
-        /*
+        
         public void Save(BusinessEntities.Personas persona)
         {
             PersonasData.Save(persona);
@@ -50,6 +50,6 @@ namespace BusinessLogic
         {
             PersonasData.Delete(ID);
         }
-        */
+        
     }
 }

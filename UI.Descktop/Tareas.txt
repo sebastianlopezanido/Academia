@@ -1,0 +1,2 @@
+﻿- agregar manejo de excepciones en la UI en Personas (en usuarios ya esta(pero incompleto))
+//var conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString; //error usandola en sqlConn???     linea 30 Adapter.cs
