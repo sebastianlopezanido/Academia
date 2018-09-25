@@ -20,28 +20,23 @@ namespace UI.Desktop
            InitializeComponent();
         }
 
-        public PersonasDesktop(ModoForm modo, BusinessEntities.Personas.TiposPersonas tipo) : this()
+        public PersonasDesktop(ModoForm modo) : this()
         {
             Modo = modo;
-            _Tipo = tipo;
+            
         }
 
-        public PersonasDesktop(int id, ModoForm modo, BusinessEntities.Personas.TiposPersonas tipo) : this()
+        public PersonasDesktop(int id, ModoForm modo) : this()
         {
             Modo = modo;
-            _Tipo = tipo;
+      
             PersonasLogic cp = new PersonasLogic(); //controlador :)
             PersonaActual = cp.GetOne(id);
             
             this.MapearDeDatos();
         }
 
-        private BusinessEntities.Personas.TiposPersonas _Tipo;
-        public BusinessEntities.Personas.TiposPersonas Tipo
-        {
-            set { _Tipo = value; }
-            get { return _Tipo; }
-        }
+        
 
 
         private BusinessEntities.Personas _PersonaActual;
@@ -61,7 +56,7 @@ namespace UI.Desktop
             this.txtTelefono.Text = this.PersonaActual.Telefono;
             this.txtFecha.Text = this.PersonaActual.FechaNacimiento.ToString();
             this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();            
-            this.txtIDPlan.Text = this.PersonaActual.IDPlan.ToString();
+            
 
             switch (this.Modo)
             {
@@ -93,8 +88,7 @@ namespace UI.Desktop
                     this.PersonaActual.Telefono = this.txtTelefono.Text;
                     this.PersonaActual.FechaNacimiento = DateTime.Parse(this.txtFecha.Text);
                     this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);                    
-                    this.PersonaActual.IDPlan = int.Parse(this.txtIDPlan.Text);
-                    this.PersonaActual.TipoPersona = this.Tipo;
+                    
 
                     
                     this.PersonaActual.State = BusinessEntities.Personas.States.New;
@@ -109,7 +103,7 @@ namespace UI.Desktop
                     this.PersonaActual.Telefono = this.txtTelefono.Text;
                     this.PersonaActual.FechaNacimiento = DateTime.Parse(this.txtFecha.Text);
                     this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);                    
-                    this.PersonaActual.IDPlan = int.Parse(this.txtIDPlan.Text);
+                    
 
 
                     this.PersonaActual.State = BusinessEntities.Personas.States.Modified;

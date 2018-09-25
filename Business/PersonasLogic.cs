@@ -27,11 +27,11 @@ namespace BusinessLogic
         }
         
 
-        public List<Personas> GetAll(BusinessEntities.Personas.TiposPersonas tipo)
+        public List<Personas> GetAll()
         {
             try
             {
-                return PersonasData.GetAll(tipo);
+                return PersonasData.GetAll();
             }
             catch (Exception Ex)
             {

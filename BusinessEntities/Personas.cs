@@ -36,12 +36,6 @@ namespace BusinessEntities
             set { _FechaNacimiento = value; }
         }
 
-        private int _IDPlan;
-        public int IDPlan
-        {
-            get { return _IDPlan; }
-            set { _IDPlan = value; }
-        }
 
         private int _Legajo;
         public int Legajo
@@ -64,18 +58,7 @@ namespace BusinessEntities
             set { _Telefono = value; }
         }
 
-        private TiposPersonas _TipoPersona;
-        public TiposPersonas TipoPersona
-        {
-            get { return _TipoPersona; }
-            set { _TipoPersona = value; }
-        }
 
-        public enum TiposPersonas
-        {
-            Alumno,
-            Profesor,
-        }
 
 
     }

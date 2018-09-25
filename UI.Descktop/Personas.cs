@@ -21,25 +21,14 @@ namespace UI.Desktop
             
         }
 
-        public Personas(BusinessEntities.Personas.TiposPersonas tipo) : this()
-        {
-            _Tipo = tipo;
-            this.Text = Tipo.ToString();
-        }
-
-        private BusinessEntities.Personas.TiposPersonas _Tipo;
-        public BusinessEntities.Personas.TiposPersonas Tipo
-        {
-            set { _Tipo = value; }
-            get { return _Tipo; }
-        }
-
+      
+        
         public void Listar()
         {
             try
             {
                 PersonasLogic pl = new PersonasLogic();
-                this.dgvPersonas.DataSource = pl.GetAll(Tipo);
+                this.dgvPersonas.DataSource = pl.GetAll();
             }
             catch (Exception Ex)
             {
@@ -64,7 +53,7 @@ namespace UI.Desktop
         
         private void tbsNuevo_Click(object sender, EventArgs e)
         {
-            PersonasDesktop ud = new PersonasDesktop(ApplicationForm.ModoForm.Alta, Tipo);
+            PersonasDesktop ud = new PersonasDesktop(ApplicationForm.ModoForm.Alta);
 
             ud.ShowDialog();
             this.Listar();
@@ -75,7 +64,7 @@ namespace UI.Desktop
             if (this.dgvPersonas.SelectedRows != null && this.dgvPersonas.MultiSelect == false && this.dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((BusinessEntities.Personas)this.dgvPersonas.SelectedRows[0].DataBoundItem).ID;
-                PersonasDesktop ud = new PersonasDesktop(ID, ApplicationForm.ModoForm.Modificacion, Tipo);
+                PersonasDesktop ud = new PersonasDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 ud.ShowDialog();
                 this.Listar();
             }
@@ -86,7 +75,7 @@ namespace UI.Desktop
             if (this.dgvPersonas.SelectedRows != null && this.dgvPersonas.MultiSelect == false && this.dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((BusinessEntities.Personas)this.dgvPersonas.SelectedRows[0].DataBoundItem).ID;
-                PersonasDesktop ud = new PersonasDesktop(ID, ApplicationForm.ModoForm.Baja, Tipo);
+                PersonasDesktop ud = new PersonasDesktop(ID, ApplicationForm.ModoForm.Baja);
                 ud.ShowDialog();
                 this.Listar();
             }

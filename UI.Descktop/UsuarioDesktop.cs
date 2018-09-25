@@ -18,6 +18,9 @@ namespace UI.Desktop
         public UsuarioDesktop()
         {
             InitializeComponent();
+            this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Administrador);
+            this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Alumno);
+            this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Profesor);
         }
 
         public UsuarioDesktop(ModoForm modo):this()
@@ -44,9 +47,9 @@ namespace UI.Desktop
         {
             this.txtID.Text = this.UsuarioActual.ID.ToString();
             this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
-            this.txtNombre.Text = this.UsuarioActual.Nombre;
-            this.txtApellido.Text = this.UsuarioActual.Apellido;
-            this.txtEmail.Text = this.UsuarioActual.Email;
+            this.txtIdPersona.Text = this.UsuarioActual.IDPersona.ToString();
+            this.cbxTipo.SelectedItem = this.UsuarioActual.Tipo;
+            this.txtIdPlan.Text = this.UsuarioActual.IDPlan.ToString();
             this.txtClave.Text = this.UsuarioActual.Clave;
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
             this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
@@ -70,9 +73,9 @@ namespace UI.Desktop
             {
                 case ModoForm.Alta: UsuarioActual = new Usuario();
                                     this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-                                    this.UsuarioActual.Nombre = this.txtNombre.Text;
-                                    this.UsuarioActual.Apellido = this.txtApellido.Text;
-                                    this.UsuarioActual.Email = this.txtEmail.Text;
+                                    this.UsuarioActual.IDPersona = int.Parse(this.txtIdPersona.Text);
+                                    this.UsuarioActual.IDPlan = int.Parse(this.txtIdPlan.Text);
+                                    this.UsuarioActual.Tipo = (BusinessEntities.Usuario.TiposUsuario) this.cbxTipo.SelectedItem;
                                     this.UsuarioActual.Clave = this.txtClave.Text;
                                     this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
                                     this.UsuarioActual.State = Usuario.States.New;
@@ -80,9 +83,9 @@ namespace UI.Desktop
                     break;              
                 case ModoForm.Modificacion: this.UsuarioActual.ID = int.Parse(this.txtID.Text);
                                             this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-                                            this.UsuarioActual.Nombre = this.txtNombre.Text;
-                                            this.UsuarioActual.Apellido = this.txtApellido.Text;
-                                            this.UsuarioActual.Email = this.txtEmail.Text;
+                                            this.UsuarioActual.IDPersona = int.Parse(this.txtIdPersona.Text);
+                                            this.UsuarioActual.IDPlan = int.Parse(this.txtIdPlan.Text);
+                                            this.UsuarioActual.Tipo = (BusinessEntities.Usuario.TiposUsuario)this.cbxTipo.SelectedItem;
                                             this.UsuarioActual.Clave = this.txtClave.Text;
                                             this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
                                             this.UsuarioActual.State = Usuario.States.Modified;
@@ -104,8 +107,7 @@ namespace UI.Desktop
         }
         public override bool Validar()
         {
-            if(string.IsNullOrEmpty(this.txtNombre.Text) || string.IsNullOrEmpty(this.txtApellido.Text) 
-                || string.IsNullOrEmpty(this.txtEmail.Text) || string.IsNullOrEmpty(this.txtClave.Text)
+            if(string.IsNullOrEmpty(this.txtIdPersona.Text) || string.IsNullOrEmpty(this.txtIdPlan.Text) || string.IsNullOrEmpty(this.txtClave.Text)
                 || string.IsNullOrEmpty(this.txtConfirmarClave.Text) || string.IsNullOrEmpty(this.txtUsuario.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -124,15 +126,16 @@ namespace UI.Desktop
                 return false;
             }
 
-            try
+            /*try
             {
-                new MailAddress(this.txtEmail.Text);               
+                new MailAddress(this.txtIdPlan.Text);               
             }
             catch (FormatException)
             {
                 Notificar("Email no valido", "Ingrese un Email valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            */
             return true;
 
         }

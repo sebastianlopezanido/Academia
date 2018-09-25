@@ -11,15 +11,14 @@ namespace Data.Database
 {
     public class PersonasAdapter : Adapter
     {
-        public List<Personas> GetAll(BusinessEntities.Personas.TiposPersonas tipo)
+        public List<Personas> GetAll()
         {
             List<Personas> personas = new List<Personas>();
 
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdPersonas = new SqlCommand("select * from personas where tipo_persona = @tipo", sqlConn);
-                cmdPersonas.Parameters.Add("@tipo", SqlDbType.Int).Value = tipo;
+                SqlCommand cmdPersonas = new SqlCommand("select * from personas", sqlConn);
                 SqlDataReader drPersonas = cmdPersonas.ExecuteReader();
 
                 while (drPersonas.Read())
@@ -31,10 +30,8 @@ namespace Data.Database
                     prs.Nombre = (string)drPersonas["nombre"];
                     prs.Email = (string)drPersonas["email"];
                     prs.FechaNacimiento = (DateTime)drPersonas["fecha_nac"];
-                    prs.IDPlan = (int)drPersonas["id_plan"];
                     prs.Legajo = (int)drPersonas["legajo"];
                     prs.Telefono = (string)drPersonas["telefono"];
-                    prs.TipoPersona = (Personas.TiposPersonas)drPersonas["tipo_persona"];
                     personas.Add(prs);
                 }
                 drPersonas.Close();
@@ -69,7 +66,6 @@ namespace Data.Database
                     prs.Nombre = (string)drPersonas["nombre"];
                     prs.Email = (string)drPersonas["email"];
                     prs.FechaNacimiento = (DateTime)drPersonas["fecha_nac"];
-                    prs.IDPlan = (int)drPersonas["id_plan"];
                     prs.Legajo = (int)drPersonas["legajo"];
                     prs.Telefono = (string)drPersonas["telefono"];
                     prs.Direccion = (string)drPersonas["direccion"];                    
@@ -119,7 +115,7 @@ namespace Data.Database
             {
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand("UPDATE personas SET nombre = @nombre, " +
-                    "direccion = @direccion, telefono = @telefono, fecha_nac = @fecha_nac, legajo = @legajo, id_plan = @id_plan, apellido = @apellido, " +
+                    "direccion = @direccion, telefono = @telefono, fecha_nac = @fecha_nac, legajo = @legajo, apellido = @apellido, " +
                     "email = @email WHERE id_persona = @id", sqlConn);
 
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = personas.ID;
@@ -130,7 +126,7 @@ namespace Data.Database
                 cmdSave.Parameters.Add("@fecha_nac", SqlDbType.DateTime).Value = personas.FechaNacimiento;
                 cmdSave.Parameters.Add("@legajo", SqlDbType.Int).Value = personas.Legajo;
                 cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;                
-                cmdSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = personas.IDPlan;
+               
 
                 cmdSave.ExecuteNonQuery();
             }
@@ -151,7 +147,7 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand("insert into personas(nombre,apellido,direccion,telefono,email,fecha_nac,legajo,tipo_persona,id_plan) " + "values(@nombre,@apellido,@direccion,@telefono,@email,@fecha_nac,@legajo,@tipo_persona,@id_plan) " + "select @@identity", sqlConn);
+                SqlCommand cmdSave = new SqlCommand("insert into personas(nombre,apellido,direccion,telefono,email,fecha_nac,legajo) " + "values(@nombre,@apellido,@direccion,@telefono,@email,@fecha_nac,@legajo) " + "select @@identity", sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = personas.ID;
                 cmdSave.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = personas.Nombre;
                 cmdSave.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = personas.Apellido;
@@ -160,8 +156,8 @@ namespace Data.Database
                 cmdSave.Parameters.Add("@fecha_nac", SqlDbType.DateTime).Value = personas.FechaNacimiento;
                 cmdSave.Parameters.Add("@legajo", SqlDbType.Int).Value = personas.Legajo;
                 cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;
-                cmdSave.Parameters.Add("@tipo_persona", SqlDbType.Int).Value = personas.TipoPersona;
-                cmdSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = personas.IDPlan;
+                
+               
                 personas.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
             }
             catch (Exception Ex)
