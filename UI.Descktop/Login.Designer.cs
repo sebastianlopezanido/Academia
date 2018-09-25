@@ -65,6 +65,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(100, 20);
             this.txtUsuario.TabIndex = 2;
+            this.txtUsuario.Text = "admin";
             // 
             // txtPw
             // 
@@ -73,6 +74,7 @@
             this.txtPw.PasswordChar = '*';
             this.txtPw.Size = new System.Drawing.Size(100, 20);
             this.txtPw.TabIndex = 3;
+            this.txtPw.Text = "12345678";
             // 
             // linkOlvidePw
             // 

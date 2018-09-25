@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessEntities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,14 +15,60 @@ namespace UI.Desktop
     {
         public Menu(BusinessEntities.Usuario user)
         {
+            UsuarioActual = user;
             InitializeComponent();
+            this.Ocultar();
         }
+
+        private Usuario _UsuarioActual;
+        public Usuario UsuarioActual
+        {
+            get { return _UsuarioActual; }
+            set { _UsuarioActual = value; }
+        }
+
+        public void Ocultar()
+        {
+            if (UsuarioActual.Tipo == Usuario.TiposUsuario.Profesor || UsuarioActual.Tipo == Usuario.TiposUsuario.Alumno)
+            {
+                //aca se oculta lo del admin
+                this.btnAdmCom.Hide();
+                this.btnAdmPla.Hide();
+                this.btnAdmCur.Hide();
+                this.btnAdmEsp.Hide();
+                this.btnAdmMat.Hide();
+                this.btnAdmPrs.Hide();
+                this.btnAdmUsr.Hide();
+
+            }
+            if (UsuarioActual.Tipo == Usuario.TiposUsuario.Alumno || UsuarioActual.Tipo == Usuario.TiposUsuario.Administrador)
+            {
+                //aca se oculta lo del profesor (lo que ve el profesor va acá)
+                
+            }
+            if (UsuarioActual.Tipo == Usuario.TiposUsuario.Administrador || UsuarioActual.Tipo == Usuario.TiposUsuario.Profesor)
+            {
+                //aca se oculta lo del alumno
+                
+            }
+        }
+
+
 
         private void salir_Click(object sender, EventArgs e)
         {
 
-            Application.Exit();
+            this.Close();
+            Login log = Program.login;
+            log.Show();
             
+        }
+
+        private void btnAdmUsr_Click(object sender, EventArgs e)
+        {
+            Usuarios userForm = new Usuarios();
+            userForm.ShowDialog();
+            //this.Hide();
         }
     }
 }

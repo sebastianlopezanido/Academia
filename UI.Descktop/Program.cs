@@ -18,9 +18,27 @@ namespace UI.Desktop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Login());
-            Login login = new Login();
-            Application.Run(login);
+
+
+            Login log = login;
+            Application.Run(log);
+            //Application.Run(new Usuarios());
+        
+            
+        
+
+    }
+        public static Login login
+        {
+            get
+            {
+                if (_login == null)
+                {
+                    _login = new Login();
+                }
+                return _login;
+            }
         }
+        private static Login _login;
     }
 }
