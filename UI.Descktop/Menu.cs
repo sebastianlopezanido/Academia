@@ -1,4 +1,5 @@
 ﻿using BusinessEntities;
+using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,15 @@ namespace UI.Desktop
             UsuarioActual = user;
             InitializeComponent();
             this.Ocultar();
+
+            EspecialidadLogic el = new EspecialidadLogic();// Pasar a método
+            List<Especialidad> especialidades = el.GetAll();//Pasar a método
+            foreach (Especialidad element in especialidades)//Pasar a método
+            {
+                this.cbxEsp.Items.Add(element.Descripcion);//Pasar a método
+
+            }//Pasar a método
+
         }
 
         private Usuario _UsuarioActual;

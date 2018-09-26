@@ -9,12 +9,12 @@ namespace BusinessLogic
 {
     public class EspecialidadLogic : BusinessLogic
     {
-        /*
+        
         public EspecialidadLogic()
         {
             EspecialidadData = new Data.Database.EspecialidadAdapter();
         }
-        /*
+        
         private Data.Database.EspecialidadAdapter _EspecialidadData;
         public Data.Database.EspecialidadAdapter EspecialidadData
         {
@@ -22,10 +22,11 @@ namespace BusinessLogic
             get { return _EspecialidadData; }
         }
 
-        public BusinessEntities.Especialidad GetOne(int ID)
+        /*public BusinessEntities.Especialidad GetOne(int ID)
         {
             //return EspecialidadData.GetOne(ID);
         }
+        */
 
         public List<Especialidad> GetAll()
         {
@@ -50,6 +51,6 @@ namespace BusinessLogic
         {
             //EspecialidadData.Delete(ID);
         }
-        */
+        
     }
 }
