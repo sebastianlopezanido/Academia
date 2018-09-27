@@ -12,7 +12,7 @@ using BusinessLogic;
 
 namespace UI.Desktop
 {
-    public partial class Usuarios : ApplicationForm
+    public partial class Usuarios : Form
     {
         public Usuarios()
         {

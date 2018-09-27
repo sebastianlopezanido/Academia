@@ -4,4 +4,4 @@ en formulario de usuarios, mostrar nombre y apellido de persona relacionada"
 en formulario usuarioDesktop al elegir el id de persona, deberia haber otro formulario para elegir la persona
 Deshabilitar edit tipopersona,idplan id persona en usuariodesktop
 PREGUNTAR loginLogic validar si es usuario o no
-como unhidear el login
+click en la cruz en el menu no cierra todo (queda corriendo)

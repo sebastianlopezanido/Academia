@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace BusinessLogic
 {
     public class EspecialidadLogic : BusinessLogic
-    {
-        
+    {        
         public EspecialidadLogic()
         {
             EspecialidadData = new Data.Database.EspecialidadAdapter();
@@ -22,11 +21,11 @@ namespace BusinessLogic
             get { return _EspecialidadData; }
         }
 
-        /*public BusinessEntities.Especialidad GetOne(int ID)
+        public BusinessEntities.Especialidad GetOne(int ID)
         {
-            //return EspecialidadData.GetOne(ID);
+            return EspecialidadData.GetOne(ID);
         }
-        */
+       
 
         public List<Especialidad> GetAll()
         {
@@ -44,12 +43,12 @@ namespace BusinessLogic
 
         public void Save(BusinessEntities.Especialidad especialidad)
         {
-            //EspecialidadData.Save(especialidad);
+            EspecialidadData.Save(especialidad);
         }
 
         public void Delete(int ID)
         {
-            //EspecialidadData.Delete(ID);
+            EspecialidadData.Delete(ID);
         }
         
     }

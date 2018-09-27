@@ -70,6 +70,7 @@ namespace UI.Desktop
             this.btnAdmPrs.TabIndex = 3;
             this.btnAdmPrs.Text = "Personas";
             this.btnAdmPrs.UseVisualStyleBackColor = true;
+            this.btnAdmPrs.Click += new System.EventHandler(this.btnAdmPrs_Click);
             // 
             // btnAdmEsp
             // 
@@ -79,6 +80,7 @@ namespace UI.Desktop
             this.btnAdmEsp.TabIndex = 4;
             this.btnAdmEsp.Text = "Especialidades";
             this.btnAdmEsp.UseVisualStyleBackColor = true;
+            this.btnAdmEsp.Click += new System.EventHandler(this.btnAdmEsp_Click);
             // 
             // btnAdmPla
             // 
@@ -88,6 +90,7 @@ namespace UI.Desktop
             this.btnAdmPla.TabIndex = 5;
             this.btnAdmPla.Text = "Planes";
             this.btnAdmPla.UseVisualStyleBackColor = true;
+            this.btnAdmPla.Click += new System.EventHandler(this.btnAdmPla_Click);
             // 
             // btnAdmMat
             // 

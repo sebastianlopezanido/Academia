@@ -154,5 +154,10 @@ namespace UI.Desktop
         {
             this.Close();
         }
+
+        private void cbxTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

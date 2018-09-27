@@ -20,13 +20,7 @@ namespace UI.Desktop
             InitializeComponent();
             this.Ocultar();
 
-            EspecialidadLogic el = new EspecialidadLogic();// Pasar a método
-            List<Especialidad> especialidades = el.GetAll();//Pasar a método
-            foreach (Especialidad element in especialidades)//Pasar a método
-            {
-                this.cbxEsp.Items.Add(element.Descripcion);//Pasar a método
-
-            }//Pasar a método
+            
 
         }
 
@@ -79,6 +73,24 @@ namespace UI.Desktop
             Usuarios userForm = new Usuarios();
             userForm.ShowDialog();
             //this.Hide();
+        }
+
+        private void btnAdmPrs_Click(object sender, EventArgs e)
+        {
+            Personas prsForm = new Personas();
+            prsForm.ShowDialog();
+        }
+
+        private void btnAdmEsp_Click(object sender, EventArgs e)
+        {
+            Especialidades espForm = new Especialidades();
+            espForm.ShowDialog();
+        }
+
+        private void btnAdmPla_Click(object sender, EventArgs e)
+        {
+            Planes planesForm = new Planes();
+            planesForm.ShowDialog();
         }
     }
 }
