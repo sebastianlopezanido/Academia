@@ -43,6 +43,7 @@
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="EspecialidadLogic.cs" />
     <Compile Include="LoginLogic.cs" />
+    <Compile Include="MateriaLogic.cs" />
     <Compile Include="PersonasLogic.cs" />
     <Compile Include="PlanLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

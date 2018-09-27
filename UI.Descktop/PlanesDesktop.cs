@@ -67,7 +67,7 @@ namespace UI.Desktop
 
         public override void MapearADatos()
         {
-            Especialidad esp;
+            
             switch (this.Modo)
             {
                 case ModoForm.Alta:
@@ -94,7 +94,7 @@ namespace UI.Desktop
 
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(this.txtDescripcion.Text))
+            if (string.IsNullOrEmpty(this.txtDescripcion.Text) || this.cbxEsp.SelectedValue == null)
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

@@ -48,7 +48,15 @@ namespace BusinessLogic
 
         public void Delete(int ID)
         {
-            EspecialidadData.Delete(ID);
+            try
+            {
+                EspecialidadData.Delete(ID);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
         
     }

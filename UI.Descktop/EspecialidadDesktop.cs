@@ -42,6 +42,7 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
+            this.txtID.Text = this.EspecialidadActual.ID.ToString();
             this.txtDescripcion.Text = this.EspecialidadActual.Descripcion.ToString();      
 
             switch (this.Modo)
@@ -98,7 +99,14 @@ namespace UI.Desktop
         {
             this.MapearADatos();
             EspecialidadLogic el = new EspecialidadLogic();
-            el.Save(EspecialidadActual);
+            try
+            {
+                el.Save(EspecialidadActual);
+            }
+            catch(Exception ex)
+            {
+                Notificar("Error",ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

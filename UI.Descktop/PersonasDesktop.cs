@@ -129,7 +129,7 @@ namespace UI.Desktop
             if (string.IsNullOrEmpty(this.txtNombre.Text) || string.IsNullOrEmpty(this.txtApellido.Text)
                 || string.IsNullOrEmpty(this.txtEmail.Text) || string.IsNullOrEmpty(this.txtDireccion.Text)
                 || string.IsNullOrEmpty(this.txtTelefono.Text) || string.IsNullOrEmpty(this.txtFecha.Text) 
-                || (string.IsNullOrEmpty(this.txtLegajo.Text)) || (string.IsNullOrEmpty(this.txtIDPlan.Text)))
+                || (string.IsNullOrEmpty(this.txtLegajo.Text)))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

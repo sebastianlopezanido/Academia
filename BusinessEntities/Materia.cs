@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntities
 {
-    class Materia : BusinessEntity
+    public class Materia : BusinessEntity
     {
         private string _Descripcion;
         public string Descripcion

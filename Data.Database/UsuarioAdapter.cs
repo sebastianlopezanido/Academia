@@ -102,6 +102,12 @@ namespace Data.Database
                     usr.IDPlan = (int)drUsuarios["id_plan"];
                     usr.Tipo = (BusinessEntities.Usuario.TiposUsuario)drUsuarios["tipo_usuario"];
                 }
+                else
+                {
+                    Exception ExcepcionManejada = new Exception("Usuario/clave no validos");
+                    throw ExcepcionManejada;
+                }
+
                 drUsuarios.Close();
             }
             catch (Exception Ex)

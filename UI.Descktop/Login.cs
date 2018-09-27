@@ -11,7 +11,7 @@ using BusinessLogic;
 
 namespace UI.Desktop
 {
-    public partial class Login : Form
+    public partial class Login : ApplicationForm
     {
         public Login()
         {
@@ -23,12 +23,11 @@ namespace UI.Desktop
             try
             {
                 LoginLogic ll = new LoginLogic();
-                BusinessEntities.Usuario usr = new BusinessEntities.Usuario();
+               
                 string nombreUsuario = this.txtUsuario.Text;
                 string clave = this.txtPw.Text;
-                usr = ll.ValidarDatos(nombreUsuario, clave);
-
                 
+                BusinessEntities.Usuario usr = ll.ValidarDatos(nombreUsuario, clave);
                 Menu menu = new Menu(usr);
                
                 menu.Show();
@@ -38,7 +37,7 @@ namespace UI.Desktop
             }
             catch (Exception Ex)
             {
-                MessageBox.Show(Ex.Message);
+                Notificar("Error",Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -44,7 +44,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtTipo = new System.Windows.Forms.TextBox();
             this.cbxTipo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -72,7 +71,6 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label7, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtTipo, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.cbxTipo, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -216,13 +214,6 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Confirmar Clave";
             // 
-            // txtTipo
-            // 
-            this.txtTipo.Location = new System.Drawing.Point(130, 182);
-            this.txtTipo.Name = "txtTipo";
-            this.txtTipo.Size = new System.Drawing.Size(100, 20);
-            this.txtTipo.TabIndex = 4;
-            // 
             // cbxTipo
             // 
             this.cbxTipo.FormattingEnabled = true;
@@ -262,7 +253,6 @@
         private System.Windows.Forms.TextBox txtIdPersona;
         private System.Windows.Forms.TextBox txtIdPlan;
         private System.Windows.Forms.TextBox txtClave;
-        private System.Windows.Forms.TextBox txtTipo;
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtConfirmarClave;
         private System.Windows.Forms.CheckBox chkHabilitado;

@@ -51,8 +51,7 @@ namespace UI.Desktop
             this.cbxTipo.SelectedItem = this.UsuarioActual.Tipo;
             this.txtIdPlan.Text = this.UsuarioActual.IDPlan.ToString();
             this.txtClave.Text = this.UsuarioActual.Clave;
-            this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
-            this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
+            this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;            
 
             switch(this.Modo)
             {

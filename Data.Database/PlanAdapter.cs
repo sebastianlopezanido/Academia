@@ -132,7 +132,7 @@ namespace Data.Database
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand("insert into planes(desc_plan,id_especialidad) " + "values(@desc_plan,@id_especialidad)" + "select @@identity", sqlConn);
                 cmdSave.Parameters.Add("desc_plan", SqlDbType.VarChar, 50).Value = plan.Descripcion;
-                cmdSave.Parameters.Add("id_especialidad", SqlDbType.VarChar, 50).Value = plan.IDEspecialidad;
+                cmdSave.Parameters.Add("id_especialidad", SqlDbType.Int).Value = plan.IDEspecialidad;
                 plan.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
 
             }

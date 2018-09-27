@@ -9,6 +9,9 @@ namespace Data.Database
 {
     public class Adapter
     {
+        //Clave por defecto a utlizar para la cadena de conexion
+        const string consKeyDefaultCnnString = "ConnStringExpressLocal";
+
         private SqlConnection _sqlConn;
         public SqlConnection sqlConn
         {
@@ -27,11 +30,12 @@ namespace Data.Database
 
         protected void OpenConnection()
         {
-            //var conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString; //error usandola en sqlConn???
-            string conn1 = "Server=localhost\\SqlExpress;Database=tp2_net;Integrated Security=true;"; 
+            var conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString; //error usandola en sqlConn???
+            //string conn = "Server=localhost\\SqlExpress;Database=tp2_net;Integrated Security=true;"; 
 
 
-            sqlConn = new SqlConnection(conn1);
+
+            sqlConn = new SqlConnection(conn);
             sqlConn.Open();
 
             //throw new Exception("Metodo no implementado");
@@ -49,7 +53,6 @@ namespace Data.Database
         {
             throw new Exception("Metodo no implementado");
         }
-        //Clave por defecto a utlizar para la cadena de conexion
-        const string consKeyDefaultCnnString = "ConnStringExpressLocal";
+
     }
 }

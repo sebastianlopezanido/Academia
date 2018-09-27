@@ -149,7 +149,15 @@ namespace Data.Database
         {
             if (especialidad.State == BusinessEntity.States.Deleted)
             {
-                this.Delete(especialidad.ID);
+                try
+                {
+                    this.Delete(especialidad.ID);
+                }
+                catch(Exception ex)
+                {
+                    throw;
+                }
+                
             }
             else if (especialidad.State == BusinessEntity.States.New)
             {

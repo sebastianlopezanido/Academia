@@ -38,8 +38,6 @@ namespace UI.Desktop
             this.btnAdmMat = new System.Windows.Forms.Button();
             this.btnAdmCom = new System.Windows.Forms.Button();
             this.btnAdmCur = new System.Windows.Forms.Button();
-            this.cbxEsp = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // salir
@@ -100,6 +98,7 @@ namespace UI.Desktop
             this.btnAdmMat.TabIndex = 6;
             this.btnAdmMat.Text = "Materias";
             this.btnAdmMat.UseVisualStyleBackColor = true;
+            this.btnAdmMat.Click += new System.EventHandler(this.btnAdmMat_Click);
             // 
             // btnAdmCom
             // 
@@ -119,30 +118,11 @@ namespace UI.Desktop
             this.btnAdmCur.Text = "Cursos";
             this.btnAdmCur.UseVisualStyleBackColor = true;
             // 
-            // cbxEsp
-            // 
-            this.cbxEsp.FormattingEnabled = true;
-            this.cbxEsp.Location = new System.Drawing.Point(240, 28);
-            this.cbxEsp.Name = "cbxEsp";
-            this.cbxEsp.Size = new System.Drawing.Size(121, 21);
-            this.cbxEsp.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(237, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Prueba lista especialidades";
-            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(436, 253);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbxEsp);
             this.Controls.Add(this.btnAdmCur);
             this.Controls.Add(this.btnAdmCom);
             this.Controls.Add(this.btnAdmMat);
@@ -154,7 +134,6 @@ namespace UI.Desktop
             this.Name = "Menu";
             this.Text = "Menu";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -170,7 +149,5 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnAdmMat;
         private System.Windows.Forms.Button btnAdmCom;
         private System.Windows.Forms.Button btnAdmCur;
-        private System.Windows.Forms.ComboBox cbxEsp;
-        private System.Windows.Forms.Label label1;
     }
 }

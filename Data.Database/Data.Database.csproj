@@ -63,6 +63,7 @@
     <Compile Include="Adapter.cs" />
     <Compile Include="EspecialidadAdapter.cs" />
     <Compile Include="LoginAdapter.cs" />
+    <Compile Include="MateriaAdapter.cs" />
     <Compile Include="PersonasAdapter.cs" />
     <Compile Include="PlanAdapter.cs" />
     <Compile Include="UsuarioAdapter.cs" />
@@ -81,6 +82,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

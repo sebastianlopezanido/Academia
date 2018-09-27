@@ -92,5 +92,11 @@ namespace UI.Desktop
             Planes planesForm = new Planes();
             planesForm.ShowDialog();
         }
+
+        private void btnAdmMat_Click(object sender, EventArgs e)
+        {
+            Materias materiasForm = new Materias();
+            materiasForm.ShowDialog();
+        }
     }
 }

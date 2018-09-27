@@ -18,17 +18,12 @@ namespace BusinessLogic
             try
             {
                 BusinessEntities.Usuario usr = ul.GetOne(nombreUsuario, clave);
-                if (usr.NombreUsuario != null)
-                {
-                    return usr;
-                }
-
-                Exception ErrorLogin = new Exception("Usuario y/o contraseña incorrectos");
-                throw ErrorLogin;
+                return usr;
+                
             }
             catch (Exception Ex)
             {
-                throw;
+                throw Ex;
             }            
         }
     }
