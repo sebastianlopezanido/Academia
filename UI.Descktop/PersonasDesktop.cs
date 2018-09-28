@@ -120,9 +120,17 @@ namespace UI.Desktop
         
         public override void GuardarCambios()
         {
-            this.MapearADatos();
-            PersonasLogic pl = new PersonasLogic();
-            pl.Save(PersonaActual);
+            try
+            {
+                this.MapearADatos();
+                PersonasLogic pl = new PersonasLogic();
+                pl.Save(PersonaActual);
+            }
+            catch (Exception ex)
+            {
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
         public override bool Validar()
         {

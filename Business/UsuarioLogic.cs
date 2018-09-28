@@ -34,7 +34,7 @@ namespace BusinessLogic
             {
                 return UsuarioData.GetOne(nombreUsuario, clave);
             }
-            catch (Exception Ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -47,7 +47,7 @@ namespace BusinessLogic
             {
                 return UsuarioData.GetAll();               
             }
-            catch (Exception Ex)
+            catch (Exception)
             {               
                 throw;
             }

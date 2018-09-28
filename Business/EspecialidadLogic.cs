@@ -33,7 +33,7 @@ namespace BusinessLogic
             {
                 return EspecialidadData.GetAll();
             }
-            catch (Exception Ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -43,20 +43,13 @@ namespace BusinessLogic
 
         public void Save(BusinessEntities.Especialidad especialidad)
         {
-            EspecialidadData.Save(especialidad);
+           EspecialidadData.Save(especialidad); 
         }
 
         public void Delete(int ID)
         {
-            try
-            {
-                EspecialidadData.Delete(ID);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-            
+            EspecialidadData.Delete(ID);
+ 
         }
         
     }

@@ -33,7 +33,7 @@ namespace BusinessLogic
             {
                 return PersonasData.GetAll();
             }
-            catch (Exception Ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -43,7 +43,9 @@ namespace BusinessLogic
         
         public void Save(BusinessEntities.Personas persona)
         {
+           
             PersonasData.Save(persona);
+    
         }
 
         public void Delete(int ID)

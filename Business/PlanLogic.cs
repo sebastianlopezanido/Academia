@@ -33,7 +33,7 @@ namespace BusinessLogic
             {
                 return PlanData.GetAll();
             }
-            catch (Exception Ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -48,14 +48,8 @@ namespace BusinessLogic
 
         public void Delete(int ID)
         {
-            try
-            {
+            
                 PlanData.Delete(ID);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
             
         }
     }

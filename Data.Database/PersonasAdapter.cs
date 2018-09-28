@@ -174,6 +174,9 @@ namespace Data.Database
 
         public void Save(Personas personas)
         {
+            
+
+            
             if (personas.State == BusinessEntity.States.Deleted)
             {
                 this.Delete(personas.ID);
@@ -187,8 +190,9 @@ namespace Data.Database
                 this.Update(personas);
             }
             personas.State = BusinessEntity.States.Unmodified;
-        }
-    
+            }
+           
+
     }
 
 }

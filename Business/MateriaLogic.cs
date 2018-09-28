@@ -33,7 +33,7 @@ namespace BusinessLogic
             {
                 return MateriaData.GetAll();
             }
-            catch (Exception Ex)
+            catch (Exception)
             {
                 throw;
             }

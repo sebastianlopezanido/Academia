@@ -105,9 +105,18 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            this.MapearADatos();
-            PlanLogic el = new PlanLogic();
-            el.Save(PlanActual);
+            try
+            {
+                this.MapearADatos();
+                PlanLogic el = new PlanLogic();
+                el.Save(PlanActual);
+
+            }
+            catch(Exception ex)
+            {
+                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
