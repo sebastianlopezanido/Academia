@@ -22,7 +22,7 @@ namespace BusinessEntities
             set { _Clave = value; }
         }
 
-        /*private string _Nombre;
+        private string _Nombre;
         public string Nombre
         {
             get { return _Nombre; }
@@ -42,7 +42,7 @@ namespace BusinessEntities
             get { return _Email; }
             set { _Email = value; }
         }
-        */
+        
         private bool _Habilitado;
         public  bool Habilitado
         {

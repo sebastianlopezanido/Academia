@@ -73,6 +73,7 @@
             // txtID
             // 
             this.txtID.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtID.Cursor = System.Windows.Forms.Cursors.No;
             this.txtID.Location = new System.Drawing.Point(116, 8);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;

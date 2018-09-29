@@ -65,7 +65,7 @@ namespace Data.Database
             }
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada = new Exception("Error al recuperar datos de Especialidades", Ex);
+                Exception ExcepcionManejada = new Exception("Error al recuperar datos de especialidades", Ex);
                 throw ExcepcionManejada;
             }
             finally

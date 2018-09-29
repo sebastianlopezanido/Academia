@@ -108,6 +108,7 @@ namespace UI.Desktop
             this.btnAdmCom.TabIndex = 7;
             this.btnAdmCom.Text = "Comisiones";
             this.btnAdmCom.UseVisualStyleBackColor = true;
+            this.btnAdmCom.Click += new System.EventHandler(this.btnAdmCom_Click);
             // 
             // btnAdmCur
             // 
