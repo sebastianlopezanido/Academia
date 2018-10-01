@@ -21,11 +21,14 @@ namespace UI.Desktop
             this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Administrador);
             this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Alumno);
             this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Profesor);
+
+            
         }
 
         public UsuarioDesktop(ModoForm modo):this()
         {
             Modo = modo;
+            
         }
 
         public UsuarioDesktop(int id,ModoForm modo) : this()
@@ -34,6 +37,7 @@ namespace UI.Desktop
             UsuarioLogic cu = new UsuarioLogic(); //controlador :)
             UsuarioActual = cu.GetOne(id);
             this.MapearDeDatos();
+            this.Ocultar();
         }
         
         private Usuario _UsuarioActual;
@@ -66,6 +70,7 @@ namespace UI.Desktop
             }
             
         }
+
         public override void MapearADatos()
         {
             switch (this.Modo)
@@ -98,12 +103,14 @@ namespace UI.Desktop
             }
 
         }
+
         public override void GuardarCambios()
         {
             this.MapearADatos();
             UsuarioLogic ul = new UsuarioLogic();
             ul.Save(UsuarioActual);
         }
+
         public override bool Validar()
         {
             if(string.IsNullOrEmpty(this.txtIdPersona.Text) || string.IsNullOrEmpty(this.txtIdPlan.Text) || string.IsNullOrEmpty(this.txtClave.Text)
@@ -139,6 +146,18 @@ namespace UI.Desktop
 
         }
 
+        public void Ocultar()
+        {
+            if (Modo != ModoForm.Alta )
+            {
+                
+                this.btnBuscarPersona.Hide();
+                
+
+            }
+            
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (this.Validar())
@@ -158,5 +177,24 @@ namespace UI.Desktop
         {
 
         }
+
+  
+
+        private void btnBuscarPersona_Click(object sender, EventArgs e)
+        {
+            FindPersona findPersonaForm = new FindPersona();
+            findPersonaForm.pasado += new FindPersona.pasar(ejecutar);
+            findPersonaForm.ShowDialog();
+          
+
+
+        }
+
+        public void ejecutar(int dato)
+        {
+            this.txtIdPersona.Text = dato.ToString();
+        }
+
+
     }
 }
