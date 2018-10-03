@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntities
 {
-    class Curso : BusinessEntity
+    public class Curso : BusinessEntity
     {
         private int _AnioCalendario;
         public int AnioCalendario
@@ -20,14 +20,7 @@ namespace BusinessEntities
         {
             get { return _Cupo; }
             set { _Cupo = value; }
-        }
-
-        private string _Descripcion;
-        public string Descripcion
-        {
-            get { return _Descripcion; }
-            set { _Descripcion = value; }
-        }
+        }        
 
         private int _IDComision;
         public int IDComision

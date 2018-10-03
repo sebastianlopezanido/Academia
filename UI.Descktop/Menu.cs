@@ -104,5 +104,11 @@ namespace UI.Desktop
             Comisiones comisionesForm = new Comisiones();
             comisionesForm.ShowDialog();
         }
+
+        private void btnAdmCur_Click(object sender, EventArgs e)
+        {
+            Cursos cursosForm = new Cursos();
+            cursosForm.ShowDialog();
+        }
     }
 }

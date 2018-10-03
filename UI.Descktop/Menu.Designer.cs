@@ -118,6 +118,7 @@ namespace UI.Desktop
             this.btnAdmCur.TabIndex = 8;
             this.btnAdmCur.Text = "Cursos";
             this.btnAdmCur.UseVisualStyleBackColor = true;
+            this.btnAdmCur.Click += new System.EventHandler(this.btnAdmCur_Click);
             // 
             // Menu
             // 

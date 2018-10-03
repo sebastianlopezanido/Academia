@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Adapter.cs" />
     <Compile Include="ComisionAdapter.cs" />
+    <Compile Include="CursoAdapter.cs" />
     <Compile Include="EspecialidadAdapter.cs" />
     <Compile Include="LoginAdapter.cs" />
     <Compile Include="MateriaAdapter.cs" />
