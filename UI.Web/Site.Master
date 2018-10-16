@@ -2,18 +2,15 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>Academia</title>
 </head>
 <body>
     <form id="bodyForm" runat="server">
         <asp:Menu runat="server" ID="menu" DataSourceID="SiteMapDataSource">
-
         </asp:Menu>
-        
         <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
-        
         <div>
             <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>
