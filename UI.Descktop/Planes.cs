@@ -76,5 +76,10 @@ namespace UI.Desktop
         {
             this.Close();
         }
+
+        private void asdToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

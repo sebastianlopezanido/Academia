@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Planes));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -41,12 +42,22 @@
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asdToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.asdToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.asdToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.sdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sdfToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sdfToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanes)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -156,10 +167,11 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnEditar,
-            this.btnEliminar});
+            this.btnEliminar,
+            this.toolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(81, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(110, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnNuevo
@@ -192,6 +204,73 @@
             this.btnEliminar.ToolTipText = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.asdToolStripMenuItem,
+            this.asdToolStripMenuItem1,
+            this.asdToolStripMenuItem2});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(93, 70);
+            // 
+            // asdToolStripMenuItem
+            // 
+            this.asdToolStripMenuItem.Name = "asdToolStripMenuItem";
+            this.asdToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.asdToolStripMenuItem.Text = "asd";
+            // 
+            // asdToolStripMenuItem1
+            // 
+            this.asdToolStripMenuItem1.Name = "asdToolStripMenuItem1";
+            this.asdToolStripMenuItem1.Size = new System.Drawing.Size(92, 22);
+            this.asdToolStripMenuItem1.Text = "asd";
+            // 
+            // asdToolStripMenuItem2
+            // 
+            this.asdToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.asdToolStripMenuItem3});
+            this.asdToolStripMenuItem2.Name = "asdToolStripMenuItem2";
+            this.asdToolStripMenuItem2.Size = new System.Drawing.Size(92, 22);
+            this.asdToolStripMenuItem2.Text = "asd";
+            this.asdToolStripMenuItem2.Click += new System.EventHandler(this.asdToolStripMenuItem2_Click);
+            // 
+            // asdToolStripMenuItem3
+            // 
+            this.asdToolStripMenuItem3.Name = "asdToolStripMenuItem3";
+            this.asdToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.asdToolStripMenuItem3.Text = "asd";
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sdfToolStripMenuItem,
+            this.sdfToolStripMenuItem1,
+            this.sdfToolStripMenuItem2});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+            // 
+            // sdfToolStripMenuItem
+            // 
+            this.sdfToolStripMenuItem.Name = "sdfToolStripMenuItem";
+            this.sdfToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sdfToolStripMenuItem.Text = "sdf";
+            // 
+            // sdfToolStripMenuItem1
+            // 
+            this.sdfToolStripMenuItem1.Name = "sdfToolStripMenuItem1";
+            this.sdfToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.sdfToolStripMenuItem1.Text = "sdf";
+            // 
+            // sdfToolStripMenuItem2
+            // 
+            this.sdfToolStripMenuItem2.Name = "sdfToolStripMenuItem2";
+            this.sdfToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.sdfToolStripMenuItem2.Text = "sdf";
+            // 
             // Planes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,6 +289,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanes)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -228,5 +308,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Especialidad;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem sdfToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sdfToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem sdfToolStripMenuItem2;
     }
 }

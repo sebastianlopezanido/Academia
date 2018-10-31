@@ -157,13 +157,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtIdPlan;
         
         /// <summary>
-        /// Label4 control.
+        /// lblClave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label lblClave;
         
         /// <summary>
         /// txtClave control.
@@ -175,13 +175,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtClave;
         
         /// <summary>
-        /// Label9 control.
+        /// lblCClave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.Label lblCClave;
         
         /// <summary>
         /// txtConfirmarClave control.

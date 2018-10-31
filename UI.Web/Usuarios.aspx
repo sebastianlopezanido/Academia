@@ -26,9 +26,9 @@
             <SelectedRowStyle BackColor="Black" ForeColor="White" />
         </asp:GridView>
             <asp:Panel ID="Panel1" runat="server">
-                <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" />
+                <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" OnClick="btnNuevo_Click" />
                 <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
-                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" />
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
             </asp:Panel>
             <br />
     </asp:Panel>
@@ -45,10 +45,10 @@
             <asp:Label ID="Label3" runat="server" Text="IDPlan"></asp:Label>
             <asp:TextBox ID="txtIdPlan" runat="server"></asp:TextBox>
             <br />
-            <asp:Label ID="Label4" runat="server" Text="Clave"></asp:Label>
+            <asp:Label ID="lblClave" runat="server" Text="Clave"></asp:Label>
             <asp:TextBox ID="txtClave" runat="server"></asp:TextBox>
             <br />
-            <asp:Label ID="Label9" runat="server" Text="Confirmar Clave"></asp:Label>
+            <asp:Label ID="lblCClave" runat="server" Text="Confirmar Clave"></asp:Label>
             <asp:TextBox ID="txtConfirmarClave" runat="server"></asp:TextBox>
             <br />
             <asp:CheckBox ID="ckbHabilitado" runat="server" Text="Habilitado" />
@@ -59,7 +59,7 @@
             <br />
             <br />
             <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" />
+            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
         </asp:Panel>
     </form>
     
