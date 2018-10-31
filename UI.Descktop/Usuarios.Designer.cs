@@ -68,7 +68,6 @@
             // tcUsuarios.TopToolStripPanel
             // 
             this.tcUsuarios.TopToolStripPanel.Controls.Add(this.tsUsuarios);
-            this.tcUsuarios.TopToolStripPanel.Click += new System.EventHandler(this.toolStripContainer1_TopToolStripPanel_Click_1);
             // 
             // tlUsuarios
             // 

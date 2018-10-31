@@ -61,8 +61,8 @@ namespace UI.Desktop
             if (this.dgvComisiones.SelectedRows != null && this.dgvComisiones.MultiSelect == false && this.dgvComisiones.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((BusinessEntities.Comision)this.dgvComisiones.SelectedRows[0].DataBoundItem).ID;
-                ComisionesDesktop ud = new ComisionesDesktop(ID, ApplicationForm.ModoForm.Baja);
-                ud.ShowDialog();
+                //ComisionesDesktop ud = new ComisionesDesktop(ID, ApplicationForm.ModoForm.Baja);
+                MessageBox.Show("Seguro que quiere eliminar", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);                
                 this.Listar();
 
             }

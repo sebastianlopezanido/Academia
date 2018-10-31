@@ -14,7 +14,7 @@
         <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
-            DataKeyNames="ID">
+            DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged">
             <Columns>
                 <asp:BoundField HeaderText="ID" DataField="ID" />
                 <asp:BoundField HeaderText="Usuario" DataField="NombreUsuario" />
@@ -27,7 +27,7 @@
         </asp:GridView>
             <asp:Panel ID="Panel1" runat="server">
                 <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" />
-                <asp:Button ID="btnEditar" runat="server" Text="Editar" />
+                <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
                 <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" />
             </asp:Panel>
             <br />
@@ -54,11 +54,11 @@
             <asp:CheckBox ID="ckbHabilitado" runat="server" Text="Habilitado" />
             <br />
             <asp:Label ID="Label7" runat="server" Text="Tipo Usuario"></asp:Label>
-            <asp:DropDownList ID="ddlTipo" runat="server">
+            <asp:DropDownList ID="cbxTipo" runat="server">
             </asp:DropDownList>
             <br />
             <br />
-            <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" />
+            <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" />
             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" />
         </asp:Panel>
     </form>

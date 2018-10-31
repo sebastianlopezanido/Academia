@@ -18,14 +18,10 @@ namespace UI.Desktop
         {
             InitializeComponent();
             this.dgvUsuarios.AutoGenerateColumns = false;
+
         }
 
         private void toolStripContainer1_TopToolStripPanel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripContainer1_TopToolStripPanel_Click_1(object sender, EventArgs e)
         {
 
         }
