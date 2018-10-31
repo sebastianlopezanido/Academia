@@ -22,6 +22,7 @@ namespace UI.Desktop
         public CursosDesktop(ModoForm modo) : this()
         {
             Modo = modo;
+            Text = CambiarTextos(btnAceptar);
         }
 
         public CursosDesktop(int id, ModoForm modo) : this()
@@ -29,7 +30,8 @@ namespace UI.Desktop
             Modo = modo;
             CursoLogic cu = new CursoLogic(); //controlador :)
             CursoActual = cu.GetOne(id);
-            this.MapearDeDatos();
+            Text = CambiarTextos(btnAceptar);
+            MapearDeDatos();
         }
 
         private Curso _CursoActual;
@@ -41,53 +43,37 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
-            this.txtID.Text = this.CursoActual.ID.ToString();
-            this.txtIDMateria.Text = this.CursoActual.IDMateria.ToString();
-            this.txtIDComision.Text = this.CursoActual.IDComision.ToString();
-            this.txtAño.Text = this.CursoActual.AnioCalendario.ToString();
-            this.txtCupo.Text = this.CursoActual.Cupo.ToString();
-
-            switch (this.Modo)
-            {
-                case ModoForm.Alta:
-                    break;
-                case ModoForm.Modificacion:
-                    this.btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja:
-                    this.btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Consulta:
-                    this.btnAceptar.Text = "Aceptar";
-                    break;
-            }
-
+            txtID.Text = CursoActual.ID.ToString();
+            txtIDMateria.Text = CursoActual.IDMateria.ToString();
+            txtIDComision.Text = CursoActual.IDComision.ToString();
+            txtAño.Text = CursoActual.AnioCalendario.ToString();
+            txtCupo.Text = CursoActual.Cupo.ToString();
         }
 
         public override void MapearADatos()
         {
-            switch (this.Modo)
+            switch (Modo)
             {
                 case ModoForm.Alta:
                     CursoActual = new Curso();
-                    this.CursoActual.IDComision = int.Parse(this.txtIDComision.Text);
-                    this.CursoActual.IDMateria = int.Parse(this.txtIDMateria.Text);
-                    this.CursoActual.AnioCalendario = int.Parse(this.txtAño.Text);
-                    this.CursoActual.Cupo = int.Parse(this.txtCupo.Text);
-                    this.CursoActual.State = Comision.States.New;
+                    CursoActual.IDComision = int.Parse(txtIDComision.Text);
+                    CursoActual.IDMateria = int.Parse(txtIDMateria.Text);
+                    CursoActual.AnioCalendario = int.Parse(txtAño.Text);
+                    CursoActual.Cupo = int.Parse(txtCupo.Text);
+                    CursoActual.State = BusinessEntity.States.New;
                     break;
                 case ModoForm.Modificacion:
-                    this.CursoActual.IDComision = int.Parse(this.txtIDComision.Text);
-                    this.CursoActual.IDMateria = int.Parse(this.txtIDMateria.Text);
-                    this.CursoActual.AnioCalendario = int.Parse(this.txtAño.Text);
-                    this.CursoActual.Cupo = int.Parse(this.txtCupo.Text);
-                    this.CursoActual.State = Curso.States.Modified;
+                    CursoActual.IDComision = int.Parse(txtIDComision.Text);
+                    CursoActual.IDMateria = int.Parse(txtIDMateria.Text);
+                    CursoActual.AnioCalendario = int.Parse(txtAño.Text);
+                    CursoActual.Cupo = int.Parse(txtCupo.Text);
+                    CursoActual.State = BusinessEntity.States.Modified;
                     break;
                 case ModoForm.Baja:
-                    this.CursoActual.State = Curso.States.Deleted;
+                    CursoActual.State = BusinessEntity.States.Deleted;
                     break;
                 case ModoForm.Consulta:
-                    this.CursoActual.State = Curso.States.Unmodified;
+                    CursoActual.State = BusinessEntity.States.Unmodified;
                     break;
             }
 
@@ -95,43 +81,40 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            this.MapearADatos();
+            MapearADatos();
             CursoLogic cl = new CursoLogic();
             cl.Save(CursoActual);
         }
 
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(this.txtAño.Text) || string.IsNullOrEmpty(this.txtIDMateria.Text) || string.IsNullOrEmpty(this.txtIDComision.Text) || string.IsNullOrEmpty(this.txtCupo.Text))
+            if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtIDMateria.Text) || string.IsNullOrEmpty(txtIDComision.Text) || string.IsNullOrEmpty(txtCupo.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (this.txtAño.Text.Length != 4)
+            if (txtAño.Text.Length != 4)
             {
                 Notificar("Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             return true;
-
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.Validar())
+            if (Validar())
             {
-                this.GuardarCambios();
-                this.Close();
+                GuardarCambios();
+                Close();
             }
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
-
     }
 }

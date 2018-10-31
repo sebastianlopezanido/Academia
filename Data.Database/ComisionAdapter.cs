@@ -17,14 +17,13 @@ namespace Data.Database
 
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdComision = new SqlCommand("select * from comisiones", sqlConn);
                 SqlDataReader drComision = cmdComision.ExecuteReader();
 
                 while (drComision.Read())
                 {
                     Comision com = new Comision();
-
                     com.ID = (int)drComision["id_comision"];
                     com.Descripcion = (string)drComision["desc_comision"];
                     com.AnioEspecialidad = (int)drComision["anio_especialidad"];
@@ -34,17 +33,16 @@ namespace Data.Database
 
                 drComision.Close();
             }
-
             catch (Exception Ex)
             {
                 Exception ExcepcionManejada = new Exception("Error al recuperar lista de comisiones", Ex);
                 throw ExcepcionManejada;
             }
-
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
+
             return comisiones;
         }
 
@@ -53,17 +51,17 @@ namespace Data.Database
             Comision com = new Comision();
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdComision = new SqlCommand("select * from comisiones where id_comision=@id", sqlConn);
                 cmdComision.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drComision = cmdComision.ExecuteReader();
+
                 if (drComision.Read())
                 {
                     com.ID = (int)drComision["id_comision"];
                     com.Descripcion = (string)drComision["desc_comision"];
                     com.AnioEspecialidad = (int)drComision["anio_especialidad"];
                     com.IDPlan = (int)drComision["id_plan"];
-
                 }
                 drComision.Close();
             }
@@ -74,8 +72,9 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
+
             return com;
         }
 
@@ -83,10 +82,9 @@ namespace Data.Database
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdDelete = new SqlCommand("delete comisiones where id_comision=@id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-
                 cmdDelete.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -96,10 +94,8 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
-
-
         }
 
         protected void Update(Comision comision)
@@ -108,13 +104,11 @@ namespace Data.Database
             {
                 OpenConnection();
                 SqlCommand cmdSave = new SqlCommand("UPDATE comisiones SET desc_comision = @desc, anio_especialidad = @anio, id_plan = @id_plan" +
-                    " WHERE id_comision = @id", sqlConn);
-
+                " WHERE id_comision = @id", sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = comision.ID;
                 cmdSave.Parameters.Add("@desc", SqlDbType.VarChar, 50).Value = comision.Descripcion;
                 cmdSave.Parameters.Add("@anio", SqlDbType.Int).Value = comision.AnioEspecialidad;
                 cmdSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = comision.IDPlan;
-
                 cmdSave.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -124,17 +118,15 @@ namespace Data.Database
             }
             finally
             {
-                
-CloseConnection();
+                CloseConnection();
             }
-
         }
 
         protected void Insert(Comision comision)
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdSave = new SqlCommand("insert into comisiones(desc_comision,anio_especialidad,id_plan) " + "values(@desc,@anio,@id_plan)" + "select @@identity", sqlConn);
                 cmdSave.Parameters.Add("@desc", SqlDbType.VarChar, 50).Value = comision.Descripcion;
                 cmdSave.Parameters.Add("@anio", SqlDbType.Int).Value = comision.AnioEspecialidad;
@@ -144,36 +136,29 @@ CloseConnection();
             }
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada = new Exception("Error al crear comision" +
-                    "", Ex);
+                Exception ExcepcionManejada = new Exception("Error al crear comision", Ex);
                 throw ExcepcionManejada;
-
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
         public void Save(Comision comision)
         {
-            if (comision.State == BusinessEntity.States.Deleted)
+            switch(comision.State)
             {
-
-                this.Delete(comision.ID);
-
-
+                case BusinessEntity.States.New:
+                    Insert(comision);
+                    break;
+                case BusinessEntity.States.Modified:
+                    Update(comision);
+                    break;
+                case BusinessEntity.States.Deleted:
+                    Delete(comision.ID);
+                    break;                
             }
-            else if (comision.State == BusinessEntity.States.New)
-            {
-                this.Insert(comision);
-            }
-            else if (comision.State == BusinessEntity.States.Modified)
-            {
-                this.Update(comision);
-            }
-            comision.State = BusinessEntity.States.Unmodified;
-
         }
     }
 }

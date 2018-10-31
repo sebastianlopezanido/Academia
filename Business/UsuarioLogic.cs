@@ -15,7 +15,6 @@ namespace BusinessLogic
             UsuarioData = new Data.Database.UsuarioAdapter();
         }
 
-
         private Data.Database.UsuarioAdapter _UsuarioData;
         public Data.Database.UsuarioAdapter UsuarioData
         {
@@ -23,12 +22,12 @@ namespace BusinessLogic
             get { return _UsuarioData; }
         }
 
-        public BusinessEntities.Usuario GetOne(int ID)
+        public Usuario GetOne(int ID)
         {
             return UsuarioData.GetOne(ID);
         }
 
-        public BusinessEntities.Usuario GetOne(string nombreUsuario, string clave)
+        public Usuario GetOne(string nombreUsuario, string clave)
         {
             try
             {
@@ -37,8 +36,7 @@ namespace BusinessLogic
             catch (Exception)
             {
                 throw;
-            }
-            
+            }            
         }
 
         public List<Usuario> GetAll()
@@ -53,7 +51,7 @@ namespace BusinessLogic
             }
         }
 
-        public void Save(BusinessEntities.Usuario usuario)
+        public void Save(Usuario usuario)
         {
             UsuarioData.Save(usuario);
         }

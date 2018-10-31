@@ -43,10 +43,29 @@ namespace UI.Desktop
         }
         public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
-            this.Notificar(this.Text, mensaje, botones, icono);
+            Notificar(Text, mensaje, botones, icono);
         }
 
-
+        public string CambiarTextos(Button b)
+        { switch (Modo)
+            {
+                case ModoForm.Alta:
+                    b.Text = "Guardar";
+                    return "Agregar";
+                case ModoForm.Modificacion:
+                    b.Text = "Guardar";
+                    return "Editar";                    
+                case ModoForm.Baja:
+                    b.Text = "Eliminar";
+                    return "Eliminar";                   
+                case ModoForm.Consulta:
+                    b.Text = "Aceptar";
+                    return "Consulta";
+                default:
+                    return "Nada";
+                    
+            }
+        }
 
     }
 }

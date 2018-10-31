@@ -21,11 +21,10 @@ namespace BusinessLogic
             get { return _PlanData; }
         }
 
-        public BusinessEntities.Plan GetOne(int ID)
+        public Plan GetOne(int ID)
         {
             return PlanData.GetOne(ID);
         }
-
 
         public List<Plan> GetAll()
         {
@@ -41,16 +40,14 @@ namespace BusinessLogic
             //return PersonasData.GetAll();
         }
 
-        public void Save(BusinessEntities.Plan plan)
+        public void Save(Plan plan)
         {
             PlanData.Save(plan);
         }
 
         public void Delete(int ID)
         {
-            
-                PlanData.Delete(ID);
-            
+            PlanData.Delete(ID);            
         }
     }
 }

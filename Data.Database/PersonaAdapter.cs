@@ -9,22 +9,21 @@ using System.Data.SqlClient;
 
 namespace Data.Database
 {
-    public class PersonasAdapter : Adapter
+    public class PersonaAdapter : Adapter
     {
-        public List<Personas> GetAll()
+        public List<Persona> GetAll()
         {
-            List<Personas> personas = new List<Personas>();
+            List<Persona> personas = new List<Persona>();
 
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdPersonas = new SqlCommand("select * from personas", sqlConn);
                 SqlDataReader drPersonas = cmdPersonas.ExecuteReader();
 
                 while (drPersonas.Read())
                 {
-                    Personas prs = new Personas();
-
+                    Persona prs = new Persona();
                     prs.ID = (int)drPersonas["id_persona"];
                     prs.Apellido = (string)drPersonas["apellido"];
                     prs.Nombre = (string)drPersonas["nombre"];
@@ -34,31 +33,32 @@ namespace Data.Database
                     prs.Telefono = (string)drPersonas["telefono"];
                     personas.Add(prs);
                 }
+
                 drPersonas.Close();
             }
-
             catch (Exception Ex)
             {
                 Exception ExcepcionManejada = new Exception("Error al recuperar lista de personas", Ex);
                 throw ExcepcionManejada;
             }
-
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
+
             return personas;
         }
 
-        public BusinessEntities.Personas GetOne(int ID)
+        public Persona GetOne(int ID)
         {
-            Personas prs = new Personas();
+            Persona prs = new Persona();
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdPersonas = new SqlCommand("select * from personas where id_persona=@id", sqlConn);
                 cmdPersonas.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drPersonas = cmdPersonas.ExecuteReader();
+
                 if (drPersonas.Read())
                 {
                     prs.ID = (int)drPersonas["id_persona"];
@@ -70,6 +70,7 @@ namespace Data.Database
                     prs.Telefono = (string)drPersonas["telefono"];
                     prs.Direccion = (string)drPersonas["direccion"];                    
                 }
+
                 drPersonas.Close();
             }
             catch (Exception Ex)
@@ -79,21 +80,19 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
-            return prs;
-        }
 
-        
+            return prs;
+        }        
 
         public void Delete(int ID)
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdDelete = new SqlCommand("delete personas where id_persona=@id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-
                 cmdDelete.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -103,21 +102,18 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
-
-
         }
 
-        protected void Update(Personas personas)
+        protected void Update(Persona personas)
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdSave = new SqlCommand("UPDATE personas SET nombre = @nombre, " +
                     "direccion = @direccion, telefono = @telefono, fecha_nac = @fecha_nac, legajo = @legajo, apellido = @apellido, " +
                     "email = @email WHERE id_persona = @id", sqlConn);
-
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = personas.ID;
                 cmdSave.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = personas.Nombre;
                 cmdSave.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = personas.Apellido;
@@ -125,9 +121,7 @@ namespace Data.Database
                 cmdSave.Parameters.Add("@telefono", SqlDbType.VarChar, 50).Value = personas.Telefono;
                 cmdSave.Parameters.Add("@fecha_nac", SqlDbType.DateTime).Value = personas.FechaNacimiento;
                 cmdSave.Parameters.Add("@legajo", SqlDbType.Int).Value = personas.Legajo;
-                cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;                
-               
-
+                cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;
                 cmdSave.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -137,17 +131,17 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
-
         }
 
-        protected void Insert(Personas personas)
+        protected void Insert(Persona personas)
         {
             try
             {
-                this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand("insert into personas(nombre,apellido,direccion,telefono,email,fecha_nac,legajo) " + "values(@nombre,@apellido,@direccion,@telefono,@email,@fecha_nac,@legajo) " + "select @@identity", sqlConn);
+                OpenConnection();
+                SqlCommand cmdSave = new SqlCommand("insert into personas(nombre,apellido,direccion,telefono,email,fecha_nac,legajo) " + 
+                    "values(@nombre,@apellido,@direccion,@telefono,@email,@fecha_nac,@legajo) " + "select @@identity", sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = personas.ID;
                 cmdSave.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = personas.Nombre;
                 cmdSave.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = personas.Apellido;
@@ -155,44 +149,34 @@ namespace Data.Database
                 cmdSave.Parameters.Add("@telefono", SqlDbType.VarChar, 50).Value = personas.Telefono;
                 cmdSave.Parameters.Add("@fecha_nac", SqlDbType.DateTime).Value = personas.FechaNacimiento;
                 cmdSave.Parameters.Add("@legajo", SqlDbType.Int).Value = personas.Legajo;
-                cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;
-                
-               
-                personas.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
+                cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;   
+                personas.ID = decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
             }
             catch (Exception Ex)
             {
                 Exception ExcepcionManejada = new Exception("Error al crear persona", Ex);
                 throw ExcepcionManejada;
-
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
-        public void Save(Personas personas)
+        public void Save(Persona personas)
         {
-            
-
-            
-            if (personas.State == BusinessEntity.States.Deleted)
+            switch (personas.State)
             {
-                this.Delete(personas.ID);
+                case BusinessEntity.States.New:
+                    Insert(personas);
+                    break;
+                case BusinessEntity.States.Modified:
+                    Update(personas);
+                    break;
+                case BusinessEntity.States.Deleted:
+                    Delete(personas.ID);
+                    break;
             }
-            else if (personas.State == BusinessEntity.States.New)
-            {
-                this.Insert(personas);
-            }
-            else if (personas.State == BusinessEntity.States.Modified)
-            {
-                this.Update(personas);
-            }
-            personas.State = BusinessEntity.States.Unmodified;
-            }
-           
-
+        }
     }
-
 }

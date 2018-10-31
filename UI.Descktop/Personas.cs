@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BusinessEntities;
 using BusinessLogic;
 
+
 namespace UI.Desktop
 {
     public partial class Personas : Form
@@ -17,18 +18,15 @@ namespace UI.Desktop
         public Personas()
         {
             InitializeComponent();
-            this.dgvPersonas.AutoGenerateColumns = false;
-            
-        }
-
-      
+            dgvPersonas.AutoGenerateColumns = false;            
+        }     
         
         public void Listar()
         {
             try
             {
-                PersonasLogic pl = new PersonasLogic();
-                this.dgvPersonas.DataSource = pl.GetAll();
+                PersonaLogic pl = new PersonaLogic();
+                dgvPersonas.DataSource = pl.GetAll();
             }
             catch (Exception Ex)
             {
@@ -38,48 +36,46 @@ namespace UI.Desktop
 
         private void Personas_Load(object sender, EventArgs e)
         {
-            this.Listar();
+            Listar();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            this.Listar();
+            Listar();
         }
         
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
         
         private void tbsNuevo_Click(object sender, EventArgs e)
         {
             PersonasDesktop ud = new PersonasDesktop(ApplicationForm.ModoForm.Alta);
-
             ud.ShowDialog();
-            this.Listar();
+            Listar();
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            if (this.dgvPersonas.SelectedRows != null && this.dgvPersonas.MultiSelect == false && this.dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            if (dgvPersonas.SelectedRows != null && dgvPersonas.MultiSelect == false && dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                int ID = ((BusinessEntities.Personas)this.dgvPersonas.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
                 PersonasDesktop ud = new PersonasDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 ud.ShowDialog();
-                this.Listar();
+                Listar();
             }
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            if (this.dgvPersonas.SelectedRows != null && this.dgvPersonas.MultiSelect == false && this.dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            if (dgvPersonas.SelectedRows != null && dgvPersonas.MultiSelect == false && dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                int ID = ((BusinessEntities.Personas)this.dgvPersonas.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
                 PersonasDesktop ud = new PersonasDesktop(ID, ApplicationForm.ModoForm.Baja);
                 ud.ShowDialog();
-                this.Listar();
+                Listar();
             }
-        }
-        
+        }        
     }
 }

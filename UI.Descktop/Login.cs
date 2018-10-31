@@ -22,18 +22,13 @@ namespace UI.Desktop
         {
             try
             {
-                LoginLogic ll = new LoginLogic();
-               
-                string nombreUsuario = this.txtUsuario.Text;
-                string clave = this.txtPw.Text;
-                
+                LoginLogic ll = new LoginLogic();               
+                string nombreUsuario = txtUsuario.Text;
+                string clave = txtPw.Text;                
                 BusinessEntities.Usuario usr = ll.ValidarDatos(nombreUsuario, clave);
-                Menu menu = new Menu(usr);
-               
+                Menu menu = new Menu(usr);               
                 menu.Show();
-                this.Hide();
-                
-                
+                Hide();  
             }
             catch (Exception Ex)
             {
@@ -43,7 +38,7 @@ namespace UI.Desktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void linkOlvidePw_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

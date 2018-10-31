@@ -22,7 +22,5 @@ namespace BusinessEntities
             set { _IDEspecialidad = value; }
         }
     }
-
-
-    }
+}
 

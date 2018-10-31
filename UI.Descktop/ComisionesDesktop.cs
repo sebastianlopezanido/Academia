@@ -22,6 +22,7 @@ namespace UI.Desktop
         public ComisionesDesktop(ModoForm modo) : this()
         {
             Modo = modo;
+            Text = CambiarTextos(btnAceptar);
         }
 
         public ComisionesDesktop(int id, ModoForm modo) : this()
@@ -29,7 +30,9 @@ namespace UI.Desktop
             Modo = modo;
             ComisionLogic cu = new ComisionLogic(); //controlador :)
             ComisionActual = cu.GetOne(id);
-            this.MapearDeDatos();
+            Text = CambiarTextos(btnAceptar);
+            if (modo == ModoForm.Baja) DisableBoxes(true); 
+            MapearDeDatos();
         }
 
         private Comision _ComisionActual;
@@ -41,53 +44,38 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
-            this.txtID.Text = this.ComisionActual.ID.ToString();
-            this.txtAño.Text = this.ComisionActual.AnioEspecialidad.ToString();
-            this.txtDescripcion.Text = this.ComisionActual.Descripcion;
-            this.txtIDPlan.Text = this.ComisionActual.IDPlan.ToString();
-            
-            switch (this.Modo)
-            {
-                case ModoForm.Alta:
-                    break;
-                case ModoForm.Modificacion:
-                    this.btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja:
-                    this.btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Consulta:
-                    this.btnAceptar.Text = "Aceptar";
-                    break;
-            }
+            txtID.Text = ComisionActual.ID.ToString();
+            txtAño.Text = ComisionActual.AnioEspecialidad.ToString();
+            txtDescripcion.Text = ComisionActual.Descripcion;
+            txtIDPlan.Text = ComisionActual.IDPlan.ToString();
 
         }
 
         public override void MapearADatos()
         {
-            switch (this.Modo)
+            switch (Modo)
             {
                 case ModoForm.Alta:
                     ComisionActual = new Comision();
-                    this.ComisionActual.AnioEspecialidad = int.Parse(this.txtAño.Text);
-                    this.ComisionActual.IDPlan = int.Parse(this.txtIDPlan.Text);
-                    this.ComisionActual.Descripcion = this.txtDescripcion.Text;
-                    this.ComisionActual.State = Comision.States.New;
+                    ComisionActual.AnioEspecialidad = int.Parse(txtAño.Text);
+                    ComisionActual.IDPlan = int.Parse(txtIDPlan.Text);
+                    ComisionActual.Descripcion = txtDescripcion.Text;
+                    ComisionActual.State = BusinessEntity.States.New;
 
                     break;
                 case ModoForm.Modificacion:
-                    this.ComisionActual.ID = int.Parse(this.txtID.Text);
-                    this.ComisionActual.AnioEspecialidad = int.Parse(this.txtAño.Text);
-                    this.ComisionActual.IDPlan = int.Parse(this.txtIDPlan.Text);
-                    this.ComisionActual.Descripcion = this.txtDescripcion.Text;
+                    ComisionActual.ID = int.Parse(txtID.Text);
+                    ComisionActual.AnioEspecialidad = int.Parse(txtAño.Text);
+                    ComisionActual.IDPlan = int.Parse(txtIDPlan.Text);
+                    ComisionActual.Descripcion = txtDescripcion.Text;
 
-                    this.ComisionActual.State = Comision.States.Modified;
+                    ComisionActual.State = BusinessEntity.States.Modified;
                     break;
                 case ModoForm.Baja:
-                    this.ComisionActual.State = Comision.States.Deleted;
+                    ComisionActual.State = BusinessEntity.States.Deleted;
                     break;
                 case ModoForm.Consulta:
-                    this.ComisionActual.State = Comision.States.Unmodified;
+                    ComisionActual.State = BusinessEntity.States.Unmodified;
                     break;
             }
 
@@ -95,42 +83,47 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            this.MapearADatos();
+            MapearADatos();
             ComisionLogic cl = new ComisionLogic();
             cl.Save(ComisionActual);
         }
 
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(this.txtAño.Text) || string.IsNullOrEmpty(this.txtIDPlan.Text) || string.IsNullOrEmpty(this.txtDescripcion.Text))
+            if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtIDPlan.Text) || string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (this.txtAño.Text.Length != 4)
+            if (txtAño.Text.Length != 4)
             {
                 Notificar("Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             return true;
+        }
 
+        private void DisableBoxes(bool enable)
+        {
+            txtDescripcion.ReadOnly = enable;
+            txtAño.ReadOnly = enable;
+            txtIDPlan.ReadOnly = enable;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.Validar())
+            if (Validar())
             {
-                this.GuardarCambios();
-                this.Close();
+                GuardarCambios();
+                Close();
             }
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

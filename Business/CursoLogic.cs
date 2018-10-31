@@ -21,11 +21,10 @@ namespace BusinessLogic
             get { return _CursoData; }
         }
 
-        public BusinessEntities.Curso GetOne(int ID)
+        public Curso GetOne(int ID)
         {
             return CursoData.GetOne(ID);
         }
-
 
         public List<Curso> GetAll()
         {
@@ -36,11 +35,10 @@ namespace BusinessLogic
             catch (Exception)
             {
                 throw;
-            }
-                       
+            }                       
         }
 
-        public void Save(BusinessEntities.Curso curso)
+        public void Save(Curso curso)
         {
             CursoData.Save(curso);
         }
@@ -55,7 +53,6 @@ namespace BusinessLogic
             {
                 throw ex;
             }
-
         }
     }
 }

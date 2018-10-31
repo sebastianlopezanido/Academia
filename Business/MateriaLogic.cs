@@ -21,11 +21,10 @@ namespace BusinessLogic
             get { return _MateriaData; }
         }
 
-        public BusinessEntities.Materia GetOne(int ID)
+        public Materia GetOne(int ID)
         {
             return MateriaData.GetOne(ID);
         }
-
 
         public List<Materia> GetAll()
         {
@@ -41,7 +40,7 @@ namespace BusinessLogic
             //return PersonasData.GetAll();
         }
 
-        public void Save(BusinessEntities.Materia materia)
+        public void Save(Materia materia)
         {
             MateriaData.Save(materia);
         }
@@ -56,7 +55,6 @@ namespace BusinessLogic
             {
                 throw ex;
             }
-
         }
     }
 }

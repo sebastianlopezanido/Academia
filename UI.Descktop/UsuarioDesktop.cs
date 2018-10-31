@@ -18,17 +18,16 @@ namespace UI.Desktop
         public UsuarioDesktop()
         {
             InitializeComponent();
-            this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Administrador);
-            this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Alumno);
-            this.cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Profesor);
-
             
+            cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Administrador);
+            cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Alumno);
+            cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Profesor);            
         }
 
         public UsuarioDesktop(ModoForm modo):this()
         {
             Modo = modo;
-            
+            Text = CambiarTextos(btnAceptar);
         }
 
         public UsuarioDesktop(int id,ModoForm modo) : this()
@@ -36,8 +35,9 @@ namespace UI.Desktop
             Modo = modo;
             UsuarioLogic cu = new UsuarioLogic(); //controlador :)
             UsuarioActual = cu.GetOne(id);
-            this.MapearDeDatos();
-            this.Ocultar();
+            Text = CambiarTextos(btnAceptar);
+            MapearDeDatos();
+            OcultarFind();
         }
         
         private Usuario _UsuarioActual;
@@ -47,86 +47,73 @@ namespace UI.Desktop
             set { _UsuarioActual = value; }
         }
 
-         public override void MapearDeDatos()
+        public override void MapearDeDatos()
         {
-            this.txtID.Text = this.UsuarioActual.ID.ToString();
-            this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
-            this.txtIdPersona.Text = this.UsuarioActual.IDPersona.ToString();
-            this.cbxTipo.SelectedItem = this.UsuarioActual.Tipo;
-            this.txtIdPlan.Text = this.UsuarioActual.IDPlan.ToString();
-            this.txtClave.Text = this.UsuarioActual.Clave;
-            this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;            
-
-            switch(this.Modo)
-            {
-                case ModoForm.Alta:
-                    break;
-                case ModoForm.Modificacion: this.btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja: this.btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Consulta: this.btnAceptar.Text = "Aceptar";
-                    break;
-            }
-            
+            txtID.Text = UsuarioActual.ID.ToString();
+            chkHabilitado.Checked = UsuarioActual.Habilitado;
+            txtIdPersona.Text = UsuarioActual.IDPersona.ToString();
+            cbxTipo.SelectedItem = UsuarioActual.Tipo;
+            txtIdPlan.Text = UsuarioActual.IDPlan.ToString();
+            txtClave.Text = UsuarioActual.Clave;
+            txtUsuario.Text = UsuarioActual.NombreUsuario;            
         }
 
         public override void MapearADatos()
         {
-            switch (this.Modo)
+            switch (Modo)
             {
-                case ModoForm.Alta: UsuarioActual = new Usuario();
-                                    this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-                                    this.UsuarioActual.IDPersona = int.Parse(this.txtIdPersona.Text);
-                                    this.UsuarioActual.IDPlan = int.Parse(this.txtIdPlan.Text);
-                                    this.UsuarioActual.Tipo = (BusinessEntities.Usuario.TiposUsuario) this.cbxTipo.SelectedItem;
-                                    this.UsuarioActual.Clave = this.txtClave.Text;
-                                    this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-                                    this.UsuarioActual.State = Usuario.States.New;
-
+                case ModoForm.Alta:
+                    UsuarioActual = new Usuario();
+                    UsuarioActual.Habilitado = chkHabilitado.Checked;
+                    UsuarioActual.IDPersona = int.Parse(txtIdPersona.Text);
+                    UsuarioActual.IDPlan = int.Parse(txtIdPlan.Text);
+                    UsuarioActual.Tipo = (Usuario.TiposUsuario)cbxTipo.SelectedItem;
+                    UsuarioActual.Clave = txtClave.Text;
+                    UsuarioActual.NombreUsuario = txtUsuario.Text;
+                    UsuarioActual.State = BusinessEntity.States.New;
                     break;              
-                case ModoForm.Modificacion: this.UsuarioActual.ID = int.Parse(this.txtID.Text);
-                                            this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-                                            this.UsuarioActual.IDPersona = int.Parse(this.txtIdPersona.Text);
-                                            this.UsuarioActual.IDPlan = int.Parse(this.txtIdPlan.Text);
-                                            this.UsuarioActual.Tipo = (BusinessEntities.Usuario.TiposUsuario)this.cbxTipo.SelectedItem;
-                                            this.UsuarioActual.Clave = this.txtClave.Text;
-                                            this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-                                            this.UsuarioActual.State = Usuario.States.Modified;
+                case ModoForm.Modificacion:
+                    UsuarioActual.ID = int.Parse(txtID.Text);
+                    UsuarioActual.Habilitado = chkHabilitado.Checked;
+                    UsuarioActual.IDPersona = int.Parse(txtIdPersona.Text);
+                    UsuarioActual.IDPlan = int.Parse(txtIdPlan.Text);
+                    UsuarioActual.Tipo = (Usuario.TiposUsuario)cbxTipo.SelectedItem;
+                    UsuarioActual.Clave = txtClave.Text;
+                    UsuarioActual.NombreUsuario = txtUsuario.Text;
+                    UsuarioActual.State = BusinessEntity.States.Modified;
                     break;
                 case ModoForm.Baja:
-                    this.UsuarioActual.State = Usuario.States.Deleted;
+                    UsuarioActual.State = BusinessEntity.States.Deleted;
                     break;
                 case ModoForm.Consulta:
-                    this.UsuarioActual.State = Usuario.States.Unmodified;
+                    UsuarioActual.State = BusinessEntity.States.Unmodified;
                     break;
             }
-
         }
 
         public override void GuardarCambios()
         {
-            this.MapearADatos();
+            MapearADatos();
             UsuarioLogic ul = new UsuarioLogic();
             ul.Save(UsuarioActual);
         }
 
         public override bool Validar()
         {
-            if(string.IsNullOrEmpty(this.txtIdPersona.Text) || string.IsNullOrEmpty(this.txtIdPlan.Text) || string.IsNullOrEmpty(this.txtClave.Text)
-                || string.IsNullOrEmpty(this.txtConfirmarClave.Text) || string.IsNullOrEmpty(this.txtUsuario.Text))
+            if(string.IsNullOrEmpty(txtIdPersona.Text) || string.IsNullOrEmpty(txtIdPlan.Text) || string.IsNullOrEmpty(txtClave.Text)
+                || string.IsNullOrEmpty(txtConfirmarClave.Text) || string.IsNullOrEmpty(txtUsuario.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if(this.txtClave.Text != this.txtConfirmarClave.Text )
+            if(txtClave.Text != txtConfirmarClave.Text )
             {
                 Notificar("Claves no coinciden", "Las claves deben ser iguales", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (this.txtClave.Text.Length < 8)
+            if (txtClave.Text.Length < 8)
             {
                 Notificar("Clave no segura", "La clave debe ser mayor a 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -134,7 +121,7 @@ namespace UI.Desktop
 
             /*try
             {
-                new MailAddress(this.txtIdPlan.Text);               
+                new MailAddress(txtIdPlan.Text);               
             }
             catch (FormatException)
             {
@@ -143,58 +130,40 @@ namespace UI.Desktop
             }
             */
             return true;
-
         }
 
-        public void Ocultar()
+        public void OcultarFind()
         {
             if (Modo != ModoForm.Alta )
-            {
-                
-                this.btnBuscarPersona.Hide();
-                
-
-            }
-            
+            {               
+                btnBuscarPersona.Hide();
+            }            
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.Validar())
+            if (Validar())
             {
-                this.GuardarCambios();
-                this.Close();
-            }
-            
+                GuardarCambios();
+                Close();
+            }            
         }        
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
-
-        private void cbxTipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-  
 
         private void btnBuscarPersona_Click(object sender, EventArgs e)
         {
             FindPersona findPersonaForm = new FindPersona();
-            findPersonaForm.pasado += new FindPersona.pasar(ejecutar);
+            findPersonaForm.pasado += new FindPersona.pasar(Ejecutar);
             findPersonaForm.ShowDialog();
-          
-
-
         }
 
-        public void ejecutar(int dato)
+        public void Ejecutar(int dato)
         {
-            this.txtIdPersona.Text = dato.ToString();
+            txtIdPersona.Text = dato.ToString();
         }
-
-
     }
 }

@@ -23,24 +23,22 @@ namespace UI.Desktop
         public PersonasDesktop(ModoForm modo) : this()
         {
             Modo = modo;
-            
+            Text = CambiarTextos(btnAceptar);
+
         }
 
         public PersonasDesktop(int id, ModoForm modo) : this()
         {
             Modo = modo;
       
-            PersonasLogic cp = new PersonasLogic(); //controlador :)
+            PersonaLogic cp = new PersonaLogic(); //controlador :)
             PersonaActual = cp.GetOne(id);
-            
-            this.MapearDeDatos();
-        }
+            Text = CambiarTextos(btnAceptar);
+            MapearDeDatos();
+        }      
 
-        
-
-
-        private BusinessEntities.Personas _PersonaActual;
-        public BusinessEntities.Personas PersonaActual
+        private BusinessEntities.Persona _PersonaActual;
+        public BusinessEntities.Persona PersonaActual
         {
             get { return _PersonaActual; }
             set { _PersonaActual = value; }
@@ -48,71 +46,46 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
-            this.txtID.Text = this.PersonaActual.ID.ToString();
-            this.txtNombre.Text = this.PersonaActual.Nombre;
-            this.txtApellido.Text = this.PersonaActual.Apellido;
-            this.txtEmail.Text = this.PersonaActual.Email;
-            this.txtDireccion.Text = this.PersonaActual.Direccion;
-            this.txtTelefono.Text = this.PersonaActual.Telefono;
-            this.txtFecha.Text = this.PersonaActual.FechaNacimiento.ToString();
-            this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();            
-            
-
-            switch (this.Modo)
-            {
-                case ModoForm.Alta:
-                    break;
-                case ModoForm.Modificacion:
-                    this.btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja:
-                    this.btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Consulta:
-                    this.btnAceptar.Text = "Aceptar";
-                    break;
-            }
-
+            txtID.Text = PersonaActual.ID.ToString();
+            txtNombre.Text = PersonaActual.Nombre;
+            txtApellido.Text = PersonaActual.Apellido;
+            txtEmail.Text = PersonaActual.Email;
+            txtDireccion.Text = PersonaActual.Direccion;
+            txtTelefono.Text = PersonaActual.Telefono;
+            txtFecha.Text = PersonaActual.FechaNacimiento.ToString();
+            txtLegajo.Text = PersonaActual.Legajo.ToString();
         }
+
         public override void MapearADatos()
         {
-            switch (this.Modo)
+            switch (Modo)
             {
                 case ModoForm.Alta:
-                    PersonaActual = new BusinessEntities.Personas();
-                    
-                    this.PersonaActual.Nombre = this.txtNombre.Text;
-                    this.PersonaActual.Apellido = this.txtApellido.Text;
-                    this.PersonaActual.Email = this.txtEmail.Text;
-                    this.PersonaActual.Direccion = this.txtDireccion.Text;
-                    this.PersonaActual.Telefono = this.txtTelefono.Text;
-                    this.PersonaActual.FechaNacimiento = DateTime.Parse(this.txtFecha.Text);
-                    this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);                    
-                    
-
-                    
-                    this.PersonaActual.State = BusinessEntities.Personas.States.New;
-
+                    PersonaActual = new BusinessEntities.Persona();                    
+                    PersonaActual.Nombre = txtNombre.Text;
+                    PersonaActual.Apellido = txtApellido.Text;
+                    PersonaActual.Email = txtEmail.Text;
+                    PersonaActual.Direccion = txtDireccion.Text;
+                    PersonaActual.Telefono = txtTelefono.Text;
+                    PersonaActual.FechaNacimiento = DateTime.Parse(txtFecha.Text);
+                    PersonaActual.Legajo = int.Parse(txtLegajo.Text);
+                    PersonaActual.State = BusinessEntity.States.New;
                     break;
-                case ModoForm.Modificacion:
-                    
-                    this.PersonaActual.Nombre = this.txtNombre.Text;
-                    this.PersonaActual.Apellido = this.txtApellido.Text;
-                    this.PersonaActual.Email = this.txtEmail.Text;
-                    this.PersonaActual.Direccion = this.txtDireccion.Text;
-                    this.PersonaActual.Telefono = this.txtTelefono.Text;
-                    this.PersonaActual.FechaNacimiento = DateTime.Parse(this.txtFecha.Text);
-                    this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);                    
-                    
-
-
-                    this.PersonaActual.State = BusinessEntities.Personas.States.Modified;
+                case ModoForm.Modificacion:                    
+                    PersonaActual.Nombre = txtNombre.Text;
+                    PersonaActual.Apellido = txtApellido.Text;
+                    PersonaActual.Email = txtEmail.Text;
+                    PersonaActual.Direccion = txtDireccion.Text;
+                    PersonaActual.Telefono = txtTelefono.Text;
+                    PersonaActual.FechaNacimiento = DateTime.Parse(txtFecha.Text);
+                    PersonaActual.Legajo = int.Parse(txtLegajo.Text);
+                    PersonaActual.State = BusinessEntity.States.Modified;
                     break;
                 case ModoForm.Baja:
-                    this.PersonaActual.State = BusinessEntities.Personas.States.Deleted;
+                    PersonaActual.State = BusinessEntity.States.Deleted;
                     break;
                 case ModoForm.Consulta:
-                    this.PersonaActual.State = BusinessEntities.Personas.States.Unmodified;
+                    PersonaActual.State = BusinessEntity.States.Unmodified;
                     break;
             }
 
@@ -122,22 +95,23 @@ namespace UI.Desktop
         {
             try
             {
-                this.MapearADatos();
-                PersonasLogic pl = new PersonasLogic();
+                MapearADatos();
+                PersonaLogic pl = new PersonaLogic();
                 pl.Save(PersonaActual);
             }
             catch (Exception ex)
             {
-                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
         }
+
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(this.txtNombre.Text) || string.IsNullOrEmpty(this.txtApellido.Text)
-                || string.IsNullOrEmpty(this.txtEmail.Text) || string.IsNullOrEmpty(this.txtDireccion.Text)
-                || string.IsNullOrEmpty(this.txtTelefono.Text) || string.IsNullOrEmpty(this.txtFecha.Text) 
-                || (string.IsNullOrEmpty(this.txtLegajo.Text)))
+            if (string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtApellido.Text)
+                || string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtDireccion.Text)
+                || string.IsNullOrEmpty(txtTelefono.Text) || string.IsNullOrEmpty(txtFecha.Text) 
+                || (string.IsNullOrEmpty(txtLegajo.Text)))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -145,7 +119,7 @@ namespace UI.Desktop
                    
             try
             {
-                new MailAddress(this.txtEmail.Text);
+                new MailAddress(txtEmail.Text);
             }
             catch (FormatException)
             {
@@ -156,22 +130,20 @@ namespace UI.Desktop
 
         }
         
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.Validar())
+            if (Validar())
             {
-                this.GuardarCambios();
-                this.Close();
+                GuardarCambios();
+                Close();
             }
 
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-               
+            Close();
+        }              
         
     }
 }

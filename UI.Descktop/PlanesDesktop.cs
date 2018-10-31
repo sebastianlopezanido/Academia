@@ -28,73 +28,63 @@ namespace UI.Desktop
         public PlanesDesktop(ModoForm modo) : this()
         {
             Modo = modo;
+            Text = CambiarTextos(btnAceptar);
 
         }
+
         public PlanesDesktop(int id, ModoForm modo) : this()
         {
             Modo = modo;
             PlanLogic pl = new PlanLogic(); //controlador :)
             PlanActual = pl.GetOne(id);
-            this.MapearDeDatos();
+            Text = CambiarTextos(btnAceptar);
+            MapearDeDatos();
         }
+
         private BusinessEntities.Plan _PlanActual;
         public BusinessEntities.Plan PlanActual
         {
             get { return _PlanActual; }
             set { _PlanActual = value; }
         }
+
         public override void MapearDeDatos()
         {
-            this.txtID.Text = this.PlanActual.ID.ToString();
-            this.txtDescripcion.Text = this.PlanActual.Descripcion.ToString();
-            this.cbxEsp.SelectedValue = this.PlanActual.IDEspecialidad;
-
-            switch (this.Modo)
-            {
-                case ModoForm.Alta:
-                    break;
-                case ModoForm.Modificacion:
-                    this.btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja:
-                    this.btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Consulta:
-                    this.btnAceptar.Text = "Aceptar";
-                    break;
-            }
+            txtID.Text = PlanActual.ID.ToString();
+            txtDescripcion.Text = PlanActual.Descripcion.ToString();
+            cbxEsp.SelectedValue = PlanActual.IDEspecialidad;
         }
 
         public override void MapearADatos()
         {
             
-            switch (this.Modo)
+            switch (Modo)
             {
                 case ModoForm.Alta:
                     PlanActual = new Plan();                    
-                    this.PlanActual.Descripcion = this.txtDescripcion.Text;
-                    this.PlanActual.State = Plan.States.New;
-                    //////esp = (Especialidad)this.cbxEsp.SelectedItem;
-                    this.PlanActual.IDEspecialidad = (int)this.cbxEsp.SelectedValue;
+                    PlanActual.Descripcion = txtDescripcion.Text;
+                    PlanActual.State = BusinessEntity.States.New;
+                    //////esp = (Especialidad)cbxEsp.SelectedItem;
+                    PlanActual.IDEspecialidad = (int)cbxEsp.SelectedValue;
                     break;
                 case ModoForm.Modificacion:
-                    this.PlanActual.Descripcion = this.txtDescripcion.Text;
-                    this.PlanActual.State = Plan.States.Modified;
-                    //esp = (Especialidad)this.cbxEsp.SelectedItem;
-                    this.PlanActual.IDEspecialidad = (int)this.cbxEsp.SelectedValue;
+                    PlanActual.Descripcion = txtDescripcion.Text;
+                    PlanActual.State = BusinessEntity.States.Modified;
+                    //esp = (Especialidad)cbxEsp.SelectedItem;
+                    PlanActual.IDEspecialidad = (int)cbxEsp.SelectedValue;
                     break;
                 case ModoForm.Baja:
-                    this.PlanActual.State = Plan.States.Deleted;
+                    PlanActual.State = BusinessEntity.States.Deleted;
                     break;
                 case ModoForm.Consulta:
-                    this.PlanActual.State = Plan.States.Unmodified;
+                    PlanActual.State = BusinessEntity.States.Unmodified;
                     break;
             }
         }
 
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(this.txtDescripcion.Text) || this.cbxEsp.SelectedValue == null)
+            if (string.IsNullOrEmpty(txtDescripcion.Text) || cbxEsp.SelectedValue == null)
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -107,7 +97,7 @@ namespace UI.Desktop
         {
             try
             {
-                this.MapearADatos();
+                MapearADatos();
                 PlanLogic el = new PlanLogic();
                 el.Save(PlanActual);
 
@@ -115,24 +105,24 @@ namespace UI.Desktop
             catch(Exception ex)
             {
                 Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+            }            
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.Validar())
+            if (Validar())
             {
-                this.GuardarCambios();
-                this.Close();
+                GuardarCambios();
+                Close();
             }
 
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
+
         private void PlanDesktop_Load(object sender, EventArgs e)
         {
 

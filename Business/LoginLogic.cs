@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessEntities;
 
 namespace BusinessLogic
 {
@@ -12,14 +13,14 @@ namespace BusinessLogic
         {
             
         }
-        public BusinessEntities.Usuario ValidarDatos(string nombreUsuario, string clave)
+
+        public Usuario ValidarDatos(string nombreUsuario, string clave)
         {
             UsuarioLogic ul = new UsuarioLogic();
             try
             {
-                BusinessEntities.Usuario usr = ul.GetOne(nombreUsuario, clave);
-                return usr;
-                
+                Usuario usr = ul.GetOne(nombreUsuario, clave);
+                return usr;                
             }
             catch (Exception Ex)
             {

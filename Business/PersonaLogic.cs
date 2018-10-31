@@ -7,27 +7,26 @@ using BusinessEntities;
 
 namespace BusinessLogic
 {
-    public class PersonasLogic : BusinessLogic
+    public class PersonaLogic : BusinessLogic
     {
-        public PersonasLogic()
+        public PersonaLogic()
         {
-            PersonasData = new Data.Database.PersonasAdapter();
+            PersonasData = new Data.Database.PersonaAdapter();
         }
 
-        private Data.Database.PersonasAdapter _PersonasData;
-        public Data.Database.PersonasAdapter PersonasData
+        private Data.Database.PersonaAdapter _PersonasData;
+        public Data.Database.PersonaAdapter PersonasData
         {
             set { _PersonasData = value; }
             get { return _PersonasData; }
         }
         
-        public BusinessEntities.Personas GetOne(int ID)
+        public Persona GetOne(int ID)
         {
             return PersonasData.GetOne(ID);
-        }
-        
+        }        
 
-        public List<Personas> GetAll()
+        public List<Persona> GetAll()
         {
             try
             {
@@ -41,11 +40,9 @@ namespace BusinessLogic
             //return PersonasData.GetAll();
         }
         
-        public void Save(BusinessEntities.Personas persona)
+        public void Save(Persona persona)
         {
-           
-            PersonasData.Save(persona);
-    
+           PersonasData.Save(persona);    
         }
 
         public void Delete(int ID)

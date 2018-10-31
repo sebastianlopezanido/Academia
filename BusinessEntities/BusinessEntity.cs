@@ -10,7 +10,7 @@ namespace BusinessEntities
     {
         public BusinessEntity()
         {
-            this.State = States.New;
+            State = States.New;
         }
 
         private int _ID;

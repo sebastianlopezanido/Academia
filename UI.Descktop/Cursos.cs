@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessEntities;
 
 namespace UI.Desktop
 {
@@ -16,7 +17,7 @@ namespace UI.Desktop
         public Cursos()
         {
             InitializeComponent();
-            this.dgvCursos.AutoGenerateColumns = false;
+            dgvCursos.AutoGenerateColumns = false;
         }
 
         public void Listar()
@@ -25,7 +26,7 @@ namespace UI.Desktop
             {
                 CursoLogic cl = new CursoLogic();
 
-                this.dgvCursos.DataSource = cl.GetAll();
+                dgvCursos.DataSource = cl.GetAll();
             }
             catch (Exception Ex)
             {
@@ -35,47 +36,46 @@ namespace UI.Desktop
 
         private void Cursos_Load(object sender, EventArgs e)
         {
-            this.Listar();
+            Listar();
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             CursosDesktop cd = new CursosDesktop(ApplicationForm.ModoForm.Alta);
-
             cd.ShowDialog();
-            this.Listar();
+            Listar();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (this.dgvCursos.SelectedRows != null && this.dgvCursos.MultiSelect == false && this.dgvCursos.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            if (dgvCursos.SelectedRows != null && dgvCursos.MultiSelect == false && dgvCursos.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                int ID = ((BusinessEntities.Curso)this.dgvCursos.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
                 CursosDesktop pd = new CursosDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 pd.ShowDialog();
-                this.Listar();
+                Listar();
             }
         }
+
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            if (this.dgvCursos.SelectedRows != null && this.dgvCursos.MultiSelect == false && this.dgvCursos.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            if (dgvCursos.SelectedRows != null && dgvCursos.MultiSelect == false && dgvCursos.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                int ID = ((BusinessEntities.Curso)this.dgvCursos.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
                 CursosDesktop ud = new CursosDesktop(ID, ApplicationForm.ModoForm.Baja);
                 ud.ShowDialog();
-                this.Listar();
-
+                Listar();
             }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            this.Listar();
+            Listar();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

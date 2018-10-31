@@ -1,6 +1,0 @@
-﻿- agregar manejo de excepciones en la UI en Personas (en usuarios ya esta(pero incompleto))
-en formulario de usuarios, mostrar nombre y apellido de persona relacionada"
-en formulario usuarioDesktop al elegir el id de persona, deberia haber otro formulario para elegir la persona
-Deshabilitar edit tipopersona,idplan id persona en usuariodesktop
-click en la cruz en el menu no cierra todo (queda corriendo)
-Entender mejor los try catch, estabamos poniendo por todos lados y algunos no hacian falta

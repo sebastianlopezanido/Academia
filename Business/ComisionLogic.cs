@@ -21,11 +21,10 @@ namespace BusinessLogic
             get { return _ComisionData; }
         }
 
-        public BusinessEntities.Comision GetOne(int ID)
+        public Comision GetOne(int ID)
         {
             return ComisionData.GetOne(ID);
         }
-
 
         public List<Comision> GetAll()
         {
@@ -39,7 +38,7 @@ namespace BusinessLogic
             }            
         }
 
-        public void Save(BusinessEntities.Comision comision)
+        public void Save(Comision comision)
         {
             ComisionData.Save(comision);
         }

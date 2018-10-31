@@ -22,6 +22,7 @@ namespace UI.Desktop
         public EspecialidadDesktop(ModoForm modo) : this()
         {
             Modo = modo;
+            Text = CambiarTextos(btnAceptar);
 
         }
 
@@ -30,7 +31,8 @@ namespace UI.Desktop
             Modo = modo;
             EspecialidadLogic el = new EspecialidadLogic(); //controlador :)
             EspecialidadActual = el.GetOne(id);
-            this.MapearDeDatos();
+            Text = CambiarTextos(btnAceptar);
+            MapearDeDatos();
         }
 
         private BusinessEntities.Especialidad _EspecialidadActual;
@@ -42,51 +44,35 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
-            this.txtID.Text = this.EspecialidadActual.ID.ToString();
-            this.txtDescripcion.Text = this.EspecialidadActual.Descripcion.ToString();      
-
-            switch (this.Modo)
-            {
-                case ModoForm.Alta:
-                    break;
-                case ModoForm.Modificacion:
-                    this.btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja:
-                    this.btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Consulta:
-                    this.btnAceptar.Text = "Aceptar";
-                    break;
-            }
-
+            txtID.Text = EspecialidadActual.ID.ToString();
+            txtDescripcion.Text = EspecialidadActual.Descripcion.ToString();
         }
 
         public override void MapearADatos()
         {
-            switch (this.Modo)
+            switch (Modo)
             {
-                case ModoForm.Alta: EspecialidadActual = new Especialidad();
-                                    this.EspecialidadActual.Descripcion = this.txtDescripcion.Text;                    
-                                    this.EspecialidadActual.State = Especialidad.States.New;
-
+                case ModoForm.Alta:
+                    EspecialidadActual = new Especialidad();
+                    EspecialidadActual.Descripcion = txtDescripcion.Text;                    
+                    EspecialidadActual.State = BusinessEntity.States.New;
                     break;
-                case ModoForm.Modificacion: this.EspecialidadActual.Descripcion = this.txtDescripcion.Text;
-                                            this.EspecialidadActual.State = Especialidad.States.Modified;
+                case ModoForm.Modificacion:
+                    EspecialidadActual.Descripcion = txtDescripcion.Text;
+                    EspecialidadActual.State = BusinessEntity.States.Modified;
                     break;
                 case ModoForm.Baja:
-                    this.EspecialidadActual.State = Especialidad.States.Deleted;
+                    EspecialidadActual.State = BusinessEntity.States.Deleted;
                     break;
                 case ModoForm.Consulta:
-                    this.EspecialidadActual.State = Especialidad.States.Unmodified;
+                    EspecialidadActual.State = BusinessEntity.States.Unmodified;
                     break;
             }
-
         }
 
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(this.txtDescripcion.Text))
+            if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -97,8 +83,9 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            this.MapearADatos();
+            MapearADatos();
             EspecialidadLogic el = new EspecialidadLogic();
+
             try
             {
                 el.Save(EspecialidadActual);
@@ -111,22 +98,16 @@ namespace UI.Desktop
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.Validar())
+            if (Validar())
             {
-                this.GuardarCambios();
-                this.Close();
+                GuardarCambios();
+                Close();
             }
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void EspecialidadDesktop_Load(object sender, EventArgs e)
-        {
-
-        }
+            Close();
+        }        
     }
 }

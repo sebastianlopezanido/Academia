@@ -17,14 +17,13 @@ namespace Data.Database
 
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdMateria = new SqlCommand("select * from materias", sqlConn);
                 SqlDataReader drMateria = cmdMateria.ExecuteReader();
 
                 while (drMateria.Read())
                 {
                     Materia materia = new Materia();
-
                     materia.ID = (int)drMateria["id_materia"];
                     materia.Descripcion = (string)drMateria["desc_materia"];
                     materia.HSSemanales = (int)drMateria["hs_semanales"];
@@ -35,29 +34,29 @@ namespace Data.Database
 
                 drMateria.Close();
             }
-
             catch (Exception Ex)
             {
                 Exception ExcepcionManejada = new Exception("Error al recuperar lista de materias", Ex);
                 throw ExcepcionManejada;
             }
-
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
+
             return materias;
         }
 
-        public BusinessEntities.Materia GetOne(int ID)
+        public Materia GetOne(int ID)
         {
             Materia materia = new Materia();
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdMateria = new SqlCommand("select * from materias where id_materia=@id", sqlConn);
                 cmdMateria.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drMateria = cmdMateria.ExecuteReader();
+
                 if (drMateria.Read())
                 {
                     materia.ID = (int)drMateria["id_materia"];
@@ -66,6 +65,7 @@ namespace Data.Database
                     materia.HSTotales = (int)drMateria["hs_totales"];
                     materia.IDPlan = (int)drMateria["id_plan"];
                 }
+
                 drMateria.Close();
             }
             catch (Exception Ex)
@@ -75,8 +75,9 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
+
             return materia;
         }
 
@@ -84,10 +85,9 @@ namespace Data.Database
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdDelete = new SqlCommand("delete materias where id_materia=@id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-
                 cmdDelete.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -97,26 +97,22 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
-
-
         }
 
         protected void Update(Materia materia)
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdSave = new SqlCommand("UPDATE materias SET desc_materia = @desc, hs_semanales = @hs_semanales, hs_totales = @hs_totales, id_plan = @id_plan" +
                     " WHERE id_materia = @id", sqlConn);
-
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = materia.ID;
                 cmdSave.Parameters.Add("@desc", SqlDbType.VarChar, 50).Value = materia.Descripcion;
                 cmdSave.Parameters.Add("@hs_semanales", SqlDbType.Int).Value = materia.HSSemanales;
                 cmdSave.Parameters.Add("@hs_totales", SqlDbType.Int).Value = materia.HSTotales;
                 cmdSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = materia.IDPlan;
-
                 cmdSave.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -126,51 +122,47 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
-
         }
 
         protected void Insert(Materia materia)
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 SqlCommand cmdSave = new SqlCommand("insert into materias(desc_materia,hs_semanales,hs_totales,id_plan) " + "values(@desc_materia,@hs_semanales,@hs_totales,@id_plan)" + "select @@identity", sqlConn);
                 cmdSave.Parameters.Add("desc_materia", SqlDbType.VarChar, 50).Value = materia.Descripcion;
                 cmdSave.Parameters.Add("hs_semanales", SqlDbType.Int).Value = materia.HSSemanales;
                 cmdSave.Parameters.Add("hs_totales", SqlDbType.Int).Value = materia.HSTotales;
                 cmdSave.Parameters.Add("id_plan", SqlDbType.Int).Value = materia.IDPlan;
-                materia.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
-
+                materia.ID = decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
             }
             catch (Exception Ex)
             {
                 Exception ExcepcionManejada = new Exception("Error al crear materia", Ex);
                 throw ExcepcionManejada;
-
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
         public void Save(Materia materia)
         {
-            if (materia.State == BusinessEntity.States.Deleted)
+            switch (materia.State)
             {
-                this.Delete(materia.ID);
+                case BusinessEntity.States.New:
+                    Insert(materia);
+                    break;
+                case BusinessEntity.States.Modified:
+                    Update(materia);
+                    break;
+                case BusinessEntity.States.Deleted:
+                    Delete(materia.ID);
+                    break;
             }
-            else if (materia.State == BusinessEntity.States.New)
-            {
-                this.Insert(materia);
-            }
-            else if (materia.State == BusinessEntity.States.Modified)
-            {
-                this.Update(materia);
-            }
-            materia.State = BusinessEntity.States.Unmodified;
         }
     }
 }

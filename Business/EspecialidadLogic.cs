@@ -21,11 +21,10 @@ namespace BusinessLogic
             get { return _EspecialidadData; }
         }
 
-        public BusinessEntities.Especialidad GetOne(int ID)
+        public Especialidad GetOne(int ID)
         {
             return EspecialidadData.GetOne(ID);
-        }
-       
+        }       
 
         public List<Especialidad> GetAll()
         {
@@ -37,11 +36,9 @@ namespace BusinessLogic
             {
                 throw;
             }
-
-            //return PersonasData.GetAll();
         }
 
-        public void Save(BusinessEntities.Especialidad especialidad)
+        public void Save(Especialidad especialidad)
         {
            EspecialidadData.Save(especialidad); 
         }
@@ -49,7 +46,6 @@ namespace BusinessLogic
         public void Delete(int ID)
         {
             EspecialidadData.Delete(ID); 
-        }
-        
+        }        
     }
 }

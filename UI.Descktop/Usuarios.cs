@@ -17,13 +17,7 @@ namespace UI.Desktop
         public Usuarios()
         {
             InitializeComponent();
-            this.dgvUsuarios.AutoGenerateColumns = false;
-
-        }
-
-        private void toolStripContainer1_TopToolStripPanel_Click(object sender, EventArgs e)
-        {
-
+            dgvUsuarios.AutoGenerateColumns = false;
         }
 
         public void Listar()
@@ -31,67 +25,57 @@ namespace UI.Desktop
             try
             {
                 UsuarioLogic ul = new UsuarioLogic();
-                this.dgvUsuarios.DataSource = ul.GetAll();
+                dgvUsuarios.DataSource = ul.GetAll();
             }
             catch (Exception Ex)
             {               
                 MessageBox.Show(Ex.Message);
-            }
-            
+            }            
         }
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-            this.Listar();
+            Listar();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            this.Listar();
+            Listar();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void tbsNuevo_Click(object sender, EventArgs e)
         {
-            UsuarioDesktop ud = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);
-            
+            UsuarioDesktop ud = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);            
             ud.ShowDialog();
-            this.Listar();
-
-
+            Listar();
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
 
-            if(this.dgvUsuarios.SelectedRows != null && this.dgvUsuarios.MultiSelect == false && this.dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            if(dgvUsuarios.SelectedRows != null && dgvUsuarios.MultiSelect == false && dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                int ID = ((BusinessEntities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
                 UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 ud.ShowDialog();
-                this.Listar();
-
+                Listar();
             }           
-
-
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            if (this.dgvUsuarios.SelectedRows != null && this.dgvUsuarios.MultiSelect == false && this.dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            if (dgvUsuarios.SelectedRows != null && dgvUsuarios.MultiSelect == false && dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                int ID = ((BusinessEntities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
                 UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Baja);
                 ud.ShowDialog();
-                this.Listar();
-
+                Listar();
             }
-        }
-
-        
+        }        
     }
 }

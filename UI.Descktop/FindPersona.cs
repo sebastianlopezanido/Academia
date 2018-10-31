@@ -16,7 +16,7 @@ namespace UI.Desktop
         public FindPersona()
         {
             InitializeComponent();
-            this.dgvPersonas.AutoGenerateColumns = false;
+            dgvPersonas.AutoGenerateColumns = false;
         }
 
         private int _IdPersona;
@@ -26,7 +26,6 @@ namespace UI.Desktop
             get { return _IdPersona; }
         }
 
-
         public delegate void pasar(int dato);
         public event pasar pasado;
 
@@ -34,8 +33,8 @@ namespace UI.Desktop
         {
             try
             {
-                PersonasLogic pl = new PersonasLogic();
-                this.dgvPersonas.DataSource = pl.GetAll();
+                PersonaLogic pl = new PersonaLogic();
+                dgvPersonas.DataSource = pl.GetAll();
             }
             catch (Exception Ex)
             {
@@ -45,29 +44,22 @@ namespace UI.Desktop
 
         private void FindPersona_Load(object sender, EventArgs e)
         {
-            this.Listar();
-        }
-
-       
+            Listar();
+        }              
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            if (this.dgvPersonas.SelectedRows != null && this.dgvPersonas.MultiSelect == false && this.dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            if (dgvPersonas.SelectedRows != null && dgvPersonas.MultiSelect == false && dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-
-                pasado(((BusinessEntities.Personas)this.dgvPersonas.SelectedRows[0].DataBoundItem).ID);
-                
-                
-
+                pasado(((BusinessEntities.Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID);  
             }
-            this.Close();
+
+            Close();
         }
 
         private void btnCancelar_Click_1(object sender, EventArgs e)
-        {
-            
-            this.Close();
-
+        {            
+            Close();
         }
     }
 }

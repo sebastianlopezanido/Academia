@@ -14,13 +14,11 @@ namespace UI.Desktop
 {
     public partial class Menu : ApplicationForm
     {
-        public Menu(BusinessEntities.Usuario user)
+        public Menu(Usuario user)
         {
             UsuarioActual = user;
             InitializeComponent();
-            this.Ocultar();
-
-            
+            Ocultar();        
 
         }
 
@@ -36,43 +34,36 @@ namespace UI.Desktop
             if (UsuarioActual.Tipo == Usuario.TiposUsuario.Profesor || UsuarioActual.Tipo == Usuario.TiposUsuario.Alumno)
             {
                 //aca se oculta lo del admin
-                this.btnAdmCom.Hide();
-                this.btnAdmPla.Hide();
-                this.btnAdmCur.Hide();
-                this.btnAdmEsp.Hide();
-                this.btnAdmMat.Hide();
-                this.btnAdmPrs.Hide();
-                this.btnAdmUsr.Hide();
-
+                btnAdmCom.Hide();
+                btnAdmPla.Hide();
+                btnAdmCur.Hide();
+                btnAdmEsp.Hide();
+                btnAdmMat.Hide();
+                btnAdmPrs.Hide();
+                btnAdmUsr.Hide();
             }
             if (UsuarioActual.Tipo == Usuario.TiposUsuario.Alumno || UsuarioActual.Tipo == Usuario.TiposUsuario.Administrador)
             {
-                //aca se oculta lo del profesor (lo que ve el profesor va acá)
-                
+                //aca se oculta lo del profesor (lo que ve el profesor va acá)                
             }
             if (UsuarioActual.Tipo == Usuario.TiposUsuario.Administrador || UsuarioActual.Tipo == Usuario.TiposUsuario.Profesor)
             {
-                //aca se oculta lo del alumno
-                
+                //aca se oculta lo del alumno                
             }
         }
 
-
-
         private void salir_Click(object sender, EventArgs e)
         {
-
-            this.Close();
+            Close();
             Login log = Program.login;
-            log.Show();
-            
+            log.Show();            
         }
 
         private void btnAdmUsr_Click(object sender, EventArgs e)
         {
             Usuarios userForm = new Usuarios();
             userForm.ShowDialog();
-            //this.Hide();
+            //Hide();
         }
 
         private void btnAdmPrs_Click(object sender, EventArgs e)
