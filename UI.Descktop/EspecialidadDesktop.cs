@@ -35,8 +35,8 @@ namespace UI.Desktop
             MapearDeDatos();
         }
 
-        private BusinessEntities.Especialidad _EspecialidadActual;
-        public BusinessEntities.Especialidad EspecialidadActual
+        private Especialidad _EspecialidadActual;
+        public Especialidad EspecialidadActual
         {
             get { return _EspecialidadActual; }
             set { _EspecialidadActual = value; }
@@ -61,9 +61,9 @@ namespace UI.Desktop
                     EspecialidadActual.Descripcion = txtDescripcion.Text;
                     EspecialidadActual.State = BusinessEntity.States.Modified;
                     break;
-                case ModoForm.Baja:
-                    EspecialidadActual.State = BusinessEntity.States.Deleted;
-                    break;
+                //case ModoForm.Baja:
+                //    EspecialidadActual.State = BusinessEntity.States.Deleted;
+                //    break;
                 case ModoForm.Consulta:
                     EspecialidadActual.State = BusinessEntity.States.Unmodified;
                     break;

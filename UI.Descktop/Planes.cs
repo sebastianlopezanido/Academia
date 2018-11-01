@@ -20,6 +20,20 @@ namespace UI.Desktop
             dgvPlanes.AutoGenerateColumns = false;
         }
 
+        private Plan _PlanActual;
+        public Plan PlanActual
+        {
+            get { return _PlanActual; }
+            set { _PlanActual = value; }
+        }
+
+        private Especialidad _EspecialidadActual;
+        public Especialidad EspecialidadActual
+        {
+            get { return _EspecialidadActual; }
+            set { _EspecialidadActual = value; }
+        }
+
         public void Listar()
         {
             try
@@ -30,6 +44,19 @@ namespace UI.Desktop
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
+            }
+        }
+
+        private void dgvPlanes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvPlanes.Columns[e.ColumnIndex].Name == "idespecialidad")
+            {
+                if (e.Value != null)
+                {
+                    EspecialidadLogic pl = new EspecialidadLogic();
+                    EspecialidadActual = pl.GetOne((int)e.Value);
+                    e.Value = EspecialidadActual.Descripcion;
+                }
             }
         }
 
@@ -60,8 +87,16 @@ namespace UI.Desktop
             if (dgvPlanes.SelectedRows != null && dgvPlanes.MultiSelect == false && dgvPlanes.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
-                PlanesDesktop ud = new PlanesDesktop(ID, ApplicationForm.ModoForm.Baja);
-                ud.ShowDialog();
+                PlanLogic pl = new PlanLogic(); //controlador :)
+                PlanActual = pl.GetOne(ID);
+                DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar el plan?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    PlanActual.State = BusinessEntity.States.Deleted;
+                    pl.Save(PlanActual);
+                }
+
                 Listar();
             }
         }
@@ -74,6 +109,7 @@ namespace UI.Desktop
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
-        }        
+        }
+
     }
 }

@@ -20,6 +20,13 @@ namespace UI.Desktop
             dgvEspecialidades.AutoGenerateColumns = false;
         }
 
+        private Especialidad _EspecialidadActual;
+        public Especialidad EspecialidadActual
+        {
+            get { return _EspecialidadActual; }
+            set { _EspecialidadActual = value; }
+        }
+
         public void Listar()
         {
             EspecialidadLogic el = new EspecialidadLogic();
@@ -64,8 +71,16 @@ namespace UI.Desktop
             if (dgvEspecialidades.SelectedRows != null && dgvEspecialidades.MultiSelect == false && dgvEspecialidades.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
-                EspecialidadDesktop ud = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Baja);
-                ud.ShowDialog();
+                EspecialidadLogic el = new EspecialidadLogic(); //controlador :)
+                EspecialidadActual = el.GetOne(ID);
+                DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar la especialidad?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    EspecialidadActual.State = BusinessEntity.States.Deleted;
+                    el.Save(EspecialidadActual);
+                }
+
                 Listar();
             }
         }

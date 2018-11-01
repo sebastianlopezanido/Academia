@@ -32,17 +32,17 @@
             this.tcUsuarios = new System.Windows.Forms.ToolStripContainer();
             this.tlUsuarios = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID_Persona = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.tsUsuarios = new System.Windows.Forms.ToolStrip();
             this.tbsNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idpersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tcUsuarios.ContentPanel.SuspendLayout();
             this.tcUsuarios.TopToolStripPanel.SuspendLayout();
             this.tcUsuarios.SuspendLayout();
@@ -94,9 +94,9 @@
             this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.usuario,
-            this.habilitado,
-            this.ID_Persona,
-            this.Tipo_Usuario});
+            this.idpersona,
+            this.Tipo_Usuario,
+            this.habilitado});
             this.tlUsuarios.SetColumnSpan(this.dgvUsuarios, 2);
             this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUsuarios.Location = new System.Drawing.Point(3, 3);
@@ -106,41 +106,7 @@
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsuarios.Size = new System.Drawing.Size(646, 352);
             this.dgvUsuarios.TabIndex = 0;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // usuario
-            // 
-            this.usuario.DataPropertyName = "NombreUsuario";
-            this.usuario.HeaderText = "Usuario";
-            this.usuario.Name = "usuario";
-            this.usuario.ReadOnly = true;
-            // 
-            // habilitado
-            // 
-            this.habilitado.DataPropertyName = "Habilitado";
-            this.habilitado.HeaderText = "Habilitado";
-            this.habilitado.Name = "habilitado";
-            this.habilitado.ReadOnly = true;
-            // 
-            // ID_Persona
-            // 
-            this.ID_Persona.DataPropertyName = "IDPersona";
-            this.ID_Persona.HeaderText = "ID Persona";
-            this.ID_Persona.Name = "ID_Persona";
-            this.ID_Persona.ReadOnly = true;
-            // 
-            // Tipo_Usuario
-            // 
-            this.Tipo_Usuario.DataPropertyName = "Tipo";
-            this.Tipo_Usuario.HeaderText = "Tipo Usuario";
-            this.Tipo_Usuario.Name = "Tipo_Usuario";
-            this.Tipo_Usuario.ReadOnly = true;
+            this.dgvUsuarios.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvUsuarios_CellFormatting);
             // 
             // btnActualizar
             // 
@@ -208,6 +174,41 @@
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // usuario
+            // 
+            this.usuario.DataPropertyName = "NombreUsuario";
+            this.usuario.HeaderText = "Usuario";
+            this.usuario.Name = "usuario";
+            this.usuario.ReadOnly = true;
+            // 
+            // idpersona
+            // 
+            this.idpersona.DataPropertyName = "IDPersona";
+            this.idpersona.HeaderText = "Legajo";
+            this.idpersona.Name = "idpersona";
+            this.idpersona.ReadOnly = true;
+            // 
+            // Tipo_Usuario
+            // 
+            this.Tipo_Usuario.DataPropertyName = "Tipo";
+            this.Tipo_Usuario.HeaderText = "Tipo Usuario";
+            this.Tipo_Usuario.Name = "Tipo_Usuario";
+            this.Tipo_Usuario.ReadOnly = true;
+            // 
+            // habilitado
+            // 
+            this.habilitado.DataPropertyName = "Habilitado";
+            this.habilitado.HeaderText = "Habilitado";
+            this.habilitado.Name = "habilitado";
+            this.habilitado.ReadOnly = true;
+            // 
             // Usuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,9 +244,9 @@
         private System.Windows.Forms.ToolStripButton tsbEliminar;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn usuario;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn habilitado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Persona;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idpersona;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Usuario;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn habilitado;
     }
 }
 

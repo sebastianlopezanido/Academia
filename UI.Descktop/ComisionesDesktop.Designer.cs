@@ -36,9 +36,9 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtAño = new System.Windows.Forms.TextBox();
-            this.txtIDPlan = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.cbxIDPlan = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,9 +56,9 @@
             this.tableLayoutPanel1.Controls.Add(this.txtID, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtDescripcion, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtAño, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtIDPlan, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.cbxIDPlan, 3, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -101,9 +101,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(197, 41);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.Size = new System.Drawing.Size(28, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "ID Plan";
+            this.label4.Text = "Plan";
             // 
             // txtID
             // 
@@ -128,13 +128,6 @@
             this.txtAño.Size = new System.Drawing.Size(93, 20);
             this.txtAño.TabIndex = 6;
             // 
-            // txtIDPlan
-            // 
-            this.txtIDPlan.Location = new System.Drawing.Point(295, 44);
-            this.txtIDPlan.Name = "txtIDPlan";
-            this.txtIDPlan.Size = new System.Drawing.Size(93, 20);
-            this.txtIDPlan.TabIndex = 7;
-            // 
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -155,6 +148,14 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // cbxIDPlan
+            // 
+            this.cbxIDPlan.FormattingEnabled = true;
+            this.cbxIDPlan.Location = new System.Drawing.Point(295, 44);
+            this.cbxIDPlan.Name = "cbxIDPlan";
+            this.cbxIDPlan.Size = new System.Drawing.Size(93, 21);
+            this.cbxIDPlan.TabIndex = 10;
             // 
             // ComisionesDesktop
             // 
@@ -180,8 +181,8 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.TextBox txtAño;
-        private System.Windows.Forms.TextBox txtIDPlan;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.ComboBox cbxIDPlan;
     }
 }

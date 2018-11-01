@@ -32,17 +32,17 @@
             this.tsCursos = new System.Windows.Forms.ToolStripContainer();
             this.tlCursos = new System.Windows.Forms.TableLayoutPanel();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id_materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id_comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsCursos.ContentPanel.SuspendLayout();
             this.tsCursos.TopToolStripPanel.SuspendLayout();
             this.tsCursos.SuspendLayout();
@@ -106,41 +106,7 @@
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCursos.Size = new System.Drawing.Size(794, 390);
             this.dgvCursos.TabIndex = 0;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // id_materia
-            // 
-            this.id_materia.DataPropertyName = "IDMateria";
-            this.id_materia.HeaderText = "ID Materia";
-            this.id_materia.Name = "id_materia";
-            this.id_materia.ReadOnly = true;
-            // 
-            // id_comision
-            // 
-            this.id_comision.DataPropertyName = "IDComision";
-            this.id_comision.HeaderText = "ID Comision";
-            this.id_comision.Name = "id_comision";
-            this.id_comision.ReadOnly = true;
-            // 
-            // año
-            // 
-            this.año.DataPropertyName = "AnioCalendario";
-            this.año.HeaderText = "Año";
-            this.año.Name = "año";
-            this.año.ReadOnly = true;
-            // 
-            // cupo
-            // 
-            this.cupo.DataPropertyName = "Cupo";
-            this.cupo.HeaderText = "Cupo";
-            this.cupo.Name = "cupo";
-            this.cupo.ReadOnly = true;
+            this.dgvCursos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCursos_CellFormatting);
             // 
             // btnAceptar
             // 
@@ -204,6 +170,41 @@
             this.btnEliminar.Size = new System.Drawing.Size(23, 22);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // id_materia
+            // 
+            this.id_materia.DataPropertyName = "IDMateria";
+            this.id_materia.HeaderText = "Materia";
+            this.id_materia.Name = "id_materia";
+            this.id_materia.ReadOnly = true;
+            // 
+            // id_comision
+            // 
+            this.id_comision.DataPropertyName = "IDComision";
+            this.id_comision.HeaderText = "Comision";
+            this.id_comision.Name = "id_comision";
+            this.id_comision.ReadOnly = true;
+            // 
+            // año
+            // 
+            this.año.DataPropertyName = "AnioCalendario";
+            this.año.HeaderText = "Año";
+            this.año.Name = "año";
+            this.año.ReadOnly = true;
+            // 
+            // cupo
+            // 
+            this.cupo.DataPropertyName = "Cupo";
+            this.cupo.HeaderText = "Cupo";
+            this.cupo.Name = "cupo";
+            this.cupo.ReadOnly = true;
             // 
             // Cursos
             // 

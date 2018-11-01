@@ -20,6 +20,20 @@ namespace UI.Desktop
             dgvUsuarios.AutoGenerateColumns = false;
         }
 
+        private Usuario _UsuarioActual;
+        public Usuario UsuarioActual
+        {
+            get { return _UsuarioActual; }
+            set { _UsuarioActual = value; }
+        }
+
+        private Persona _PersonaActual;
+        public Persona PersonaActual
+        {
+            get { return _PersonaActual; }
+            set { _PersonaActual = value; }
+        }
+
         public void Listar()
         {
             try
@@ -31,6 +45,19 @@ namespace UI.Desktop
             {               
                 MessageBox.Show(Ex.Message);
             }            
+        }
+
+        private void dgvUsuarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvUsuarios.Columns[e.ColumnIndex].Name == "idpersona")
+            {
+                if (e.Value != null)
+                {
+                    PersonaLogic pl = new PersonaLogic();
+                    PersonaActual = pl.GetOne((int)e.Value);
+                    e.Value = PersonaActual.Legajo;
+                }
+            }
         }
 
         private void Usuarios_Load(object sender, EventArgs e)
@@ -71,11 +98,20 @@ namespace UI.Desktop
         {
             if (dgvUsuarios.SelectedRows != null && dgvUsuarios.MultiSelect == false && dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                int ID = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-                UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Baja);
-                ud.ShowDialog();
+                int ID = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;                
+                UsuarioLogic ul = new UsuarioLogic(); //controlador :)
+                UsuarioActual = ul.GetOne(ID);
+                DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar el usuario?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);                
+                
+                if (dr == DialogResult.Yes)
+                {
+                    UsuarioActual.State = BusinessEntity.States.Deleted;
+                    ul.Save(UsuarioActual);
+                }
+                                
                 Listar();
             }
-        }        
+        }
+
     }
 }

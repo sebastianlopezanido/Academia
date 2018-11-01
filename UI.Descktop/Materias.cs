@@ -20,6 +20,20 @@ namespace UI.Desktop
             dgvMaterias.AutoGenerateColumns = false;
         }
 
+        private Materia _MateriaActual;
+        public Materia MateriaActual
+        {
+            get { return _MateriaActual; }
+            set { _MateriaActual = value; }
+        }
+
+        private Plan _PlanActual;
+        public Plan PlanActual
+        {
+            get { return _PlanActual; }
+            set { _PlanActual = value; }
+        }
+
         public void Listar()
         {
             try
@@ -30,6 +44,19 @@ namespace UI.Desktop
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
+            }
+        }
+
+        private void dgvMaterias_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvMaterias.Columns[e.ColumnIndex].Name == "idplan")
+            {
+                if (e.Value != null)
+                {
+                    PlanLogic pl = new PlanLogic();
+                    PlanActual = pl.GetOne((int)e.Value);
+                    e.Value = PlanActual.Descripcion;
+                }
             }
         }
 
@@ -61,8 +88,16 @@ namespace UI.Desktop
             if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
-                MateriasDesktop md = new MateriasDesktop(ID, ApplicationForm.ModoForm.Baja);
-                md.ShowDialog();
+                MateriaLogic ml = new MateriaLogic(); //controlador :)
+                MateriaActual = ml.GetOne(ID);
+                DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar la materia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    MateriaActual.State = BusinessEntity.States.Deleted;
+                    ml.Save(MateriaActual);
+                }
+
                 Listar();
             }
         }
@@ -75,6 +110,6 @@ namespace UI.Desktop
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
-        }
+        }        
     }
 }

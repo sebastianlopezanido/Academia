@@ -18,10 +18,9 @@ namespace UI.Desktop
         {
             InitializeComponent();
             PlanLogic pl = new PlanLogic();
-            List<Plan> planes = pl.GetAll();
-            cbxPlanes.DataSource = planes;
-            cbxPlanes.ValueMember = "ID";
-            cbxPlanes.DisplayMember = "Descripcion";
+            cbxIDPlan.DataSource = pl.GetAll();
+            cbxIDPlan.ValueMember = "ID";
+            cbxIDPlan.DisplayMember = "Descripcion";
         }
 
         public MateriasDesktop(ModoForm modo) : this()
@@ -38,8 +37,8 @@ namespace UI.Desktop
             MapearDeDatos();
         }
 
-        private BusinessEntities.Materia _MateriaActual;
-        public BusinessEntities.Materia MateriaActual
+        private Materia _MateriaActual;
+        public Materia MateriaActual
         {
             get { return _MateriaActual; }
             set { _MateriaActual = value; }
@@ -51,7 +50,7 @@ namespace UI.Desktop
             txtDescripcion.Text = MateriaActual.Descripcion.ToString();
             txtHSemanales.Text = MateriaActual.HSSemanales.ToString();
             txtHTotales.Text = MateriaActual.HSTotales.ToString();
-            cbxPlanes.SelectedValue = MateriaActual.IDPlan;
+            cbxIDPlan.SelectedValue = MateriaActual.IDPlan;
         }
 
         public override void MapearADatos()
@@ -62,20 +61,20 @@ namespace UI.Desktop
                     MateriaActual = new Materia();
                     MateriaActual.Descripcion = txtDescripcion.Text;
                     MateriaActual.HSSemanales = int.Parse(txtHSemanales.Text);
-                    MateriaActual.HSTotales = int.Parse(txtHTotales.Text);
-                    MateriaActual.State = BusinessEntity.States.New;                                    
-                    MateriaActual.IDPlan = (int)cbxPlanes.SelectedValue;
+                    MateriaActual.HSTotales = int.Parse(txtHTotales.Text);                                                  
+                    MateriaActual.IDPlan = (int)cbxIDPlan.SelectedValue;
+                    MateriaActual.State = BusinessEntity.States.New;
                     break;
                 case ModoForm.Modificacion:
                     MateriaActual.Descripcion = txtDescripcion.Text;
                     MateriaActual.HSSemanales = int.Parse(txtHSemanales.Text);
-                    MateriaActual.HSTotales = int.Parse(txtHTotales.Text);
-                    MateriaActual.State = BusinessEntity.States.Modified;                    
-                    MateriaActual.IDPlan = (int)cbxPlanes.SelectedValue;
+                    MateriaActual.HSTotales = int.Parse(txtHTotales.Text);                                    
+                    MateriaActual.IDPlan = (int)cbxIDPlan.SelectedValue;
+                    MateriaActual.State = BusinessEntity.States.Modified;
                     break;
-                case ModoForm.Baja:
-                    MateriaActual.State = BusinessEntity.States.Deleted;
-                    break;
+                //case ModoForm.Baja:
+                //    MateriaActual.State = BusinessEntity.States.Deleted;
+                //    break;
                 case ModoForm.Consulta:
                     MateriaActual.State = BusinessEntity.States.Unmodified;
                     break;
@@ -85,7 +84,7 @@ namespace UI.Desktop
         public override bool Validar()
         {
             if (string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(lable4.Text) || string.IsNullOrEmpty(txtHTotales.Text)
-                || string.IsNullOrEmpty(txtHTotales.Text) || cbxPlanes.SelectedValue == null)
+                || string.IsNullOrEmpty(txtHTotales.Text) || cbxIDPlan.SelectedValue == null)
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

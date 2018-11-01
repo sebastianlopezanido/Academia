@@ -18,19 +18,20 @@ namespace UI.Desktop
         public UsuarioDesktop()
         {
             InitializeComponent();
-            
-            cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Administrador);
-            cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Alumno);
-            cbxTipo.Items.Add(BusinessEntities.Usuario.TiposUsuario.Profesor);            
+            cbxTipo.DataSource = Enum.GetValues(typeof(Usuario.TiposUsuario));
+            PlanLogic pl = new PlanLogic();
+            cbxIDPlan.DataSource = pl.GetAll();
+            cbxIDPlan.ValueMember = "ID";
+            cbxIDPlan.DisplayMember = "Descripcion";
         }
 
-        public UsuarioDesktop(ModoForm modo):this()
+        public UsuarioDesktop(ModoForm modo):this() //aca entra el Nuevo
         {
             Modo = modo;
             Text = CambiarTextos(btnAceptar);
         }
 
-        public UsuarioDesktop(int id,ModoForm modo) : this()
+        public UsuarioDesktop(int id,ModoForm modo) : this() //aca entra el Editar
         {
             Modo = modo;
             UsuarioLogic cu = new UsuarioLogic(); //controlador :)
@@ -53,7 +54,7 @@ namespace UI.Desktop
             chkHabilitado.Checked = UsuarioActual.Habilitado;
             txtIdPersona.Text = UsuarioActual.IDPersona.ToString();
             cbxTipo.SelectedItem = UsuarioActual.Tipo;
-            txtIdPlan.Text = UsuarioActual.IDPlan.ToString();
+            cbxIDPlan.SelectedValue = UsuarioActual.IDPlan.ToString();
             txtClave.Text = UsuarioActual.Clave;
             txtUsuario.Text = UsuarioActual.NombreUsuario;            
         }
@@ -66,7 +67,7 @@ namespace UI.Desktop
                     UsuarioActual = new Usuario();
                     UsuarioActual.Habilitado = chkHabilitado.Checked;
                     UsuarioActual.IDPersona = int.Parse(txtIdPersona.Text);
-                    UsuarioActual.IDPlan = int.Parse(txtIdPlan.Text);
+                    UsuarioActual.IDPlan = (int)cbxIDPlan.SelectedValue;
                     UsuarioActual.Tipo = (Usuario.TiposUsuario)cbxTipo.SelectedItem;
                     UsuarioActual.Clave = txtClave.Text;
                     UsuarioActual.NombreUsuario = txtUsuario.Text;
@@ -76,15 +77,15 @@ namespace UI.Desktop
                     UsuarioActual.ID = int.Parse(txtID.Text);
                     UsuarioActual.Habilitado = chkHabilitado.Checked;
                     UsuarioActual.IDPersona = int.Parse(txtIdPersona.Text);
-                    UsuarioActual.IDPlan = int.Parse(txtIdPlan.Text);
+                    UsuarioActual.IDPlan = (int)cbxIDPlan.SelectedValue;
                     UsuarioActual.Tipo = (Usuario.TiposUsuario)cbxTipo.SelectedItem;
                     UsuarioActual.Clave = txtClave.Text;
                     UsuarioActual.NombreUsuario = txtUsuario.Text;
                     UsuarioActual.State = BusinessEntity.States.Modified;
                     break;
-                case ModoForm.Baja:
-                    UsuarioActual.State = BusinessEntity.States.Deleted;
-                    break;
+                //case ModoForm.Baja:
+                    //UsuarioActual.State = BusinessEntity.States.Deleted;
+                    //break;
                 case ModoForm.Consulta:
                     UsuarioActual.State = BusinessEntity.States.Unmodified;
                     break;
@@ -100,8 +101,8 @@ namespace UI.Desktop
 
         public override bool Validar()
         {
-            if(string.IsNullOrEmpty(txtIdPersona.Text) || string.IsNullOrEmpty(txtIdPlan.Text) || string.IsNullOrEmpty(txtClave.Text)
-                || string.IsNullOrEmpty(txtConfirmarClave.Text) || string.IsNullOrEmpty(txtUsuario.Text))
+            if(string.IsNullOrEmpty(txtIdPersona.Text) || cbxIDPlan.SelectedValue == null || string.IsNullOrEmpty(txtClave.Text)
+                || string.IsNullOrEmpty(txtConfirmarClave.Text) || string.IsNullOrEmpty(txtUsuario.Text) || cbxTipo.SelectedValue == null)
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -118,17 +119,7 @@ namespace UI.Desktop
                 Notificar("Clave no segura", "La clave debe ser mayor a 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
-            /*try
-            {
-                new MailAddress(txtIdPlan.Text);               
-            }
-            catch (FormatException)
-            {
-                Notificar("Email no valido", "Ingrese un Email valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            */
+            
             return true;
         }
 

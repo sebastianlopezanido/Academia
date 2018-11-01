@@ -17,7 +17,11 @@ namespace UI.Desktop
         public CursosDesktop()
         {
             InitializeComponent();
-        }
+            ComisionLogic cl = new ComisionLogic();
+            cbxIDComision.DataSource = cl.GetAll();
+            cbxIDComision.ValueMember = "ID";
+            cbxIDComision.DisplayMember = "Descripcion";
+        }    
 
         public CursosDesktop(ModoForm modo) : this()
         {
@@ -45,7 +49,7 @@ namespace UI.Desktop
         {
             txtID.Text = CursoActual.ID.ToString();
             txtIDMateria.Text = CursoActual.IDMateria.ToString();
-            txtIDComision.Text = CursoActual.IDComision.ToString();
+            cbxIDComision.SelectedValue = CursoActual.IDComision;
             txtAño.Text = CursoActual.AnioCalendario.ToString();
             txtCupo.Text = CursoActual.Cupo.ToString();
         }
@@ -56,22 +60,22 @@ namespace UI.Desktop
             {
                 case ModoForm.Alta:
                     CursoActual = new Curso();
-                    CursoActual.IDComision = int.Parse(txtIDComision.Text);
+                    CursoActual.IDComision = (int)cbxIDComision.SelectedValue;
                     CursoActual.IDMateria = int.Parse(txtIDMateria.Text);
                     CursoActual.AnioCalendario = int.Parse(txtAño.Text);
                     CursoActual.Cupo = int.Parse(txtCupo.Text);
                     CursoActual.State = BusinessEntity.States.New;
                     break;
                 case ModoForm.Modificacion:
-                    CursoActual.IDComision = int.Parse(txtIDComision.Text);
+                    CursoActual.IDComision = (int)cbxIDComision.SelectedValue;
                     CursoActual.IDMateria = int.Parse(txtIDMateria.Text);
                     CursoActual.AnioCalendario = int.Parse(txtAño.Text);
                     CursoActual.Cupo = int.Parse(txtCupo.Text);
                     CursoActual.State = BusinessEntity.States.Modified;
                     break;
-                case ModoForm.Baja:
-                    CursoActual.State = BusinessEntity.States.Deleted;
-                    break;
+                //case ModoForm.Baja:
+                //    CursoActual.State = BusinessEntity.States.Deleted;
+                //    break;
                 case ModoForm.Consulta:
                     CursoActual.State = BusinessEntity.States.Unmodified;
                     break;
@@ -88,7 +92,7 @@ namespace UI.Desktop
 
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtIDMateria.Text) || string.IsNullOrEmpty(txtIDComision.Text) || string.IsNullOrEmpty(txtCupo.Text))
+            if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtIDMateria.Text) || cbxIDComision.SelectedValue == null || string.IsNullOrEmpty(txtCupo.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -116,5 +120,18 @@ namespace UI.Desktop
         {
             Close();
         }
+
+        private void btnFindMateria_Click(object sender, EventArgs e)
+        {
+            FindMateria findMateriaForm = new FindMateria();
+            findMateriaForm.pasado += new FindMateria.pasar(Ejecutar);
+            findMateriaForm.ShowDialog();
+        }
+
+        public void Ejecutar(int dato)
+        {
+            txtIDMateria.Text = dato.ToString();
+        }
     }
 }
+

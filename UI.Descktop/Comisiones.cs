@@ -20,17 +20,43 @@ namespace UI.Desktop
             dgvComisiones.AutoGenerateColumns = false;
         }
 
+        private Comision _ComisionActual;
+        public Comision ComisionActual
+        {
+            get { return _ComisionActual; }
+            set { _ComisionActual = value; }
+        }
+
+        private Plan _PlanActual;
+        public Plan PlanActual
+        {
+            get { return _PlanActual; }
+            set { _PlanActual = value; }
+        }
+
         public void Listar()
         {
             try
             {
                 ComisionLogic cl = new ComisionLogic();
-
                 dgvComisiones.DataSource = cl.GetAll();
             }
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
+            }
+        }
+
+        private void dgvComisiones_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvComisiones.Columns[e.ColumnIndex].Name == "idplan")
+            {
+                if (e.Value != null)
+                {
+                    PlanLogic pl = new PlanLogic();
+                    PlanActual = pl.GetOne((int)e.Value);
+                    e.Value = PlanActual.Descripcion;                    
+                }
             }
         }
 
@@ -57,13 +83,22 @@ namespace UI.Desktop
                 Listar();
             }
         }
+
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (dgvComisiones.SelectedRows != null && dgvComisiones.MultiSelect == false && dgvComisiones.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
-                ComisionesDesktop ud = new ComisionesDesktop(ID, ApplicationForm.ModoForm.Baja);
-                //MessageBox.Show("¿Seguro que quiere eliminar?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);                
+                ComisionLogic cl = new ComisionLogic(); //controlador :)
+                ComisionActual = cl.GetOne(ID);
+                DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar la comisión?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    ComisionActual.State = BusinessEntity.States.Deleted;
+                    cl.Save(ComisionActual);
+                }
+
                 Listar();
             }
         }
@@ -77,5 +112,7 @@ namespace UI.Desktop
         {
             Close();
         }
+
+        
     }
 }

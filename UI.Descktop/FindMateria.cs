@@ -12,19 +12,19 @@ using System.Windows.Forms;
 
 namespace UI.Desktop
 {
-    public partial class FindPersona : Form
+    public partial class FindMateria : Form
     {
-        public FindPersona()
+        public FindMateria()
         {
             InitializeComponent();
-            dgvPersonas.AutoGenerateColumns = false;
+            dgvMaterias.AutoGenerateColumns = false;
         }
 
-        private int _IdPersona;
-        public int IdPersona
+        private int _IDMateria;
+        public int IDMateria
         {
-            set { _IdPersona = value; }
-            get { return _IdPersona; }
+            set { _IDMateria = value; }
+            get { return _IDMateria; }
         }
 
         public delegate void pasar(int dato);
@@ -34,8 +34,8 @@ namespace UI.Desktop
         {
             try
             {
-                PersonaLogic pl = new PersonaLogic();
-                dgvPersonas.DataSource = pl.GetAll();
+                MateriaLogic ml = new MateriaLogic();
+                dgvMaterias.DataSource = ml.GetAll();
             }
             catch (Exception Ex)
             {
@@ -43,23 +43,23 @@ namespace UI.Desktop
             }
         }
 
-        private void FindPersona_Load(object sender, EventArgs e)
+        private void FindMateria_Load(object sender, EventArgs e)
         {
             Listar();
-        }              
+        }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            if (dgvPersonas.SelectedRows != null && dgvPersonas.MultiSelect == false && dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                pasado(((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID);  
+                pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
             }
 
             Close();
         }
 
-        private void btnCancelar_Click_1(object sender, EventArgs e)
-        {            
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
             Close();
         }
     }

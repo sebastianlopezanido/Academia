@@ -18,9 +18,8 @@ namespace UI.Desktop
         {
             InitializeComponent();
 
-            EspecialidadLogic el = new EspecialidadLogic();
-            List<Especialidad> especialidades = el.GetAll();
-            cbxEsp.DataSource = especialidades;
+            EspecialidadLogic el = new EspecialidadLogic();            
+            cbxEsp.DataSource = el.GetAll();
             cbxEsp.ValueMember = "ID";
             cbxEsp.DisplayMember = "Descripcion";                     
         }
@@ -29,7 +28,6 @@ namespace UI.Desktop
         {
             Modo = modo;
             Text = CambiarTextos(btnAceptar);
-
         }
 
         public PlanesDesktop(int id, ModoForm modo) : this()
@@ -41,8 +39,8 @@ namespace UI.Desktop
             MapearDeDatos();
         }
 
-        private BusinessEntities.Plan _PlanActual;
-        public BusinessEntities.Plan PlanActual
+        private Plan _PlanActual;
+        public Plan PlanActual
         {
             get { return _PlanActual; }
             set { _PlanActual = value; }
@@ -62,20 +60,18 @@ namespace UI.Desktop
             {
                 case ModoForm.Alta:
                     PlanActual = new Plan();                    
-                    PlanActual.Descripcion = txtDescripcion.Text;
-                    PlanActual.State = BusinessEntity.States.New;
-                    //////esp = (Especialidad)cbxEsp.SelectedItem;
+                    PlanActual.Descripcion = txtDescripcion.Text;                                       
                     PlanActual.IDEspecialidad = (int)cbxEsp.SelectedValue;
+                    PlanActual.State = BusinessEntity.States.New;
                     break;
                 case ModoForm.Modificacion:
                     PlanActual.Descripcion = txtDescripcion.Text;
-                    PlanActual.State = BusinessEntity.States.Modified;
-                    //esp = (Especialidad)cbxEsp.SelectedItem;
                     PlanActual.IDEspecialidad = (int)cbxEsp.SelectedValue;
+                    PlanActual.State = BusinessEntity.States.Modified;
                     break;
-                case ModoForm.Baja:
-                    PlanActual.State = BusinessEntity.States.Deleted;
-                    break;
+                //case ModoForm.Baja:
+                //    PlanActual.State = BusinessEntity.States.Deleted;
+                //    break;
                 case ModoForm.Consulta:
                     PlanActual.State = BusinessEntity.States.Unmodified;
                     break;

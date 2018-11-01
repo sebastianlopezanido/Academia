@@ -37,8 +37,8 @@ namespace UI.Desktop
             MapearDeDatos();
         }      
 
-        private BusinessEntities.Persona _PersonaActual;
-        public BusinessEntities.Persona PersonaActual
+        private Persona _PersonaActual;
+        public Persona PersonaActual
         {
             get { return _PersonaActual; }
             set { _PersonaActual = value; }
@@ -81,9 +81,9 @@ namespace UI.Desktop
                     PersonaActual.Legajo = int.Parse(txtLegajo.Text);
                     PersonaActual.State = BusinessEntity.States.Modified;
                     break;
-                case ModoForm.Baja:
-                    PersonaActual.State = BusinessEntity.States.Deleted;
-                    break;
+                //case ModoForm.Baja:
+                //    PersonaActual.State = BusinessEntity.States.Deleted;
+                //    break;
                 case ModoForm.Consulta:
                     PersonaActual.State = BusinessEntity.States.Unmodified;
                     break;

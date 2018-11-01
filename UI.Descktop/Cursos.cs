@@ -20,6 +20,27 @@ namespace UI.Desktop
             dgvCursos.AutoGenerateColumns = false;
         }
 
+        private Curso _CursoActual;
+        public Curso CursoActual
+        {
+            get { return _CursoActual; }
+            set { _CursoActual = value; }
+        }
+
+        private Comision _ComisionActual;
+        public Comision ComisionActual
+        {
+            get { return _ComisionActual; }
+            set { _ComisionActual = value; }
+        }
+
+        private Materia _MateriaActual;
+        public Materia MateriaActual
+        {
+            get { return _MateriaActual; }
+            set { _MateriaActual = value; }
+        }
+
         public void Listar()
         {
             try
@@ -31,6 +52,29 @@ namespace UI.Desktop
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
+            }
+        }
+
+        private void dgvCursos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvCursos.Columns[e.ColumnIndex].Name == "id_materia")
+            {
+                if (e.Value != null)
+                {
+                    MateriaLogic ml = new MateriaLogic();
+                    MateriaActual = ml.GetOne((int)e.Value);
+                    e.Value = MateriaActual.Descripcion;
+                }
+            }
+
+            if (dgvCursos.Columns[e.ColumnIndex].Name == "id_comision")
+            {
+                if (e.Value != null)
+                {
+                    ComisionLogic ml = new ComisionLogic();
+                    ComisionActual = ml.GetOne((int)e.Value);
+                    e.Value = ComisionActual.Descripcion;
+                }
             }
         }
 
@@ -62,8 +106,16 @@ namespace UI.Desktop
             if (dgvCursos.SelectedRows != null && dgvCursos.MultiSelect == false && dgvCursos.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
-                CursosDesktop ud = new CursosDesktop(ID, ApplicationForm.ModoForm.Baja);
-                ud.ShowDialog();
+                CursoLogic cl = new CursoLogic(); //controlador :)
+                CursoActual = cl.GetOne(ID);
+                DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar el curso?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    CursoActual.State = BusinessEntity.States.Deleted;
+                    cl.Save(CursoActual);
+                }
+
                 Listar();
             }
         }
@@ -77,5 +129,6 @@ namespace UI.Desktop
         {
             Close();
         }
+        
     }
 }

@@ -87,6 +87,12 @@
     <Compile Include="EspecialidadDesktop.Designer.cs">
       <DependentUpon>EspecialidadDesktop.cs</DependentUpon>
     </Compile>
+    <Compile Include="FindMateria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindMateria.Designer.cs">
+      <DependentUpon>FindMateria.cs</DependentUpon>
+    </Compile>
     <Compile Include="FindPersona.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Especialidades.resx">
       <DependentUpon>Especialidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindMateria.resx">
+      <DependentUpon>FindMateria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FindPersona.resx">
       <DependentUpon>FindPersona.cs</DependentUpon>

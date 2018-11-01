@@ -55,14 +55,14 @@ namespace UI.Desktop
                 case ModoForm.Modificacion:
                     b.Text = "Guardar";
                     return "Editar";                    
-                case ModoForm.Baja:
-                    b.Text = "Eliminar";
-                    return "Eliminar";                   
+                //case ModoForm.Baja:
+                //    b.Text = "Eliminar";
+                //    return "Eliminar";                   
                 case ModoForm.Consulta:
                     b.Text = "Aceptar";
                     return "Consulta";
                 default:
-                    return "Nada";
+                    return "";
                     
             }
         }

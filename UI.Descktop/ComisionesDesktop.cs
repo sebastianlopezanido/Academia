@@ -17,6 +17,10 @@ namespace UI.Desktop
         public ComisionesDesktop()
         {
             InitializeComponent();
+            PlanLogic pl = new PlanLogic();
+            cbxIDPlan.DataSource = pl.GetAll();
+            cbxIDPlan.ValueMember = "ID";
+            cbxIDPlan.DisplayMember = "Descripcion";
         }
 
         public ComisionesDesktop(ModoForm modo) : this()
@@ -30,8 +34,7 @@ namespace UI.Desktop
             Modo = modo;
             ComisionLogic cu = new ComisionLogic(); //controlador :)
             ComisionActual = cu.GetOne(id);
-            Text = CambiarTextos(btnAceptar);
-            if (modo == ModoForm.Baja) DisableBoxes(true); 
+            Text = CambiarTextos(btnAceptar);            
             MapearDeDatos();
         }
 
@@ -47,8 +50,7 @@ namespace UI.Desktop
             txtID.Text = ComisionActual.ID.ToString();
             txtAño.Text = ComisionActual.AnioEspecialidad.ToString();
             txtDescripcion.Text = ComisionActual.Descripcion;
-            txtIDPlan.Text = ComisionActual.IDPlan.ToString();
-
+            cbxIDPlan.SelectedValue = ComisionActual.IDPlan.ToString();
         }
 
         public override void MapearADatos()
@@ -58,22 +60,20 @@ namespace UI.Desktop
                 case ModoForm.Alta:
                     ComisionActual = new Comision();
                     ComisionActual.AnioEspecialidad = int.Parse(txtAño.Text);
-                    ComisionActual.IDPlan = int.Parse(txtIDPlan.Text);
+                    ComisionActual.IDPlan = (int)cbxIDPlan.SelectedValue;
                     ComisionActual.Descripcion = txtDescripcion.Text;
                     ComisionActual.State = BusinessEntity.States.New;
-
                     break;
                 case ModoForm.Modificacion:
                     ComisionActual.ID = int.Parse(txtID.Text);
                     ComisionActual.AnioEspecialidad = int.Parse(txtAño.Text);
-                    ComisionActual.IDPlan = int.Parse(txtIDPlan.Text);
+                    ComisionActual.IDPlan = (int)cbxIDPlan.SelectedValue;
                     ComisionActual.Descripcion = txtDescripcion.Text;
-
                     ComisionActual.State = BusinessEntity.States.Modified;
                     break;
-                case ModoForm.Baja:
-                    ComisionActual.State = BusinessEntity.States.Deleted;
-                    break;
+                //case ModoForm.Baja:
+                //    ComisionActual.State = BusinessEntity.States.Deleted;
+                //    break;
                 case ModoForm.Consulta:
                     ComisionActual.State = BusinessEntity.States.Unmodified;
                     break;
@@ -90,7 +90,7 @@ namespace UI.Desktop
 
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtIDPlan.Text) || string.IsNullOrEmpty(txtDescripcion.Text))
+            if (string.IsNullOrEmpty(txtAño.Text) || cbxIDPlan.SelectedValue == null || string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -103,14 +103,7 @@ namespace UI.Desktop
             }
 
             return true;
-        }
-
-        private void DisableBoxes(bool enable)
-        {
-            txtDescripcion.ReadOnly = enable;
-            txtAño.ReadOnly = enable;
-            txtIDPlan.ReadOnly = enable;
-        }
+        }        
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {

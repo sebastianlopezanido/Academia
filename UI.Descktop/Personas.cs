@@ -19,8 +19,15 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvPersonas.AutoGenerateColumns = false;            
-        }     
-        
+        }
+
+        private Persona _PersonaActual;
+        public Persona PersonaActual
+        {
+            get { return _PersonaActual; }
+            set { _PersonaActual = value; }
+        }
+
         public void Listar()
         {
             try
@@ -72,8 +79,16 @@ namespace UI.Desktop
             if (dgvPersonas.SelectedRows != null && dgvPersonas.MultiSelect == false && dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
-                PersonasDesktop ud = new PersonasDesktop(ID, ApplicationForm.ModoForm.Baja);
-                ud.ShowDialog();
+                PersonaLogic pl = new PersonaLogic(); //controlador :)
+                PersonaActual = pl.GetOne(ID);
+                DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar la persona?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    PersonaActual.State = BusinessEntity.States.Deleted;
+                    pl.Save(PersonaActual);
+                }
+
                 Listar();
             }
         }        
