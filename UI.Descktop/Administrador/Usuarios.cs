@@ -77,7 +77,7 @@ namespace UI.Desktop
 
         private void tbsNuevo_Click(object sender, EventArgs e)
         {
-            UsuarioDesktop ud = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);            
+            UsuariosDesktop ud = new UsuariosDesktop(ApplicationForm.ModoForm.Alta);            
             ud.ShowDialog();
             Listar();
         }
@@ -88,7 +88,7 @@ namespace UI.Desktop
             if(dgvUsuarios.SelectedRows != null && dgvUsuarios.MultiSelect == false && dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-                UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                UsuariosDesktop ud = new UsuariosDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 ud.ShowDialog();
                 Listar();
             }           

@@ -1,6 +1,6 @@
 ﻿namespace UI.Desktop
 {
-    partial class EspecialidadDesktop
+    partial class EspecialidadesDesktop
     {
         /// <summary>
         /// Required designer variable.
@@ -115,13 +115,13 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // EspecialidadDesktop
+            // EspecialidadesDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 85);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "EspecialidadDesktop";
+            this.Name = "EspecialidadesDesktop";
             this.Text = "Form1";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

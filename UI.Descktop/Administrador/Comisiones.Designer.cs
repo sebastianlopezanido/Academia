@@ -32,16 +32,16 @@
             this.tcComisiones = new System.Windows.Forms.ToolStripContainer();
             this.tlComisiones = new System.Windows.Forms.TableLayoutPanel();
             this.dgvComisiones = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.anio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.tsComisiones = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.anio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcComisiones.ContentPanel.SuspendLayout();
             this.tcComisiones.TopToolStripPanel.SuspendLayout();
             this.tcComisiones.SuspendLayout();
@@ -106,6 +106,34 @@
             this.dgvComisiones.TabIndex = 0;
             this.dgvComisiones.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvComisiones_CellFormatting);
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // descripcion
+            // 
+            this.descripcion.DataPropertyName = "Descripcion";
+            this.descripcion.HeaderText = "Descripción";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // anio
+            // 
+            this.anio.DataPropertyName = "AnioEspecialidad";
+            this.anio.HeaderText = "Año esp.";
+            this.anio.Name = "anio";
+            this.anio.ReadOnly = true;
+            // 
+            // idplan
+            // 
+            this.idplan.DataPropertyName = "IDPlan";
+            this.idplan.HeaderText = "Plan";
+            this.idplan.Name = "idplan";
+            this.idplan.ReadOnly = true;
+            // 
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -136,7 +164,7 @@
             this.btnEliminar});
             this.tsComisiones.Location = new System.Drawing.Point(3, 0);
             this.tsComisiones.Name = "tsComisiones";
-            this.tsComisiones.Size = new System.Drawing.Size(81, 25);
+            this.tsComisiones.Size = new System.Drawing.Size(112, 25);
             this.tsComisiones.TabIndex = 0;
             // 
             // btnNuevo
@@ -168,34 +196,6 @@
             this.btnEliminar.Size = new System.Drawing.Size(23, 22);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // descripcion
-            // 
-            this.descripcion.DataPropertyName = "Descripcion";
-            this.descripcion.HeaderText = "Descripción";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // anio
-            // 
-            this.anio.DataPropertyName = "AnioEspecialidad";
-            this.anio.HeaderText = "Año esp.";
-            this.anio.Name = "anio";
-            this.anio.ReadOnly = true;
-            // 
-            // idplan
-            // 
-            this.idplan.DataPropertyName = "IDPlan";
-            this.idplan.HeaderText = "Plan";
-            this.idplan.Name = "idplan";
-            this.idplan.ReadOnly = true;
             // 
             // Comisiones
             // 

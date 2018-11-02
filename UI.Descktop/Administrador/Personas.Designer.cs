@@ -163,7 +163,7 @@
             this.tsbEliminar});
             this.tsPersonas.Location = new System.Drawing.Point(3, 0);
             this.tsPersonas.Name = "tsPersonas";
-            this.tsPersonas.Size = new System.Drawing.Size(81, 25);
+            this.tsPersonas.Size = new System.Drawing.Size(112, 25);
             this.tsPersonas.TabIndex = 0;
             // 
             // tsbNuevo

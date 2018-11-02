@@ -12,21 +12,21 @@ using BusinessEntities;
 
 namespace UI.Desktop
 {
-    public partial class EspecialidadDesktop : ApplicationForm
+    public partial class EspecialidadesDesktop : ApplicationForm
     {
-        public EspecialidadDesktop()
+        public EspecialidadesDesktop()
         {
             InitializeComponent();
         }
 
-        public EspecialidadDesktop(ModoForm modo) : this()
+        public EspecialidadesDesktop(ModoForm modo) : this()
         {
             Modo = modo;
             Text = CambiarTextos(btnAceptar);
 
         }
 
-        public EspecialidadDesktop(int id, ModoForm modo) : this()
+        public EspecialidadesDesktop(int id, ModoForm modo) : this()
         {
             Modo = modo;
             EspecialidadLogic el = new EspecialidadLogic(); //controlador :)

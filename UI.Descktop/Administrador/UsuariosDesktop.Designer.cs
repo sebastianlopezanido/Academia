@@ -1,6 +1,6 @@
 ﻿namespace UI.Desktop
 {
-    partial class UsuarioDesktop
+    partial class UsuariosDesktop
     {
         /// <summary>
         /// Required designer variable.
@@ -247,14 +247,14 @@
             this.cbxIDPlan.Size = new System.Drawing.Size(92, 21);
             this.cbxIDPlan.TabIndex = 19;
             // 
-            // UsuarioDesktop
+            // UsuariosDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 141);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "UsuarioDesktop";
-            this.Text = "UsuarioDesktop";
+            this.Name = "UsuariosDesktop";
+            this.Text = "UsuariosDesktop";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

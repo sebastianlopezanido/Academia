@@ -149,7 +149,7 @@
             this.tsbEliminar});
             this.tsEspecialidades.Location = new System.Drawing.Point(3, 0);
             this.tsEspecialidades.Name = "tsEspecialidades";
-            this.tsEspecialidades.Size = new System.Drawing.Size(81, 25);
+            this.tsEspecialidades.Size = new System.Drawing.Size(112, 25);
             this.tsEspecialidades.TabIndex = 1;
             // 
             // tbsNuevo

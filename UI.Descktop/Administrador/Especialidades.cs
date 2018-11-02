@@ -50,7 +50,7 @@ namespace UI.Desktop
 
         private void tbsNuevo_Click(object sender, EventArgs e)
         {
-            EspecialidadDesktop ed = new EspecialidadDesktop(ApplicationForm.ModoForm.Alta);
+            EspecialidadesDesktop ed = new EspecialidadesDesktop(ApplicationForm.ModoForm.Alta);
             ed.ShowDialog();
             Listar();
         }
@@ -60,7 +60,7 @@ namespace UI.Desktop
             if (dgvEspecialidades.SelectedRows != null && dgvEspecialidades.MultiSelect == false && dgvEspecialidades.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
-                EspecialidadDesktop ud = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                EspecialidadesDesktop ud = new EspecialidadesDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 ud.ShowDialog();
                 Listar();
             }            

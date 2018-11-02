@@ -13,9 +13,9 @@ using System.Net.Mail;
 
 namespace UI.Desktop
 {
-    public partial class UsuarioDesktop : ApplicationForm
+    public partial class UsuariosDesktop : ApplicationForm
     {
-        public UsuarioDesktop()
+        public UsuariosDesktop()
         {
             InitializeComponent();
             cbxTipo.DataSource = Enum.GetValues(typeof(Usuario.TiposUsuario));
@@ -25,13 +25,13 @@ namespace UI.Desktop
             cbxIDPlan.DisplayMember = "Descripcion";
         }
 
-        public UsuarioDesktop(ModoForm modo):this() //aca entra el Nuevo
+        public UsuariosDesktop(ModoForm modo):this() //aca entra el Nuevo
         {
             Modo = modo;
             Text = CambiarTextos(btnAceptar);
         }
 
-        public UsuarioDesktop(int id,ModoForm modo) : this() //aca entra el Editar
+        public UsuariosDesktop(int id,ModoForm modo) : this() //aca entra el Editar
         {
             Modo = modo;
             UsuarioLogic cu = new UsuarioLogic(); //controlador :)

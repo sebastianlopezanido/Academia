@@ -33,6 +33,9 @@
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPlanes = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idespecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -44,9 +47,6 @@
             this.asdToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idespecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -113,6 +113,30 @@
             this.dgvPlanes.TabIndex = 0;
             this.dgvPlanes.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPlanes_CellFormatting);
             // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "ID";
+            this.Id.HeaderText = "ID";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 43;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            this.Descripcion.Width = 88;
+            // 
+            // idespecialidad
+            // 
+            this.idespecialidad.DataPropertyName = "IDEspecialidad";
+            this.idespecialidad.HeaderText = "Especialidad";
+            this.idespecialidad.Name = "idespecialidad";
+            this.idespecialidad.ReadOnly = true;
+            this.idespecialidad.Width = 92;
+            // 
             // btnAceptar
             // 
             this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -143,7 +167,7 @@
             this.btnEliminar});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(81, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(112, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnNuevo
@@ -210,30 +234,6 @@
             this.asdToolStripMenuItem3.Name = "asdToolStripMenuItem3";
             this.asdToolStripMenuItem3.Size = new System.Drawing.Size(92, 22);
             this.asdToolStripMenuItem3.Text = "asd";
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "ID";
-            this.Id.HeaderText = "ID";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 43;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            this.Descripcion.Width = 88;
-            // 
-            // idespecialidad
-            // 
-            this.idespecialidad.DataPropertyName = "IDEspecialidad";
-            this.idespecialidad.HeaderText = "Especialidad";
-            this.idespecialidad.Name = "idespecialidad";
-            this.idespecialidad.ReadOnly = true;
-            this.idespecialidad.Width = 92;
             // 
             // Planes
             // 
