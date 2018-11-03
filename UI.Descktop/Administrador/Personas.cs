@@ -18,7 +18,8 @@ namespace UI.Desktop
         public Personas()
         {
             InitializeComponent();
-            dgvPersonas.AutoGenerateColumns = false;            
+            dgvPersonas.AutoGenerateColumns = false;
+            CenterToScreen();
         }
 
         private Persona _PersonaActual;

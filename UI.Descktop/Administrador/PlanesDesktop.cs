@@ -21,7 +21,8 @@ namespace UI.Desktop
             EspecialidadLogic el = new EspecialidadLogic();            
             cbxEsp.DataSource = el.GetAll();
             cbxEsp.ValueMember = "ID";
-            cbxEsp.DisplayMember = "Descripcion";                     
+            cbxEsp.DisplayMember = "Descripcion";
+            CenterToScreen();
         }
 
         public PlanesDesktop(ModoForm modo) : this()

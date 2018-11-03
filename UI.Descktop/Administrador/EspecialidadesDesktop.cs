@@ -17,6 +17,7 @@ namespace UI.Desktop
         public EspecialidadesDesktop()
         {
             InitializeComponent();
+            CenterToScreen();
         }
 
         public EspecialidadesDesktop(ModoForm modo) : this()

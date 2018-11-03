@@ -21,6 +21,7 @@ namespace UI.Desktop
             cbxIDComision.DataSource = cl.GetAll();
             cbxIDComision.ValueMember = "ID";
             cbxIDComision.DisplayMember = "Descripcion";
+            CenterToScreen();
         }    
 
         public CursosDesktop(ModoForm modo) : this()

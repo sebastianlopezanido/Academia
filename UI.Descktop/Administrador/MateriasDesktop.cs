@@ -21,6 +21,7 @@ namespace UI.Desktop
             cbxIDPlan.DataSource = pl.GetAll();
             cbxIDPlan.ValueMember = "ID";
             cbxIDPlan.DisplayMember = "Descripcion";
+            CenterToScreen();
         }
 
         public MateriasDesktop(ModoForm modo) : this()

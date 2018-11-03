@@ -18,6 +18,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvEspecialidades.AutoGenerateColumns = false;
+            CenterToScreen();
         }
 
         private Especialidad _EspecialidadActual;

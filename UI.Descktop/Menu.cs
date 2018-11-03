@@ -18,6 +18,7 @@ namespace UI.Desktop
         {
             UsuarioActual = user;
             InitializeComponent();
+            CenterToScreen();
             Ocultar();        
 
         }

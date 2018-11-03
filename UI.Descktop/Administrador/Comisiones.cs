@@ -18,6 +18,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvComisiones.AutoGenerateColumns = false;
+            CenterToScreen();
         }
 
         private Comision _ComisionActual;

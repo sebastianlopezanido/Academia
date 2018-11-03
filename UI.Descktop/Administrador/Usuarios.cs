@@ -18,6 +18,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvUsuarios.AutoGenerateColumns = false;
+            CenterToScreen();
         }
 
         private Usuario _UsuarioActual;

@@ -17,7 +17,8 @@ namespace UI.Desktop
     {
         public PersonasDesktop()
         {
-           InitializeComponent();
+            InitializeComponent();
+            CenterToScreen();
         }
 
         public PersonasDesktop(ModoForm modo) : this()

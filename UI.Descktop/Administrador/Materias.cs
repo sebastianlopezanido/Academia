@@ -18,6 +18,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvMaterias.AutoGenerateColumns = false;
+            CenterToScreen();
         }
 
         private Materia _MateriaActual;
