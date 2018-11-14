@@ -1,8 +1,21 @@
 ﻿- agregar manejo de excepciones en la UI en Personas (en usuarios ya esta(pero incompleto))
 en formulario de usuarios, mostrar nombre y apellido de persona relacionada"
-en formulario UsuariosDesktop al elegir el id de persona, deberia haber otro formulario para elegir la persona
 Deshabilitar edit tipopersona,idplan id persona en UsuariosDesktop
 click en la cruz en el menu no cierra todo (queda corriendo)
 Entender mejor los try catch, estabamos poniendo por todos lados y algunos no hacian falta
 corregir combobox en web form
-al eliminar en desktop, no deberia aparecer el xxxDesktop, sino un cartel de advertencia y listo, como esta hecho en comisiones, (no esta terminado)
+
+
+Alumnos
+Inscripcion a CURSO
+Cursado y Notas (de todas los cursos a los que esta inscripto) nombre prof, comision, nota
+
+Profesores
+Ver mis cursos (selecciona un curso, y muestra todos los alumnos inscriptos y ahi carga las notas de c/u)
+
+
+
+
+
+
+
