@@ -14,6 +14,10 @@ Profesores
 Ver mis cursos (selecciona un curso, y muestra todos los alumnos inscriptos y ahi carga las notas de c/u)
 
 
+Cambios en la Database
+
+condicion de alumnosinscripcion puede ser NULL
+cambiar fk de id_alumno en alumnos_inscripcion a id_usuario en usuarios (estaba con id_persona)
 
 
 

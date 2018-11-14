@@ -38,6 +38,18 @@ namespace BusinessLogic
             }                       
         }
 
+        public List<Curso> GetByMateria(int idMat)
+        {
+            try
+            {
+                return CursoData.GetByMateria(idMat);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void Save(Curso curso)
         {
             CursoData.Save(curso);

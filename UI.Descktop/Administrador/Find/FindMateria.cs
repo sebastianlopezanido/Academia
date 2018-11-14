@@ -27,7 +27,7 @@ namespace UI.Desktop
             get { return _IDMateria; }
         }
 
-        public delegate void pasar(int dato);
+        public delegate void pasar(int id);
         public event pasar pasado;
 
         public void Listar()

@@ -129,9 +129,9 @@ namespace UI.Desktop
             findMateriaForm.ShowDialog();
         }
 
-        public void Ejecutar(int dato)
+        public void Ejecutar(int id)
         {
-            txtIDMateria.Text = dato.ToString();
+            txtIDMateria.Text = id.ToString();
         }
     }
 }

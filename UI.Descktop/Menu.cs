@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Desktop.Alumno;
 
 namespace UI.Desktop
 {
@@ -32,24 +33,30 @@ namespace UI.Desktop
 
         public void Ocultar()
         {
-            if (UsuarioActual.Tipo == Usuario.TiposUsuario.Profesor || UsuarioActual.Tipo == Usuario.TiposUsuario.Alumno)
+            switch(UsuarioActual.Tipo)
             {
-                //aca se oculta lo del admin
-                btnAdmCom.Hide();
-                btnAdmPla.Hide();
-                btnAdmCur.Hide();
-                btnAdmEsp.Hide();
-                btnAdmMat.Hide();
-                btnAdmPrs.Hide();
-                btnAdmUsr.Hide();
-            }
-            if (UsuarioActual.Tipo == Usuario.TiposUsuario.Alumno || UsuarioActual.Tipo == Usuario.TiposUsuario.Administrador)
-            {
-                //aca se oculta lo del profesor (lo que ve el profesor va acá)                
-            }
-            if (UsuarioActual.Tipo == Usuario.TiposUsuario.Administrador || UsuarioActual.Tipo == Usuario.TiposUsuario.Profesor)
-            {
-                //aca se oculta lo del alumno                
+                case Usuario.TiposUsuario.Alumno:
+                    btn1.Text = "Inscripcion";
+                    btn2.Text = "Cursado y Notas";
+                    btnAdmCom.Hide();
+                    btnAdmPla.Hide();
+                    btnAdmCur.Hide();
+                    btnAdmEsp.Hide();
+                    btnAdmMat.Hide();
+                    break;
+                case Usuario.TiposUsuario.Profesor:
+                    btn1.Text = "Cursos";
+                    btn2.Hide();
+                    btnAdmCom.Hide();
+                    btnAdmPla.Hide();
+                    btnAdmCur.Hide();
+                    btnAdmEsp.Hide();
+                    btnAdmMat.Hide();
+                    break;
+                case Usuario.TiposUsuario.Administrador:
+                    btn1.Text = "Usuarios";
+                    btn2.Text = "Personas";
+                    break;
             }
         }
 
@@ -60,17 +67,46 @@ namespace UI.Desktop
             log.Show();            
         }
 
-        private void btnAdmUsr_Click(object sender, EventArgs e)
+        private void btn1_Click(object sender, EventArgs e)
         {
-            Usuarios userForm = new Usuarios();
-            userForm.ShowDialog();
-            //Hide();
+            switch (UsuarioActual.Tipo)
+            {
+                case Usuario.TiposUsuario.Alumno:
+                    FindMateria findMateriaForm = new FindMateria();
+                    findMateriaForm.pasado += new FindMateria.pasar(Ejecutar);
+                    findMateriaForm.ShowDialog();                    
+                    break;
+                //case Usuario.TiposUsuario.Profesor:
+                //    CursosProfesor cpForm = new CursosProfesor();
+                //    cpForm.ShowDialog();
+                //    break;
+                case Usuario.TiposUsuario.Administrador:
+                    Usuarios userForm = new Usuarios();
+                    userForm.ShowDialog();
+                    break;
+            }
         }
 
-        private void btnAdmPrs_Click(object sender, EventArgs e)
+        public void Ejecutar(int dato)
         {
-            Personas prsForm = new Personas();
-            prsForm.ShowDialog();
+
+            Inscripciones insForm = new Inscripciones(dato);
+            insForm.ShowDialog();
+        }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {           
+            switch (UsuarioActual.Tipo)
+            {
+                //case Usuario.TiposUsuario.Alumno:
+                //    Cursado curForm = new Cursado();
+                //    curForm.ShowDialog();
+                //    break;
+                case Usuario.TiposUsuario.Administrador:
+                    Personas prsForm = new Personas();
+                    prsForm.ShowDialog();
+                    break;
+            }
         }
 
         private void btnAdmEsp_Click(object sender, EventArgs e)
@@ -101,6 +137,6 @@ namespace UI.Desktop
         {
             Cursos cursosForm = new Cursos();
             cursosForm.ShowDialog();
-        }
+        }        
     }
 }

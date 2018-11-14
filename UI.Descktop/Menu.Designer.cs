@@ -31,8 +31,8 @@ namespace UI.Desktop
         private void InitializeComponent()
         {
             this.salir = new System.Windows.Forms.Button();
-            this.btnAdmUsr = new System.Windows.Forms.Button();
-            this.btnAdmPrs = new System.Windows.Forms.Button();
+            this.btn1 = new System.Windows.Forms.Button();
+            this.btn2 = new System.Windows.Forms.Button();
             this.btnAdmEsp = new System.Windows.Forms.Button();
             this.btnAdmPla = new System.Windows.Forms.Button();
             this.btnAdmMat = new System.Windows.Forms.Button();
@@ -50,25 +50,25 @@ namespace UI.Desktop
             this.salir.UseVisualStyleBackColor = true;
             this.salir.Click += new System.EventHandler(this.salir_Click);
             // 
-            // btnAdmUsr
+            // btn1
             // 
-            this.btnAdmUsr.Location = new System.Drawing.Point(24, 13);
-            this.btnAdmUsr.Name = "btnAdmUsr";
-            this.btnAdmUsr.Size = new System.Drawing.Size(87, 23);
-            this.btnAdmUsr.TabIndex = 2;
-            this.btnAdmUsr.Text = "Usuarios";
-            this.btnAdmUsr.UseVisualStyleBackColor = true;
-            this.btnAdmUsr.Click += new System.EventHandler(this.btnAdmUsr_Click);
+            this.btn1.Location = new System.Drawing.Point(24, 13);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(87, 23);
+            this.btn1.TabIndex = 2;
+            this.btn1.Text = "Usuarios";
+            this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.Click += new System.EventHandler(this.btn1_Click);
             // 
-            // btnAdmPrs
+            // btn2
             // 
-            this.btnAdmPrs.Location = new System.Drawing.Point(24, 42);
-            this.btnAdmPrs.Name = "btnAdmPrs";
-            this.btnAdmPrs.Size = new System.Drawing.Size(87, 23);
-            this.btnAdmPrs.TabIndex = 3;
-            this.btnAdmPrs.Text = "Personas";
-            this.btnAdmPrs.UseVisualStyleBackColor = true;
-            this.btnAdmPrs.Click += new System.EventHandler(this.btnAdmPrs_Click);
+            this.btn2.Location = new System.Drawing.Point(24, 42);
+            this.btn2.Name = "btn2";
+            this.btn2.Size = new System.Drawing.Size(87, 23);
+            this.btn2.TabIndex = 3;
+            this.btn2.Text = "Personas";
+            this.btn2.UseVisualStyleBackColor = true;
+            this.btn2.Click += new System.EventHandler(this.btn2_Click);
             // 
             // btnAdmEsp
             // 
@@ -130,8 +130,8 @@ namespace UI.Desktop
             this.Controls.Add(this.btnAdmMat);
             this.Controls.Add(this.btnAdmPla);
             this.Controls.Add(this.btnAdmEsp);
-            this.Controls.Add(this.btnAdmPrs);
-            this.Controls.Add(this.btnAdmUsr);
+            this.Controls.Add(this.btn2);
+            this.Controls.Add(this.btn1);
             this.Controls.Add(this.salir);
             this.Name = "Menu";
             this.Text = "Menu";
@@ -144,8 +144,8 @@ namespace UI.Desktop
         #endregion
 
         private System.Windows.Forms.Button salir;
-        private System.Windows.Forms.Button btnAdmUsr;
-        private System.Windows.Forms.Button btnAdmPrs;
+        private System.Windows.Forms.Button btn1;
+        private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btnAdmEsp;
         private System.Windows.Forms.Button btnAdmPla;
         private System.Windows.Forms.Button btnAdmMat;
