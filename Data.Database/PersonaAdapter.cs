@@ -18,23 +18,23 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmdPersonas = new SqlCommand("select * from personas", sqlConn);
-                SqlDataReader drPersonas = cmdPersonas.ExecuteReader();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM personas", sqlConn);
+                SqlDataReader dr = cmd.ExecuteReader();
 
-                while (drPersonas.Read())
+                while (dr.Read())
                 {
                     Persona prs = new Persona();
-                    prs.ID = (int)drPersonas["id_persona"];
-                    prs.Apellido = (string)drPersonas["apellido"];
-                    prs.Nombre = (string)drPersonas["nombre"];
-                    prs.Email = (string)drPersonas["email"];
-                    prs.FechaNacimiento = (DateTime)drPersonas["fecha_nac"];
-                    prs.Legajo = (int)drPersonas["legajo"];
-                    prs.Telefono = (string)drPersonas["telefono"];
+                    prs.ID = (int)dr["id_persona"];
+                    prs.Apellido = (string)dr["apellido"];
+                    prs.Nombre = (string)dr["nombre"];
+                    prs.Email = (string)dr["email"];
+                    prs.FechaNacimiento = (DateTime)dr["fecha_nac"];
+                    prs.Legajo = (int)dr["legajo"];
+                    prs.Telefono = (string)dr["telefono"];
                     personas.Add(prs);
                 }
 
-                drPersonas.Close();
+                dr.Close();
             }
             catch (Exception Ex)
             {
@@ -52,26 +52,27 @@ namespace Data.Database
         public Persona GetOne(int ID)
         {
             Persona prs = new Persona();
+
             try
             {
                 OpenConnection();
-                SqlCommand cmdPersonas = new SqlCommand("select * from personas where id_persona=@id", sqlConn);
-                cmdPersonas.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drPersonas = cmdPersonas.ExecuteReader();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM personas WHERE id_persona = @id", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                SqlDataReader dr = cmd.ExecuteReader();
 
-                if (drPersonas.Read())
+                if (dr.Read())
                 {
-                    prs.ID = (int)drPersonas["id_persona"];
-                    prs.Apellido = (string)drPersonas["apellido"];
-                    prs.Nombre = (string)drPersonas["nombre"];
-                    prs.Email = (string)drPersonas["email"];
-                    prs.FechaNacimiento = (DateTime)drPersonas["fecha_nac"];
-                    prs.Legajo = (int)drPersonas["legajo"];
-                    prs.Telefono = (string)drPersonas["telefono"];
-                    prs.Direccion = (string)drPersonas["direccion"];                    
+                    prs.ID = (int)dr["id_persona"];
+                    prs.Apellido = (string)dr["apellido"];
+                    prs.Nombre = (string)dr["nombre"];
+                    prs.Email = (string)dr["email"];
+                    prs.FechaNacimiento = (DateTime)dr["fecha_nac"];
+                    prs.Legajo = (int)dr["legajo"];
+                    prs.Telefono = (string)dr["telefono"];
+                    prs.Direccion = (string)dr["direccion"];                    
                 }
 
-                drPersonas.Close();
+                dr.Close();
             }
             catch (Exception Ex)
             {
@@ -91,9 +92,9 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete personas where id_persona=@id", sqlConn);
-                cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                cmdDelete.ExecuteNonQuery();
+                SqlCommand cmd = new SqlCommand("DELETE personas WHERE id_persona = @id", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {
@@ -111,18 +112,17 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmdSave = new SqlCommand("UPDATE personas SET nombre = @nombre, " +
-                    "direccion = @direccion, telefono = @telefono, fecha_nac = @fecha_nac, legajo = @legajo, apellido = @apellido, " +
-                    "email = @email WHERE id_persona = @id", sqlConn);
-                cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = personas.ID;
-                cmdSave.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = personas.Nombre;
-                cmdSave.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = personas.Apellido;
-                cmdSave.Parameters.Add("@direccion", SqlDbType.VarChar, 50).Value = personas.Direccion;
-                cmdSave.Parameters.Add("@telefono", SqlDbType.VarChar, 50).Value = personas.Telefono;
-                cmdSave.Parameters.Add("@fecha_nac", SqlDbType.DateTime).Value = personas.FechaNacimiento;
-                cmdSave.Parameters.Add("@legajo", SqlDbType.Int).Value = personas.Legajo;
-                cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;
-                cmdSave.ExecuteNonQuery();
+                SqlCommand cmd = new SqlCommand("UPDATE personas SET nombre = @nombre, direccion = @direccion, telefono = @telefono," +
+                    " fecha_nac = @fecha_nac, legajo = @legajo, apellido = @apellido,email = @email WHERE id_persona = @id", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = personas.ID;
+                cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = personas.Nombre;
+                cmd.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = personas.Apellido;
+                cmd.Parameters.Add("@direccion", SqlDbType.VarChar, 50).Value = personas.Direccion;
+                cmd.Parameters.Add("@telefono", SqlDbType.VarChar, 50).Value = personas.Telefono;
+                cmd.Parameters.Add("@fecha_nac", SqlDbType.DateTime).Value = personas.FechaNacimiento;
+                cmd.Parameters.Add("@legajo", SqlDbType.Int).Value = personas.Legajo;
+                cmd.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;
+                cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {
@@ -140,17 +140,17 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmdSave = new SqlCommand("insert into personas(nombre,apellido,direccion,telefono,email,fecha_nac,legajo) " + 
-                    "values(@nombre,@apellido,@direccion,@telefono,@email,@fecha_nac,@legajo) " + "select @@identity", sqlConn);
-                cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = personas.ID;
-                cmdSave.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = personas.Nombre;
-                cmdSave.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = personas.Apellido;
-                cmdSave.Parameters.Add("@direccion", SqlDbType.VarChar, 50).Value = personas.Direccion;
-                cmdSave.Parameters.Add("@telefono", SqlDbType.VarChar, 50).Value = personas.Telefono;
-                cmdSave.Parameters.Add("@fecha_nac", SqlDbType.DateTime).Value = personas.FechaNacimiento;
-                cmdSave.Parameters.Add("@legajo", SqlDbType.Int).Value = personas.Legajo;
-                cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;   
-                personas.ID = decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
+                SqlCommand cmd = new SqlCommand("INSERT INTO personas(nombre,apellido,direccion,telefono,email,fecha_nac,legajo) " + 
+                    "VALUES(@nombre,@apellido,@direccion,@telefono,@email,@fecha_nac,@legajo) SELECT @@identity", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = personas.ID;
+                cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = personas.Nombre;
+                cmd.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = personas.Apellido;
+                cmd.Parameters.Add("@direccion", SqlDbType.VarChar, 50).Value = personas.Direccion;
+                cmd.Parameters.Add("@telefono", SqlDbType.VarChar, 50).Value = personas.Telefono;
+                cmd.Parameters.Add("@fecha_nac", SqlDbType.DateTime).Value = personas.FechaNacimiento;
+                cmd.Parameters.Add("@legajo", SqlDbType.Int).Value = personas.Legajo;
+                cmd.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = personas.Email;
+                cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {

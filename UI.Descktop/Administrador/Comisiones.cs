@@ -69,7 +69,6 @@ namespace UI.Desktop
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             ComisionesDesktop cd = new ComisionesDesktop(ApplicationForm.ModoForm.Alta);
-
             cd.ShowDialog();
             Listar();
         }
@@ -112,8 +111,6 @@ namespace UI.Desktop
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        
+        }        
     }
 }

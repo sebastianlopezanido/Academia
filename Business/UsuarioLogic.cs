@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities;
-
+using Data.Database;
 
 namespace BusinessLogic
 {
-    public class UsuarioLogic : BusinessLogic
+    public class UsuarioLogic
     {
         public UsuarioLogic()
         {
             UsuarioData = new Data.Database.UsuarioAdapter();
         }
 
-        private Data.Database.UsuarioAdapter _UsuarioData;
-        public Data.Database.UsuarioAdapter UsuarioData
+        private UsuarioAdapter _UsuarioData;
+        public UsuarioAdapter UsuarioData
         {
             set { _UsuarioData = value; }
             get { return _UsuarioData; }

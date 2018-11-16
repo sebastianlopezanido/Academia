@@ -31,16 +31,16 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtIDMateria = new System.Windows.Forms.TextBox();
-            this.txtAño = new System.Windows.Forms.TextBox();
-            this.txtCupo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbxIDComision = new System.Windows.Forms.ComboBox();
+            this.txtCupo = new System.Windows.Forms.TextBox();
+            this.txtAño = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.cbxIDComision = new System.Windows.Forms.ComboBox();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.btnFindMateria = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -87,25 +87,11 @@
             // 
             // txtIDMateria
             // 
-            this.txtIDMateria.Location = new System.Drawing.Point(72, 44);
+            this.txtIDMateria.Location = new System.Drawing.Point(72, 45);
             this.txtIDMateria.Name = "txtIDMateria";
             this.txtIDMateria.ReadOnly = true;
             this.txtIDMateria.Size = new System.Drawing.Size(100, 20);
             this.txtIDMateria.TabIndex = 3;
-            // 
-            // txtAño
-            // 
-            this.txtAño.Location = new System.Drawing.Point(306, 3);
-            this.txtAño.Name = "txtAño";
-            this.txtAño.Size = new System.Drawing.Size(100, 20);
-            this.txtAño.TabIndex = 5;
-            // 
-            // txtCupo
-            // 
-            this.txtCupo.Location = new System.Drawing.Point(306, 44);
-            this.txtCupo.Name = "txtCupo";
-            this.txtCupo.Size = new System.Drawing.Size(100, 20);
-            this.txtCupo.TabIndex = 6;
             // 
             // label1
             // 
@@ -119,7 +105,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 41);
+            this.label2.Location = new System.Drawing.Point(3, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 8;
@@ -128,11 +114,33 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 82);
+            this.label3.Location = new System.Drawing.Point(3, 84);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "ID Comision";
+            // 
+            // cbxIDComision
+            // 
+            this.cbxIDComision.FormattingEnabled = true;
+            this.cbxIDComision.Location = new System.Drawing.Point(72, 87);
+            this.cbxIDComision.Name = "cbxIDComision";
+            this.cbxIDComision.Size = new System.Drawing.Size(112, 21);
+            this.cbxIDComision.TabIndex = 12;
+            // 
+            // txtCupo
+            // 
+            this.txtCupo.Location = new System.Drawing.Point(306, 45);
+            this.txtCupo.Name = "txtCupo";
+            this.txtCupo.Size = new System.Drawing.Size(100, 20);
+            this.txtCupo.TabIndex = 6;
+            // 
+            // txtAño
+            // 
+            this.txtAño.Location = new System.Drawing.Point(306, 3);
+            this.txtAño.Name = "txtAño";
+            this.txtAño.Size = new System.Drawing.Size(100, 20);
+            this.txtAño.TabIndex = 5;
             // 
             // label4
             // 
@@ -146,26 +154,15 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(225, 41);
+            this.label5.Location = new System.Drawing.Point(225, 42);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 11;
             this.label5.Text = "Cupo";
             // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(225, 85);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 1;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(306, 85);
+            this.btnCancelar.Location = new System.Drawing.Point(306, 87);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 0;
@@ -173,17 +170,20 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // cbxIDComision
+            // btnAceptar
             // 
-            this.cbxIDComision.FormattingEnabled = true;
-            this.cbxIDComision.Location = new System.Drawing.Point(72, 85);
-            this.cbxIDComision.Name = "cbxIDComision";
-            this.cbxIDComision.Size = new System.Drawing.Size(112, 21);
-            this.cbxIDComision.TabIndex = 12;
+            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAceptar.Location = new System.Drawing.Point(225, 87);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btnAceptar.TabIndex = 1;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnFindMateria
             // 
-            this.btnFindMateria.Location = new System.Drawing.Point(190, 44);
+            this.btnFindMateria.Location = new System.Drawing.Point(190, 45);
             this.btnFindMateria.Name = "btnFindMateria";
             this.btnFindMateria.Size = new System.Drawing.Size(29, 23);
             this.btnFindMateria.TabIndex = 13;
@@ -193,6 +193,7 @@
             // 
             // CursosDesktop
             // 
+            this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 126);

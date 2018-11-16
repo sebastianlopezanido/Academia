@@ -47,7 +47,6 @@ namespace UI.Desktop
             try
             {
                 CursoLogic cl = new CursoLogic();
-
                 dgvCursos.DataSource = cl.GetAll();
             }
             catch (Exception Ex)
@@ -129,7 +128,6 @@ namespace UI.Desktop
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
-        }
-        
+        }        
     }
 }

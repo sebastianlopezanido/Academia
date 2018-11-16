@@ -14,6 +14,5 @@ namespace BusinessEntities
             get { return _Descripcion; }
             set { _Descripcion = value; }
         }
-
     }
 }

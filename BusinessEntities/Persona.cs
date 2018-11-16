@@ -36,7 +36,6 @@ namespace BusinessEntities
             set { _FechaNacimiento = value; }
         }
 
-
         private int _Legajo;
         public int Legajo
         {
@@ -57,9 +56,5 @@ namespace BusinessEntities
             get { return _Telefono; }
             set { _Telefono = value; }
         }
-
-
-
-
     }
 }

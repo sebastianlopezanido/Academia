@@ -40,11 +40,7 @@ namespace UI.Desktop
         public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
             MessageBox.Show(mensaje, titulo, botones, icono);
-        }
-        public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
-        {
-            Notificar(Text, mensaje, botones, icono);
-        }
+        }        
 
         public string CambiarTextos(Button b)
         { switch (Modo)
@@ -54,10 +50,7 @@ namespace UI.Desktop
                     return "Agregar";
                 case ModoForm.Modificacion:
                     b.Text = "Guardar";
-                    return "Editar";                    
-                //case ModoForm.Baja:
-                //    b.Text = "Eliminar";
-                //    return "Eliminar";                   
+                    return "Editar";                  
                 case ModoForm.Consulta:
                     b.Text = "Aceptar";
                     return "Consulta";

@@ -17,7 +17,6 @@ namespace UI.Desktop
         public PlanesDesktop()
         {
             InitializeComponent();
-
             EspecialidadLogic el = new EspecialidadLogic();            
             cbxEsp.DataSource = el.GetAll();
             cbxEsp.ValueMember = "ID";
@@ -56,7 +55,6 @@ namespace UI.Desktop
 
         public override void MapearADatos()
         {
-            
             switch (Modo)
             {
                 case ModoForm.Alta:
@@ -70,9 +68,6 @@ namespace UI.Desktop
                     PlanActual.IDEspecialidad = (int)cbxEsp.SelectedValue;
                     PlanActual.State = BusinessEntity.States.Modified;
                     break;
-                //case ModoForm.Baja:
-                //    PlanActual.State = BusinessEntity.States.Deleted;
-                //    break;
                 case ModoForm.Consulta:
                     PlanActual.State = BusinessEntity.States.Unmodified;
                     break;
@@ -84,6 +79,7 @@ namespace UI.Desktop
             if (string.IsNullOrEmpty(txtDescripcion.Text) || cbxEsp.SelectedValue == null)
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 
@@ -92,17 +88,9 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            try
-            {
-                MapearADatos();
-                PlanLogic el = new PlanLogic();
-                el.Save(PlanActual);
-
-            }
-            catch(Exception ex)
-            {
-                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }            
+            MapearADatos();
+            PlanLogic el = new PlanLogic();
+            el.Save(PlanActual);    
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -112,17 +100,11 @@ namespace UI.Desktop
                 GuardarCambios();
                 Close();
             }
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void PlanDesktop_Load(object sender, EventArgs e)
-        {
-
-        }
+        }        
     }
 }

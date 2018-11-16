@@ -18,14 +18,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvPersonas.AutoGenerateColumns = false;
-        }
-
-        private int _IdPersona;
-        public int IdPersona
-        {
-            set { _IdPersona = value; }
-            get { return _IdPersona; }
-        }
+        }        
 
         public delegate void pasar(int dato);
         public event pasar pasado;

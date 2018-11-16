@@ -8,7 +8,7 @@ using BusinessEntities;
 
 namespace BusinessLogic
 {
-    public class InscripcionLogic : BusinessLogic
+    public class InscripcionLogic
     {
         public InscripcionLogic()
         {
@@ -25,6 +25,23 @@ namespace BusinessLogic
         public void Save(AlumnoInscripcion alIns)
         {
             InscripcionData.Save(alIns);
+        }
+
+        public bool EstaInscripto(int idUsr, int idMat)
+        {
+            return InscripcionData.EstaInscripto(idUsr, idMat);
+        }
+
+        public List<AlumnoInscripcion> GetAll(int id)
+        {
+            try
+            {
+                return InscripcionData.GetAll(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

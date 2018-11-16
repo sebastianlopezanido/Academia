@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities;
+using Data.Database;
 
 namespace BusinessLogic
 {
-    public class PersonaLogic : BusinessLogic
+    public class PersonaLogic
     {
         public PersonaLogic()
         {
             PersonasData = new Data.Database.PersonaAdapter();
         }
 
-        private Data.Database.PersonaAdapter _PersonasData;
-        public Data.Database.PersonaAdapter PersonasData
+        private PersonaAdapter _PersonasData;
+        public PersonaAdapter PersonasData
         {
             set { _PersonasData = value; }
             get { return _PersonasData; }
@@ -36,8 +37,6 @@ namespace BusinessLogic
             {
                 throw;
             }
-
-            //return PersonasData.GetAll();
         }
         
         public void Save(Persona persona)
@@ -48,7 +47,6 @@ namespace BusinessLogic
         public void Delete(int ID)
         {
             PersonasData.Delete(ID);
-        }
-        
+        }        
     }
 }

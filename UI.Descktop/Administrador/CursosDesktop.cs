@@ -74,14 +74,10 @@ namespace UI.Desktop
                     CursoActual.Cupo = int.Parse(txtCupo.Text);
                     CursoActual.State = BusinessEntity.States.Modified;
                     break;
-                //case ModoForm.Baja:
-                //    CursoActual.State = BusinessEntity.States.Deleted;
-                //    break;
                 case ModoForm.Consulta:
                     CursoActual.State = BusinessEntity.States.Unmodified;
                     break;
             }
-
         }
 
         public override void GuardarCambios()
@@ -96,12 +92,14 @@ namespace UI.Desktop
             if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtIDMateria.Text) || cbxIDComision.SelectedValue == null || string.IsNullOrEmpty(txtCupo.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 
             if (txtAño.Text.Length != 4)
             {
-                Notificar("Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar("Error","Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 

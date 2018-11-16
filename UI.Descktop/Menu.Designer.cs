@@ -38,6 +38,8 @@ namespace UI.Desktop
             this.btnAdmMat = new System.Windows.Forms.Button();
             this.btnAdmCom = new System.Windows.Forms.Button();
             this.btnAdmCur = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblSesion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // salir
@@ -120,11 +122,31 @@ namespace UI.Desktop
             this.btnAdmCur.UseVisualStyleBackColor = true;
             this.btnAdmCur.Click += new System.EventHandler(this.btnAdmCur_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(341, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Sesión:";
+            // 
+            // lblSesion
+            // 
+            this.lblSesion.AutoSize = true;
+            this.lblSesion.Location = new System.Drawing.Point(389, 4);
+            this.lblSesion.Name = "lblSesion";
+            this.lblSesion.Size = new System.Drawing.Size(35, 13);
+            this.lblSesion.TabIndex = 10;
+            this.lblSesion.Text = "label2";
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(436, 253);
+            this.Controls.Add(this.lblSesion);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAdmCur);
             this.Controls.Add(this.btnAdmCom);
             this.Controls.Add(this.btnAdmMat);
@@ -136,6 +158,7 @@ namespace UI.Desktop
             this.Name = "Menu";
             this.Text = "Menu";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -151,5 +174,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnAdmMat;
         private System.Windows.Forms.Button btnAdmCom;
         private System.Windows.Forms.Button btnAdmCur;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblSesion;
     }
 }

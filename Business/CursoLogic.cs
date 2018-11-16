@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities;
+using Data.Database;
 
 namespace BusinessLogic
 {
-    public class CursoLogic : BusinessLogic
+    public class CursoLogic
     {
         public CursoLogic()
         {
             CursoData = new Data.Database.CursoAdapter();
         }
 
-        private Data.Database.CursoAdapter _CursoData;
-        public Data.Database.CursoAdapter CursoData
+        private CursoAdapter _CursoData;
+        public CursoAdapter CursoData
         {
             set { _CursoData = value; }
             get { return _CursoData; }

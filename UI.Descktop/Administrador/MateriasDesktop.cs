@@ -73,9 +73,6 @@ namespace UI.Desktop
                     MateriaActual.IDPlan = (int)cbxIDPlan.SelectedValue;
                     MateriaActual.State = BusinessEntity.States.Modified;
                     break;
-                //case ModoForm.Baja:
-                //    MateriaActual.State = BusinessEntity.States.Deleted;
-                //    break;
                 case ModoForm.Consulta:
                     MateriaActual.State = BusinessEntity.States.Unmodified;
                     break;
@@ -88,6 +85,7 @@ namespace UI.Desktop
                 || string.IsNullOrEmpty(txtHTotales.Text) || cbxIDPlan.SelectedValue == null)
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 

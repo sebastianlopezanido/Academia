@@ -35,7 +35,5 @@ namespace BusinessEntities
             get { return _IDPlan; }
             set { _IDPlan = value; }
         }
-
-
     }
 }

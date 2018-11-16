@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities;
+using Data.Database;
 
 namespace BusinessLogic
 {
-    public class ComisionLogic : BusinessLogic
+    public class ComisionLogic
     {
         public ComisionLogic()
         {
             ComisionData = new Data.Database.ComisionAdapter();
         }
 
-        private Data.Database.ComisionAdapter _ComisionData;
-        public Data.Database.ComisionAdapter ComisionData
+        private ComisionAdapter _ComisionData;
+        public ComisionAdapter ComisionData
         {
             set { _ComisionData = value; }
             get { return _ComisionData; }

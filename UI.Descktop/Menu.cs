@@ -20,8 +20,8 @@ namespace UI.Desktop
             UsuarioActual = user;
             InitializeComponent();
             CenterToScreen();
-            Ocultar();        
-
+            Ocultar();
+            lblSesion.Text = UsuarioActual.NombreUsuario;
         }
 
         private Usuario _UsuarioActual;
@@ -89,7 +89,6 @@ namespace UI.Desktop
 
         public void Ejecutar(int dato)
         {
-
             Inscripciones insForm = new Inscripciones(dato);
             insForm.ShowDialog();
         }
@@ -98,10 +97,10 @@ namespace UI.Desktop
         {           
             switch (UsuarioActual.Tipo)
             {
-                //case Usuario.TiposUsuario.Alumno:
-                //    Cursado curForm = new Cursado();
-                //    curForm.ShowDialog();
-                //    break;
+                case Usuario.TiposUsuario.Alumno:
+                    Cursado curForm = new Cursado(LoginSession.ID);
+                    curForm.ShowDialog();
+                    break;
                 case Usuario.TiposUsuario.Administrador:
                     Personas prsForm = new Personas();
                     prsForm.ShowDialog();

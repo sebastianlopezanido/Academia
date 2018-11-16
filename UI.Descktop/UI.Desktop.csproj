@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alumno\Cursado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alumno\Cursado.Designer.cs">
+      <DependentUpon>Cursado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Alumno\Inscripciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,7 @@
     <Compile Include="Administrador\MateriasDesktop.Designer.cs">
       <DependentUpon>MateriasDesktop.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginSession.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Administrador\Find\FindPersona.resx">
       <DependentUpon>FindPersona.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Alumno\Cursado.resx">
+      <DependentUpon>Cursado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Alumno\Inscripciones.resx">
       <DependentUpon>Inscripciones.cs</DependentUpon>

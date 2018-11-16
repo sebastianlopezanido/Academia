@@ -24,7 +24,6 @@ namespace UI.Desktop
         {
             Modo = modo;
             Text = CambiarTextos(btnAceptar);
-
         }
 
         public EspecialidadesDesktop(int id, ModoForm modo) : this()
@@ -62,9 +61,6 @@ namespace UI.Desktop
                     EspecialidadActual.Descripcion = txtDescripcion.Text;
                     EspecialidadActual.State = BusinessEntity.States.Modified;
                     break;
-                //case ModoForm.Baja:
-                //    EspecialidadActual.State = BusinessEntity.States.Deleted;
-                //    break;
                 case ModoForm.Consulta:
                     EspecialidadActual.State = BusinessEntity.States.Unmodified;
                     break;
@@ -76,6 +72,7 @@ namespace UI.Desktop
             if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 
@@ -85,16 +82,8 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            EspecialidadLogic el = new EspecialidadLogic();
-
-            try
-            {
-                el.Save(EspecialidadActual);
-            }
-            catch(Exception ex)
-            {
-                Notificar("Error",ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            EspecialidadLogic el = new EspecialidadLogic();           
+            el.Save(EspecialidadActual);           
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
