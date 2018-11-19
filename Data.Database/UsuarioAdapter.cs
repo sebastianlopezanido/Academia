@@ -47,6 +47,44 @@ namespace Data.Database
             return usuarios;
         }
 
+        public List<Usuario> GetAllDocentes()
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+
+            try
+            {
+                OpenConnection();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM usuarios WHERE tipo_usuario = 1", sqlConn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Usuario usr = new Usuario();
+                    usr.ID = (int)dr["id_usuario"];
+                    usr.NombreUsuario = (string)dr["nombre_usuario"];
+                    usr.Clave = (string)dr["clave"];
+                    usr.Habilitado = (bool)dr["habilitado"];
+                    usr.IDPersona = (int)dr["id_persona"];
+                    usr.IDPlan = (int)dr["id_plan"];
+                    usr.Tipo = (Usuario.TiposUsuario)dr["tipo_usuario"];
+                    usuarios.Add(usr);
+                }
+
+                dr.Close();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar lista de usuarios", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return usuarios;
+        }
+
         public Usuario GetOne(int ID)
         {
             Usuario usr = new Usuario();

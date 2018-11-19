@@ -27,6 +27,10 @@ namespace BusinessLogic
             return CursoData.GetOne(ID);
         }
 
+        public Curso GetOneByMatComAnio(int id_mat, int id_com, int anio)
+        {
+            return CursoData.GetOneByMatComAnio(id_mat,id_com,anio);
+        }
         public List<Curso> GetAll()
         {
             try

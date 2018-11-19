@@ -38,6 +38,17 @@ namespace BusinessLogic
                 throw;
             }            
         }
+        public List<Usuario> GetAllDocentes()
+        {
+            try
+            {
+                return UsuarioData.GetAllDocentes();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public List<Usuario> GetAll()
         {

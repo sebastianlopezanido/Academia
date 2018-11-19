@@ -83,6 +83,42 @@ namespace Data.Database
             return cur;
         }
 
+        public Curso GetOneByMatComAnio(int id_mat, int id_com, int anio)
+        {
+            Curso cur = new Curso();
+            try
+            {
+                OpenConnection();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM cursos WHERE id_materia = @id_mat and id_comision = @id_com and @anio_calendario = @anio", sqlConn);
+                cmd.Parameters.Add("@id_mat", SqlDbType.Int).Value = id_mat;
+                cmd.Parameters.Add("@id_com", SqlDbType.Int).Value = id_com;
+                cmd.Parameters.Add("@id_anio", SqlDbType.Int).Value = anio;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    cur.ID = (int)dr["id_curso"];
+                    cur.IDComision = (int)dr["id_comision"];
+                    cur.IDMateria = (int)dr["id_materia"];
+                    cur.AnioCalendario = (int)dr["anio_calendario"];
+                    cur.Cupo = (int)dr["cupo"];
+                }
+
+                dr.Close();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar datos de cursos", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return cur;
+        }
+
         public List<Curso> GetByMateria(int idMat)
         {
             List<Curso> cursos = new List<Curso>();

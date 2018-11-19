@@ -30,8 +30,8 @@ namespace Data.Database
 
         protected void OpenConnection()
         {
-            var conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString; //error usandola en sqlConn???
-            //string conn = "Server=localhost\\SqlExpress;Database=tp2_net;Integrated Security=true;"; 
+           var conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString; //error usandola en sqlConn???
+           //string conn = "Server=localhost\\SqlExpress;Database=tp2_net;Integrated Security=true;"; 
 
 
 

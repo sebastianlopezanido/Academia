@@ -33,15 +33,18 @@
             this.txtIDMateria = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbxIDComision = new System.Windows.Forms.ComboBox();
             this.txtCupo = new System.Windows.Forms.TextBox();
             this.txtAño = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAceptar = new System.Windows.Forms.Button();
             this.btnFindMateria = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.cbxIDComision = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtIDDocente = new System.Windows.Forms.TextBox();
+            this.btnFindProfesor = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,29 +60,33 @@
             this.tableLayoutPanel1.Controls.Add(this.txtIDMateria, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.cbxIDComision, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtCupo, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtAño, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnFindMateria, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cbxIDComision, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtIDDocente, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnFindProfesor, 2, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(419, 126);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(419, 140);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // txtID
             // 
             this.txtID.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtID.Location = new System.Drawing.Point(72, 3);
+            this.txtID.Location = new System.Drawing.Point(71, 3);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(100, 20);
@@ -87,7 +94,7 @@
             // 
             // txtIDMateria
             // 
-            this.txtIDMateria.Location = new System.Drawing.Point(72, 45);
+            this.txtIDMateria.Location = new System.Drawing.Point(71, 41);
             this.txtIDMateria.Name = "txtIDMateria";
             this.txtIDMateria.ReadOnly = true;
             this.txtIDMateria.Size = new System.Drawing.Size(100, 20);
@@ -105,39 +112,22 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 42);
+            this.label2.Location = new System.Drawing.Point(3, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "ID Materia";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 84);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "ID Comision";
-            // 
-            // cbxIDComision
-            // 
-            this.cbxIDComision.FormattingEnabled = true;
-            this.cbxIDComision.Location = new System.Drawing.Point(72, 87);
-            this.cbxIDComision.Name = "cbxIDComision";
-            this.cbxIDComision.Size = new System.Drawing.Size(112, 21);
-            this.cbxIDComision.TabIndex = 12;
-            // 
             // txtCupo
             // 
-            this.txtCupo.Location = new System.Drawing.Point(306, 45);
+            this.txtCupo.Location = new System.Drawing.Point(293, 41);
             this.txtCupo.Name = "txtCupo";
             this.txtCupo.Size = new System.Drawing.Size(100, 20);
             this.txtCupo.TabIndex = 6;
             // 
             // txtAño
             // 
-            this.txtAño.Location = new System.Drawing.Point(306, 3);
+            this.txtAño.Location = new System.Drawing.Point(293, 3);
             this.txtAño.Name = "txtAño";
             this.txtAño.Size = new System.Drawing.Size(100, 20);
             this.txtAño.TabIndex = 5;
@@ -145,7 +135,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(225, 0);
+            this.label4.Location = new System.Drawing.Point(212, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 10;
@@ -154,36 +144,15 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(225, 42);
+            this.label5.Location = new System.Drawing.Point(212, 38);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 11;
             this.label5.Text = "Cupo";
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(306, 87);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 0;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(225, 87);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 1;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
             // btnFindMateria
             // 
-            this.btnFindMateria.Location = new System.Drawing.Point(190, 45);
+            this.btnFindMateria.Location = new System.Drawing.Point(177, 41);
             this.btnFindMateria.Name = "btnFindMateria";
             this.btnFindMateria.Size = new System.Drawing.Size(29, 23);
             this.btnFindMateria.TabIndex = 13;
@@ -191,12 +160,76 @@
             this.btnFindMateria.UseVisualStyleBackColor = true;
             this.btnFindMateria.Click += new System.EventHandler(this.btnFindMateria_Click);
             // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAceptar.Location = new System.Drawing.Point(212, 117);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 20);
+            this.btnAceptar.TabIndex = 1;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(293, 117);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 20);
+            this.btnCancelar.TabIndex = 0;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // cbxIDComision
+            // 
+            this.cbxIDComision.FormattingEnabled = true;
+            this.cbxIDComision.Location = new System.Drawing.Point(293, 79);
+            this.cbxIDComision.Name = "cbxIDComision";
+            this.cbxIDComision.Size = new System.Drawing.Size(112, 21);
+            this.cbxIDComision.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(212, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "ID Comision";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(62, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "ID Docente";
+            // 
+            // txtIDDocente
+            // 
+            this.txtIDDocente.Location = new System.Drawing.Point(71, 79);
+            this.txtIDDocente.Name = "txtIDDocente";
+            this.txtIDDocente.ReadOnly = true;
+            this.txtIDDocente.Size = new System.Drawing.Size(100, 20);
+            this.txtIDDocente.TabIndex = 15;
+            // 
+            // btnFindProfesor
+            // 
+            this.btnFindProfesor.Location = new System.Drawing.Point(177, 79);
+            this.btnFindProfesor.Name = "btnFindProfesor";
+            this.btnFindProfesor.Size = new System.Drawing.Size(29, 23);
+            this.btnFindProfesor.TabIndex = 16;
+            this.btnFindProfesor.Text = "...";
+            this.btnFindProfesor.UseVisualStyleBackColor = true;
+            // 
             // CursosDesktop
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 126);
+            this.ClientSize = new System.Drawing.Size(419, 140);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "CursosDesktop";
             this.Text = "CursosDesktop";
@@ -222,5 +255,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbxIDComision;
         private System.Windows.Forms.Button btnFindMateria;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtIDDocente;
+        private System.Windows.Forms.Button btnFindProfesor;
     }
 }
