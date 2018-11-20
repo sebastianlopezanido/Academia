@@ -61,11 +61,11 @@ namespace Data.Database
 
                 if (dr.Read())
                 {
-                    DocenteCurso dc = new DocenteCurso();
-                    dc.ID = (int)dr["id_dictado"];
-                    dc.IDCurso = (int)dr["id_curso"];
-                    dc.IDDocente = (int)dr["id_docente"];
-                    dc.Cargo = (DocenteCurso.TiposCargos)dr["cargo"];
+                    
+                    dictado.ID = (int)dr["id_dictado"];
+                    dictado.IDCurso = (int)dr["id_curso"];
+                    dictado.IDDocente = (int)dr["id_docente"];
+                    dictado.Cargo = (DocenteCurso.TiposCargos)dr["cargo"];
                     
                 }
 
@@ -93,7 +93,7 @@ namespace Data.Database
                 SqlCommand cmd = new SqlCommand("INSERT INTO docentes_cursos(id_curso,id_docente,cargo) VALUES(@id_curso,@id_docente,@cargo) SELECT @@identity", sqlConn);
                 cmd.Parameters.Add("@id_docente", SqlDbType.Int).Value = doCu.IDDocente;
                 cmd.Parameters.Add("@id_curso", SqlDbType.Int).Value = doCu.IDCurso;
-                cmd.Parameters.Add("@id_curso", SqlDbType.Int).Value = doCu.Cargo;
+                cmd.Parameters.Add("@cargo", SqlDbType.Int).Value = doCu.Cargo;
                 cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -107,29 +107,47 @@ namespace Data.Database
             }
         }
 
-        //public bool EstaInscripto(int idUsr, int idMat)
-        //{
-        //    try
-        //    {
-        //        int cant = 0;
-        //        OpenConnection();
-        //        SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM alumnos_inscripciones WHERE id_alumno=@idUsr AND id_curso=(SELECT id_curso FROM cursos WHERE id_materia=@idMat AND anio_calendario=YEAR(getdate()))", sqlConn);
-        //        cmd.Parameters.Add("@idUsr", SqlDbType.Int).Value = idUsr;
-        //        cmd.Parameters.Add("@idMat", SqlDbType.Int).Value = idMat;
-        //        cant = Convert.ToInt32(cmd.ExecuteScalar());
-        //        if (cant == 0) return false; else return true;
-        //    }
-        //    catch (Exception Ex)
-        //    {
-        //        Exception ExcepcionManejada = new Exception("Error al comprobar inscripcion", Ex);
-        //        throw ExcepcionManejada;
+        protected void Update(DocenteCurso doCu)
+        {
+            try
+            {
+                OpenConnection();
+                SqlCommand cmd = new SqlCommand("UPDATE docentes_cursos SET id_docente = @id_docente, cargo = @cargo WHERE id_dictado = @id", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = doCu.ID;
+                cmd.Parameters.Add("@id_docente", SqlDbType.Int).Value = doCu.IDDocente;
+                cmd.Parameters.Add("@cargo", SqlDbType.Int).Value = doCu.Cargo;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al modificar datos del dictado", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
 
-        //    }
-        //    finally
-        //    {
-        //        CloseConnection();
-        //    }
-        //}
+        protected void Delete(int ID)
+        {
+            try
+            {
+                OpenConnection();
+                SqlCommand cmd = new SqlCommand("DELETE docentes_cursos WHERE id_dictado = @id", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al eliminar dictado", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
 
         public void Save(DocenteCurso doCu)
         {
@@ -138,9 +156,12 @@ namespace Data.Database
                 case BusinessEntity.States.New:
                     Insert(doCu);
                     break;
-                    //case BusinessEntity.States.Modified:
-                    //    Update(alIns);
-                    //    break;
+                case BusinessEntity.States.Modified:
+                    Update(doCu);
+                    break;
+                case BusinessEntity.States.Deleted:
+                    Delete(doCu.ID);
+                    break;
             }
         }
     }

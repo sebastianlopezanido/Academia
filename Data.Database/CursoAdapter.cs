@@ -83,28 +83,28 @@ namespace Data.Database
             return cur;
         }
 
-        public Curso GetOneByMatComAnio(int id_mat, int id_com, int anio)
+        public bool EstaAgregado(int id_mat, int id_com, int anio)
         {
-            Curso cur = new Curso();
+           
             try
             {
                 OpenConnection();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM cursos WHERE id_materia = @id_mat and id_comision = @id_com and @anio_calendario = @anio", sqlConn);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM cursos WHERE id_materia = @id_mat AND id_comision = @id_com AND anio_calendario = @anio", sqlConn);
                 cmd.Parameters.Add("@id_mat", SqlDbType.Int).Value = id_mat;
                 cmd.Parameters.Add("@id_com", SqlDbType.Int).Value = id_com;
-                cmd.Parameters.Add("@id_anio", SqlDbType.Int).Value = anio;
+                cmd.Parameters.Add("@anio", SqlDbType.Int).Value = anio;
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 if (dr.Read())
                 {
-                    cur.ID = (int)dr["id_curso"];
-                    cur.IDComision = (int)dr["id_comision"];
-                    cur.IDMateria = (int)dr["id_materia"];
-                    cur.AnioCalendario = (int)dr["anio_calendario"];
-                    cur.Cupo = (int)dr["cupo"];
+                    dr.Close();
+                    return true;
                 }
-
-                dr.Close();
+                else
+                {
+                    dr.Close();
+                    return false;
+                }                 
             }
             catch (Exception Ex)
             {
@@ -114,9 +114,7 @@ namespace Data.Database
             finally
             {
                 CloseConnection();
-            }
-
-            return cur;
+            }            
         }
 
         public List<Curso> GetByMateria(int idMat)
@@ -163,12 +161,20 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmd = new SqlCommand("DELETE cursos WHERE id_curso = @id", sqlConn);
+                sqlTran = sqlConn.BeginTransaction();
+                SqlCommand cmd = new SqlCommand("DELETE cursos WHERE id_curso = @id", sqlConn, sqlTran);
+                SqlCommand cmddc = new SqlCommand("DELETE docentes_cursos WHERE id_dictado = @id", sqlConn, sqlTran);
+                DocenteCursoAdapter dca = new DocenteCursoAdapter();
+                DocenteCurso dc = dca.GetOneByCurso(ID);
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                cmddc.Parameters.Add("@id", SqlDbType.Int).Value = dc.ID;
+                cmddc.ExecuteNonQuery();
                 cmd.ExecuteNonQuery();
+                sqlTran.Commit();
             }
             catch (Exception Ex)
             {
+                sqlTran.Rollback();
                 Exception ExcepcionManejada = new Exception("Error al eliminar curso", Ex);
                 throw ExcepcionManejada;
             }
@@ -202,7 +208,7 @@ namespace Data.Database
             }
         }
 
-        protected void Insert(Curso curso)
+        public int Insert(Curso curso)
         {
             try
             {
@@ -212,7 +218,9 @@ namespace Data.Database
                 cmd.Parameters.Add("@id_materia", SqlDbType.Int).Value = curso.IDMateria;
                 cmd.Parameters.Add("@anio_calendario", SqlDbType.Int).Value = curso.AnioCalendario;
                 cmd.Parameters.Add("@cupo", SqlDbType.Int).Value = curso.Cupo;
-                cmd.ExecuteNonQuery();
+                curso.ID = decimal.ToInt32((decimal)cmd.ExecuteScalar());
+
+                return curso.ID;
             }
             catch (Exception Ex)
             {

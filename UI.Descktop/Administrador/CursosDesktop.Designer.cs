@@ -45,6 +45,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtIDDocente = new System.Windows.Forms.TextBox();
             this.btnFindProfesor = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbxCargo = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +58,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.cbxCargo, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtID, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtIDMateria, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
@@ -65,13 +69,13 @@
             this.tableLayoutPanel1.Controls.Add(this.label4, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnFindMateria, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.cbxIDComision, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtIDDocente, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnFindProfesor, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 4, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -79,8 +83,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(419, 140);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(419, 170);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // txtID
@@ -94,7 +98,7 @@
             // 
             // txtIDMateria
             // 
-            this.txtIDMateria.Location = new System.Drawing.Point(71, 41);
+            this.txtIDMateria.Location = new System.Drawing.Point(71, 50);
             this.txtIDMateria.Name = "txtIDMateria";
             this.txtIDMateria.ReadOnly = true;
             this.txtIDMateria.Size = new System.Drawing.Size(100, 20);
@@ -112,7 +116,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 38);
+            this.label2.Location = new System.Drawing.Point(3, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 8;
@@ -120,14 +124,14 @@
             // 
             // txtCupo
             // 
-            this.txtCupo.Location = new System.Drawing.Point(293, 41);
+            this.txtCupo.Location = new System.Drawing.Point(305, 50);
             this.txtCupo.Name = "txtCupo";
             this.txtCupo.Size = new System.Drawing.Size(100, 20);
             this.txtCupo.TabIndex = 6;
             // 
             // txtAño
             // 
-            this.txtAño.Location = new System.Drawing.Point(293, 3);
+            this.txtAño.Location = new System.Drawing.Point(305, 3);
             this.txtAño.Name = "txtAño";
             this.txtAño.Size = new System.Drawing.Size(100, 20);
             this.txtAño.TabIndex = 5;
@@ -135,7 +139,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(212, 0);
+            this.label4.Location = new System.Drawing.Point(224, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 10;
@@ -144,7 +148,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(212, 38);
+            this.label5.Location = new System.Drawing.Point(224, 47);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 11;
@@ -152,7 +156,7 @@
             // 
             // btnFindMateria
             // 
-            this.btnFindMateria.Location = new System.Drawing.Point(177, 41);
+            this.btnFindMateria.Location = new System.Drawing.Point(189, 50);
             this.btnFindMateria.Name = "btnFindMateria";
             this.btnFindMateria.Size = new System.Drawing.Size(29, 23);
             this.btnFindMateria.TabIndex = 13;
@@ -163,7 +167,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(212, 117);
+            this.btnAceptar.Location = new System.Drawing.Point(224, 144);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 20);
             this.btnAceptar.TabIndex = 1;
@@ -173,7 +177,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(293, 117);
+            this.btnCancelar.Location = new System.Drawing.Point(305, 144);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 20);
             this.btnCancelar.TabIndex = 0;
@@ -184,7 +188,7 @@
             // cbxIDComision
             // 
             this.cbxIDComision.FormattingEnabled = true;
-            this.cbxIDComision.Location = new System.Drawing.Point(293, 79);
+            this.cbxIDComision.Location = new System.Drawing.Point(305, 97);
             this.cbxIDComision.Name = "cbxIDComision";
             this.cbxIDComision.Size = new System.Drawing.Size(112, 21);
             this.cbxIDComision.TabIndex = 12;
@@ -192,7 +196,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(212, 76);
+            this.label3.Location = new System.Drawing.Point(224, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 9;
@@ -201,7 +205,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 76);
+            this.label6.Location = new System.Drawing.Point(3, 94);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 13);
             this.label6.TabIndex = 14;
@@ -209,7 +213,7 @@
             // 
             // txtIDDocente
             // 
-            this.txtIDDocente.Location = new System.Drawing.Point(71, 79);
+            this.txtIDDocente.Location = new System.Drawing.Point(71, 97);
             this.txtIDDocente.Name = "txtIDDocente";
             this.txtIDDocente.ReadOnly = true;
             this.txtIDDocente.Size = new System.Drawing.Size(100, 20);
@@ -217,19 +221,37 @@
             // 
             // btnFindProfesor
             // 
-            this.btnFindProfesor.Location = new System.Drawing.Point(177, 79);
+            this.btnFindProfesor.Location = new System.Drawing.Point(189, 97);
             this.btnFindProfesor.Name = "btnFindProfesor";
             this.btnFindProfesor.Size = new System.Drawing.Size(29, 23);
             this.btnFindProfesor.TabIndex = 16;
             this.btnFindProfesor.Text = "...";
             this.btnFindProfesor.UseVisualStyleBackColor = true;
+            this.btnFindProfesor.Click += new System.EventHandler(this.btnFindProfesor_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 141);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Cargo";
+            // 
+            // cbxCargo
+            // 
+            this.cbxCargo.FormattingEnabled = true;
+            this.cbxCargo.Location = new System.Drawing.Point(71, 144);
+            this.cbxCargo.Name = "cbxCargo";
+            this.cbxCargo.Size = new System.Drawing.Size(112, 21);
+            this.cbxCargo.TabIndex = 18;
             // 
             // CursosDesktop
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 140);
+            this.ClientSize = new System.Drawing.Size(419, 170);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "CursosDesktop";
             this.Text = "CursosDesktop";
@@ -258,5 +280,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtIDDocente;
         private System.Windows.Forms.Button btnFindProfesor;
+        private System.Windows.Forms.ComboBox cbxCargo;
+        private System.Windows.Forms.Label label7;
     }
 }

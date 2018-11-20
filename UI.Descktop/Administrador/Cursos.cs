@@ -12,7 +12,7 @@ using BusinessEntities;
 
 namespace UI.Desktop
 {
-    public partial class Cursos : Form
+    public partial class Cursos : ApplicationForm
     {
         public Cursos()
         {
@@ -42,6 +42,27 @@ namespace UI.Desktop
             set { _MateriaActual = value; }
         }
 
+        private DocenteCurso _DocenteCursoActual;
+        public DocenteCurso DocenteCursoActual
+        {
+            get { return _DocenteCursoActual; }
+            set { _DocenteCursoActual = value; }
+        }
+
+        private Usuario _UsuarioActual;
+        public Usuario UsuarioActual
+        {
+            get { return _UsuarioActual; }
+            set { _UsuarioActual = value; }
+        }
+
+        private Persona _PersonaActual;
+        public Persona PersonaActual
+        {
+            get { return _PersonaActual; }
+            set { _PersonaActual = value; }
+        }
+
         public void Listar()
         {
             try
@@ -64,6 +85,20 @@ namespace UI.Desktop
                     MateriaLogic ml = new MateriaLogic();
                     MateriaActual = ml.GetOne((int)e.Value);
                     e.Value = MateriaActual.Descripcion;
+                }
+            }
+
+            if (dgvCursos.Columns[e.ColumnIndex].Name == "Profesor")
+            {
+                if (e.Value != null)
+                {
+                    DocenteCursoLogic ml = new DocenteCursoLogic();
+                    DocenteCursoActual = ml.GetOneByCurso((int)e.Value);
+                    UsuarioLogic ul = new UsuarioLogic();
+                    UsuarioActual = ul.GetOne(DocenteCursoActual.IDDocente);
+                    PersonaLogic pl = new PersonaLogic();
+                    PersonaActual = pl.GetOne(UsuarioActual.IDPersona);
+                    e.Value = PersonaActual.Apellido;
                 }
             }
 
@@ -112,8 +147,21 @@ namespace UI.Desktop
 
                 if (dr == DialogResult.Yes)
                 {
-                    CursoActual.State = BusinessEntity.States.Deleted;
-                    cl.Save(CursoActual);
+                    try
+                    {
+                        CursoActual.State = BusinessEntity.States.Deleted;
+                        DocenteCursoLogic dc = new DocenteCursoLogic();
+                        DocenteCursoActual = dc.GetOneByCurso(ID);
+                        DocenteCursoActual.State = BusinessEntity.States.Deleted;
+                        //dc.Save(DocenteCursoActual);
+                        cl.Save(CursoActual);
+                    }
+                    catch (Exception Ex)
+                    {
+                        Notificar("Error", Ex.Message + ", posiblemente existan inscripciones a este curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                   
+                    
                 }
 
                 Listar();

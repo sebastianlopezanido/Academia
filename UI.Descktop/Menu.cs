@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.Desktop.Alumno;
+using UI.Desktop.Profesor;
 
 namespace UI.Desktop
 {
@@ -21,7 +22,7 @@ namespace UI.Desktop
             InitializeComponent();
             CenterToScreen();
             Ocultar();
-            lblSesion.Text = UsuarioActual.NombreUsuario;
+            lblSesion.Text = UsuarioActual.NombreUsuario;           
         }
 
         private Usuario _UsuarioActual;
@@ -76,10 +77,10 @@ namespace UI.Desktop
                     findMateriaForm.pasado += new FindMateria.pasar(Ejecutar);
                     findMateriaForm.ShowDialog();                    
                     break;
-                //case Usuario.TiposUsuario.Profesor:
-                //    CursosProfesor cpForm = new CursosProfesor();
-                //    cpForm.ShowDialog();
-                //    break;
+                case Usuario.TiposUsuario.Profesor:
+                    CursosProfesor cpForm = new CursosProfesor();
+                    cpForm.ShowDialog();
+                    break;
                 case Usuario.TiposUsuario.Administrador:
                     Usuarios userForm = new Usuarios();
                     userForm.ShowDialog();

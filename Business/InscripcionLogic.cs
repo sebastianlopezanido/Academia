@@ -43,5 +43,29 @@ namespace BusinessLogic
                 throw;
             }
         }
+
+        public AlumnoInscripcion GetOne(int id)
+        {
+            try
+            {
+                return InscripcionData.GetOne(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<AlumnoInscripcion> GetAllByCurso(int id)
+        {
+            try
+            {
+                return InscripcionData.GetAllByCurso(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

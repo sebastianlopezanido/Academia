@@ -31,8 +31,8 @@ namespace BusinessEntities
 
         public enum TiposCargos
         {
-            g,
-            h,
+            Titular,
+            Reemplazante,
         }
     }
 }

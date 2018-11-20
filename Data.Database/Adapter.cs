@@ -15,14 +15,15 @@ namespace Data.Database
         private SqlConnection _sqlConn;
         public SqlConnection sqlConn
         {
-            set
-            {
-                _sqlConn = value;
-            }
-            get
-            {
-                return _sqlConn;
-            }
+            set { _sqlConn = value; }
+            get { return _sqlConn;  }
+        }
+
+        private SqlTransaction _sqlTran;
+        public SqlTransaction sqlTran
+        {
+            set { _sqlTran = value; }
+            get { return _sqlTran; }
         }
 
 

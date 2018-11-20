@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessEntities;
 using BusinessLogic;
+using UI.Desktop.Profesor;
 
 namespace UI.Desktop
 {
@@ -17,6 +18,7 @@ namespace UI.Desktop
         public CursosDesktop()
         {
             InitializeComponent();
+            cbxCargo.DataSource = Enum.GetValues(typeof(DocenteCurso.TiposCargos));
             ComisionLogic cl = new ComisionLogic();
             cbxIDComision.DataSource = cl.GetAll();
             cbxIDComision.ValueMember = "ID";
@@ -56,6 +58,13 @@ namespace UI.Desktop
             set { _CursoActual = value; }
         }
 
+        private int _IDCurso;
+        public int IDCurso
+        {
+            get { return _IDCurso; }
+            set { _IDCurso = value; }
+        }
+
         public override void MapearDeDatos()
         {
             txtID.Text = CursoActual.ID.ToString();
@@ -64,6 +73,7 @@ namespace UI.Desktop
             txtAño.Text = CursoActual.AnioCalendario.ToString();
             txtCupo.Text = CursoActual.Cupo.ToString();
             txtIDDocente.Text = DocenteCursoActual.IDDocente.ToString();
+            cbxCargo.SelectedItem = DocenteCursoActual.Cargo;
         }
 
         public override void MapearADatos()
@@ -77,8 +87,7 @@ namespace UI.Desktop
                     CursoActual.IDMateria = int.Parse(txtIDMateria.Text);
                     CursoActual.AnioCalendario = int.Parse(txtAño.Text);
                     CursoActual.Cupo = int.Parse(txtCupo.Text);
-                    CursoActual.State = BusinessEntity.States.New;
-                   
+                    CursoActual.State = BusinessEntity.States.New;                   
                     break;
                 case ModoForm.Modificacion:
                     CursoActual.IDComision = (int)cbxIDComision.SelectedValue;
@@ -97,42 +106,43 @@ namespace UI.Desktop
         {
             MapearADatos();
             CursoLogic cl = new CursoLogic();
-            cl.Save(CursoActual);
-            GuardarCambiosDocenteCurso();
+
+            switch (Modo)
+            {
+                case ModoForm.Alta:
+                    IDCurso = cl.Insert(CursoActual);
+                    GuardarCambiosDocenteCurso();
+                    break;
+                case ModoForm.Modificacion:
+                    cl.Save(CursoActual);
+                    GuardarCambiosDocenteCurso();
+                    break;                
+            }          
+            
         }
 
-        public void MapearADatosDocenteCurso(int id_curso)
+        public void MapearADatosDocenteCurso()
         {
             switch (Modo)
             {
                 case ModoForm.Alta:
                     DocenteCursoActual = new DocenteCurso();
                     DocenteCursoActual.IDDocente = int.Parse(txtIDDocente.Text);
-                    DocenteCursoActual.IDCurso = id_curso;
-                    DocenteCursoActual.Cargo = (DocenteCurso.TiposCargos)1;
-
+                    DocenteCursoActual.IDCurso = IDCurso;
+                    DocenteCursoActual.Cargo = (DocenteCurso.TiposCargos)cbxCargo.SelectedItem;
                     DocenteCursoActual.State = BusinessEntity.States.New;
-
                     break;
                 case ModoForm.Modificacion:
-                    CursoActual.IDComision = (int)cbxIDComision.SelectedValue;
-                    CursoActual.IDMateria = int.Parse(txtIDMateria.Text);
-                    CursoActual.AnioCalendario = int.Parse(txtAño.Text);
-                    CursoActual.Cupo = int.Parse(txtCupo.Text);
-                    CursoActual.State = BusinessEntity.States.Modified;
-                    break;
-                case ModoForm.Consulta:
-                    DocenteCursoActual.State = BusinessEntity.States.Unmodified;
-                    break;
+                    DocenteCursoActual.IDDocente = int.Parse(txtIDDocente.Text);
+                    DocenteCursoActual.Cargo = (DocenteCurso.TiposCargos)cbxCargo.SelectedItem;
+                    DocenteCursoActual.State = BusinessEntity.States.Modified;
+                    break;               
             }
         }
 
         public void GuardarCambiosDocenteCurso()
         {
-            CursoLogic cl = new CursoLogic();
-            CursoActual = cl.GetOneByMatComAnio(CursoActual.IDMateria, CursoActual.IDComision,CursoActual.AnioCalendario);
-
-            MapearADatosDocenteCurso(CursoActual.ID);
+            MapearADatosDocenteCurso();
             DocenteCursoLogic dc = new DocenteCursoLogic();
             dc.Save(DocenteCursoActual);
         }
@@ -152,6 +162,14 @@ namespace UI.Desktop
 
                 return false;
             }
+                        
+            CursoLogic cl = new CursoLogic();
+
+            if(cl.EstaAgregado(int.Parse(txtIDMateria.Text), (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)))
+            {
+                Notificar("Error", "Ya existe ese curso en esa comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }             
 
             return true;
         }
@@ -182,7 +200,16 @@ namespace UI.Desktop
             txtIDMateria.Text = id.ToString();
         }
 
-       
+        private void btnFindProfesor_Click(object sender, EventArgs e)
+        {
+            FindProfesor findProfesorForm = new FindProfesor();
+            findProfesorForm.pasado += new FindProfesor.pasar(Ejecutar2);
+            findProfesorForm.ShowDialog();
+        }
+        public void Ejecutar2(int id)
+        {
+            txtIDDocente.Text = id.ToString();
+        }
     }
 }
 

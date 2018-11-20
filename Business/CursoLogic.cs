@@ -27,9 +27,9 @@ namespace BusinessLogic
             return CursoData.GetOne(ID);
         }
 
-        public Curso GetOneByMatComAnio(int id_mat, int id_com, int anio)
+        public bool EstaAgregado(int id_mat, int id_com, int anio)
         {
-            return CursoData.GetOneByMatComAnio(id_mat,id_com,anio);
+            return CursoData.EstaAgregado(id_mat,id_com,anio);
         }
         public List<Curso> GetAll()
         {
@@ -53,6 +53,11 @@ namespace BusinessLogic
             {
                 throw;
             }
+        }
+
+        public int Insert(Curso curso)
+        {
+            return CursoData.Insert(curso);
         }
 
         public void Save(Curso curso)
