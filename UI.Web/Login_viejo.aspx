@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:Login ID="Login1" runat="server" Height="150px" Width="236px">
+        <center><asp:Login ID="Login1" runat="server" Height="150px" Width="236px">
             <LayoutTemplate>
                 <table cellpadding="1" cellspacing="0" style="border-collapse:collapse;">
                     <tr>
@@ -55,7 +55,7 @@
                     </tr>
                 </table>
             </LayoutTemplate>
-        </asp:Login>
+        </asp:Login></center>
         
     </form>
 </body>

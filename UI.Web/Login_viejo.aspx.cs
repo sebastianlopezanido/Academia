@@ -26,7 +26,7 @@ namespace UI.Web
                 string nombreUsuario = Login1.UserName;
                 string clave = Login1.Password;
                 Usuario usr = ll.ValidarDatos(nombreUsuario, clave);
-                Response.Redirect("http://localhost:57900/Menu.aspx");
+                Response.Redirect("http://localhost:57900/Menu.aspx"); //switch según tipo de usuario??
                 //Server.Transfer("Menu.aspx");
                 //Menu menu = new Menu(usr);
                 //menu.Show();

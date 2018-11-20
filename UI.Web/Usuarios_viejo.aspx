@@ -1,6 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.Usuarios" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
-    <asp:Panel ID="gridPanel" runat="server">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Usuarios_viejo.aspx.cs" Inherits="UI.Web.Usuarios_viejo" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Usuarios</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+        </div>
+        <asp:Panel ID="gridPanel" runat="server">
         <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
@@ -51,4 +61,9 @@
             <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" />
             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
         </asp:Panel>
-</asp:Content>
+    </form>
+    
+
+
+</body>
+</html>

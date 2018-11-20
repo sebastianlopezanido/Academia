@@ -7,9 +7,10 @@ using System.Web.UI.WebControls;
 using BusinessEntities;
 using BusinessLogic;
 
+
 namespace UI.Web
 {
-    public partial class Usuarios : System.Web.UI.Page
+    public partial class Usuarios_viejo : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,7 +61,7 @@ namespace UI.Web
             get;
             set;
         }
-
+        
         private int SelectedID
         {
             get
@@ -86,9 +87,9 @@ namespace UI.Web
             {
                 return SelectedID != 0;
             }
-        }
+        }        
 
-        private void LoadForm(int id)
+        private void LoadForm (int id)
         {
             Entity = Logic.GetOne(id);
             txtUsuario.Text = Entity.NombreUsuario;
@@ -97,11 +98,11 @@ namespace UI.Web
             txtClave.Text = Entity.Clave;
             txtConfirmarClave.Text = Entity.Clave;
             txtId.Text = Entity.ID.ToString();
-        }
+        }        
 
         private void LoadEntity(Usuario usuario)
         {
-            if (FormMode == FormModes.Modificacion) usuario.ID = int.Parse(txtId.Text);
+            if(FormMode == FormModes.Modificacion) usuario.ID = int.Parse(txtId.Text);                
             usuario.IDPersona = int.Parse(txtIdPersona.Text);
             usuario.NombreUsuario = txtUsuario.Text;
             usuario.Clave = txtClave.Text;
@@ -113,12 +114,12 @@ namespace UI.Web
         private void SaveEntity(Usuario usuario)
         {
             Logic.Save(usuario);
-        }
+        }        
 
         private void EnableForm(bool enable)
         {
             txtClave.Enabled = enable;
-            txtConfirmarClave.Enabled = enable;
+            txtConfirmarClave.Enabled = enable;             
             txtId.Enabled = enable;
             txtIdPersona.Enabled = enable;
             txtIdPlan.Enabled = enable;
@@ -168,22 +169,22 @@ namespace UI.Web
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-
+            
             switch (FormMode)
             {
                 case FormModes.Alta:
-                    Entity = new Usuario();
+                    Entity = new Usuario();                    
                     Entity.State = BusinessEntity.States.New;
                     LoadEntity(Entity);
                     SaveEntity(Entity);
                     break;
                 case FormModes.Modificacion:
-                    Entity = new Usuario();
+                    Entity = new Usuario();                    
                     Entity.State = BusinessEntity.States.Modified;
                     LoadEntity(Entity);
                     SaveEntity(Entity);
                     break;
-                case FormModes.Baja:
+                case FormModes.Baja:                    
                     DeleteEntity(SelectedID);
                     break;
                 default:
