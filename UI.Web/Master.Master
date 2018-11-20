@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="UI.Web.Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>    
+    
+    <style type="text/css">
+        .auto-style1 {
+            height: 678px;
+        }
+        </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <center><h1>Academia</h1></center>
+        <div class="auto-style1">
+            <asp:ContentPlaceHolder ID="Contenido" runat="server">
+                
+                <p></p>
+                
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

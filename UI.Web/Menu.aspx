@@ -1,14 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="UI.Web.Menu" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="UI.Web.Menu" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
+    <div aria-orientation="vertical">
             <asp:Menu ID="Menu1" runat="server">
                 <Items>
                     <asp:MenuItem NavigateUrl="~/Usuarios.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
@@ -19,9 +12,8 @@
                     <asp:MenuItem Text="Comisiones" Value="Comisiones"></asp:MenuItem>
                     <asp:MenuItem Text="Cursos" Value="Cursos"></asp:MenuItem>
                 </Items>
+                
             </asp:Menu>
+            <asp:Button ID="Button1" runat="server" PostBackUrl="~/Login.aspx" Text="Cerrar Sesión" />
         </div>
-        <asp:Button ID="Button1" runat="server" PostBackUrl="~/Login.aspx" Text="Cerrar Sesión" />
-    </form>
-</body>
-</html>
+</asp:Content>
