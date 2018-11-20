@@ -7,21 +7,38 @@
     <title></title>    
     
     <style type="text/css">
-        .auto-style1 {
-            height: 678px;
+        .auto-style2 {
+            width: 1337px;
+            height: 1084px;
+        }
+        .auto-style4 {
+            width: 228px;
+        }
+        .auto-style5 {
+            width: 80%;
         }
         </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <center><h1>Academia</h1></center>
-        <div class="auto-style1">
-            <asp:ContentPlaceHolder ID="Contenido" runat="server">
-                
-                <p></p>
-                
-            </asp:ContentPlaceHolder>
-        </div>
+    <form id="form1" runat="server"> 
+                    <table cellpadding="0" width ="100%">
+                        <tr>
+                            <td align="center" colspan="2"><center><h1>Academia</h1></center></td>
+                        </tr>
+                        <tr height ="1000">
+                            <td width="20%"> Menu </td>
+                            <td class="auto-style5">
+                                <asp:ContentPlaceHolder ID="Contenido" runat="server">  
+                                    formularios
+                                </asp:ContentPlaceHolder></td>
+                        </tr>
+                        <tr> 
+                            <td colspan="2"> Pie </td>
+                        </tr>
+
+                    </table>                    
+                          
+        
     </form>
 </body>
 </html>
