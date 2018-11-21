@@ -46,5 +46,8 @@
     <Content Include="Tareas.txt" />
     <Content Include="TP2Script.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="data.xls" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
