@@ -85,7 +85,6 @@ namespace UI.Desktop
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-
             if(dgvUsuarios.SelectedRows != null && dgvUsuarios.MultiSelect == false && dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
@@ -113,6 +112,5 @@ namespace UI.Desktop
                 Listar();
             }
         }
-
     }
 }

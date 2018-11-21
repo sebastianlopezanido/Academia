@@ -15,14 +15,15 @@ namespace Data.Database
         private SqlConnection _sqlConn;
         public SqlConnection sqlConn
         {
-            set
-            {
-                _sqlConn = value;
-            }
-            get
-            {
-                return _sqlConn;
-            }
+            set { _sqlConn = value; }
+            get { return _sqlConn;  }
+        }
+
+        private SqlTransaction _sqlTran;
+        public SqlTransaction sqlTran
+        {
+            set { _sqlTran = value; }
+            get { return _sqlTran; }
         }
 
 
@@ -30,8 +31,8 @@ namespace Data.Database
 
         protected void OpenConnection()
         {
-            var conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString; //error usandola en sqlConn???
-            //string conn = "Server=localhost\\SqlExpress;Database=tp2_net;Integrated Security=true;"; 
+           var conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString; //error usandola en sqlConn???
+           //string conn = "Server=localhost\\SqlExpress;Database=tp2_net;Integrated Security=true;"; 
 
 
 

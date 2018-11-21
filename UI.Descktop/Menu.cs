@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.Desktop.Alumno;
+using UI.Desktop.Profesor;
 
 namespace UI.Desktop
 {
@@ -20,8 +21,8 @@ namespace UI.Desktop
             UsuarioActual = user;
             InitializeComponent();
             CenterToScreen();
-            Ocultar();        
-
+            Ocultar();
+            lblSesion.Text = UsuarioActual.NombreUsuario;           
         }
 
         private Usuario _UsuarioActual;
@@ -76,10 +77,10 @@ namespace UI.Desktop
                     findMateriaForm.pasado += new FindMateria.pasar(Ejecutar);
                     findMateriaForm.ShowDialog();                    
                     break;
-                //case Usuario.TiposUsuario.Profesor:
-                //    CursosProfesor cpForm = new CursosProfesor();
-                //    cpForm.ShowDialog();
-                //    break;
+                case Usuario.TiposUsuario.Profesor:
+                    CursosProfesor cpForm = new CursosProfesor();
+                    cpForm.ShowDialog();
+                    break;
                 case Usuario.TiposUsuario.Administrador:
                     Usuarios userForm = new Usuarios();
                     userForm.ShowDialog();
@@ -89,7 +90,6 @@ namespace UI.Desktop
 
         public void Ejecutar(int dato)
         {
-
             Inscripciones insForm = new Inscripciones(dato);
             insForm.ShowDialog();
         }
@@ -98,10 +98,10 @@ namespace UI.Desktop
         {           
             switch (UsuarioActual.Tipo)
             {
-                //case Usuario.TiposUsuario.Alumno:
-                //    Cursado curForm = new Cursado();
-                //    curForm.ShowDialog();
-                //    break;
+                case Usuario.TiposUsuario.Alumno:
+                    Cursado curForm = new Cursado(LoginSession.ID);
+                    curForm.ShowDialog();
+                    break;
                 case Usuario.TiposUsuario.Administrador:
                     Personas prsForm = new Personas();
                     prsForm.ShowDialog();

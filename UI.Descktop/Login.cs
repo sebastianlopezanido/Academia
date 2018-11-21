@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessEntities;
 
 namespace UI.Desktop
 {
@@ -25,7 +26,9 @@ namespace UI.Desktop
                 LoginLogic ll = new LoginLogic();               
                 string nombreUsuario = txtUsuario.Text;
                 string clave = txtPw.Text;                
-                BusinessEntities.Usuario usr = ll.ValidarDatos(nombreUsuario, clave);
+                Usuario usr = ll.ValidarDatos(nombreUsuario, clave);                
+                LoginSession.ID = usr.ID;
+                LoginSession.Tipo = usr.Tipo;
                 Menu menu = new Menu(usr);               
                 menu.Show();
                 Hide();  

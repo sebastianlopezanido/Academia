@@ -83,9 +83,6 @@ namespace UI.Desktop
                     UsuarioActual.NombreUsuario = txtUsuario.Text;
                     UsuarioActual.State = BusinessEntity.States.Modified;
                     break;
-                //case ModoForm.Baja:
-                    //UsuarioActual.State = BusinessEntity.States.Deleted;
-                    //break;
                 case ModoForm.Consulta:
                     UsuarioActual.State = BusinessEntity.States.Unmodified;
                     break;
@@ -105,18 +102,21 @@ namespace UI.Desktop
                 || string.IsNullOrEmpty(txtConfirmarClave.Text) || string.IsNullOrEmpty(txtUsuario.Text) || cbxTipo.SelectedValue == null)
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 
             if(txtClave.Text != txtConfirmarClave.Text )
             {
                 Notificar("Claves no coinciden", "Las claves deben ser iguales", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 
             if (txtClave.Text.Length < 8)
             {
                 Notificar("Clave no segura", "La clave debe ser mayor a 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
             
@@ -125,10 +125,7 @@ namespace UI.Desktop
 
         public void OcultarFind()
         {
-            if (Modo != ModoForm.Alta )
-            {               
-                btnBuscarPersona.Hide();
-            }            
+            if (Modo != ModoForm.Alta ) btnBuscarPersona.Hide();          
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

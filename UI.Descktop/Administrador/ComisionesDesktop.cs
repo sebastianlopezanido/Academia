@@ -72,14 +72,10 @@ namespace UI.Desktop
                     ComisionActual.Descripcion = txtDescripcion.Text;
                     ComisionActual.State = BusinessEntity.States.Modified;
                     break;
-                //case ModoForm.Baja:
-                //    ComisionActual.State = BusinessEntity.States.Deleted;
-                //    break;
                 case ModoForm.Consulta:
                     ComisionActual.State = BusinessEntity.States.Unmodified;
                     break;
             }
-
         }
 
         public override void GuardarCambios()
@@ -94,12 +90,14 @@ namespace UI.Desktop
             if (string.IsNullOrEmpty(txtAño.Text) || cbxIDPlan.SelectedValue == null || string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 
             if (txtAño.Text.Length != 4)
             {
-                Notificar("Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar("Error","Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 

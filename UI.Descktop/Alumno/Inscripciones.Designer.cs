@@ -50,7 +50,7 @@
             // tsCursos.ContentPanel
             // 
             this.tsCursos.ContentPanel.Controls.Add(this.tlCursos);
-            this.tsCursos.ContentPanel.Size = new System.Drawing.Size(800, 450);
+            this.tsCursos.ContentPanel.Size = new System.Drawing.Size(800, 425);
             this.tsCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsCursos.Location = new System.Drawing.Point(0, 0);
             this.tsCursos.Name = "tsCursos";
@@ -72,7 +72,7 @@
             this.tlCursos.RowCount = 2;
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlCursos.Size = new System.Drawing.Size(800, 450);
+            this.tlCursos.Size = new System.Drawing.Size(800, 425);
             this.tlCursos.TabIndex = 0;
             // 
             // dgvCursos
@@ -93,8 +93,9 @@
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.ReadOnly = true;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCursos.Size = new System.Drawing.Size(794, 415);
+            this.dgvCursos.Size = new System.Drawing.Size(794, 390);
             this.dgvCursos.TabIndex = 0;
+            this.dgvCursos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCursos_CellFormatting);
             // 
             // id
             // 
@@ -134,7 +135,7 @@
             // btnSeleccionar
             // 
             this.btnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeleccionar.Location = new System.Drawing.Point(641, 424);
+            this.btnSeleccionar.Location = new System.Drawing.Point(641, 399);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
             this.btnSeleccionar.TabIndex = 1;
@@ -144,7 +145,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(722, 424);
+            this.btnSalir.Location = new System.Drawing.Point(722, 399);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 2;
@@ -159,7 +160,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tsCursos);
             this.Name = "Inscripciones";
-            this.Text = "Inscripciones";
+            this.Text = "Inscripcion a cursado";
             this.Load += new System.EventHandler(this.Inscripciones_Load);
             this.tsCursos.ContentPanel.ResumeLayout(false);
             this.tsCursos.ResumeLayout(false);

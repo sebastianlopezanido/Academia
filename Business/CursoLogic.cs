@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities;
+using Data.Database;
 
 namespace BusinessLogic
 {
-    public class CursoLogic : BusinessLogic
+    public class CursoLogic
     {
         public CursoLogic()
         {
             CursoData = new Data.Database.CursoAdapter();
         }
 
-        private Data.Database.CursoAdapter _CursoData;
-        public Data.Database.CursoAdapter CursoData
+        private CursoAdapter _CursoData;
+        public CursoAdapter CursoData
         {
             set { _CursoData = value; }
             get { return _CursoData; }
@@ -26,6 +27,10 @@ namespace BusinessLogic
             return CursoData.GetOne(ID);
         }
 
+        public bool EstaAgregado(int id_mat, int id_com, int anio)
+        {
+            return CursoData.EstaAgregado(id_mat,id_com,anio);
+        }
         public List<Curso> GetAll()
         {
             try
@@ -48,6 +53,11 @@ namespace BusinessLogic
             {
                 throw;
             }
+        }
+
+        public int Insert(Curso curso)
+        {
+            return CursoData.Insert(curso);
         }
 
         public void Save(Curso curso)

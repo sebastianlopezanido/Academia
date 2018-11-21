@@ -18,21 +18,21 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmdMateria = new SqlCommand("select * from materias", sqlConn);
-                SqlDataReader drMateria = cmdMateria.ExecuteReader();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM materias", sqlConn);
+                SqlDataReader dr = cmd.ExecuteReader();
 
-                while (drMateria.Read())
+                while (dr.Read())
                 {
-                    Materia materia = new Materia();
-                    materia.ID = (int)drMateria["id_materia"];
-                    materia.Descripcion = (string)drMateria["desc_materia"];
-                    materia.HSSemanales = (int)drMateria["hs_semanales"];
-                    materia.HSTotales = (int)drMateria["hs_totales"];
-                    materia.IDPlan = (int)drMateria["id_plan"];
-                    materias.Add(materia);
+                    Materia mat = new Materia();
+                    mat.ID = (int)dr["id_materia"];
+                    mat.Descripcion = (string)dr["desc_materia"];
+                    mat.HSSemanales = (int)dr["hs_semanales"];
+                    mat.HSTotales = (int)dr["hs_totales"];
+                    mat.IDPlan = (int)dr["id_plan"];
+                    materias.Add(mat);
                 }
 
-                drMateria.Close();
+                dr.Close();
             }
             catch (Exception Ex)
             {
@@ -49,24 +49,24 @@ namespace Data.Database
 
         public Materia GetOne(int ID)
         {
-            Materia materia = new Materia();
+            Materia mat = new Materia();
             try
             {
                 OpenConnection();
-                SqlCommand cmdMateria = new SqlCommand("select * from materias where id_materia=@id", sqlConn);
-                cmdMateria.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drMateria = cmdMateria.ExecuteReader();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM materias WHERE id_materia = @id", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                SqlDataReader dr = cmd.ExecuteReader();
 
-                if (drMateria.Read())
+                if (dr.Read())
                 {
-                    materia.ID = (int)drMateria["id_materia"];
-                    materia.Descripcion = (string)drMateria["desc_materia"];
-                    materia.HSSemanales = (int)drMateria["hs_semanales"];
-                    materia.HSTotales = (int)drMateria["hs_totales"];
-                    materia.IDPlan = (int)drMateria["id_plan"];
+                    mat.ID = (int)dr["id_materia"];
+                    mat.Descripcion = (string)dr["desc_materia"];
+                    mat.HSSemanales = (int)dr["hs_semanales"];
+                    mat.HSTotales = (int)dr["hs_totales"];
+                    mat.IDPlan = (int)dr["id_plan"];
                 }
 
-                drMateria.Close();
+                dr.Close();
             }
             catch (Exception Ex)
             {
@@ -78,7 +78,7 @@ namespace Data.Database
                 CloseConnection();
             }
 
-            return materia;
+            return mat;
         }
 
         public void Delete(int ID)
@@ -86,9 +86,9 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete materias where id_materia=@id", sqlConn);
-                cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                cmdDelete.ExecuteNonQuery();
+                SqlCommand cmd = new SqlCommand("DELETE materias WHERE id_materia = @id", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {
@@ -106,14 +106,13 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmdSave = new SqlCommand("UPDATE materias SET desc_materia = @desc, hs_semanales = @hs_semanales, hs_totales = @hs_totales, id_plan = @id_plan" +
-                    " WHERE id_materia = @id", sqlConn);
-                cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = materia.ID;
-                cmdSave.Parameters.Add("@desc", SqlDbType.VarChar, 50).Value = materia.Descripcion;
-                cmdSave.Parameters.Add("@hs_semanales", SqlDbType.Int).Value = materia.HSSemanales;
-                cmdSave.Parameters.Add("@hs_totales", SqlDbType.Int).Value = materia.HSTotales;
-                cmdSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = materia.IDPlan;
-                cmdSave.ExecuteNonQuery();
+                SqlCommand cmd = new SqlCommand("UPDATE materias SET desc_materia = @desc, hs_semanales = @hs_semanales, hs_totales = @hs_totales, id_plan = @id_plan WHERE id_materia = @id", sqlConn);
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = materia.ID;
+                cmd.Parameters.Add("@desc", SqlDbType.VarChar, 50).Value = materia.Descripcion;
+                cmd.Parameters.Add("@hs_semanales", SqlDbType.Int).Value = materia.HSSemanales;
+                cmd.Parameters.Add("@hs_totales", SqlDbType.Int).Value = materia.HSTotales;
+                cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = materia.IDPlan;
+                cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {
@@ -131,12 +130,12 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmdSave = new SqlCommand("insert into materias(desc_materia,hs_semanales,hs_totales,id_plan) " + "values(@desc_materia,@hs_semanales,@hs_totales,@id_plan)" + "select @@identity", sqlConn);
-                cmdSave.Parameters.Add("desc_materia", SqlDbType.VarChar, 50).Value = materia.Descripcion;
-                cmdSave.Parameters.Add("hs_semanales", SqlDbType.Int).Value = materia.HSSemanales;
-                cmdSave.Parameters.Add("hs_totales", SqlDbType.Int).Value = materia.HSTotales;
-                cmdSave.Parameters.Add("id_plan", SqlDbType.Int).Value = materia.IDPlan;
-                materia.ID = decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
+                SqlCommand cmd = new SqlCommand("INSERT INTO materias(desc_materia,hs_semanales,hs_totales,id_plan) VALUES(@desc_materia,@hs_semanales,@hs_totales,@id_plan) SELECT @@identity", sqlConn);
+                cmd.Parameters.Add("desc_materia", SqlDbType.VarChar, 50).Value = materia.Descripcion;
+                cmd.Parameters.Add("hs_semanales", SqlDbType.Int).Value = materia.HSSemanales;
+                cmd.Parameters.Add("hs_totales", SqlDbType.Int).Value = materia.HSTotales;
+                cmd.Parameters.Add("id_plan", SqlDbType.Int).Value = materia.IDPlan;
+                cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {

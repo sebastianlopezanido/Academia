@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Database;
 
 namespace BusinessLogic
 {
-    public class EspecialidadLogic : BusinessLogic
+    public class EspecialidadLogic
     {        
         public EspecialidadLogic()
         {
             EspecialidadData = new Data.Database.EspecialidadAdapter();
         }
         
-        private Data.Database.EspecialidadAdapter _EspecialidadData;
-        public Data.Database.EspecialidadAdapter EspecialidadData
+        private EspecialidadAdapter _EspecialidadData;
+        public EspecialidadAdapter EspecialidadData
         {
             set { _EspecialidadData = value; }
             get { return _EspecialidadData; }

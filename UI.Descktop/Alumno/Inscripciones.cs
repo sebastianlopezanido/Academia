@@ -21,9 +21,9 @@ namespace UI.Desktop.Alumno
             CenterToScreen();
         }
         
-        public Inscripciones(int id) : this()
+        public Inscripciones(int idMat) : this()
         {
-            IDMateria = id;
+            IDMateria = idMat;
         }
 
         private int _IDMateria;
@@ -31,6 +31,20 @@ namespace UI.Desktop.Alumno
         {
             set { _IDMateria = value; }
             get { return _IDMateria; }
+        }
+
+        private Comision _ComisionActual;
+        public Comision ComisionActual
+        {
+            get { return _ComisionActual; }
+            set { _ComisionActual = value; }
+        }
+
+        private Materia _MateriaActual;
+        public Materia MateriaActual
+        {
+            get { return _MateriaActual; }
+            set { _MateriaActual = value; }
         }
 
         private AlumnoInscripcion _InscripcionActual;
@@ -50,7 +64,6 @@ namespace UI.Desktop.Alumno
             try
             {
                 CursoLogic cl = new CursoLogic();
-
                 dgvCursos.DataSource = cl.GetByMateria(IDMateria);
             }
             catch (Exception Ex)
@@ -62,7 +75,7 @@ namespace UI.Desktop.Alumno
         public void MapearADatos()
         {
             InscripcionActual = new AlumnoInscripcion();
-            InscripcionActual.IDAlumno = 7;
+            InscripcionActual.IDAlumno = LoginSession.ID;
             InscripcionActual.IDCurso = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
             InscripcionActual.State = BusinessEntity.States.New;
         }
@@ -86,6 +99,29 @@ namespace UI.Desktop.Alumno
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void dgvCursos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvCursos.Columns[e.ColumnIndex].Name == "id_materia")
+            {
+                if (e.Value != null)
+                {
+                    MateriaLogic ml = new MateriaLogic();
+                    MateriaActual = ml.GetOne((int)e.Value);
+                    e.Value = MateriaActual.Descripcion;
+                }
+            }
+
+            if (dgvCursos.Columns[e.ColumnIndex].Name == "id_comision")
+            {
+                if (e.Value != null)
+                {
+                    ComisionLogic ml = new ComisionLogic();
+                    ComisionActual = ml.GetOne((int)e.Value);
+                    e.Value = ComisionActual.Descripcion;
+                }
+            }
         }
     }
 }

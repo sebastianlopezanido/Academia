@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities;
+using Data.Database;
 
 namespace BusinessLogic
 {
-    public class PlanLogic : BusinessLogic
+    public class PlanLogic
     {
         public PlanLogic()
         {
             PlanData = new Data.Database.PlanAdapter();
         }
 
-        private Data.Database.PlanAdapter _PlanData;
-        public Data.Database.PlanAdapter PlanData
+        private PlanAdapter _PlanData;
+        public PlanAdapter PlanData
         {
             set { _PlanData = value; }
             get { return _PlanData; }
@@ -36,8 +37,6 @@ namespace BusinessLogic
             {
                 throw;
             }
-
-            //return PersonasData.GetAll();
         }
 
         public void Save(Plan plan)

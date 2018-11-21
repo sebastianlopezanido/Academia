@@ -18,13 +18,14 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvMaterias.AutoGenerateColumns = false;
+            CenterToScreen();
         }
 
-        private int _IDMateria;
-        public int IDMateria
+        private Plan _PlanActual;
+        public Plan PlanActual
         {
-            set { _IDMateria = value; }
-            get { return _IDMateria; }
+            get { return _PlanActual; }
+            set { _PlanActual = value; }
         }
 
         public delegate void pasar(int id);
@@ -36,6 +37,7 @@ namespace UI.Desktop
             {
                 MateriaLogic ml = new MateriaLogic();
                 dgvMaterias.DataSource = ml.GetAll();
+
             }
             catch (Exception Ex)
             {
@@ -50,17 +52,52 @@ namespace UI.Desktop
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            switch(LoginSession.Tipo)
             {
-                pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
-            }
+                case Usuario.TiposUsuario.Alumno:
+                    InscripcionLogic il = new InscripcionLogic();
+                    if (il.EstaInscripto(LoginSession.ID,((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID) == false)
+                    {
+                        if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+                        {
+                            pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
+                        }
 
-            Close();
-        }
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ya esta inscripto a la materia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    break;
+                case Usuario.TiposUsuario.Administrador:
+                    if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+                    {
+                        pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
+                    }
+                    Close();
+
+                    break;
+            }
+        }        
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void dgvMaterias_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvMaterias.Columns[e.ColumnIndex].Name == "idplan")
+            {
+                if (e.Value != null)
+                {
+                    PlanLogic pl = new PlanLogic();
+                    PlanActual = pl.GetOne((int)e.Value);
+                    e.Value = PlanActual.Descripcion;
+                }
+            }
         }
     }
 }

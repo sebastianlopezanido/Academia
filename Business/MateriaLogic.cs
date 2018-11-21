@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities;
+using Data.Database;
 
 namespace BusinessLogic
 {
-    public class MateriaLogic : BusinessLogic
+    public class MateriaLogic
     {
         public MateriaLogic()
         {
             MateriaData = new Data.Database.MateriaAdapter();
         }
 
-        private Data.Database.MateriaAdapter _MateriaData;
-        public Data.Database.MateriaAdapter MateriaData
+        private MateriaAdapter _MateriaData;
+        public MateriaAdapter MateriaData
         {
             set { _MateriaData = value; }
             get { return _MateriaData; }
@@ -35,9 +36,7 @@ namespace BusinessLogic
             catch (Exception)
             {
                 throw;
-            }
-
-            //return PersonasData.GetAll();
+            }            
         }
 
         public void Save(Materia materia)

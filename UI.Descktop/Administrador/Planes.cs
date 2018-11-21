@@ -111,6 +111,5 @@ namespace UI.Desktop
         {
             Close();
         }
-
     }
 }

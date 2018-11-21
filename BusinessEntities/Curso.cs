@@ -35,6 +35,5 @@ namespace BusinessEntities
             get { return _IDMateria; }
             set { _IDMateria = value; }
         }
-
     }
 }

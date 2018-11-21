@@ -9,23 +9,21 @@ namespace BusinessLogic
 {
     public class LoginLogic
     {
-        public LoginLogic()
-        {
-            
-        }
-
         public Usuario ValidarDatos(string nombreUsuario, string clave)
         {
             UsuarioLogic ul = new UsuarioLogic();
             try
             {
                 Usuario usr = ul.GetOne(nombreUsuario, clave);
-                return usr;                
+                return usr;
             }
             catch (Exception Ex)
             {
-                throw Ex;
-            }            
+                Exception ExcepcionManejada = new Exception("Usuario y/o contraseña incorrecto/s", Ex);
+                throw ExcepcionManejada;                
+            }
+
+            
         }
     }
 }

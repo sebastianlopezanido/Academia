@@ -38,9 +38,9 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtHSemanales = new System.Windows.Forms.TextBox();
             this.txtHTotales = new System.Windows.Forms.TextBox();
+            this.cbxIDPlan = new System.Windows.Forms.ComboBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.cbxIDPlan = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,6 +148,14 @@
             this.txtHTotales.Size = new System.Drawing.Size(97, 20);
             this.txtHTotales.TabIndex = 9;
             // 
+            // cbxIDPlan
+            // 
+            this.cbxIDPlan.FormattingEnabled = true;
+            this.cbxIDPlan.Location = new System.Drawing.Point(104, 89);
+            this.cbxIDPlan.Name = "cbxIDPlan";
+            this.cbxIDPlan.Size = new System.Drawing.Size(95, 21);
+            this.cbxIDPlan.TabIndex = 12;
+            // 
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -169,16 +177,9 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // cbxIDPlan
-            // 
-            this.cbxIDPlan.FormattingEnabled = true;
-            this.cbxIDPlan.Location = new System.Drawing.Point(104, 89);
-            this.cbxIDPlan.Name = "cbxIDPlan";
-            this.cbxIDPlan.Size = new System.Drawing.Size(95, 21);
-            this.cbxIDPlan.TabIndex = 12;
-            // 
             // MateriasDesktop
             // 
+            this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 131);
