@@ -14,11 +14,6 @@ namespace UI.Web
             lblUsuario.Text = Session["usuario"].ToString() + Session["tipo"].ToString();
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            Session["usuario"] = "Default";
-            Session["tipo"] = "Default";
-            Response.Redirect("http://localhost:57900/Login.aspx");
-        }
+        
     }
 }
