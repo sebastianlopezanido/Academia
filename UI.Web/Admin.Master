@@ -36,7 +36,7 @@
                                 <asp:Menu ID="Menu1" runat="server" OnInit="Menu1_Init" Visible="False">
                                     <Items>
                                         <asp:MenuItem NavigateUrl="~/AdminPages/Usuarios.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
-                                        <asp:MenuItem Text="Personas" Value="Personas"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/AdminPages/Personas.aspx" Text="Personas" Value="Personas"></asp:MenuItem>
                                         <asp:MenuItem Text="Especialidades" Value="Especialidades"></asp:MenuItem>
                                         <asp:MenuItem Text="Planes" Value="Planes"></asp:MenuItem>
                                         <asp:MenuItem Text="Materias" Value="Materias"></asp:MenuItem>
