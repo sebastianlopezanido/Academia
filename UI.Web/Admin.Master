@@ -38,7 +38,7 @@
                                         <asp:MenuItem NavigateUrl="~/AdminPages/Usuarios.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
                                         <asp:MenuItem Text="Personas" Value="Personas"></asp:MenuItem>
                                         <asp:MenuItem Text="Especialidades" Value="Especialidades"></asp:MenuItem>
-                                        <asp:MenuItem Text="Planes" Value="Planes"></asp:MenuItem>
+                                        <asp:MenuItem Text="Planes" Value="Planes" NavigateUrl="~/AdminPages/Planes.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="Materias" Value="Materias"></asp:MenuItem>
                                         <asp:MenuItem Text="Comisiones" Value="Comisiones"></asp:MenuItem>
                                         <asp:MenuItem Text="Cursos" Value="Cursos"></asp:MenuItem>
