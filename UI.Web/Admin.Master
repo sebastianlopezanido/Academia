@@ -28,7 +28,7 @@
                                         <asp:MenuItem Text="Cursada" Value="Cursada"></asp:MenuItem>
                                     </Items>
                                 </asp:Menu>
-                                <asp:Menu ID="Menu3" runat="server">
+                                <asp:Menu ID="Menu3" runat="server" Visible="False">
                                     <Items>
                                         <asp:MenuItem Text="Cursos" Value="Cursos"></asp:MenuItem>
                                     </Items>

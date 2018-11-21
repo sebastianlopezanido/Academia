@@ -165,7 +165,7 @@ namespace UI.Desktop
                         
             CursoLogic cl = new CursoLogic();
 
-            if(cl.EstaAgregado(int.Parse(txtIDMateria.Text), (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)))
+            if(cl.EstaAgregado(int.Parse(txtIDMateria.Text), (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)) && Modo == ModoForm.Alta )
             {
                 Notificar("Error", "Ya existe ese curso en esa comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
