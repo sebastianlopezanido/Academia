@@ -17,6 +17,12 @@ namespace UI.Web
             {
                 Response.Redirect("http://localhost:57900/Home.aspx");
             }
+            EspecialidadLogic el = new EspecialidadLogic();
+            ddlEsp.DataSource = el.GetAll();            
+            ddlEsp.DataValueField = "ID";
+            ddlEsp.DataTextField = "Descripcion";
+            ddlEsp.DataBind();
+        
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -99,13 +105,13 @@ namespace UI.Web
             Entity = Logic.GetOne(id);
             txtId.Text = Entity.ID.ToString();
             txtDescripcion.Text = Entity.Descripcion.ToString();
-            txtEspecialidad.Text = Entity.IDEspecialidad.ToString();            
+            ddlEsp.SelectedValue = Entity.IDEspecialidad.ToString();                        
         }
 
         private void LoadEntity(Plan plan)
         {
             if (FormMode == FormModes.Modificacion) plan.ID = int.Parse(txtId.Text);
-            plan.IDEspecialidad = int.Parse(txtEspecialidad.Text);
+            plan.IDEspecialidad = int.Parse(ddlEsp.SelectedValue);           
             plan.Descripcion = txtDescripcion.Text;            
         }
 
@@ -118,7 +124,7 @@ namespace UI.Web
         {
             txtId.Enabled = enable;
             txtDescripcion.Enabled = enable;
-            txtEspecialidad.Enabled = enable;
+            lblError.Text = "";
         }
 
         private void DeleteEntity(int id)
@@ -129,8 +135,8 @@ namespace UI.Web
         private void ClearForm()
         {
             txtDescripcion.Text = string.Empty;            
-            txtId.Text = string.Empty;
-            txtEspecialidad.Text = string.Empty;            
+            txtId.Text = string.Empty;            
+            ddlEsp.ClearSelection();
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -152,34 +158,47 @@ namespace UI.Web
                 FormMode = FormModes.Modificacion;
                 EnableForm(true);
                 LoadForm(SelectedID);
+
             }
+        }
+
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+                lblError.Text = "*Campos incompletos";
+                return false;
+            }
+            return true;
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-
-            switch (FormMode)
+            if (Validar())
             {
-                case FormModes.Alta:
-                    Entity = new Plan();
-                    Entity.State = BusinessEntity.States.New;
-                    LoadEntity(Entity);
-                    SaveEntity(Entity);
-                    break;
-                case FormModes.Modificacion:
-                    Entity = new Plan();
-                    Entity.State = BusinessEntity.States.Modified;
-                    LoadEntity(Entity);
-                    SaveEntity(Entity);
-                    break;
-                case FormModes.Baja:
-                    DeleteEntity(SelectedID);
-                    break;
-                default:
-                    break;
+                switch (FormMode)
+                {
+                    case FormModes.Alta:
+                        Entity = new Plan();
+                        Entity.State = BusinessEntity.States.New;
+                        LoadEntity(Entity);
+                        SaveEntity(Entity);
+                        break;
+                    case FormModes.Modificacion:
+                        Entity = new Plan();
+                        Entity.State = BusinessEntity.States.Modified;
+                        LoadEntity(Entity);
+                        SaveEntity(Entity);
+                        break;
+                    case FormModes.Baja:
+                        DeleteEntity(SelectedID);
+                        break;
+                    default:
+                        break;
+                }
+                LoadGrid();
+                formPanel.Visible = false;
             }
-            LoadGrid();
-            formPanel.Visible = false;
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)

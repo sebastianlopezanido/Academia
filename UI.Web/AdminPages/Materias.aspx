@@ -63,10 +63,11 @@
                 </tr>
                 <tr>
                     <td dir="rtl">
-                        <asp:Label ID="lblClave" runat="server" Text="ID Plan"></asp:Label>
+                        <asp:Label ID="lblClave" runat="server" Text="Plan"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtPlan" runat="server"></asp:TextBox>
+                        <asp:DropDownList ID="ddlPlan" runat="server">
+                        </asp:DropDownList>
                     </td>
                     
                 </tr>
@@ -78,6 +79,11 @@
                         <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
                     </td>
                     
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblError" runat="server"></asp:Label>
+                    </td>
                 </tr>
             </table></center>
         </asp:Panel>

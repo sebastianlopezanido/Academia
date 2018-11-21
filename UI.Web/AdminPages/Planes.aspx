@@ -22,17 +22,48 @@
             <br />
     </asp:Panel> </center>
         <asp:Panel ID="formPanel" runat="server" Height="265px" Visible="False">
-            <asp:Label ID="Label1" runat="server" Text="ID"></asp:Label>
-            <asp:TextBox ID="txtId" runat="server" ReadOnly="True"></asp:TextBox>
             <br />
-            <asp:Label ID="Label8" runat="server" Text="Descripción"></asp:Label>
-            <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="Label2" runat="server" Text="Especialidad"></asp:Label>
-            <asp:TextBox ID="txtEspecialidad" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
+            <center>
+            <table dir="ltr" style="width: 80px; height: 100px">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label1" runat="server" Text="ID"></asp:Label>
+                    </td>
+                    <td style="width: 128px">
+                        <asp:TextBox ID="txtId" runat="server" ReadOnly="True"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label8" runat="server" Text="Descripción"></asp:Label>
+                    </td>
+                    <td style="width: 128px">
+                        <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label2" runat="server" Text="Especialidad"></asp:Label>
+                    </td>
+                    <td style="width: 128px">
+                        <asp:DropDownList ID="ddlEsp" runat="server">
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+                    </td>
+                    <td style="width: 128px">
+                        <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError" runat="server"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+            </center>
         </asp:Panel>
 </asp:Content>

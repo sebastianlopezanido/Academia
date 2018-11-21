@@ -17,6 +17,12 @@ namespace UI.Web
             {
                 Response.Redirect("http://localhost:57900/Home.aspx");
             }
+
+            PlanLogic pl = new PlanLogic();
+            ddlPlan.DataSource = pl.GetAll();
+            ddlPlan.DataValueField = "ID";
+            ddlPlan.DataTextField = "Descripcion";
+            ddlPlan.DataBind();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -99,7 +105,7 @@ namespace UI.Web
             Entity = Logic.GetOne(id);
             txtId.Text = Entity.ID.ToString();
             txtDescripcion.Text = Entity.Descripcion.ToString();
-            txtPlan.Text = Entity.IDPlan.ToString();
+            ddlPlan.SelectedValue = Entity.IDPlan.ToString();
             txtHsTotales.Text = Entity.HSTotales.ToString();
             txtHsSemanales.Text = Entity.HSSemanales.ToString();          
             
@@ -110,7 +116,7 @@ namespace UI.Web
             if (FormMode == FormModes.Modificacion) materia.ID = int.Parse(txtId.Text);
             materia.HSSemanales = int.Parse(txtHsSemanales.Text);
             materia.HSTotales = int.Parse(txtHsTotales.Text);
-            materia.IDPlan = int.Parse(txtPlan.Text);
+            materia.IDPlan = int.Parse(ddlPlan.SelectedValue);
             materia.Descripcion = (string)txtDescripcion.Text;
         }
 
@@ -125,7 +131,9 @@ namespace UI.Web
             txtDescripcion.Enabled = enable;
             txtHsSemanales.Enabled = enable;
             txtHsTotales.Enabled = enable;
-            txtPlan.Enabled = enable;
+            lblError.Text = "";
+
+
         }
 
         private void DeleteEntity(int id)
@@ -137,7 +145,7 @@ namespace UI.Web
         {
             txtDescripcion.Text = string.Empty;
             txtId.Text = string.Empty;
-            txtPlan.Text = string.Empty;
+            ddlPlan.ClearSelection();
             txtHsTotales.Text = string.Empty;
             txtHsSemanales.Text = string.Empty;
         }
@@ -164,31 +172,53 @@ namespace UI.Web
             }
         }
 
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtDescripcion.Text) || 
+                string.IsNullOrEmpty(txtHsSemanales.Text) ||
+                string.IsNullOrEmpty(txtHsTotales.Text))
+            {
+                lblError.Text = "*Campos incompletos";
+                return false;
+            }
+            int num;
+            if (!(int.TryParse(txtHsSemanales.Text,out num)) || !(int.TryParse(txtHsTotales.Text, out num)))
+            {
+                lblError.Text = "*Horas debe ser un numero entero";
+                return false;
+            }
+
+            return true;
+        }
+
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
 
-            switch (FormMode)
-            {
-                case FormModes.Alta:
-                    Entity = new Materia();
-                    Entity.State = BusinessEntity.States.New;
-                    LoadEntity(Entity);
-                    SaveEntity(Entity);
-                    break;
-                case FormModes.Modificacion:
-                    Entity = new Materia();
-                    Entity.State = BusinessEntity.States.Modified;
-                    LoadEntity(Entity);
-                    SaveEntity(Entity);
-                    break;
-                case FormModes.Baja:
-                    DeleteEntity(SelectedID);
-                    break;
-                default:
-                    break;
+            if (Validar())
+            {            
+                switch (FormMode)
+                {
+                    case FormModes.Alta:
+                        Entity = new Materia();
+                        Entity.State = BusinessEntity.States.New;
+                        LoadEntity(Entity);
+                        SaveEntity(Entity);
+                        break;
+                    case FormModes.Modificacion:
+                        Entity = new Materia();
+                        Entity.State = BusinessEntity.States.Modified;
+                        LoadEntity(Entity);
+                        SaveEntity(Entity);
+                        break;
+                    case FormModes.Baja:
+                        DeleteEntity(SelectedID);
+                        break;
+                    default:
+                        break;
+                }
+                LoadGrid();
+                formPanel.Visible = false;
             }
-            LoadGrid();
-            formPanel.Visible = false;
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
