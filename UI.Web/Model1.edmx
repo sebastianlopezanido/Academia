@@ -1,0 +1,848 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TP2_NETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alumnos_inscripciones">
+          <Key>
+            <PropertyRef Name="id_inscripcion" />
+          </Key>
+          <Property Name="id_inscripcion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_alumno" Type="int" Nullable="false" />
+          <Property Name="id_curso" Type="int" Nullable="false" />
+          <Property Name="condicion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nota" Type="int" />
+        </EntityType>
+        <EntityType Name="comisiones">
+          <Key>
+            <PropertyRef Name="id_comision" />
+          </Key>
+          <Property Name="id_comision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_comision" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="anio_especialidad" Type="int" Nullable="false" />
+          <Property Name="id_plan" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cursos">
+          <Key>
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_curso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_materia" Type="int" Nullable="false" />
+          <Property Name="id_comision" Type="int" Nullable="false" />
+          <Property Name="anio_calendario" Type="int" Nullable="false" />
+          <Property Name="cupo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="docentes_cursos">
+          <Key>
+            <PropertyRef Name="id_dictado" />
+          </Key>
+          <Property Name="id_dictado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_curso" Type="int" Nullable="false" />
+          <Property Name="id_docente" Type="int" Nullable="false" />
+          <Property Name="cargo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="especialidades">
+          <Key>
+            <PropertyRef Name="id_especialidad" />
+          </Key>
+          <Property Name="id_especialidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_especialidad" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="materias">
+          <Key>
+            <PropertyRef Name="id_materia" />
+          </Key>
+          <Property Name="id_materia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_materia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="hs_semanales" Type="int" Nullable="false" />
+          <Property Name="hs_totales" Type="int" Nullable="false" />
+          <Property Name="id_plan" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="modulos">
+          <Key>
+            <PropertyRef Name="id_modulo" />
+          </Key>
+          <Property Name="id_modulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_modulo" Type="varchar" MaxLength="50" />
+          <Property Name="ejecuta" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="modulos_usuarios">
+          <Key>
+            <PropertyRef Name="id_modulo_usuario" />
+          </Key>
+          <Property Name="id_modulo_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_modulo" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="alta" Type="bit" />
+          <Property Name="baja" Type="bit" />
+          <Property Name="modificacion" Type="bit" />
+          <Property Name="consulta" Type="bit" />
+        </EntityType>
+        <EntityType Name="personas">
+          <Key>
+            <PropertyRef Name="id_persona" />
+          </Key>
+          <Property Name="id_persona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_nac" Type="datetime" Nullable="false" />
+          <Property Name="legajo" Type="int" />
+        </EntityType>
+        <EntityType Name="planes">
+          <Key>
+            <PropertyRef Name="id_plan" />
+          </Key>
+          <Property Name="id_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_plan" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_especialidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="habilitado" Type="bit" Nullable="false" />
+          <Property Name="tipo_usuario" Type="int" Nullable="false" />
+          <Property Name="cambia_clave" Type="bit" />
+          <Property Name="id_persona" Type="int" Nullable="false" />
+          <Property Name="id_plan" Type="int" />
+        </EntityType>
+        <Association Name="FK_alumnos_inscripciones_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="alumnos_inscripciones" Type="Self.alumnos_inscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="alumnos_inscripciones">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_alumnos_inscripciones_personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="alumnos_inscripciones" Type="Self.alumnos_inscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="alumnos_inscripciones">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comisiones_planes">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="comisiones" Type="Self.comisiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id_plan" />
+            </Principal>
+            <Dependent Role="comisiones">
+              <PropertyRef Name="id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cursos_comisiones">
+          <End Role="comisiones" Type="Self.comisiones" Multiplicity="1" />
+          <End Role="cursos" Type="Self.cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comisiones">
+              <PropertyRef Name="id_comision" />
+            </Principal>
+            <Dependent Role="cursos">
+              <PropertyRef Name="id_comision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cursos_materias">
+          <End Role="materias" Type="Self.materias" Multiplicity="1" />
+          <End Role="cursos" Type="Self.cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materias">
+              <PropertyRef Name="id_materia" />
+            </Principal>
+            <Dependent Role="cursos">
+              <PropertyRef Name="id_materia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_docentes_cursos_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="docentes_cursos" Type="Self.docentes_cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="docentes_cursos">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_docentes_cursos_personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="docentes_cursos" Type="Self.docentes_cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="docentes_cursos">
+              <PropertyRef Name="id_docente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materias_planes">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="materias" Type="Self.materias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id_plan" />
+            </Principal>
+            <Dependent Role="materias">
+              <PropertyRef Name="id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_modulos_usuarios_modulos">
+          <End Role="modulos" Type="Self.modulos" Multiplicity="1" />
+          <End Role="modulos_usuarios" Type="Self.modulos_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modulos">
+              <PropertyRef Name="id_modulo" />
+            </Principal>
+            <Dependent Role="modulos_usuarios">
+              <PropertyRef Name="id_modulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_modulos_usuarios_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="modulos_usuarios" Type="Self.modulos_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="modulos_usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_planes_especialidades">
+          <End Role="especialidades" Type="Self.especialidades" Multiplicity="1" />
+          <End Role="planes" Type="Self.planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="especialidades">
+              <PropertyRef Name="id_especialidad" />
+            </Principal>
+            <Dependent Role="planes">
+              <PropertyRef Name="id_especialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuarios_personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuarios_planes">
+          <End Role="planes" Type="Self.planes" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id_plan" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TP2_NETModelStoreContainer">
+          <EntitySet Name="alumnos_inscripciones" EntityType="Self.alumnos_inscripciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comisiones" EntityType="Self.comisiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cursos" EntityType="Self.cursos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="docentes_cursos" EntityType="Self.docentes_cursos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="especialidades" EntityType="Self.especialidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materias" EntityType="Self.materias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="modulos" EntityType="Self.modulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="modulos_usuarios" EntityType="Self.modulos_usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personas" EntityType="Self.personas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="planes" EntityType="Self.planes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_alumnos_inscripciones_cursos" Association="Self.FK_alumnos_inscripciones_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="alumnos_inscripciones" EntitySet="alumnos_inscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_alumnos_inscripciones_personas" Association="Self.FK_alumnos_inscripciones_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="alumnos_inscripciones" EntitySet="alumnos_inscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comisiones_planes" Association="Self.FK_comisiones_planes">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="comisiones" EntitySet="comisiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cursos_comisiones" Association="Self.FK_cursos_comisiones">
+            <End Role="comisiones" EntitySet="comisiones" />
+            <End Role="cursos" EntitySet="cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cursos_materias" Association="Self.FK_cursos_materias">
+            <End Role="materias" EntitySet="materias" />
+            <End Role="cursos" EntitySet="cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_docentes_cursos_cursos" Association="Self.FK_docentes_cursos_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="docentes_cursos" EntitySet="docentes_cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_docentes_cursos_personas" Association="Self.FK_docentes_cursos_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="docentes_cursos" EntitySet="docentes_cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materias_planes" Association="Self.FK_materias_planes">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="materias" EntitySet="materias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_modulos_usuarios_modulos" Association="Self.FK_modulos_usuarios_modulos">
+            <End Role="modulos" EntitySet="modulos" />
+            <End Role="modulos_usuarios" EntitySet="modulos_usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_modulos_usuarios_usuarios" Association="Self.FK_modulos_usuarios_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="modulos_usuarios" EntitySet="modulos_usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_planes_especialidades" Association="Self.FK_planes_especialidades">
+            <End Role="especialidades" EntitySet="especialidades" />
+            <End Role="planes" EntitySet="planes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuarios_personas" Association="Self.FK_usuarios_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuarios_planes" Association="Self.FK_usuarios_planes">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TP2_NETModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alumnos_inscripciones">
+          <Key>
+            <PropertyRef Name="id_inscripcion" />
+          </Key>
+          <Property Name="id_inscripcion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_alumno" Type="Int32" Nullable="false" />
+          <Property Name="id_curso" Type="Int32" Nullable="false" />
+          <Property Name="condicion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nota" Type="Int32" />
+          <NavigationProperty Name="curso" Relationship="Self.FK_alumnos_inscripciones_cursos" FromRole="alumnos_inscripciones" ToRole="cursos" />
+          <NavigationProperty Name="persona" Relationship="Self.FK_alumnos_inscripciones_personas" FromRole="alumnos_inscripciones" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="comisione">
+          <Key>
+            <PropertyRef Name="id_comision" />
+          </Key>
+          <Property Name="id_comision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_comision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="anio_especialidad" Type="Int32" Nullable="false" />
+          <Property Name="id_plan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="plane" Relationship="Self.FK_comisiones_planes" FromRole="comisiones" ToRole="planes" />
+          <NavigationProperty Name="cursos" Relationship="Self.FK_cursos_comisiones" FromRole="comisiones" ToRole="cursos" />
+        </EntityType>
+        <EntityType Name="curso">
+          <Key>
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_curso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_materia" Type="Int32" Nullable="false" />
+          <Property Name="id_comision" Type="Int32" Nullable="false" />
+          <Property Name="anio_calendario" Type="Int32" Nullable="false" />
+          <Property Name="cupo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="alumnos_inscripciones" Relationship="Self.FK_alumnos_inscripciones_cursos" FromRole="cursos" ToRole="alumnos_inscripciones" />
+          <NavigationProperty Name="comisione" Relationship="Self.FK_cursos_comisiones" FromRole="cursos" ToRole="comisiones" />
+          <NavigationProperty Name="materia" Relationship="Self.FK_cursos_materias" FromRole="cursos" ToRole="materias" />
+          <NavigationProperty Name="docentes_cursos" Relationship="Self.FK_docentes_cursos_cursos" FromRole="cursos" ToRole="docentes_cursos" />
+        </EntityType>
+        <EntityType Name="docentes_cursos">
+          <Key>
+            <PropertyRef Name="id_dictado" />
+          </Key>
+          <Property Name="id_dictado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_curso" Type="Int32" Nullable="false" />
+          <Property Name="id_docente" Type="Int32" Nullable="false" />
+          <Property Name="cargo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="curso" Relationship="Self.FK_docentes_cursos_cursos" FromRole="docentes_cursos" ToRole="cursos" />
+          <NavigationProperty Name="persona" Relationship="Self.FK_docentes_cursos_personas" FromRole="docentes_cursos" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="especialidade">
+          <Key>
+            <PropertyRef Name="id_especialidad" />
+          </Key>
+          <Property Name="id_especialidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_especialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="planes" Relationship="Self.FK_planes_especialidades" FromRole="especialidades" ToRole="planes" />
+        </EntityType>
+        <EntityType Name="materia">
+          <Key>
+            <PropertyRef Name="id_materia" />
+          </Key>
+          <Property Name="id_materia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_materia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hs_semanales" Type="Int32" Nullable="false" />
+          <Property Name="hs_totales" Type="Int32" Nullable="false" />
+          <Property Name="id_plan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cursos" Relationship="Self.FK_cursos_materias" FromRole="materias" ToRole="cursos" />
+          <NavigationProperty Name="plane" Relationship="Self.FK_materias_planes" FromRole="materias" ToRole="planes" />
+        </EntityType>
+        <EntityType Name="modulo">
+          <Key>
+            <PropertyRef Name="id_modulo" />
+          </Key>
+          <Property Name="id_modulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_modulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ejecuta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="modulos_usuarios" Relationship="Self.FK_modulos_usuarios_modulos" FromRole="modulos" ToRole="modulos_usuarios" />
+        </EntityType>
+        <EntityType Name="modulos_usuarios">
+          <Key>
+            <PropertyRef Name="id_modulo_usuario" />
+          </Key>
+          <Property Name="id_modulo_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_modulo" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="alta" Type="Boolean" />
+          <Property Name="baja" Type="Boolean" />
+          <Property Name="modificacion" Type="Boolean" />
+          <Property Name="consulta" Type="Boolean" />
+          <NavigationProperty Name="modulo" Relationship="Self.FK_modulos_usuarios_modulos" FromRole="modulos_usuarios" ToRole="modulos" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_modulos_usuarios_usuarios" FromRole="modulos_usuarios" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="id_persona" />
+          </Key>
+          <Property Name="id_persona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_nac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="legajo" Type="Int32" />
+          <NavigationProperty Name="alumnos_inscripciones" Relationship="Self.FK_alumnos_inscripciones_personas" FromRole="personas" ToRole="alumnos_inscripciones" />
+          <NavigationProperty Name="docentes_cursos" Relationship="Self.FK_docentes_cursos_personas" FromRole="personas" ToRole="docentes_cursos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_usuarios_personas" FromRole="personas" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="plane">
+          <Key>
+            <PropertyRef Name="id_plan" />
+          </Key>
+          <Property Name="id_plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_especialidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comisiones" Relationship="Self.FK_comisiones_planes" FromRole="planes" ToRole="comisiones" />
+          <NavigationProperty Name="especialidade" Relationship="Self.FK_planes_especialidades" FromRole="planes" ToRole="especialidades" />
+          <NavigationProperty Name="materias" Relationship="Self.FK_materias_planes" FromRole="planes" ToRole="materias" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_usuarios_planes" FromRole="planes" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="habilitado" Type="Boolean" Nullable="false" />
+          <Property Name="tipo_usuario" Type="Int32" Nullable="false" />
+          <Property Name="cambia_clave" Type="Boolean" />
+          <Property Name="id_persona" Type="Int32" Nullable="false" />
+          <Property Name="id_plan" Type="Int32" />
+          <NavigationProperty Name="modulos_usuarios" Relationship="Self.FK_modulos_usuarios_usuarios" FromRole="usuarios" ToRole="modulos_usuarios" />
+          <NavigationProperty Name="persona" Relationship="Self.FK_usuarios_personas" FromRole="usuarios" ToRole="personas" />
+          <NavigationProperty Name="plane" Relationship="Self.FK_usuarios_planes" FromRole="usuarios" ToRole="planes" />
+        </EntityType>
+        <Association Name="FK_alumnos_inscripciones_cursos">
+          <End Role="cursos" Type="Self.curso" Multiplicity="1" />
+          <End Role="alumnos_inscripciones" Type="Self.alumnos_inscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="alumnos_inscripciones">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_alumnos_inscripciones_personas">
+          <End Role="personas" Type="Self.persona" Multiplicity="1" />
+          <End Role="alumnos_inscripciones" Type="Self.alumnos_inscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="alumnos_inscripciones">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comisiones_planes">
+          <End Role="planes" Type="Self.plane" Multiplicity="1" />
+          <End Role="comisiones" Type="Self.comisione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id_plan" />
+            </Principal>
+            <Dependent Role="comisiones">
+              <PropertyRef Name="id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cursos_comisiones">
+          <End Role="comisiones" Type="Self.comisione" Multiplicity="1" />
+          <End Role="cursos" Type="Self.curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comisiones">
+              <PropertyRef Name="id_comision" />
+            </Principal>
+            <Dependent Role="cursos">
+              <PropertyRef Name="id_comision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cursos_materias">
+          <End Role="materias" Type="Self.materia" Multiplicity="1" />
+          <End Role="cursos" Type="Self.curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materias">
+              <PropertyRef Name="id_materia" />
+            </Principal>
+            <Dependent Role="cursos">
+              <PropertyRef Name="id_materia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_docentes_cursos_cursos">
+          <End Role="cursos" Type="Self.curso" Multiplicity="1" />
+          <End Role="docentes_cursos" Type="Self.docentes_cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="docentes_cursos">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_docentes_cursos_personas">
+          <End Role="personas" Type="Self.persona" Multiplicity="1" />
+          <End Role="docentes_cursos" Type="Self.docentes_cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="docentes_cursos">
+              <PropertyRef Name="id_docente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_planes_especialidades">
+          <End Role="especialidades" Type="Self.especialidade" Multiplicity="1" />
+          <End Role="planes" Type="Self.plane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="especialidades">
+              <PropertyRef Name="id_especialidad" />
+            </Principal>
+            <Dependent Role="planes">
+              <PropertyRef Name="id_especialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materias_planes">
+          <End Role="planes" Type="Self.plane" Multiplicity="1" />
+          <End Role="materias" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id_plan" />
+            </Principal>
+            <Dependent Role="materias">
+              <PropertyRef Name="id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_modulos_usuarios_modulos">
+          <End Role="modulos" Type="Self.modulo" Multiplicity="1" />
+          <End Role="modulos_usuarios" Type="Self.modulos_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modulos">
+              <PropertyRef Name="id_modulo" />
+            </Principal>
+            <Dependent Role="modulos_usuarios">
+              <PropertyRef Name="id_modulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_modulos_usuarios_usuarios">
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="1" />
+          <End Role="modulos_usuarios" Type="Self.modulos_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="modulos_usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuarios_personas">
+          <End Role="personas" Type="Self.persona" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuarios_planes">
+          <End Role="planes" Type="Self.plane" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id_plan" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TP2_NETEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alumnos_inscripciones" EntityType="Self.alumnos_inscripciones" />
+          <EntitySet Name="comisiones" EntityType="Self.comisione" />
+          <EntitySet Name="cursos" EntityType="Self.curso" />
+          <EntitySet Name="docentes_cursos" EntityType="Self.docentes_cursos" />
+          <EntitySet Name="especialidades" EntityType="Self.especialidade" />
+          <EntitySet Name="materias" EntityType="Self.materia" />
+          <EntitySet Name="modulos" EntityType="Self.modulo" />
+          <EntitySet Name="modulos_usuarios" EntityType="Self.modulos_usuarios" />
+          <EntitySet Name="personas" EntityType="Self.persona" />
+          <EntitySet Name="planes" EntityType="Self.plane" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <AssociationSet Name="FK_alumnos_inscripciones_cursos" Association="Self.FK_alumnos_inscripciones_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="alumnos_inscripciones" EntitySet="alumnos_inscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_alumnos_inscripciones_personas" Association="Self.FK_alumnos_inscripciones_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="alumnos_inscripciones" EntitySet="alumnos_inscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comisiones_planes" Association="Self.FK_comisiones_planes">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="comisiones" EntitySet="comisiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cursos_comisiones" Association="Self.FK_cursos_comisiones">
+            <End Role="comisiones" EntitySet="comisiones" />
+            <End Role="cursos" EntitySet="cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cursos_materias" Association="Self.FK_cursos_materias">
+            <End Role="materias" EntitySet="materias" />
+            <End Role="cursos" EntitySet="cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_docentes_cursos_cursos" Association="Self.FK_docentes_cursos_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="docentes_cursos" EntitySet="docentes_cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_docentes_cursos_personas" Association="Self.FK_docentes_cursos_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="docentes_cursos" EntitySet="docentes_cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_planes_especialidades" Association="Self.FK_planes_especialidades">
+            <End Role="especialidades" EntitySet="especialidades" />
+            <End Role="planes" EntitySet="planes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materias_planes" Association="Self.FK_materias_planes">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="materias" EntitySet="materias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_modulos_usuarios_modulos" Association="Self.FK_modulos_usuarios_modulos">
+            <End Role="modulos" EntitySet="modulos" />
+            <End Role="modulos_usuarios" EntitySet="modulos_usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_modulos_usuarios_usuarios" Association="Self.FK_modulos_usuarios_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="modulos_usuarios" EntitySet="modulos_usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuarios_personas" Association="Self.FK_usuarios_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuarios_planes" Association="Self.FK_usuarios_planes">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TP2_NETModelStoreContainer" CdmEntityContainer="TP2_NETEntities1">
+          <EntitySetMapping Name="alumnos_inscripciones">
+            <EntityTypeMapping TypeName="TP2_NETModel.alumnos_inscripciones">
+              <MappingFragment StoreEntitySet="alumnos_inscripciones">
+                <ScalarProperty Name="id_inscripcion" ColumnName="id_inscripcion" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+                <ScalarProperty Name="condicion" ColumnName="condicion" />
+                <ScalarProperty Name="nota" ColumnName="nota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comisiones">
+            <EntityTypeMapping TypeName="TP2_NETModel.comisione">
+              <MappingFragment StoreEntitySet="comisiones">
+                <ScalarProperty Name="id_comision" ColumnName="id_comision" />
+                <ScalarProperty Name="desc_comision" ColumnName="desc_comision" />
+                <ScalarProperty Name="anio_especialidad" ColumnName="anio_especialidad" />
+                <ScalarProperty Name="id_plan" ColumnName="id_plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cursos">
+            <EntityTypeMapping TypeName="TP2_NETModel.curso">
+              <MappingFragment StoreEntitySet="cursos">
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+                <ScalarProperty Name="id_comision" ColumnName="id_comision" />
+                <ScalarProperty Name="anio_calendario" ColumnName="anio_calendario" />
+                <ScalarProperty Name="cupo" ColumnName="cupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="docentes_cursos">
+            <EntityTypeMapping TypeName="TP2_NETModel.docentes_cursos">
+              <MappingFragment StoreEntitySet="docentes_cursos">
+                <ScalarProperty Name="id_dictado" ColumnName="id_dictado" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+                <ScalarProperty Name="id_docente" ColumnName="id_docente" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="especialidades">
+            <EntityTypeMapping TypeName="TP2_NETModel.especialidade">
+              <MappingFragment StoreEntitySet="especialidades">
+                <ScalarProperty Name="id_especialidad" ColumnName="id_especialidad" />
+                <ScalarProperty Name="desc_especialidad" ColumnName="desc_especialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materias">
+            <EntityTypeMapping TypeName="TP2_NETModel.materia">
+              <MappingFragment StoreEntitySet="materias">
+                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+                <ScalarProperty Name="desc_materia" ColumnName="desc_materia" />
+                <ScalarProperty Name="hs_semanales" ColumnName="hs_semanales" />
+                <ScalarProperty Name="hs_totales" ColumnName="hs_totales" />
+                <ScalarProperty Name="id_plan" ColumnName="id_plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modulos">
+            <EntityTypeMapping TypeName="TP2_NETModel.modulo">
+              <MappingFragment StoreEntitySet="modulos">
+                <ScalarProperty Name="id_modulo" ColumnName="id_modulo" />
+                <ScalarProperty Name="desc_modulo" ColumnName="desc_modulo" />
+                <ScalarProperty Name="ejecuta" ColumnName="ejecuta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modulos_usuarios">
+            <EntityTypeMapping TypeName="TP2_NETModel.modulos_usuarios">
+              <MappingFragment StoreEntitySet="modulos_usuarios">
+                <ScalarProperty Name="id_modulo_usuario" ColumnName="id_modulo_usuario" />
+                <ScalarProperty Name="id_modulo" ColumnName="id_modulo" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="alta" ColumnName="alta" />
+                <ScalarProperty Name="baja" ColumnName="baja" />
+                <ScalarProperty Name="modificacion" ColumnName="modificacion" />
+                <ScalarProperty Name="consulta" ColumnName="consulta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personas">
+            <EntityTypeMapping TypeName="TP2_NETModel.persona">
+              <MappingFragment StoreEntitySet="personas">
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
+                <ScalarProperty Name="legajo" ColumnName="legajo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="planes">
+            <EntityTypeMapping TypeName="TP2_NETModel.plane">
+              <MappingFragment StoreEntitySet="planes">
+                <ScalarProperty Name="id_plan" ColumnName="id_plan" />
+                <ScalarProperty Name="desc_plan" ColumnName="desc_plan" />
+                <ScalarProperty Name="id_especialidad" ColumnName="id_especialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="TP2_NETModel.usuario">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+                <ScalarProperty Name="tipo_usuario" ColumnName="tipo_usuario" />
+                <ScalarProperty Name="cambia_clave" ColumnName="cambia_clave" />
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+                <ScalarProperty Name="id_plan" ColumnName="id_plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

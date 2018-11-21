@@ -16,6 +16,13 @@ namespace UI.Web
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+        }
+
+        void Session_Start(object sender, EventArgs e)
+        {
+            Session ["usuario"] = "Default";
+            Session ["tipo"] = "Default";
         }
     }
 }

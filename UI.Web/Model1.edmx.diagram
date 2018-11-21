@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8a490046691418e9b7682654100c78b" Name="Diagram1">
+        <EntityTypeShape EntityType="TP2_NETModel.alumnos_inscripciones" Width="1.5" PointX="9.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.comisione" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.curso" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.docentes_cursos" Width="1.5" PointX="9.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.especialidade" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.materia" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.modulo" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.modulos_usuarios" Width="1.5" PointX="10.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.persona" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.plane" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2_NETModel.usuario" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="TP2_NETModel.FK_alumnos_inscripciones_cursos" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_alumnos_inscripciones_personas" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_comisiones_planes" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_cursos_comisiones" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_cursos_materias" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_docentes_cursos_cursos" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_docentes_cursos_personas" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_planes_especialidades" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_materias_planes" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_modulos_usuarios_modulos" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_modulos_usuarios_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_usuarios_personas" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2_NETModel.FK_usuarios_planes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

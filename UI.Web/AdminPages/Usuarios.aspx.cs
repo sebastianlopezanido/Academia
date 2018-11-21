@@ -9,18 +9,27 @@ using BusinessLogic;
 
 namespace UI.Web
 {
-    public partial class Usuarios : System.Web.UI.Page
+    public partial class Usuarios : Page
     {
+
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            if (Session["tipo"].ToString() != "Administrador")
+            {
+                Response.Redirect("http://localhost:57900/Home.aspx");
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 this.LoadGrid();
-            }
-
-            cbxTipo.Items.Add("Alumno");
-            cbxTipo.Items.Add("Profesor");
-            cbxTipo.Items.Add("Administrador");
+                cbxTipo.Items.Add("Alumno");
+                cbxTipo.Items.Add("Profesor");
+                cbxTipo.Items.Add("Administrador");
+            }            
         }
 
         public enum FormModes

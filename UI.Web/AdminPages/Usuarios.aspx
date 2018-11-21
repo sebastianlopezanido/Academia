@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.Usuarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.Usuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
-    <asp:Panel ID="gridPanel" runat="server">
+    <center><asp:Panel ID="gridPanel" runat="server">
         <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
@@ -20,8 +20,9 @@
                 <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
                 <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
             </asp:Panel>
+
             <br />
-    </asp:Panel>
+    </asp:Panel> </center>
         <asp:Panel ID="formPanel" runat="server" Height="265px" Visible="False">
             <asp:Label ID="Label1" runat="server" Text="ID"></asp:Label>
             <asp:TextBox ID="txtId" runat="server" ReadOnly="True"></asp:TextBox>

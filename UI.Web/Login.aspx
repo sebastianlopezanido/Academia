@@ -1,15 +1,21 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Login2.aspx.cs" Inherits="UI.Web.Login2" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
-    <center>
-    <asp:Login ID="Login1" runat="server" Height="150px" Width="236px">
-           
-        <LayoutTemplate>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="UI.Web.Login" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <center><asp:Login ID="Login1" runat="server" Height="150px" Width="236px">
+            <LayoutTemplate>
                 <table cellpadding="1" cellspacing="0" style="border-collapse:collapse;">
                     <tr>
                         <td>
                             <table cellpadding="0" style="height:150px;width:236px;">
                                 <tr>
-                                    <td align="center" colspan="2">Inicio de Sesión</td>
+                                    <td align="center" colspan="2">Academia</td>
                                 </tr>
                                 <tr>
                                     <td align="right">
@@ -49,6 +55,8 @@
                     </tr>
                 </table>
             </LayoutTemplate>
-        </asp:Login>
-        </center> 
-</asp:Content>
+        </asp:Login></center>
+        
+    </form>
+</body>
+</html>
