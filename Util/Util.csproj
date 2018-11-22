@@ -40,19 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Archivos reporte\SqlServerTypes\Loader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Archivos reporte\SqlServerTypes\readme.htm" />
-    <Content Include="Archivos reporte\SqlServerTypes\x64\msvcr120.dll" />
-    <Content Include="Archivos reporte\SqlServerTypes\x64\SqlServerSpatial140.dll" />
-    <Content Include="Archivos reporte\SqlServerTypes\x86\msvcr120.dll" />
-    <Content Include="Archivos reporte\SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="Tareas.txt" />
     <Content Include="TP2Script.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Archivos reporte\SqlServerTypes.rar" />
     <None Include="data.xls" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
