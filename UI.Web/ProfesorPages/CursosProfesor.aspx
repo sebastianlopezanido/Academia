@@ -23,7 +23,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:GridView ID="GridAlumnos" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" ForeColor="#333333" GridLines="None" OnRowDataBound="GridAlumnos_RowDataBound" OnSelectedIndexChanged="gridAlumnos_SelectedIndexChanged">
+        <asp:GridView ID="gridAlumnos" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" ForeColor="#333333" GridLines="None" OnRowDataBound="GridAlumnos_RowDataBound" OnSelectedIndexChanged="gridAlumnos_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />

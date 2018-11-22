@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="cursado.aspx.cs" Inherits="UI.Web.Cursado" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Cursado.aspx.cs" Inherits="UI.Web.Cursado" %>
 <asp:Content ID="ContentCursado" ContentPlaceHolderID="Contenido" runat="server">
     <center> <asp:Panel ID="gridPanel" runat="server">
-        <asp:GridView ID="gridViewAlu" runat="server" AutoGenerateColumns="False"
+        <asp:GridView ID="gridInscripciones" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
             CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDataBound="gridView_RowDataBound">
@@ -24,6 +24,11 @@
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
         <br />
+        <table dir="ltr">
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError" runat="server" Visible="False"></asp:Label>
+                    </td></table>
     </asp:Panel>
  </center>
     </asp:Content>

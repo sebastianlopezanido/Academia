@@ -54,6 +54,21 @@
                     <td style="height: 26px">
                         <asp:TextBox ID="txtMateria" runat="server"></asp:TextBox>
                     </td>
+                    <td style="height: 26px">
+                        <asp:Button ID="btnMateria" runat="server" OnClick="btnMateria_Click" Text="..." />
+                    </td>
+                    
+                </tr>
+                    <tr>
+                    <td dir="rtl" style="height: 26px">
+                        <asp:Label ID="Label1" runat="server" Text="Profesor"></asp:Label>
+                    </td>
+                    <td style="height: 26px">
+                        <asp:TextBox ID="txtProfesor" runat="server"></asp:TextBox>
+                    </td>
+                    <td style="height: 26px">
+                        <asp:Button ID="btnProfesor" runat="server" OnClick="btnProfesor_Click" Text="..." />
+                    </td>
                     
                 </tr>
                 <tr>

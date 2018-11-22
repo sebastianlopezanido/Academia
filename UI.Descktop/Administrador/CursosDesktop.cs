@@ -155,20 +155,22 @@ namespace UI.Desktop
 
                 return false;
             }
+
             int num;
+
             if (txtAño.Text.Length != 4 || !(int.TryParse(txtAño.Text, out num)))
             {
                 Notificar("Error","Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }
+
             if (!(int.TryParse(txtCupo.Text, out num)))
             {
                 Notificar("Error", "Ingrese correctamente el cupo", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }
-
 
             CursoLogic cl = new CursoLogic();
 

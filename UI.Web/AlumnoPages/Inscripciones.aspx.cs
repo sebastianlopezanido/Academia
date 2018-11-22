@@ -56,6 +56,12 @@ namespace UI.Web
                 CursoLogic cl = new CursoLogic();
                 gridCursos.DataSource = cl.GetByMateria(IDMateria);
                 gridCursos.DataBind();
+
+                if (gridCursos.Rows.Count == 0)
+                {
+                    lblInfo.Visible = true;
+                    lblInfo.Text = "No hay cursos para mostrar";
+                }
             }
             catch (Exception Ex)
             {
