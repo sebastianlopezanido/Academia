@@ -134,7 +134,6 @@ namespace UI.Web
             txtUsuario.Enabled = enable;
             ckbHabilitado.Enabled = enable;
             cbxTipo.Enabled = enable;
-
         }
 
         private void DeleteEntity(int id)
