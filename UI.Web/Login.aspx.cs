@@ -31,7 +31,8 @@ namespace UI.Web
                 Session["IDPlan"] = usr.IDPlan;
                 Session["ID"] = usr.ID;
                 Session["id"] = usr.ID;
-                Response.Redirect("http://localhost:57900/Home.aspx"); 
+                Response.Redirect("~/Home.aspx"); 
+
                 //Server.Transfer("Menu.aspx");
                 //Menu menu = new Menu(usr);
                 //menu.Show();

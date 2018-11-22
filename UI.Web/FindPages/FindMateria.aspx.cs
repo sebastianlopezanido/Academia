@@ -15,7 +15,7 @@ namespace UI.Web
         {
             if (Session["tipo"].ToString() != "Alumno")
             {
-                Response.Redirect("http://localhost:57900/Home.aspx");
+                Response.Redirect("~/Home.aspx");
             }            
         }
 
@@ -70,7 +70,7 @@ namespace UI.Web
                     InscripcionLogic il = new InscripcionLogic();
                     if (il.EstaInscripto((int)Session["ID"],int.Parse(gridMaterias.SelectedRow.Cells[0].Text)) == false)
                     {
-                        Response.Redirect("http://localhost:57900/AlumnoPages/Inscripciones.aspx?IDMateria="+ gridMaterias.SelectedRow.Cells[0].Text);
+                        Response.Redirect("~/AlumnoPages/Inscripciones.aspx?IDMateria="+ gridMaterias.SelectedRow.Cells[0].Text);
                     }
                     else
                     {

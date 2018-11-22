@@ -22,7 +22,7 @@ namespace UI.Web
         {            
             if (Session["tipo"].ToString() == "Default")
             {
-                Response.Redirect("http://localhost:57900/Login.aspx");
+                Response.Redirect("~/Login.aspx");
             }            
             
             switch (Session["tipo"].ToString())
@@ -38,12 +38,12 @@ namespace UI.Web
         {
             Session["usuario"] = "Default";
             Session["tipo"] = "Default";
-            Response.Redirect("http://localhost:57900/Login.aspx");
+            Response.Redirect("~/Login.aspx");
         }
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("http://localhost:57900/Home.aspx");
+            Response.Redirect("~/Home.aspx");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace UI.Web
         {
             if (Session["tipo"].ToString() == "Default")
             {
-                Response.Redirect("http://localhost:57900/Login.aspx");
+                Response.Redirect("~/Login.aspx");
             }
         }
     }

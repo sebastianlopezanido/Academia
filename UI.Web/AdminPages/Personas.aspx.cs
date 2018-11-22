@@ -16,7 +16,7 @@ namespace UI.Web.AdminPages
         {
             if (Session["tipo"].ToString() != "Administrador")
             {
-                Response.Redirect("http://localhost:57900/Home.aspx");
+                Response.Redirect("~/Home.aspx");
             }
         }
 
