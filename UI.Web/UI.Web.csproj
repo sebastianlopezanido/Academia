@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminPages\Personas.aspx" />
     <Content Include="AdminPages\Usuarios2.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -164,6 +165,7 @@
     <Content Include="Admin.Master" />
     <Content Include="Home.aspx" />
     <Content Include="AdminPages\Usuarios.aspx" />
+    <Content Include="AdminPages\Especialidades.aspx" />
     <Content Include="AdminPages\Planes.aspx" />
     <Content Include="AdminPages\Materias.aspx" />
     <EntityDeploy Include="Model1.edmx">
@@ -223,6 +225,13 @@
     <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminPages\Personas.aspx.cs">
+      <DependentUpon>Personas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\Personas.aspx.designer.cs">
+      <DependentUpon>Personas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPages\Usuarios2.aspx.cs">
       <DependentUpon>Usuarios2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -332,20 +341,6 @@
     </Compile>
     <Compile Include="AdminPages\Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdminPages\Planes.aspx.cs">
-      <DependentUpon>Planes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminPages\Planes.aspx.designer.cs">
-      <DependentUpon>Planes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdminPages\Materias.aspx.cs">
-      <DependentUpon>Materias.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminPages\Materias.aspx.designer.cs">
-      <DependentUpon>Materias.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
