@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace UI.Web
 {
-    public partial class Cursado : System.Web.UI.Page
+    public partial class Cursado : ApplicationForm
     {
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -23,13 +23,32 @@ namespace UI.Web
         {
             if (!IsPostBack)
             {
-                this.LoadGrid();
-
+                LoadGrid();
             }
         }
 
+        private Curso _CursoActual;
+        public Curso CursoActual
+        {
+            set { _CursoActual = value; }
+            get { return _CursoActual; }
+        }
 
-       InscripcionLogic _logic;
+        private Materia _MateriaActual;
+        public Materia MateriaActual
+        {
+            set { _MateriaActual = value; }
+            get { return _MateriaActual; }
+        }
+
+        private Comision _ComisionActual;
+        public Comision ComisionActual
+        {
+            set { _ComisionActual = value; }
+            get { return _ComisionActual; }
+        }
+
+        InscripcionLogic _logic;
         private InscripcionLogic Logic
         {
             get
@@ -44,29 +63,15 @@ namespace UI.Web
 
         private void LoadGrid()
         {
-            int id = (int)Session["id"];
-            this.gridViewAlu.DataSource = this.Logic.GetAll(id);
-            this.gridViewAlu.DataBind();
-        }
+            gridInscripciones.DataSource = Logic.GetAll((int)Session["id"]);
+            gridInscripciones.DataBind();
 
-        private Curso CursoActual
-        {
-            get;
-            set;
-        }
-
-        private Materia MateriaActual
-        {
-            get;
-            set;
-        }
-
-        private Comision ComisionActual
-        {
-            get;
-            set;
-        }
-
+            if (gridInscripciones.Rows.Count == 0)
+            {
+                lblError.Visible = true;
+                lblError.Text = "No esta inscripto a ningun curso";
+            }
+        }       
 
         protected void gridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {

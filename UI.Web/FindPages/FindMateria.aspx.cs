@@ -13,7 +13,7 @@ namespace UI.Web
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            if (Session["tipo"].ToString() != "Alumno")
+            if (Session["tipo"].ToString() == "Profesor")
             {
                 Response.Redirect("http://localhost:57900/Home.aspx");
             }            
@@ -60,6 +60,12 @@ namespace UI.Web
             }
             
             gridMaterias.DataBind();
+
+            if (gridMaterias.Rows.Count == 0)
+            {
+                lblError.Visible = true;
+                lblError.Text = "No hay materias para mostrar";
+            }
         }
 
         protected void gridMaterias_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,7 +85,9 @@ namespace UI.Web
                     }
                     break;
                 case Usuario.TiposUsuario.Administrador:
-                    //ACA hace lo de admin
+                    Response.Redirect("http://localhost:57900/AdminPages/Cursos.aspx?IDMateria=" + gridMaterias.SelectedRow.Cells[0].Text + "&IDCurso=" 
+                        + Request.QueryString["IDCurso"] + "&Cupo=" + Request.QueryString["Cupo"] + "&Año=" + Request.QueryString["Año"] + "&IDComision="
+                        + Request.QueryString["IDComision"]);
                     break;
 
             }

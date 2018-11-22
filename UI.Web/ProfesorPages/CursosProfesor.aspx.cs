@@ -9,7 +9,7 @@ using BusinessEntities;
 
 namespace UI.Web
 {
-    public partial class CursosProfesor : System.Web.UI.Page
+    public partial class CursosProfesor : ApplicationForm
     {
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -25,40 +25,8 @@ namespace UI.Web
             {
                 LoadGrid();                
             }
-        }
+        }     
         
-        public enum FormModes
-        {
-            Alta,
-            Baja,
-            Modificacion
-        }
-
-        public FormModes FormMode
-        {
-            get { return (FormModes)ViewState["FormMode"]; }
-            set { ViewState["FormMode"] = value; }
-        }
-
-        protected int SelectedID
-        {
-            get
-            {
-                if (ViewState["SelectedID"] != null)
-                {
-                    return (int)ViewState["SelectedID"];
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            set
-            {
-                ViewState["SelectedID"] = value;
-            }
-        }
-
         protected int SelectedIDInscripcion
         {
             get
@@ -140,45 +108,31 @@ namespace UI.Web
             set { _AlumnoInscripcion = value; }
         }
 
-        protected bool IsEntitySelected
+        private void LoadGrid()
         {
-            get
+            DocenteCursoLogic dcl = new DocenteCursoLogic();
+            gridCursos.DataSource = dcl.GetAll((int)Session["id"]);
+            gridCursos.DataBind();
+
+            if (gridCursos.Rows.Count == 0)
             {
-                return SelectedID != 0;
+                lblError.Visible = true;
+                lblError.Text = "No pertenece a ningun curso";
             }
         }
-    
-
-        private void LoadGrid()
-            {
-                DocenteCursoLogic dcl = new DocenteCursoLogic();
-                gridCursos.DataSource = dcl.GetAll((int)Session["id"]);
-                gridCursos.DataBind();
-
-
-            }
 
         private void LoadGridAlumnos()
-                {
-                    InscripcionLogic il = new InscripcionLogic();
-                    GridAlumnos.DataSource = il.GetAllByCurso(SelectedID);
-                    GridAlumnos.DataBind();
-                }
-
-        protected void btnVer_Click(object sender, EventArgs e)
         {
-            if (IsEntitySelected)
+            InscripcionLogic il = new InscripcionLogic();
+            gridAlumnos.DataSource = il.GetAllByCurso(SelectedID);
+            gridAlumnos.DataBind();
+
+            if (gridAlumnos.Rows.Count == 0)
             {
-                gridCursos.Visible = false;
-                GridAlumnos.Visible= true;                
-                btnSalir.Visible = true;
-                LoadGridAlumnos();
+                lblError.Visible = true;
+                lblError.Text = "No hay alumnos inscriptos al curso";
             }
-        }
-
-
-
-        
+        }     
 
         private void LoadForm(int id)
         {
@@ -207,32 +161,26 @@ namespace UI.Web
 
         private void SaveEntity(AlumnoInscripcion alumnoInscripcion )
         {
-            InscripcionLogic il = new InscripcionLogic();
-            il.Save(alumnoInscripcion);
-        }
-                       
-
-        //private void ClearForm()
-        //{
-        //    txtID.Text = string.Empty;
-        //    txtMateria.Text = string.Empty;
-        //    txtAño.Text = string.Empty;
-        //    txtCupo.Text = string.Empty;
-        //}   
-
-
-
-        
+            try
+            {
+                InscripcionLogic il = new InscripcionLogic();
+                il.Save(alumnoInscripcion);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }                        
+        }       
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            //if (Validar())
-            //{
+            if (Validar())
+            {
                 LoadEntity();
                 SaveEntity(AlumnoInscripcionActual);
                 LoadGridAlumnos();
                 formPanel.Visible = false;
-            //}
+            }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -248,7 +196,7 @@ namespace UI.Web
             if (IsEntitySelected)
             {
                 gridCursos.Visible = false;
-                GridAlumnos.Visible = true;
+                gridAlumnos.Visible = true;
                 btnSalir.Visible = true;
                 LoadGridAlumnos();
             }
@@ -256,35 +204,40 @@ namespace UI.Web
 
         protected void gridAlumnos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             InscripcionLogic il = new InscripcionLogic();
-            int aux = (int)GridAlumnos.SelectedValue;
+            int aux = (int)gridAlumnos.SelectedValue;
             AlumnoInscripcionActual = il.GetOne(aux);
             SelectedIDAlumno = AlumnoInscripcionActual.IDAlumno;
-            SelectedIDInscripcion = (int)GridAlumnos.SelectedValue;
+            SelectedIDInscripcion = (int)gridAlumnos.SelectedValue;
 
             if (IsEntitySelected)
             {
                 formPanel.Visible = true;
                 FormMode = FormModes.Modificacion;
                 LoadForm(SelectedIDAlumno);
-
             }
         }
-
-        
 
         protected void btnSalir_Click(object sender, EventArgs e)
         {
             gridCursos.Visible = true;
-            GridAlumnos.Visible = false;
+            gridAlumnos.Visible = false;
             btnSalir.Visible = false;
             formPanel.Visible = false;
             LoadGrid();
         }
 
-     
-        
+        public bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtNota.Text) == false && (int.Parse(txtNota.Text) > 10 || int.Parse(txtNota.Text) < 0))
+            {
+                lblError.Text = "Ingrese Nota valida";
+
+                return false;
+            }
+
+            return true;
+        }
 
         protected void gridCursos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -333,39 +286,8 @@ namespace UI.Web
                     e.Row.Cells[1].Text = PersonaActual.Legajo.ToString();
                     e.Row.Cells[2].Text = PersonaActual.Nombre.ToString();
                     e.Row.Cells[3].Text = PersonaActual.Apellido.ToString();
-                }
-                
+                }                
             }
-
-
-        }
-
-        
-
-        //public bool Validar()
-        //{
-        //    if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtMateria.Text) || cbxComision.SelectedValue == null || string.IsNullOrEmpty(txtCupo.Text))
-        //    {
-        //        lblError.Visible = true;
-        //        lblError.Text = "Debe llenar todos los campos";
-        //        return false;
-        //    }
-
-        //    if (txtAño.Text.Length != 4)
-        //    {
-        //        lblError.Visible = true;
-        //        lblError.Text = "Ingrese correctamente el año";
-        //        return false;
-        //    }
-
-        //    if (Logic.EstaAgregado(int.Parse(txtMateria.Text), int.Parse(cbxComision.SelectedValue), int.Parse(txtAño.Text)))
-        //    {
-        //        lblError.Visible = true;
-        //        lblError.Text = "Ya existe ese curso en esa comision";
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
+        }        
     }
 }

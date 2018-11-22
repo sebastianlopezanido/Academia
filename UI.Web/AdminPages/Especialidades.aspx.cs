@@ -28,12 +28,6 @@ namespace UI.Web
             }
         }
 
-        public FormModes FormMode
-        {
-            get { return (FormModes)this.ViewState["FormMode"]; }
-            set { this.ViewState["FormMode"] = value; }
-        }
-
         EspecialidadLogic _logic;
         private EspecialidadLogic Logic
         {

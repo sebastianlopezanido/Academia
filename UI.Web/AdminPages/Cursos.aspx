@@ -54,6 +54,9 @@
                     <td style="height: 26px">
                         <asp:TextBox ID="txtMateria" runat="server"></asp:TextBox>
                     </td>
+                    <td style="height: 26px">
+                        <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="..." />
+                    </td>
                     
                 </tr>
                 <tr>
