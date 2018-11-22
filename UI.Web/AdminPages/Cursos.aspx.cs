@@ -38,6 +38,41 @@ namespace UI.Web
             gridCursos.DataBind();
         }
 
+        private Materia _MateriaActual;
+        public Materia MateriaActual
+        {
+            get { return _MateriaActual; }
+            set { _MateriaActual = value; }
+        }
+
+        private Comision _ComisionActual;
+        public Comision ComisionActual
+        {
+            get { return _ComisionActual; }
+            set { _ComisionActual = value; }
+        }
+
+        private DocenteCurso _DocenteCursoActual;
+        public DocenteCurso DocenteCursoActual
+        {
+            get { return _DocenteCursoActual; }
+            set { _DocenteCursoActual = value; }
+        }
+
+        private Usuario _UsuarioActual;
+        public Usuario UsuarioActual
+        {
+            get { return _UsuarioActual; }
+            set { _UsuarioActual = value; }
+        }
+
+        private Persona _PersonaActual;
+        public Persona PersonaActual
+        {
+            get { return _PersonaActual; }
+            set { _PersonaActual = value; }
+        }
+
         CursoLogic _logic;
         private CursoLogic Logic
         {
@@ -96,7 +131,14 @@ namespace UI.Web
 
         private void SaveEntity(Curso curso)
         {
-            Logic.Save(curso);
+            try
+            {
+                Logic.Save(curso);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
         }
 
         private void EnableForm(bool enable)
@@ -110,7 +152,14 @@ namespace UI.Web
 
         private void DeleteEntity(int id)
         {
-            Logic.Delete(id);
+            try
+            {
+                Logic.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }
         }
 
         private void ClearForm()
@@ -164,12 +213,7 @@ namespace UI.Web
         {
             LoadGrid();
             formPanel.Visible = false;
-        }
-
-        protected void gridCursos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SelectedID = (int)gridCursos.SelectedValue;
-        }
+        }        
 
         public bool Validar()
         {
@@ -195,6 +239,43 @@ namespace UI.Web
             }
 
             return true;
+        }
+
+        protected void gridCursos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedID = (int)gridCursos.SelectedValue;
+        }
+
+        protected void gridCursos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[1].Text != null)
+                {
+                    MateriaLogic ml = new MateriaLogic();
+                    MateriaActual = ml.GetOne(int.Parse(e.Row.Cells[1].Text));
+                    e.Row.Cells[1].Text = MateriaActual.Descripcion;
+                }
+
+                if (e.Row.Cells[2].Text != null)
+                {
+                    ComisionLogic cl = new ComisionLogic();
+                    ComisionActual = cl.GetOne(int.Parse(e.Row.Cells[2].Text));
+                    e.Row.Cells[2].Text = ComisionActual.Descripcion;
+                }
+
+                if (e.Row.Cells[5].Text != null)
+                {
+                    DocenteCursoLogic ml = new DocenteCursoLogic();
+                    DocenteCursoActual = ml.GetOneByCurso(int.Parse(e.Row.Cells[5].Text));
+                    UsuarioLogic ul = new UsuarioLogic();
+                    UsuarioActual = ul.GetOne(DocenteCursoActual.IDDocente);
+                    PersonaLogic pl = new PersonaLogic();
+                    PersonaActual = pl.GetOne(UsuarioActual.IDPersona);
+                    e.Row.Cells[5].Text = PersonaActual.Apellido;
+                }
+
+            }
         }
     }
 }

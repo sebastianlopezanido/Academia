@@ -57,8 +57,8 @@ namespace BusinessEntities
             set { _IDPersona = value; }
         }
 
-        private int _IDPlan;
-        public int IDPlan
+        private int? _IDPlan;
+        public int? IDPlan
         {
             get { return _IDPlan; }
             set { _IDPlan = value; }

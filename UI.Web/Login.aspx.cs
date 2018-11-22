@@ -28,6 +28,8 @@ namespace UI.Web
                 Usuario usr = ll.ValidarDatos(nombreUsuario, clave);
                 Session["tipo"] = usr.Tipo;
                 Session["usuario"] = Login1.UserName;
+                Session["IDPlan"] = usr.IDPlan;
+                Session["ID"] = usr.ID;
                 Response.Redirect("http://localhost:57900/Home.aspx"); 
                 //Server.Transfer("Menu.aspx");
                 //Menu menu = new Menu(usr);

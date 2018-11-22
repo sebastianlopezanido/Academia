@@ -28,7 +28,8 @@ namespace UI.Desktop
                 string clave = txtPw.Text;                
                 Usuario usr = ll.ValidarDatos(nombreUsuario, clave);                
                 LoginSession.ID = usr.ID;
-                LoginSession.Tipo = usr.Tipo;
+                LoginSession.Tipo = usr.Tipo;               
+                LoginSession.IDPlan = usr.IDPlan;
                 Menu menu = new Menu(usr);               
                 menu.Show();
                 Hide();  

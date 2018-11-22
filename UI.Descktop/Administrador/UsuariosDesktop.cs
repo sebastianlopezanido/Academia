@@ -89,9 +89,18 @@ namespace UI.Desktop
             }
         }
 
+        public void EsAdmin()
+        {
+            if((Usuario.TiposUsuario)cbxTipo.SelectedValue == Usuario.TiposUsuario.Administrador)
+            {
+                UsuarioActual.IDPlan = null;
+            }
+        }
+
         public override void GuardarCambios()
         {
             MapearADatos();
+            EsAdmin();
             UsuarioLogic ul = new UsuarioLogic();
             ul.Save(UsuarioActual);
         }

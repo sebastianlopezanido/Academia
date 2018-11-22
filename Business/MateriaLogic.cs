@@ -39,6 +39,18 @@ namespace BusinessLogic
             }            
         }
 
+        public List<Materia> GetAllByPlan(int? idPla)
+        {
+            try
+            {
+                return MateriaData.GetAllByPlan(idPla);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void Save(Materia materia)
         {
             MateriaData.Save(materia);

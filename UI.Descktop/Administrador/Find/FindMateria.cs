@@ -36,7 +36,16 @@ namespace UI.Desktop
             try
             {
                 MateriaLogic ml = new MateriaLogic();
-                dgvMaterias.DataSource = ml.GetAll();
+
+                switch(LoginSession.Tipo)
+                {
+                    case Usuario.TiposUsuario.Alumno:
+                        dgvMaterias.DataSource = ml.GetAllByPlan(LoginSession.IDPlan);
+                        break;
+                    case Usuario.TiposUsuario.Administrador:
+                        dgvMaterias.DataSource = ml.GetAll();
+                        break;
+                }              
 
             }
             catch (Exception Ex)

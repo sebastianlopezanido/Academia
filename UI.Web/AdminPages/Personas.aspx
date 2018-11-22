@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     
  <center> <asp:Panel ID="gridPanel" runat="server">
-        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
+        <asp:GridView ID="gridPersonas" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
             DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
@@ -32,7 +32,12 @@
             <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
             <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
             <br />
-            <asp:Label ID="lblError1" runat="server"></asp:Label>
+            <br />
+            <table dir="ltr">
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
+                    </td></table>            
         </asp:Panel>
         <br />
     </asp:Panel>
@@ -105,21 +110,24 @@
                             <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
                         </td>
                     </tr>
-                    <tr>
-                        <td dir="rtl">
-                            <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
-                        </td>
-                        <td>
-                            <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:Label ID="lblError" runat="server"></asp:Label>
-                            <asp:CompareValidator Runat="Server" ControlToValidate="txtFechaNac" Display="Dynamic" Operator="DataTypeCheck" Text="Error, fecha incorrecta" Type="Date" />
-                        </td>
-                    </tr>
-                </table>
+                    </table><br />
+
+                    <table dir="ltr">
+                <tr>
+                    <td dir="rtl">                
+                        <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
+                    </td>
+                    <tr><td></td></tr>
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError" runat="server"></asp:Label>
+                        <asp:CompareValidator Runat="Server" ControlToValidate="txtFechaNac" Display="Dynamic" Operator="DataTypeCheck" Text="Ingrese correctamente la fecha" Type="Date" />
+                    </td>
+                </tr>                
+                    </table>
             </center>
             <br />
             <br />

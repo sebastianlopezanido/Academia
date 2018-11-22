@@ -47,6 +47,43 @@ namespace Data.Database
             return materias;
         }
 
+        public List<Materia> GetAllByPlan(int? idPla)
+        {
+            List<Materia> materias = new List<Materia>();
+
+            try
+            {
+                OpenConnection();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM materias WHERE id_plan = @idPla", sqlConn);
+                cmd.Parameters.Add("@idPla", SqlDbType.Int).Value = idPla;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Materia mat = new Materia();
+                    mat.ID = (int)dr["id_materia"];
+                    mat.Descripcion = (string)dr["desc_materia"];
+                    mat.HSSemanales = (int)dr["hs_semanales"];
+                    mat.HSTotales = (int)dr["hs_totales"];
+                    mat.IDPlan = (int)dr["id_plan"];
+                    materias.Add(mat);
+                }
+
+                dr.Close();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar lista de materias", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return materias;
+        }
+
         public Materia GetOne(int ID)
         {
             Materia mat = new Materia();

@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
 
      <center> <asp:Panel ID="gridPanel" runat="server">
-        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
+        <asp:GridView ID="gridEspecialidades" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
             DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
@@ -30,7 +30,12 @@
              <asp:Button ID="btnEditar" runat="server" OnClick="btnEditar_Click" Text="Editar" />
              <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" />
              <br />
-             <asp:Label ID="lblError1" runat="server"></asp:Label>
+             <br />
+             <table dir="ltr">
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
+                    </td></table>
          </asp:Panel>
         <br />
     </asp:Panel>
@@ -55,20 +60,24 @@
                         <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
                     </td>
                 </tr>       
+                
+            </table><br />
+                <table dir="ltr">
                 <tr>
-                    <td dir="rtl">
+                    <td dir="rtl">                
                         <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
                     </td>
                     <td>
                         <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
                     </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
+                    <tr><td></td></tr>
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
                         <asp:Label ID="lblError" runat="server"></asp:Label>
                     </td>
-                </tr>
-            </table></center>
+                </tr>                
+                    </table>
+            </center>
             <br />
         </asp:Panel>
 </asp:Content>

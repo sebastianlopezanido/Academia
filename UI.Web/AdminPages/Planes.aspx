@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Planes.aspx.cs" Inherits="UI.Web.Planes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <center><asp:Panel ID="gridPanel" runat="server">
-        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
+        <asp:GridView ID="gridPlanes" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
-            DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
+            DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDataBound="gridView_RowDataBound">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
@@ -32,6 +32,12 @@
             </asp:Panel>
 
             <br />
+            <br />
+            <table dir="ltr">
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
+                    </td></table>
     </asp:Panel> </center>
         <asp:Panel ID="formPanel" runat="server" Height="265px" Visible="False">
             <br />
@@ -62,20 +68,22 @@
                         </asp:DropDownList>
                     </td>
                 </tr>
+                </table><br />
+            <table dir="ltr">
                 <tr>
-                    <td>
+                    <td dir="rtl">                
                         <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
                     </td>
-                    <td style="width: 128px">
+                    <td>
                         <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
                     </td>
-                </tr>
-                <tr>
+                    <tr><td></td></tr>
+                <tr> 
                     <td colspan="2" style="color: #FF0000">
                         <asp:Label ID="lblError" runat="server"></asp:Label>
                     </td>
-                </tr>
-            </table>
+                </tr>                
+                    </table>
             </center>
         </asp:Panel>
 </asp:Content>

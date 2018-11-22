@@ -171,6 +171,8 @@
     <Content Include="AdminPages\Materias.aspx" />
     <Content Include="AdminPages\Comisiones.aspx" />
     <Content Include="AdminPages\Cursos.aspx" />
+    <Content Include="FindPages\FindMateria.aspx" />
+    <Content Include="AlumnoPages\Inscripciones.aspx" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -387,9 +389,22 @@
     <Compile Include="AdminPages\Cursos.aspx.designer.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FindPages\FindMateria.aspx.cs">
+      <DependentUpon>FindMateria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FindPages\FindMateria.aspx.designer.cs">
+      <DependentUpon>FindMateria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AlumnoPages\Inscripciones.aspx.cs">
+      <DependentUpon>Inscripciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AlumnoPages\Inscripciones.aspx.designer.cs">
+      <DependentUpon>Inscripciones.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AlumnoPages\" />
     <Folder Include="App_Data\" />
     <Folder Include="ProfesorPages\" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Cursos.aspx.cs" Inherits="UI.Web.Cursos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <center><asp:Panel ID="gridPanel" runat="server" Height="161px">
-        <asp:GridView ID="gridCursos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" OnSelectedIndexChanged="gridCursos_SelectedIndexChanged">
+        <asp:GridView ID="gridCursos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" OnSelectedIndexChanged="gridCursos_SelectedIndexChanged" OnRowDataBound="gridCursos_RowDataBound">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
@@ -9,6 +9,7 @@
                 <asp:BoundField DataField="IDComision" HeaderText="Comision" />
                 <asp:BoundField DataField="AnioCalendario" HeaderText="Año" />
                 <asp:BoundField DataField="Cupo" HeaderText="Cupo" />
+                <asp:BoundField DataField="ID" HeaderText="Profesor" />
                 <asp:CommandField SelectText="Seleccionar" ShowSelectButton="True" >
                 <ControlStyle Font-Bold="True" />
                 </asp:CommandField>
@@ -30,7 +31,11 @@
             <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" />
             <br />
             <br />
-            <br />
+            <table dir="ltr">
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
+                    </td></table>
             <asp:Panel ID="formPanel" runat="server" style="margin-top: 0px" Visible="False" Height="256px">
                 <table dir="ltr">
                 <tr>
@@ -79,7 +84,7 @@
                     </td>
                     
                 </tr>
-                    </table>
+                    </table><br />
                 <table dir="ltr">
                 <tr>
                     <td dir="rtl">                

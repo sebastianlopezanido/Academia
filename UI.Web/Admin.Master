@@ -28,7 +28,7 @@
                             <td width ="100" style="background-color:lightgrey">
                                 <asp:Menu ID="Menu2" runat="server" Visible="False">
                                     <Items>
-                                        <asp:MenuItem Text="Inscripciones" Value="Inscripciones"></asp:MenuItem>
+                                        <asp:MenuItem Text="Inscripciones" Value="Inscripciones" NavigateUrl="~/FindPages/FindMateria.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="Cursada" Value="Cursada"></asp:MenuItem>
                                     </Items>
                                 </asp:Menu>
