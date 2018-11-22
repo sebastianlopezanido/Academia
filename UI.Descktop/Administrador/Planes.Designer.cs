@@ -42,6 +42,7 @@
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.tspReporte = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -164,10 +165,11 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnEditar,
-            this.btnEliminar});
+            this.btnEliminar,
+            this.tspReporte});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(112, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(135, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnNuevo
@@ -199,6 +201,16 @@
             this.btnEliminar.Size = new System.Drawing.Size(23, 22);
             this.btnEliminar.ToolTipText = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
+            // 
+            // tspReporte
+            // 
+            this.tspReporte.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tspReporte.Image = ((System.Drawing.Image)(resources.GetObject("tspReporte.Image")));
+            this.tspReporte.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tspReporte.Name = "tspReporte";
+            this.tspReporte.Size = new System.Drawing.Size(23, 22);
+            this.tspReporte.Text = "Reporte";
+            this.tspReporte.Click += new System.EventHandler(this.tspReporte_Click);
             // 
             // contextMenuStrip1
             // 
@@ -277,5 +289,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn idespecialidad;
+        private System.Windows.Forms.ToolStripButton tspReporte;
     }
 }

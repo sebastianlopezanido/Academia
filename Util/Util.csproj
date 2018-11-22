@@ -47,6 +47,7 @@
     <Content Include="TP2Script.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Archivos reporte\SqlServerTypes.rar" />
     <None Include="data.xls" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

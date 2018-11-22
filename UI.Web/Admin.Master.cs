@@ -40,5 +40,10 @@ namespace UI.Web
             Session["tipo"] = "Default";
             Response.Redirect("http://localhost:57900/Login.aspx");
         }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("http://localhost:57900/Home.aspx");
+        }
     }
 }

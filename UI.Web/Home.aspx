@@ -4,6 +4,6 @@
     <div aria-orientation="vertical">
             
             
-            <asp:Label ID="lblUsuario" runat="server" Text="Label"></asp:Label>
+            <center><asp:Image ID="Image1" runat="server" ImageAlign="Middle" ImageUrl="~/Content/UTNFIN.png" /></center>
         </div>
 </asp:Content>
