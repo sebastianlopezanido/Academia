@@ -51,7 +51,7 @@ namespace UI.Desktop
             txtEmail.Text = PersonaActual.Email;
             txtDireccion.Text = PersonaActual.Direccion;
             txtTelefono.Text = PersonaActual.Telefono;
-            txtFecha.Text = PersonaActual.FechaNacimiento.ToString();
+            txtFecha.Text = PersonaActual.FechaNacimiento.Date.ToString();
             txtLegajo.Text = PersonaActual.Legajo.ToString();
         }
 
@@ -114,6 +114,12 @@ namespace UI.Desktop
             {
                 Notificar("Email no valido", "Ingrese un Email valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                return false;
+            }
+            DateTime t;
+            if (!DateTime.TryParse(txtFecha.Text ,out t))
+            {
+                Notificar("Fecha no valida", "Ingrese una Fecha válida", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;

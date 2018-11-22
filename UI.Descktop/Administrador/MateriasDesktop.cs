@@ -89,6 +89,14 @@ namespace UI.Desktop
                 return false;
             }
 
+            int num;
+            if (!(int.TryParse(txtHSemanales.Text, out num)) || !(int.TryParse(txtHTotales.Text, out num)))
+            {
+                Notificar("Error", "Las horas deben ser números enteros", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+
             return true;
         }
 

@@ -93,8 +93,8 @@ namespace UI.Desktop
 
                 return false;
             }
-
-            if (txtAño.Text.Length != 4)
+            int num;
+            if ((txtAño.Text.Length != 4) || (!(int.TryParse(txtAño.Text, out num))))
             {
                 Notificar("Error","Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
