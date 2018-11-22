@@ -85,7 +85,7 @@ namespace UI.Web
                     }
                     break;
                 case Usuario.TiposUsuario.Administrador:
-                    Response.Redirect("http://localhost:57900/AdminPages/Cursos.aspx?IDMateria=" + gridMaterias.SelectedRow.Cells[0].Text + "&IDCurso=" 
+                    Response.Redirect("~/AdminPages/Cursos.aspx?IDMateria=" + gridMaterias.SelectedRow.Cells[0].Text + "&IDCurso=" 
                         + Request.QueryString["IDCurso"] + "&Cupo=" + Request.QueryString["Cupo"] + "&Año=" + Request.QueryString["Año"] + "&IDComision="
                         + Request.QueryString["IDComision"] + "&IDProfesor=" + Request.QueryString["IDProfesor"]);
                     break;

@@ -15,7 +15,7 @@ namespace UI.Web
         {
             if (Session["tipo"].ToString() != "Administrador")
             {
-                Response.Redirect("http://localhost:57900/Home.aspx");
+                Response.Redirect("~/Home.aspx");
             }
         }
 
@@ -49,7 +49,7 @@ namespace UI.Web
 
         protected void gridProfesores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Response.Redirect("http://localhost:57900/AdminPages/Cursos.aspx?IDProfesor=" + gridProfesores.SelectedRow.Cells[0].Text + "&IDCurso="
+            Response.Redirect("~/AdminPages/Cursos.aspx?IDProfesor=" + gridProfesores.SelectedRow.Cells[0].Text + "&IDCurso="
                         + Request.QueryString["IDCurso"] + "&Cupo=" + Request.QueryString["Cupo"] + "&Año=" + Request.QueryString["Año"] + "&IDComision="
                         + Request.QueryString["IDComision"] + "&IDMateria=" + Request.QueryString["IDMateria"]);
         }

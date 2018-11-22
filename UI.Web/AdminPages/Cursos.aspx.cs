@@ -389,11 +389,11 @@ namespace UI.Web
             switch(Session["FormMode"])
             {
                 case FormModes.Alta:                    
-                    Response.Redirect("http://localhost:57900/FindPages/FindMateria.aspx?Cupo=" + txtCupo.Text + "&Año=" +
+                    Response.Redirect("~/FindPages/FindMateria.aspx?Cupo=" + txtCupo.Text + "&Año=" +
                         txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDProfesor=" + txtProfesor.Text);
                     break;
                 case FormModes.Modificacion:                    
-                    Response.Redirect("http://localhost:57900/FindPages/FindMateria.aspx?IDCurso=" + SelectedID.ToString()
+                    Response.Redirect("~/FindPages/FindMateria.aspx?IDCurso=" + SelectedID.ToString()
                 + "&Cupo=" + txtCupo.Text + "&Año=" + txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDProfesor=" + txtProfesor.Text);
                     break;
             }
@@ -405,11 +405,11 @@ namespace UI.Web
             switch (Session["FormMode"])
             {
                 case FormModes.Alta:
-                    Response.Redirect("http://localhost:57900/FindPages/FindProfesor.aspx?Cupo=" + txtCupo.Text + "&Año=" +
+                    Response.Redirect("~/FindPages/FindProfesor.aspx?Cupo=" + txtCupo.Text + "&Año=" +
                         txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDMateria=" + txtMateria.Text);
                     break;
                 case FormModes.Modificacion:
-                    Response.Redirect("http://localhost:57900/FindPages/FindProfesor.aspx?IDCurso=" + SelectedID.ToString()
+                    Response.Redirect("~/FindPages/FindProfesor.aspx?IDCurso=" + SelectedID.ToString()
                 + "&Cupo=" + txtCupo.Text + "&Año=" + txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDMateria=" + txtMateria.Text);
                     break;
             }
