@@ -139,13 +139,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// txtIdPlan control.
+        /// ddlPlan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdPlan;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPlan;
         
         /// <summary>
         /// lblClave control.

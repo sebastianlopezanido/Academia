@@ -54,7 +54,8 @@
                         <asp:Label ID="Label3" runat="server" Text="IDPlan"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtIdPlan" runat="server"></asp:TextBox>
+                        <asp:DropDownList ID="ddlPlan" runat="server">
+                        </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
