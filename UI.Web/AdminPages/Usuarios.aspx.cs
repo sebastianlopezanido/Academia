@@ -19,6 +19,12 @@ namespace UI.Web
             {
                 Response.Redirect("http://localhost:57900/Home.aspx");
             }
+
+            PlanLogic pl = new PlanLogic();
+            ddlPlan.DataSource = pl.GetAll();
+            ddlPlan.DataValueField = "ID";
+            ddlPlan.DataTextField = "Descripcion";
+            ddlPlan.DataBind();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,9 +32,6 @@ namespace UI.Web
             if (!IsPostBack)
             {
                 this.LoadGrid();
-                cbxTipo.Items.Add("Alumno");
-                cbxTipo.Items.Add("Profesor");
-                cbxTipo.Items.Add("Administrador");
             }            
         }
 
@@ -100,12 +103,13 @@ namespace UI.Web
         private void LoadForm(int id)
         {
             Entity = Logic.GetOne(id);
-            txtUsuario.Text = Entity.NombreUsuario;
-            txtIdPlan.Text = Entity.IDPlan.ToString();
+            txtUsuario.Text = Entity.NombreUsuario;            
             txtIdPersona.Text = Entity.IDPersona.ToString();
             txtClave.Text = Entity.Clave;
             txtConfirmarClave.Text = Entity.Clave;
             txtId.Text = Entity.ID.ToString();
+            ddlTipo.SelectedIndex = (int) Entity.Tipo ;
+            ddlPlan.SelectedValue = Entity.IDPlan.ToString();
         }
 
         private void LoadEntity(Usuario usuario)
@@ -114,8 +118,8 @@ namespace UI.Web
             usuario.IDPersona = int.Parse(txtIdPersona.Text);
             usuario.NombreUsuario = txtUsuario.Text;
             usuario.Clave = txtClave.Text;
-            usuario.IDPlan = int.Parse(txtIdPlan.Text);
-            usuario.Tipo = Usuario.TiposUsuario.Alumno; // corregir
+            usuario.IDPlan = int.Parse(ddlPlan.SelectedValue);
+            usuario.Tipo = (Usuario.TiposUsuario)int.Parse(ddlTipo.SelectedValue); // corregir
             usuario.Habilitado = ckbHabilitado.Checked;
         }
 
@@ -129,11 +133,12 @@ namespace UI.Web
             txtClave.Enabled = enable;
             txtConfirmarClave.Enabled = enable;
             txtId.Enabled = enable;
-            txtIdPersona.Enabled = enable;
-            txtIdPlan.Enabled = enable;
+            txtIdPersona.Enabled = enable;            
             txtUsuario.Enabled = enable;
             ckbHabilitado.Enabled = enable;
-            cbxTipo.Enabled = enable;
+            ddlTipo.Enabled = enable;
+            ddlPlan.Enabled = enable;
+            lblError.Text = "";
 
         }
 
@@ -147,10 +152,10 @@ namespace UI.Web
             txtClave.Text = string.Empty;
             txtConfirmarClave.Text = string.Empty;
             txtId.Text = string.Empty;
-            txtIdPersona.Text = string.Empty;
-            txtIdPlan.Text = string.Empty;
+            txtIdPersona.Text = string.Empty;            
             txtUsuario.Text = string.Empty;
             ckbHabilitado.Checked = false;
+            ddlPlan.ClearSelection();
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -175,31 +180,57 @@ namespace UI.Web
             }
         }
 
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtClave.Text) ||
+                string.IsNullOrEmpty(txtConfirmarClave.Text) ||
+                string.IsNullOrEmpty(txtIdPersona.Text) ||
+                string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                lblError.Text = "*Campos incompletos";
+                return false;
+            }
+            if (txtClave.Text != txtConfirmarClave.Text)
+            {
+                lblError.Text = "*Las claves deben ser iguales";
+                return false;
+            }
+            if (txtClave.Text.Length < 8)
+            {
+                lblError.Text = "La clave debe ser mayor a 8 caracteres";
+                return false;
+            }
+
+            return true;
+        }
+
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-
-            switch (FormMode)
+            if (Validar())
             {
-                case FormModes.Alta:
-                    Entity = new Usuario();
-                    Entity.State = BusinessEntity.States.New;
-                    LoadEntity(Entity);
-                    SaveEntity(Entity);
-                    break;
-                case FormModes.Modificacion:
-                    Entity = new Usuario();
-                    Entity.State = BusinessEntity.States.Modified;
-                    LoadEntity(Entity);
-                    SaveEntity(Entity);
-                    break;
-                case FormModes.Baja:
-                    DeleteEntity(SelectedID);
-                    break;
-                default:
-                    break;
+                switch (FormMode)
+                {
+                    case FormModes.Alta:
+                        Entity = new Usuario();
+                        Entity.State = BusinessEntity.States.New;
+                        LoadEntity(Entity);
+                        SaveEntity(Entity);
+                        break;
+                    case FormModes.Modificacion:
+                        Entity = new Usuario();
+                        Entity.State = BusinessEntity.States.Modified;
+                        LoadEntity(Entity);
+                        SaveEntity(Entity);
+                        break;
+                    case FormModes.Baja:
+                        DeleteEntity(SelectedID);
+                        break;
+                    default:
+                        break;
+                }
+                LoadGrid();
+                formPanel.Visible = false;
             }
-            LoadGrid();
-            formPanel.Visible = false;
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
