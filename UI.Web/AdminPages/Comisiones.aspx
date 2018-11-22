@@ -28,32 +28,59 @@
             <asp:Button ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" Text="Nuevo" />
             <asp:Button ID="btnEditar" runat="server" OnClick="btnEditar_Click" Text="Editar" />
             <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" />
-            <asp:Panel ID="formPanel" runat="server" Visible="False">
-                <br />
-                <br />
-                <asp:Label ID="Label1" runat="server" Text="ID"></asp:Label>
-                <asp:TextBox ID="txtID" runat="server" ReadOnly="True"></asp:TextBox>
-                <br />
-                <asp:Label ID="Label2" runat="server" Text="Descripcion"></asp:Label>
-                <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
-                <br />
-                <asp:Label ID="Label3" runat="server" Text="ID Plan"></asp:Label>
-                <asp:DropDownList ID="cbxPlan" runat="server">
-                </asp:DropDownList>
-                <br />
-                <asp:Label ID="Label4" runat="server" Text="Año especialidad"></asp:Label>
-                <asp:TextBox ID="txtAño" runat="server"></asp:TextBox>
-                <br />
-                <br />
-                <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
-                <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
-                <br />
+            <asp:Panel ID="formPanel" runat="server" Visible="False" style="margin-top: 20px">
+                <table dir="ltr">
+                <tr>
+                    <td dir="rtl">
+                        <asp:Label ID="Label6" runat="server" Text="ID"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtID" runat="server" ReadOnly="True"></asp:TextBox>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td dir="rtl" style="height: 26px">
+                        <asp:Label ID="Label8" runat="server" Text="Descripcion"></asp:Label>
+                    </td>
+                    <td style="height: 26px">
+                        <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
+                    </td>
+                    
+                </tr>                
+                <tr>
+                    <td dir="rtl">
+                        <asp:Label ID="Label9" runat="server" Text="Año"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtAño" runat="server"></asp:TextBox>
+                    </td>                    
+                </tr>
+                <tr>
+                    <td dir="rtl">
+                        <asp:Label ID="lblClave" runat="server" Text="Plan"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="cbxPlan" runat="server">
+                        </asp:DropDownList>
+                    </td>                    
+                </tr>
+                    </table>
+                <table dir="ltr">
+                <tr>
+                    <td dir="rtl">                
+                        <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
+                    </td>                    
+                </tr> 
+                </table>  
+                
                 <br />
                 <asp:Label ID="lblError" runat="server" Font-Bold="True" Text="Label" Visible="False"></asp:Label>
                 <br />
                 <br />
-                <asp:Table ID="Table1" runat="server" Width="160px">
-                </asp:Table>
             </asp:Panel>
         </asp:Panel>
     </asp:Panel></center>

@@ -76,13 +76,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.Panel formPanel;
         
         /// <summary>
-        /// Label1 control.
+        /// Label6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
         /// txtID control.
@@ -94,13 +94,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtID;
         
         /// <summary>
-        /// Label2 control.
+        /// Label8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label Label8;
         
         /// <summary>
         /// txtMateria control.
@@ -112,31 +112,31 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtMateria;
         
         /// <summary>
-        /// Label3 control.
+        /// Label7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label Label7;
         
         /// <summary>
-        /// cbxComision control.
+        /// txtCupo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cbxComision;
+        protected global::System.Web.UI.WebControls.TextBox txtCupo;
         
         /// <summary>
-        /// Label4 control.
+        /// Label9 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label Label9;
         
         /// <summary>
         /// txtAño control.
@@ -148,22 +148,22 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtAño;
         
         /// <summary>
-        /// Label5 control.
+        /// lblClave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label lblClave;
         
         /// <summary>
-        /// txtCupo control.
+        /// cbxComision control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCupo;
+        protected global::System.Web.UI.WebControls.DropDownList cbxComision;
         
         /// <summary>
         /// btnAceptar control.

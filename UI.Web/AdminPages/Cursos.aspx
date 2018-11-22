@@ -32,28 +32,69 @@
             <br />
             <br />
             <asp:Panel ID="formPanel" runat="server" style="margin-top: 0px" Visible="False">
-                <asp:Label ID="Label1" runat="server" Text="ID"></asp:Label>
-                <asp:TextBox ID="txtID" runat="server" ReadOnly="True"></asp:TextBox>
+                <table dir="ltr">
+                <tr>
+                    <td dir="rtl">
+                        <asp:Label ID="Label6" runat="server" Text="ID"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtID" runat="server" ReadOnly="True"></asp:TextBox>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td dir="rtl" style="height: 26px">
+                        <asp:Label ID="Label8" runat="server" Text="Materia"></asp:Label>
+                    </td>
+                    <td style="height: 26px">
+                        <asp:TextBox ID="txtMateria" runat="server"></asp:TextBox>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td dir="rtl">
+                        <asp:Label ID="Label7" runat="server" Text="Cupo"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtCupo" runat="server"></asp:TextBox>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td dir="rtl">
+                        <asp:Label ID="Label9" runat="server" Text="Año"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtAño" runat="server"></asp:TextBox>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td dir="rtl">
+                        <asp:Label ID="lblClave" runat="server" Text="Comision"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="cbxComision" runat="server">
+                        </asp:DropDownList>
+                    </td>
+                    
+                </tr>
+                    </table>
+                <table dir="ltr">
+                <tr>
+                    <td dir="rtl">                
+                        <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
+                    </td>                    
+                </tr> 
+                </table>    
+                         
                 <br />
-                <asp:Label ID="Label2" runat="server" Text="Materia"></asp:Label>
-                <asp:TextBox ID="txtMateria" runat="server"></asp:TextBox>
                 <br />
-                <asp:Label ID="Label3" runat="server" Text="Comision"></asp:Label>
-                <asp:DropDownList ID="cbxComision" runat="server">
-                </asp:DropDownList>
-                <br />
-                <asp:Label ID="Label4" runat="server" Text="Año"></asp:Label>
-                <asp:TextBox ID="txtAño" runat="server"></asp:TextBox>
-                <br />
-                <asp:Label ID="Label5" runat="server" Text="Cupo"></asp:Label>
-                <asp:TextBox ID="txtCupo" runat="server"></asp:TextBox>
-                <br />
-                <br />
-                <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
-                <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
-                <br />
-                <br />
-                <asp:Label ID="lblError" runat="server" BorderColor="Red" Font-Bold="True" Text="Label" Visible="False"></asp:Label>
+
+                <asp:Label ID="lblError" runat="server" Font-Color="Red" Font-Bold="True" Text="Label" Visible="False"></asp:Label>
             </asp:Panel>
         </asp:Panel>
     </asp:Panel></center>
