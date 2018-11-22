@@ -10,7 +10,7 @@ using static UI.Web.Usuarios;
 
 namespace UI.Web
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class Especialidades : System.Web.UI.Page
     {
         protected void Page_Init(object sender, EventArgs e)
         {
