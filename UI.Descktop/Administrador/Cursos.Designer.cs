@@ -184,7 +184,7 @@
             this.tsbReporte});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(164, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(135, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnNuevo
@@ -219,11 +219,11 @@
             // 
             // tsbReporte
             // 
-            this.tsbReporte.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbReporte.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbReporte.Image = ((System.Drawing.Image)(resources.GetObject("tsbReporte.Image")));
             this.tsbReporte.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbReporte.Name = "tsbReporte";
-            this.tsbReporte.Size = new System.Drawing.Size(52, 22);
+            this.tsbReporte.Size = new System.Drawing.Size(23, 22);
             this.tsbReporte.Text = "Reporte";
             this.tsbReporte.Click += new System.EventHandler(this.tsbReporte_Click);
             // 
