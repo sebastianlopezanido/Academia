@@ -175,6 +175,7 @@
     <Content Include="FindPages\FindMateria.aspx" />
     <Content Include="AlumnoPages\Inscripciones.aspx" />
     <Content Include="AlumnoPages\Cursado.aspx" />
+    <Content Include="FindProfesor.aspx" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -418,6 +419,13 @@
     </Compile>
     <Compile Include="AlumnoPages\Cursado.aspx.designer.cs">
       <DependentUpon>Cursado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FindProfesor.aspx.cs">
+      <DependentUpon>FindProfesor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FindProfesor.aspx.designer.cs">
+      <DependentUpon>FindProfesor.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
