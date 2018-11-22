@@ -143,6 +143,7 @@
   <ItemGroup>
     <Content Include="AdminPages\Personas.aspx" />
     <Content Include="AdminPages\Usuarios2.aspx" />
+    <Content Include="ApplicationForm.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -168,6 +169,8 @@
     <Content Include="AdminPages\Especialidades.aspx" />
     <Content Include="AdminPages\Planes.aspx" />
     <Content Include="AdminPages\Materias.aspx" />
+    <Content Include="AdminPages\Comisiones.aspx" />
+    <Content Include="AdminPages\Cursos.aspx" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -262,6 +265,13 @@
     </Compile>
     <Compile Include="alumnos_inscripciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationForm.aspx.cs">
+      <DependentUpon>ApplicationForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplicationForm.aspx.designer.cs">
+      <DependentUpon>ApplicationForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -362,6 +372,20 @@
     </Compile>
     <Compile Include="AdminPages\Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\Comisiones.aspx.cs">
+      <DependentUpon>Comisiones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\Comisiones.aspx.designer.cs">
+      <DependentUpon>Comisiones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\Cursos.aspx.cs">
+      <DependentUpon>Cursos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\Cursos.aspx.designer.cs">
+      <DependentUpon>Cursos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
