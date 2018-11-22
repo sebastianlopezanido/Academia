@@ -8,7 +8,7 @@
                 <asp:BoundField DataField="IDCurso" HeaderText="Materia" />
                 <asp:BoundField DataField="IDCurso" HeaderText="Comision" />
                 <asp:BoundField DataField="IDCurso" HeaderText="Año" />
-                <asp:CommandField SelectText="Seleccionar" ShowSelectButton="True" >
+                <asp:CommandField SelectText="Ver" ShowSelectButton="True" >
                 <ControlStyle Font-Bold="True" />
                 </asp:CommandField>
             </Columns>
@@ -23,7 +23,6 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:Button ID="btnVer" runat="server" OnClick="btnVer_Click" Text="Ver" />
         <asp:GridView ID="GridAlumnos" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" ForeColor="#333333" GridLines="None" OnRowDataBound="GridAlumnos_RowDataBound" OnSelectedIndexChanged="gridAlumnos_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -33,7 +32,7 @@
                 <asp:BoundField DataField="IDAlumno" HeaderText="Apellido" />
                 <asp:BoundField DataField="Nota" HeaderText="Nota" />
                 <asp:BoundField DataField="Condicion" HeaderText="Condicion" />
-                <asp:CommandField SelectText="Seleccionar" ShowSelectButton="True">
+                <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                 <ControlStyle Font-Bold="True" />
                 </asp:CommandField>
             </Columns>
@@ -48,7 +47,6 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-            <asp:Button ID="btnEditar" runat="server" OnClick="btnEditar_Click" Text="Editar" Visible="False" />
             <asp:Button ID="btnSalir" runat="server" OnClick="btnSalir_Click" Text="Salir" Visible="False" />
 
         <asp:Panel ID="Panel2" runat="server" Height="289px">
@@ -80,6 +78,10 @@
                         <td dir="rtl">Condición</td>
                         <td>
                             <asp:DropDownList ID="ddlCondicion" runat="server">
+                                <asp:ListItem>Indefinida</asp:ListItem>
+                                <asp:ListItem>Libre</asp:ListItem>
+                                <asp:ListItem>Regular</asp:ListItem>
+                                <asp:ListItem>Promovido</asp:ListItem>
                             </asp:DropDownList>
                         </td>
                     </tr>

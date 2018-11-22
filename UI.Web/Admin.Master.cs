@@ -29,7 +29,7 @@ namespace UI.Web
             {
                 case "Administrador": Menu1.Visible = true; break;
                 case "Alumno": Menu2.Visible = true; break;
-                //case "Profesor": Menu3.Visible = true; break;
+                case "Profesor": Menu3.Visible = true; break;
             }
             lblTipo.Text = Session["usuario"].ToString();
         }

@@ -34,7 +34,7 @@
                                 </asp:Menu>
                                 <asp:Menu ID="Menu3" runat="server" Visible="False">
                                     <Items>
-                                        <asp:MenuItem Text="Cursos" Value="Cursos"></asp:MenuItem>
+                                        <asp:MenuItem Text="Cursos" Value="Cursos" NavigateUrl="~/ProfesorPages/CursosProfesor.aspx"></asp:MenuItem>
                                     </Items>
                                 </asp:Menu>
                                 <asp:Menu ID="Menu1" runat="server" OnInit="Menu1_Init" Visible="False">
@@ -57,7 +57,7 @@
                             <td width ="100"></td>
                         </tr>
                         <tr> 
-                            <td colspan="2"> Pie </td>
+                            <td colspan="3"> Pie </td>
                         </tr>
 
                     </table>                    

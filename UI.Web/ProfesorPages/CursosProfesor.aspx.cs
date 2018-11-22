@@ -23,8 +23,7 @@ namespace UI.Web
         {
             if (!IsPostBack)
             {
-                LoadGrid();
-                //ddlcondicion?
+                LoadGrid();                
             }
         }
         
@@ -57,6 +56,25 @@ namespace UI.Web
             set
             {
                 ViewState["SelectedID"] = value;
+            }
+        }
+
+        protected int SelectedIDInscripcion
+        {
+            get
+            {
+                if (ViewState["SelectedIDInscripcion"] != null)
+                {
+                    return (int)ViewState["SelectedIDInscripcion"];
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                ViewState["SelectedIDInscripcion"] = value;
             }
         }
 
@@ -152,9 +170,7 @@ namespace UI.Web
             if (IsEntitySelected)
             {
                 gridCursos.Visible = false;
-                btnVer.Visible = false;
-                GridAlumnos.Visible= true;
-                btnEditar.Visible = true;
+                GridAlumnos.Visible= true;                
                 btnSalir.Visible = true;
                 LoadGridAlumnos();
             }
@@ -162,25 +178,7 @@ namespace UI.Web
 
 
 
-        //CursoLogic _logic;
-        //private CursoLogic Logic
-        //{
-        //    get
-        //    {
-        //        if (_logic == null)
-        //        {
-        //            _logic = new CursoLogic();
-        //        }
-        //        return _logic;
-        //    }
-        //}
-
-        //private Curso _Entity;
-        //public Curso Entity
-        //{
-        //    set { _Entity = value; }
-        //    get { return _Entity; }
-        //}
+        
 
         private void LoadForm(int id)
         {
@@ -189,28 +187,22 @@ namespace UI.Web
             InscripcionLogic il = new InscripcionLogic();
             UsuarioActual = ul.GetOne(id);
             PersonaActual = pl.GetOne(UsuarioActual.IDPersona);
-            AlumnoInscripcionActual = il.GetOne(id);
+            AlumnoInscripcionActual = il.GetOne(SelectedIDInscripcion);
 
             txtApellido.Text = PersonaActual.Apellido;
             txtNombre.Text = PersonaActual.Nombre;
             txtNota.Text = AlumnoInscripcionActual.Nota.ToString();
+            ddlCondicion.SelectedIndex = (int)AlumnoInscripcionActual.Condicion;
             
         }
 
         private void LoadEntity()
-        {
-            switch (FormMode)
-            {
-                
-                case FormModes.Modificacion:
-                    AlumnoInscripcionActual = new AlumnoInscripcion();
-                    AlumnoInscripcionActual.Nota = int.Parse(txtNota.Text);
-                    AlumnoInscripcionActual.Condicion = (AlumnoInscripcion.TiposCondiciones)int.Parse(ddlCondicion.SelectedValue);
-                    AlumnoInscripcionActual.ID = SelectedIDAlumno;
-                    break;
-                default:
-                    break;
-            }
+        {            
+            AlumnoInscripcionActual = new AlumnoInscripcion();
+            AlumnoInscripcionActual.Nota = int.Parse(txtNota.Text);
+            AlumnoInscripcionActual.Condicion = (AlumnoInscripcion.TiposCondiciones)ddlCondicion.SelectedIndex;
+            AlumnoInscripcionActual.ID = SelectedIDInscripcion;
+            AlumnoInscripcionActual.State = BusinessEntity.States.Modified;
         }
 
         private void SaveEntity(AlumnoInscripcion alumnoInscripcion )
@@ -218,12 +210,7 @@ namespace UI.Web
             InscripcionLogic il = new InscripcionLogic();
             il.Save(alumnoInscripcion);
         }
-
-
-        //private void DeleteEntity(int id)
-        //{
-        //    Logic.Delete(id);
-        //}
+                       
 
         //private void ClearForm()
         //{
@@ -235,14 +222,7 @@ namespace UI.Web
 
 
 
-        //protected void btnEliminar_Click(object sender, EventArgs e)
-        //{
-        //    if (IsEntitySelected)
-        //    {
-        //        DeleteEntity(SelectedID);
-        //        LoadGrid();
-        //    }
-        //}
+        
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -264,6 +244,14 @@ namespace UI.Web
         protected void gridCursos_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int)gridCursos.SelectedValue;
+
+            if (IsEntitySelected)
+            {
+                gridCursos.Visible = false;
+                GridAlumnos.Visible = true;
+                btnSalir.Visible = true;
+                LoadGridAlumnos();
+            }
         }
 
         protected void gridAlumnos_SelectedIndexChanged(object sender, EventArgs e)
@@ -272,27 +260,24 @@ namespace UI.Web
             InscripcionLogic il = new InscripcionLogic();
             int aux = (int)GridAlumnos.SelectedValue;
             AlumnoInscripcionActual = il.GetOne(aux);
+            SelectedIDAlumno = AlumnoInscripcionActual.IDAlumno;
+            SelectedIDInscripcion = (int)GridAlumnos.SelectedValue;
 
-            SelectedIDAlumno = AlumnoInscripcionActual.IDAlumno; 
-        }
-
-        protected void btnEditar_Click(object sender, EventArgs e)
-        {
             if (IsEntitySelected)
             {
                 formPanel.Visible = true;
-                FormMode = FormModes.Modificacion;                
+                FormMode = FormModes.Modificacion;
                 LoadForm(SelectedIDAlumno);
 
             }
         }
 
+        
+
         protected void btnSalir_Click(object sender, EventArgs e)
         {
             gridCursos.Visible = true;
-            btnVer.Visible = true;
             GridAlumnos.Visible = false;
-            btnEditar.Visible = false;
             btnSalir.Visible = false;
             formPanel.Visible = false;
             LoadGrid();
