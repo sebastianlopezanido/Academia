@@ -26,9 +26,6 @@ namespace UI.Web
             if (!IsPostBack)
             {
                 this.LoadGrid();
-                cbxTipo.Items.Add("Alumno");
-                cbxTipo.Items.Add("Profesor");
-                cbxTipo.Items.Add("Administrador");
             }            
         }
 
@@ -106,6 +103,7 @@ namespace UI.Web
             txtClave.Text = Entity.Clave;
             txtConfirmarClave.Text = Entity.Clave;
             txtId.Text = Entity.ID.ToString();
+            ddlTipo.SelectedIndex = (int) Entity.Tipo ;
         }
 
         private void LoadEntity(Usuario usuario)
@@ -115,7 +113,7 @@ namespace UI.Web
             usuario.NombreUsuario = txtUsuario.Text;
             usuario.Clave = txtClave.Text;
             usuario.IDPlan = int.Parse(txtIdPlan.Text);
-            usuario.Tipo = Usuario.TiposUsuario.Alumno; // corregir
+            usuario.Tipo = (Usuario.TiposUsuario)int.Parse(ddlTipo.SelectedValue); // corregir
             usuario.Habilitado = ckbHabilitado.Checked;
         }
 
@@ -133,7 +131,7 @@ namespace UI.Web
             txtIdPlan.Enabled = enable;
             txtUsuario.Enabled = enable;
             ckbHabilitado.Enabled = enable;
-            cbxTipo.Enabled = enable;
+            ddlTipo.Enabled = enable;
 
         }
 
@@ -173,6 +171,16 @@ namespace UI.Web
                 EnableForm(true);
                 LoadForm(SelectedID);
             }
+        }
+
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtClave.Text))
+            {
+                lblError.Text = "*Campos incompletos";
+                return false;
+            }
+            return true;
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)

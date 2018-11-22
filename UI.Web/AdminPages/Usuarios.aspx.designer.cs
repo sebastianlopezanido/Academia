@@ -202,13 +202,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.Label Label7;
         
         /// <summary>
-        /// cbxTipo control.
+        /// ddlTipo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cbxTipo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
         
         /// <summary>
         /// btnAceptar control.
@@ -227,5 +227,14 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar;
+        
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
     }
 }

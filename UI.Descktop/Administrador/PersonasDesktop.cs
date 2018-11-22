@@ -51,7 +51,7 @@ namespace UI.Desktop
             txtEmail.Text = PersonaActual.Email;
             txtDireccion.Text = PersonaActual.Direccion;
             txtTelefono.Text = PersonaActual.Telefono;
-            txtFecha.Text = PersonaActual.FechaNacimiento.Date.ToString();
+            txtFecha.Text = PersonaActual.FechaNacimiento.ToString("dd/MM/yyyy");
             txtLegajo.Text = PersonaActual.Legajo.ToString();
         }
 

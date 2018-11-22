@@ -24,32 +24,86 @@
             <br />
     </asp:Panel> </center>
         <asp:Panel ID="formPanel" runat="server" Height="265px" Visible="False">
-            <asp:Label ID="Label1" runat="server" Text="ID"></asp:Label>
-            <asp:TextBox ID="txtId" runat="server" ReadOnly="True"></asp:TextBox>
-            <br />
-            <asp:Label ID="Label8" runat="server" Text="Usuario"></asp:Label>
-            <asp:TextBox ID="txtUsuario" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="Label2" runat="server" Text="ID Persona"></asp:Label>
-            <asp:TextBox ID="txtIdPersona" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="Label3" runat="server" Text="IDPlan"></asp:Label>
-            <asp:TextBox ID="txtIdPlan" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblClave" runat="server" Text="Clave"></asp:Label>
-            <asp:TextBox ID="txtClave" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblCClave" runat="server" Text="Confirmar Clave"></asp:Label>
-            <asp:TextBox ID="txtConfirmarClave" runat="server"></asp:TextBox>
-            <br />
-            <asp:CheckBox ID="ckbHabilitado" runat="server" Text="Habilitado" />
-            <br />
-            <asp:Label ID="Label7" runat="server" Text="Tipo Usuario"></asp:Label>
-            <asp:DropDownList ID="cbxTipo" runat="server">
-            </asp:DropDownList>
-            <br />
-            <br />
-            <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
+            <center><table>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label1" runat="server" Text="ID"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtId" runat="server" ReadOnly="True"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label8" runat="server" Text="Usuario"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtUsuario" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label2" runat="server" Text="ID Persona"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtIdPersona" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label3" runat="server" Text="IDPlan"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtIdPlan" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblClave" runat="server" Text="Clave"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtClave" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblCClave" runat="server" Text="Confirmar Clave"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtConfirmarClave" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:CheckBox ID="ckbHabilitado" runat="server" Text="Habilitado" TextAlign="Left" />
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label7" runat="server" Text="Tipo Usuario"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlTipo" runat="server">
+                            <asp:ListItem Value="0">Alumno</asp:ListItem>
+                            <asp:ListItem Value="1">Profesor</asp:ListItem>
+                            <asp:ListItem Value="2">Admin</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblError" runat="server"></asp:Label>
+                    </td>
+                </tr>
+            </table></center>
         </asp:Panel>
 </asp:Content>
