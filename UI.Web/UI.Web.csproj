@@ -165,6 +165,7 @@
     <Content Include="Admin.Master" />
     <Content Include="Home.aspx" />
     <Content Include="AdminPages\Usuarios.aspx" />
+    <Content Include="AdminPages\Especialidades.aspx" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -338,6 +339,13 @@
     </Compile>
     <Compile Include="AdminPages\Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\Especialidades.aspx.cs">
+      <DependentUpon>Especialidades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\Especialidades.aspx.designer.cs">
+      <DependentUpon>Especialidades.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
