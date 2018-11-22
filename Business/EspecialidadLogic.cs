@@ -41,12 +41,19 @@ namespace BusinessLogic
 
         public void Save(Especialidad especialidad)
         {
-           EspecialidadData.Save(especialidad); 
+            try { EspecialidadData.Save(especialidad); }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public void Delete(int ID)
         {
-            EspecialidadData.Delete(ID); 
+            EspecialidadData.Delete(ID);
+           
+            
         }        
     }
 }

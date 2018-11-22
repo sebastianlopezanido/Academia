@@ -19,6 +19,8 @@
             <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" OnClick="btnNuevo_Click" />
             <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
             <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
+            <br />
+            <asp:Label ID="lblError1" runat="server"></asp:Label>
         </asp:Panel>
         <br />
     </asp:Panel>
@@ -102,6 +104,7 @@
                     <tr>
                         <td colspan="2">
                             <asp:Label ID="lblError" runat="server"></asp:Label>
+                            <asp:CompareValidator Runat="Server" ControlToValidate="txtFechaNac" Display="Dynamic" Operator="DataTypeCheck" Text="Error, fecha incorrecta" Type="Date" />
                         </td>
                     </tr>
                 </table>

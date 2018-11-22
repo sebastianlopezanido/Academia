@@ -103,18 +103,35 @@ namespace UI.Web
 
         private void SaveEntity(Especialidad especialidad)
         {
-            Logic.Save(especialidad);
+            try
+            {
+                Logic.Save(especialidad);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+            
         }
 
         private void EnableForm(bool enable)
         {
             txtId.Enabled = enable;
             txtDescripcion.Enabled = enable;
+            lblError.Text = "";
         }
 
         private void DeleteEntity(int id)
         {
-            Logic.Delete(id);
+            try
+            {
+                Logic.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }
+            
         }
 
         private void ClearForm()
@@ -144,10 +161,18 @@ namespace UI.Web
                 LoadForm(SelectedID);
             }
         }
-
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+                lblError.Text = "*Campos incompletos";
+                return false;
+            }
+            return true;
+        }
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-
+            if (Validar()) { 
             switch (FormMode)
             {
                 case FormModes.Alta:
@@ -170,6 +195,7 @@ namespace UI.Web
             }
             LoadGrid();
             formPanel.Visible = false;
+            }
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)

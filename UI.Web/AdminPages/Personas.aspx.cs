@@ -94,7 +94,7 @@ namespace UI.Web.AdminPages
             txtApellido.Text = Entity.Apellido;
             txtDireccion.Text = Entity.Direccion;
             txtTelefono.Text = Entity.Telefono;
-            txtFechaNac.Text = Entity.FechaNacimiento.ToString();
+            txtFechaNac.Text = Entity.FechaNacimiento.ToString("dd/MM/yyyy");
             txtLegajo.Text = Entity.Legajo.ToString();
             txtId.Text = Entity.ID.ToString();
             txtEmail.Text = Entity.Email;
@@ -115,7 +115,15 @@ namespace UI.Web.AdminPages
 
         private void SaveEntity(Persona persona)
         {
-            Logic.Save(persona);
+            try
+            {
+                Logic.Save(persona);
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }
+           
         }
 
         private void EnableForm(bool enable)
@@ -129,11 +137,21 @@ namespace UI.Web.AdminPages
             txtLegajo.Enabled = enable;
             txtId.Enabled = enable;
             txtEmail.Enabled = enable;
+            lblError.Text = "";
+
         }
 
         private void DeleteEntity(int id)
         {
-            Logic.Delete(id);
+            try
+            {
+                Logic.Delete(id);
+            }
+            catch(Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }
+            
         }
 
         private void ClearForm()
@@ -171,9 +189,35 @@ namespace UI.Web.AdminPages
             }
         }
 
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtApellido.Text) ||
+                string.IsNullOrEmpty(txtNombre.Text) ||
+                string.IsNullOrEmpty(txtTelefono.Text) ||
+                string.IsNullOrEmpty(txtFechaNac.Text) ||
+                string.IsNullOrEmpty(txtLegajo.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) ||
+                string.IsNullOrEmpty(txtDireccion.Text))
+            {
+                lblError.Text = "*Campos incompletos";
+                return false;
+            }
+            int num;
+            if (!(int.TryParse(txtLegajo.Text, out num)) )
+            {
+                lblError.Text = "*Legajo debe ser un numero entero";
+                return false;
+            }
+
+            return true;
+        }
+
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
+            if (Validar())
+            {
 
+            
             switch (FormMode)
             {
                 case FormModes.Alta:
@@ -194,8 +238,10 @@ namespace UI.Web.AdminPages
                 default:
                     break;
             }
+            
             LoadGrid();
             formPanel.Visible = false;
+            }
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
