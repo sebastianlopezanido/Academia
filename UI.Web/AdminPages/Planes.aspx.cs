@@ -9,43 +9,34 @@ using BusinessLogic;
 
 namespace UI.Web
 {
-    public partial class Planes : System.Web.UI.Page
+    public partial class Planes : ApplicationForm
     {
         protected void Page_Init(object sender, EventArgs e)
         {
             if (Session["tipo"].ToString() != "Administrador")
             {
                 Response.Redirect("http://localhost:57900/Home.aspx");
-            }
-            EspecialidadLogic el = new EspecialidadLogic();
-            ddlEsp.DataSource = el.GetAll();            
-            ddlEsp.DataValueField = "ID";
-            ddlEsp.DataTextField = "Descripcion";
-            ddlEsp.DataBind();
-        
+            }           
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                this.LoadGrid();
+                LoadGrid();
+                EspecialidadLogic el = new EspecialidadLogic();
+                ddlEsp.DataSource = el.GetAll();
+                ddlEsp.DataValueField = "ID";
+                ddlEsp.DataTextField = "Descripcion";
+                ddlEsp.DataBind();
             }
-        }
+        }        
 
-        
-
-        public enum FormModes
+        private Especialidad _EspecialidadActual;
+        public Especialidad EspecialidadActual
         {
-            Alta,
-            Baja,
-            Modificacion
-        }
-
-        public FormModes FormMode
-        {
-            get { return (FormModes)this.ViewState["FormMode"]; }
-            set { this.ViewState["FormMode"] = value; }
+            get { return _EspecialidadActual; }
+            set { _EspecialidadActual = value; }
         }
 
         PlanLogic _logic;
@@ -59,45 +50,19 @@ namespace UI.Web
                 }
                 return _logic;
             }
+        }       
+
+        private Plan _Entity;
+        public Plan Entity
+        {
+            set { _Entity = value; }
+            get { return _Entity; }
         }
 
         private void LoadGrid()
         {
-            this.gridView.DataSource = this.Logic.GetAll();
-            this.gridView.DataBind();
-        }
-
-        private Plan Entity
-        {
-            get;
-            set;
-        }
-
-        private int SelectedID
-        {
-            get
-            {
-                if (ViewState["SelectedID"] != null)
-                {
-                    return (int)ViewState["SelectedID"];
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            set
-            {
-                ViewState["SelectedID"] = value;
-            }
-        }
-
-        private bool IsEntitySelected
-        {
-            get
-            {
-                return SelectedID != 0;
-            }
+            gridPlanes.DataSource = Logic.GetAll();
+            gridPlanes.DataBind();
         }
 
         private void LoadForm(int id)
@@ -108,16 +73,38 @@ namespace UI.Web
             ddlEsp.SelectedValue = Entity.IDEspecialidad.ToString();                        
         }
 
-        private void LoadEntity(Plan plan)
+        private void LoadEntity()
         {
-            if (FormMode == FormModes.Modificacion) plan.ID = int.Parse(txtId.Text);
-            plan.IDEspecialidad = int.Parse(ddlEsp.SelectedValue);           
-            plan.Descripcion = txtDescripcion.Text;            
+            switch (FormMode)
+            {
+                case FormModes.Alta:
+                    Entity = new Plan();
+                    Entity.State = BusinessEntity.States.New;
+                    Entity.IDEspecialidad = int.Parse(ddlEsp.SelectedValue);
+                    Entity.Descripcion = txtDescripcion.Text;
+                    break;
+                case FormModes.Modificacion:
+                    Entity = new Plan();
+                    Entity.State = BusinessEntity.States.Modified;
+                    Entity.ID = int.Parse(txtId.Text);
+                    Entity.IDEspecialidad = int.Parse(ddlEsp.SelectedValue);
+                    Entity.Descripcion = txtDescripcion.Text;
+                    break;
+                default:
+                    break;
+            }        
         }
 
         private void SaveEntity(Plan plan)
         {
-            Logic.Save(plan);
+            try
+            {
+                Logic.Save(plan);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
         }
 
         private void EnableForm(bool enable)
@@ -129,7 +116,14 @@ namespace UI.Web
 
         private void DeleteEntity(int id)
         {
-            Logic.Delete(id);
+            try
+            {
+                Logic.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }
         }
 
         private void ClearForm()
@@ -139,15 +133,13 @@ namespace UI.Web
             ddlEsp.ClearSelection();
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
+
+        protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (IsEntitySelected)
-            {
-                formPanel.Visible = true;
-                FormMode = FormModes.Baja;
-                EnableForm(false);
-                LoadForm(SelectedID);
-            }
+            formPanel.Visible = true;
+            FormMode = FormModes.Alta;
+            ClearForm();
+            EnableForm(true);
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -162,62 +154,59 @@ namespace UI.Web
             }
         }
 
-        private bool Validar()
+        protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtDescripcion.Text))
+            if (IsEntitySelected)
             {
-                lblError.Text = "*Campos incompletos";
-                return false;
+                DeleteEntity(SelectedID);
+                LoadGrid();
             }
-            return true;
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             if (Validar())
             {
-                switch (FormMode)
-                {
-                    case FormModes.Alta:
-                        Entity = new Plan();
-                        Entity.State = BusinessEntity.States.New;
-                        LoadEntity(Entity);
-                        SaveEntity(Entity);
-                        break;
-                    case FormModes.Modificacion:
-                        Entity = new Plan();
-                        Entity.State = BusinessEntity.States.Modified;
-                        LoadEntity(Entity);
-                        SaveEntity(Entity);
-                        break;
-                    case FormModes.Baja:
-                        DeleteEntity(SelectedID);
-                        break;
-                    default:
-                        break;
-                }
+                LoadEntity();
+                SaveEntity(Entity);
                 LoadGrid();
                 formPanel.Visible = false;
             }
-        }
-
-        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SelectedID = (int)gridView.SelectedValue;
-        }
-
-        protected void btnNuevo_Click(object sender, EventArgs e)
-        {
-            formPanel.Visible = true;
-            FormMode = FormModes.Alta;
-            ClearForm();
-            EnableForm(true);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             LoadGrid();
             formPanel.Visible = false;
+        }
+
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+                lblError.Text = "Debe llenar todos los campos";
+                return false;
+            }
+
+            return true;
+        }        
+
+        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedID = (int)gridPlanes.SelectedValue;
+        }
+
+        protected void gridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[2].Text != null)
+                {
+                    EspecialidadLogic pl = new EspecialidadLogic();
+                    EspecialidadActual = pl.GetOne(int.Parse(e.Row.Cells[2].Text));
+                    e.Row.Cells[2].Text = EspecialidadActual.Descripcion;
+                }
+            }
         }
     }
 }

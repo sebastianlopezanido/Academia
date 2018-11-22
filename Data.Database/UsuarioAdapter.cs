@@ -27,8 +27,17 @@ namespace Data.Database
                     usr.Clave = (string)dr["clave"];
                     usr.Habilitado = (bool)dr["habilitado"];
                     usr.IDPersona = (int)dr["id_persona"];
-                    usr.IDPlan = (int)dr["id_plan"];
                     usr.Tipo = (Usuario.TiposUsuario)dr["tipo_usuario"];
+
+                    if (Convert.IsDBNull(dr["id_plan"]))
+                    {
+                        usr.IDPlan = null;
+                    }
+                    else
+                    {
+                        usr.IDPlan = (int)dr["id_plan"];
+                    }
+
                     usuarios.Add(usr);
                 }
 
@@ -103,8 +112,17 @@ namespace Data.Database
                     usr.Clave = (string)dr["clave"];
                     usr.Habilitado = (bool)dr["habilitado"];
                     usr.IDPersona = (int)dr["id_persona"];
-                    usr.IDPlan = (int)dr["id_plan"];
                     usr.Tipo = (Usuario.TiposUsuario)dr["tipo_usuario"];
+
+                    if (Convert.IsDBNull(dr["id_plan"]))
+                    {
+                        usr.IDPlan = null;
+                    }
+                    else
+                    {
+                        usr.IDPlan = (int)dr["id_plan"];
+                    }
+                    
                 }
 
                 dr.Close();
@@ -141,8 +159,17 @@ namespace Data.Database
                     usr.Clave = (string)dr["clave"];
                     usr.Habilitado = (bool)dr["habilitado"];
                     usr.IDPersona = (int)dr["id_persona"];
-                    usr.IDPlan = (int)dr["id_plan"];
                     usr.Tipo = (Usuario.TiposUsuario)dr["tipo_usuario"];
+
+                    if (Convert.IsDBNull(dr["id_plan"]))
+                    {
+                        usr.IDPlan = null;
+                    }
+                    else
+                    {
+                        usr.IDPlan = (int)dr["id_plan"];
+                    }                    
+                    
                 }
                 else
                 {
@@ -190,11 +217,20 @@ namespace Data.Database
             try
             {
                 OpenConnection();
-                SqlCommand cmd = new SqlCommand("UPDATE usuarios SET nombre_usuario = @nombre_usuario, clave = @clave, habilitado = @habilitado WHERE id_usuario = @id", sqlConn);
+                SqlCommand cmd = new SqlCommand("UPDATE usuarios SET nombre_usuario = @nombre_usuario, clave = @clave, habilitado = @habilitado, id_plan = @id_plan WHERE id_usuario = @id", sqlConn);
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = usuario.ID;
                 cmd.Parameters.Add("@nombre_usuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
                 cmd.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
                 cmd.Parameters.Add("@habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
+                if (usuario.IDPlan == null)
+                {
+                    cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = DBNull.Value;
+                }
+                else
+                {
+                    cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = usuario.IDPlan;
+                }
+
                 cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -219,8 +255,16 @@ namespace Data.Database
                 cmd.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
                 cmd.Parameters.Add("@habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
                 cmd.Parameters.Add("@id_persona", SqlDbType.Int).Value = usuario.IDPersona;
-                cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = usuario.IDPlan;
                 cmd.Parameters.Add("@tipo_usuario", SqlDbType.Int).Value = usuario.Tipo;
+                if (usuario.IDPlan == null)
+                {
+                    cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = DBNull.Value;
+                }
+                else
+                {
+                    cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = usuario.IDPlan;
+                }
+                             
                 cmd.ExecuteNonQuery();
             }
             catch (Exception Ex)

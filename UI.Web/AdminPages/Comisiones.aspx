@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Comisiones.aspx.cs" Inherits="UI.Web.Comisiones" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <center><asp:Panel ID="gridPanel" runat="server" Height="155px">
-        <asp:GridView ID="gridComisiones" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged">
+        <asp:GridView ID="gridComisiones" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowDataBound="gridComisiones_RowDataBound">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
@@ -28,6 +28,13 @@
             <asp:Button ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" Text="Nuevo" />
             <asp:Button ID="btnEditar" runat="server" OnClick="btnEditar_Click" Text="Editar" />
             <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" />
+            <br />
+            <br />
+            <table dir="ltr">
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
+                    </td></table>
             <asp:Panel ID="formPanel" runat="server" Visible="False" style="margin-top: 20px">
                 <table dir="ltr">
                 <tr>
@@ -66,6 +73,7 @@
                     </td>                    
                 </tr>
                     </table>
+                <br />
                 <table dir="ltr">
                 <tr>
                     <td dir="rtl">                
@@ -80,10 +88,8 @@
                         <asp:Label ID="lblError" runat="server"></asp:Label>
                     </td>
                 </tr>                
-                    </table>
-                <br />                
-                <br />
-                <br />
+                    </table>               
+                
             </asp:Panel>
         </asp:Panel>
     </asp:Panel></center>

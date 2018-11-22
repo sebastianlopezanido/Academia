@@ -22,5 +22,12 @@ namespace UI.Desktop
             get { return _Tipo; }
             set { _Tipo = value; }
         }
+
+        private static int? _IDPlan;
+        public static int? IDPlan
+        {
+            get { return _IDPlan; }
+            set { _IDPlan = value; }
+        }
     }
 }

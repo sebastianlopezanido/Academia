@@ -32,12 +32,6 @@ namespace UI.Web
             }
         }
 
-        private void LoadGrid()
-        {
-            gridComisiones.DataSource = Logic.GetAll();
-            gridComisiones.DataBind();
-        }
-
         ComisionLogic _logic;
         private ComisionLogic Logic
         {
@@ -51,11 +45,24 @@ namespace UI.Web
             }
         }
 
+        private Plan _PlanActual;
+        public Plan PlanActual
+        {
+            get { return _PlanActual; }
+            set { _PlanActual = value; }
+        }
+
         private Comision _Entity;
         public Comision Entity
         {
             set { _Entity = value; }
             get { return _Entity; }
+        }
+
+        private void LoadGrid()
+        {
+            gridComisiones.DataSource = Logic.GetAll();
+            gridComisiones.DataBind();
         }
 
         private void LoadForm(int id)
@@ -93,7 +100,14 @@ namespace UI.Web
 
         private void SaveEntity(Comision comision)
         {
-            Logic.Save(comision);
+            try
+            {
+                Logic.Save(comision);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
         }
 
         private void EnableForm(bool enable)
@@ -106,7 +120,14 @@ namespace UI.Web
 
         private void DeleteEntity(int id)
         {
-            Logic.Delete(id);
+            try
+            {
+                Logic.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }
         }
 
         private void ClearForm()
@@ -116,13 +137,12 @@ namespace UI.Web
             txtAño.Text = string.Empty;
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
+        protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (IsEntitySelected)
-            {
-                DeleteEntity(SelectedID);
-                LoadGrid();
-            }
+            formPanel.Visible = true;
+            FormMode = FormModes.Alta;
+            ClearForm();
+            EnableForm(true);
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -136,12 +156,13 @@ namespace UI.Web
             }
         }
 
-        protected void btnNuevo_Click(object sender, EventArgs e)
+        protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            formPanel.Visible = true;
-            FormMode = FormModes.Alta;
-            ClearForm();
-            EnableForm(true);
+            if (IsEntitySelected)
+            {
+                DeleteEntity(SelectedID);
+                LoadGrid();
+            }
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -161,11 +182,6 @@ namespace UI.Web
             formPanel.Visible = false;
         }
 
-        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SelectedID = (int)gridComisiones.SelectedValue;
-        }
-
         public bool Validar()
         {
             if (string.IsNullOrEmpty(txtAño.Text) || cbxPlan.SelectedValue == null || string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtAño.Text))
@@ -183,6 +199,24 @@ namespace UI.Web
             }
 
             return true;
+        }
+
+        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedID = (int)gridComisiones.SelectedValue;
+        }        
+
+        protected void gridComisiones_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[2].Text != null)
+                {
+                    PlanLogic pl = new PlanLogic();
+                    PlanActual = pl.GetOne(int.Parse(e.Row.Cells[2].Text));
+                    e.Row.Cells[2].Text = PlanActual.Descripcion;
+                }
+            }
         }
     }
 }

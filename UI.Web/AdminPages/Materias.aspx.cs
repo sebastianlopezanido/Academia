@@ -9,41 +9,41 @@ using BusinessLogic;
 
 namespace UI.Web
 {
-    public partial class Materias : System.Web.UI.Page
+    public partial class Materias : ApplicationForm
     {
         protected void Page_Init(object sender, EventArgs e)
         {
             if (Session["tipo"].ToString() != "Administrador")
             {
                 Response.Redirect("http://localhost:57900/Home.aspx");
-            }
-
-            PlanLogic pl = new PlanLogic();
-            ddlPlan.DataSource = pl.GetAll();
-            ddlPlan.DataValueField = "ID";
-            ddlPlan.DataTextField = "Descripcion";
-            ddlPlan.DataBind();
+            }            
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                this.LoadGrid();
+                LoadGrid();
+                PlanLogic pl = new PlanLogic();
+                ddlPlan.DataSource = pl.GetAll();
+                ddlPlan.DataValueField = "ID";
+                ddlPlan.DataTextField = "Descripcion";
+                ddlPlan.DataBind();
             }
         }
 
-        public enum FormModes
+        public Materia _Entity;
+        private Materia Entity
         {
-            Alta,
-            Baja,
-            Modificacion
+            set { _Entity = value; }
+            get { return _Entity; }
         }
 
-        public FormModes FormMode
+        private Plan _PlanActual;
+        public Plan PlanActual
         {
-            get { return (FormModes)this.ViewState["FormMode"]; }
-            set { this.ViewState["FormMode"] = value; }
+            get { return _PlanActual; }
+            set { _PlanActual = value; }
         }
 
         MateriaLogic _logic;
@@ -61,42 +61,9 @@ namespace UI.Web
 
         private void LoadGrid()
         {
-            this.gridView.DataSource = this.Logic.GetAll();
-            this.gridView.DataBind();
-        }
-
-        private Materia Entity
-        {
-            get;
-            set;
-        }
-
-        private int SelectedID
-        {
-            get
-            {
-                if (ViewState["SelectedID"] != null)
-                {
-                    return (int)ViewState["SelectedID"];
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            set
-            {
-                ViewState["SelectedID"] = value;
-            }
-        }
-
-        private bool IsEntitySelected
-        {
-            get
-            {
-                return SelectedID != 0;
-            }
-        }
+            gridMaterias.DataSource = Logic.GetAll();
+            gridMaterias.DataBind();
+        }     
 
         private void LoadForm(int id)
         {
@@ -105,22 +72,45 @@ namespace UI.Web
             txtDescripcion.Text = Entity.Descripcion.ToString();
             ddlPlan.SelectedValue = Entity.IDPlan.ToString();
             txtHsTotales.Text = Entity.HSTotales.ToString();
-            txtHsSemanales.Text = Entity.HSSemanales.ToString();          
-            
+            txtHsSemanales.Text = Entity.HSSemanales.ToString();           
         }
 
-        private void LoadEntity(Materia materia)
+        private void LoadEntity()
         {
-            if (FormMode == FormModes.Modificacion) materia.ID = int.Parse(txtId.Text);
-            materia.HSSemanales = int.Parse(txtHsSemanales.Text);
-            materia.HSTotales = int.Parse(txtHsTotales.Text);
-            materia.IDPlan = int.Parse(ddlPlan.SelectedValue);
-            materia.Descripcion = (string)txtDescripcion.Text;
+            switch (FormMode)
+            {
+                case FormModes.Alta:
+                    Entity = new Materia();
+                    Entity.State = BusinessEntity.States.New;
+                    Entity.HSSemanales = int.Parse(txtHsSemanales.Text);
+                    Entity.HSTotales = int.Parse(txtHsTotales.Text);
+                    Entity.IDPlan = int.Parse(ddlPlan.SelectedValue);
+                    Entity.Descripcion = txtDescripcion.Text;
+                    break;
+                case FormModes.Modificacion:
+                    Entity = new Materia();
+                    Entity.State = BusinessEntity.States.Modified;
+                    Entity.ID = int.Parse(txtId.Text);
+                    Entity.HSSemanales = int.Parse(txtHsSemanales.Text);
+                    Entity.HSTotales = int.Parse(txtHsTotales.Text);
+                    Entity.IDPlan = int.Parse(ddlPlan.SelectedValue);
+                    Entity.Descripcion = txtDescripcion.Text;
+                    break;                
+                default:
+                    break;
+            }            
         }
 
         private void SaveEntity(Materia materia)
         {
-            Logic.Save(materia);
+            try
+            {
+                Logic.Save(materia);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
         }
 
         private void EnableForm(bool enable)
@@ -129,14 +119,19 @@ namespace UI.Web
             txtDescripcion.Enabled = enable;
             txtHsSemanales.Enabled = enable;
             txtHsTotales.Enabled = enable;
-            lblError.Text = "";
-
-
+            lblError.Text = "";            
         }
 
         private void DeleteEntity(int id)
         {
-            Logic.Delete(id);
+            try
+            {
+                Logic.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }
         }
 
         private void ClearForm()
@@ -148,15 +143,12 @@ namespace UI.Web
             txtHsSemanales.Text = string.Empty;
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
+        protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (IsEntitySelected)
-            {
-                formPanel.Visible = true;
-                FormMode = FormModes.Baja;
-                EnableForm(false);
-                LoadForm(SelectedID);
-            }
+            formPanel.Visible = true;
+            FormMode = FormModes.Alta;
+            ClearForm();
+            EnableForm(true);
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -170,72 +162,70 @@ namespace UI.Web
             }
         }
 
-        private bool Validar()
+        protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtDescripcion.Text) || 
-                string.IsNullOrEmpty(txtHsSemanales.Text) ||
-                string.IsNullOrEmpty(txtHsTotales.Text))
+            if (IsEntitySelected)
             {
-                lblError.Text = "*Campos incompletos";
-                return false;
+                DeleteEntity(SelectedID);
+                LoadGrid();
             }
-            int num;
-            if (!(int.TryParse(txtHsSemanales.Text,out num)) || !(int.TryParse(txtHsTotales.Text, out num)))
-            {
-                lblError.Text = "*Horas debe ser un numero entero";
-                return false;
-            }
-
-            return true;
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-
             if (Validar())
-            {            
-                switch (FormMode)
-                {
-                    case FormModes.Alta:
-                        Entity = new Materia();
-                        Entity.State = BusinessEntity.States.New;
-                        LoadEntity(Entity);
-                        SaveEntity(Entity);
-                        break;
-                    case FormModes.Modificacion:
-                        Entity = new Materia();
-                        Entity.State = BusinessEntity.States.Modified;
-                        LoadEntity(Entity);
-                        SaveEntity(Entity);
-                        break;
-                    case FormModes.Baja:
-                        DeleteEntity(SelectedID);
-                        break;
-                    default:
-                        break;
-                }
+            {
+                LoadEntity();
+                SaveEntity(Entity);
                 LoadGrid();
                 formPanel.Visible = false;
             }
-        }
-
-        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SelectedID = (int)gridView.SelectedValue;
-        }
-
-        protected void btnNuevo_Click(object sender, EventArgs e)
-        {
-            formPanel.Visible = true;
-            FormMode = FormModes.Alta;
-            ClearForm();
-            EnableForm(true);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             LoadGrid();
             formPanel.Visible = false;
+        }
+
+
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtDescripcion.Text) || 
+                string.IsNullOrEmpty(txtHsSemanales.Text) ||
+                string.IsNullOrEmpty(txtHsTotales.Text))
+            {
+                lblError.Text = "Debe llenar todos los campos";
+                return false;
+            }
+
+            int num;
+
+            if (!(int.TryParse(txtHsSemanales.Text,out num)) || !(int.TryParse(txtHsTotales.Text, out num)))
+            {
+                lblError.Text = "Horas debe ser un numero entero";
+                return false;
+            }
+
+            return true;
+        }        
+
+        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedID = (int)gridMaterias.SelectedValue;
+        }        
+
+        protected void gridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[4].Text != null)
+                {
+                    PlanLogic pl = new PlanLogic();
+                    PlanActual = pl.GetOne(int.Parse(e.Row.Cells[4].Text));
+                    e.Row.Cells[4].Text = PlanActual.Descripcion;
+                }
+            }
         }
     }
 }

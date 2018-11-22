@@ -10,7 +10,7 @@ using static UI.Web.Usuarios;
 
 namespace UI.Web.AdminPages
 {
-    public partial class Personas : System.Web.UI.Page
+    public partial class Personas : ApplicationForm
     {
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -24,16 +24,9 @@ namespace UI.Web.AdminPages
         {
             if (!IsPostBack)
             {
-                this.LoadGrid();
-                
+                LoadGrid();                
             }
-        }
-
-        public FormModes FormMode
-        {
-            get { return (FormModes)this.ViewState["FormMode"]; }
-            set { this.ViewState["FormMode"] = value; }
-        }
+        }        
 
         PersonaLogic _logic;
         private PersonaLogic Logic
@@ -47,44 +40,18 @@ namespace UI.Web.AdminPages
                 return _logic;
             }
         }
+       
+        public Persona _Entity;
+        private Persona Entity
+        {
+            set { _Entity = value; }
+            get { return _Entity; }
+        }
 
         private void LoadGrid()
         {
-            this.gridView.DataSource = this.Logic.GetAll();
-            this.gridView.DataBind();
-        }
-
-        private Persona Entity
-        {
-            get;
-            set;
-        }
-
-        private int SelectedID
-        {
-            get
-            {
-                if (ViewState["SelectedID"] != null)
-                {
-                    return (int)ViewState["SelectedID"];
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            set
-            {
-                ViewState["SelectedID"] = value;
-            }
-        }
-
-        private bool IsEntitySelected
-        {
-            get
-            {
-                return SelectedID != 0;
-            }
+            gridPersonas.DataSource = Logic.GetAll();
+            gridPersonas.DataBind();
         }
 
         private void LoadForm(int id)
@@ -100,17 +67,36 @@ namespace UI.Web.AdminPages
             txtEmail.Text = Entity.Email;
         }
 
-        private void LoadEntity(Persona persona)
+        private void LoadEntity()
         {
-            if (FormMode == FormModes.Modificacion) persona.ID = int.Parse(txtId.Text);
-            persona.Apellido = txtApellido.Text;
-            persona.Nombre = txtNombre.Text;
-            persona.Direccion = txtDireccion.Text;
-            persona.Telefono = txtTelefono.Text;
-            persona.FechaNacimiento = DateTime.Parse(txtFechaNac.Text); 
-            persona.Legajo = int.Parse(txtLegajo.Text);
-            persona.Email = txtEmail.Text;
-
+            switch (FormMode)
+            {
+                case FormModes.Alta:
+                    Entity = new Persona();
+                    Entity.State = BusinessEntity.States.New;
+                    Entity.Apellido = txtApellido.Text;
+                    Entity.Nombre = txtNombre.Text;
+                    Entity.Direccion = txtDireccion.Text;
+                    Entity.Telefono = txtTelefono.Text;
+                    Entity.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                    Entity.Legajo = int.Parse(txtLegajo.Text);
+                    Entity.Email = txtEmail.Text;
+                    break;
+                case FormModes.Modificacion:
+                    Entity = new Persona();
+                    Entity.State = BusinessEntity.States.Modified;
+                    Entity.ID = int.Parse(txtId.Text);
+                    Entity.Apellido = txtApellido.Text;
+                    Entity.Nombre = txtNombre.Text;
+                    Entity.Direccion = txtDireccion.Text;
+                    Entity.Telefono = txtTelefono.Text;
+                    Entity.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                    Entity.Legajo = int.Parse(txtLegajo.Text);
+                    Entity.Email = txtEmail.Text;
+                    break;               
+                default:
+                    break;
+            }                        
         }
 
         private void SaveEntity(Persona persona)
@@ -121,9 +107,8 @@ namespace UI.Web.AdminPages
             }
             catch (Exception ex)
             {
-                lblError1.Text = ex.Message;
-            }
-           
+                lblError.Text = ex.Message;
+            }           
         }
 
         private void EnableForm(bool enable)
@@ -138,7 +123,6 @@ namespace UI.Web.AdminPages
             txtId.Enabled = enable;
             txtEmail.Enabled = enable;
             lblError.Text = "";
-
         }
 
         private void DeleteEntity(int id)
@@ -150,33 +134,29 @@ namespace UI.Web.AdminPages
             catch(Exception ex)
             {
                 lblError1.Text = ex.Message;
-            }
-            
+            }            
         }
 
         private void ClearForm()
         {
-            txtId.Text = String.Empty;
-            txtNombre.Text = String.Empty;
-            txtApellido.Text = String.Empty;
-            txtDireccion.Text = String.Empty;
-            txtTelefono.Text = String.Empty;
-            txtFechaNac.Text = String.Empty;
-            txtLegajo.Text = String.Empty;
-            txtId.Text = String.Empty;
-            txtEmail.Text = String.Empty;
+            txtId.Text = string.Empty;
+            txtNombre.Text = string.Empty;
+            txtApellido.Text = string.Empty;
+            txtDireccion.Text = string.Empty;
+            txtTelefono.Text = string.Empty;
+            txtFechaNac.Text = string.Empty;
+            txtLegajo.Text = string.Empty;
+            txtId.Text = string.Empty;
+            txtEmail.Text = string.Empty;
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
+        protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (IsEntitySelected)
-            {
-                formPanel.Visible = true;
-                FormMode = FormModes.Baja;
-                EnableForm(false);
-                LoadForm(SelectedID);
-            }
-        }
+            formPanel.Visible = true;
+            FormMode = FormModes.Alta;
+            ClearForm();
+            EnableForm(true);
+        }       
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
@@ -189,6 +169,32 @@ namespace UI.Web.AdminPages
             }
         }
 
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (IsEntitySelected)
+            {
+                DeleteEntity(SelectedID);
+                LoadGrid();
+            }
+        }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            if (Validar())
+            {
+                LoadEntity();
+                SaveEntity(Entity);
+                LoadGrid();
+                formPanel.Visible = false;
+            }
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LoadGrid();
+            formPanel.Visible = false;
+        }
+
         private bool Validar()
         {
             if (string.IsNullOrEmpty(txtApellido.Text) ||
@@ -199,68 +205,24 @@ namespace UI.Web.AdminPages
                 string.IsNullOrEmpty(txtEmail.Text) ||
                 string.IsNullOrEmpty(txtDireccion.Text))
             {
-                lblError.Text = "*Campos incompletos";
+                lblError.Text = "Debe llenar todos los campos";
                 return false;
             }
+
             int num;
+
             if (!(int.TryParse(txtLegajo.Text, out num)) )
             {
-                lblError.Text = "*Legajo debe ser un numero entero";
+                lblError.Text = "Legajo debe ser un numero entero";
                 return false;
             }
 
             return true;
-        }
-
-        protected void btnAceptar_Click(object sender, EventArgs e)
-        {
-            if (Validar())
-            {
-
-            
-            switch (FormMode)
-            {
-                case FormModes.Alta:
-                    Entity = new Persona();
-                    Entity.State = BusinessEntity.States.New;
-                    LoadEntity(Entity);
-                    SaveEntity(Entity);
-                    break;
-                case FormModes.Modificacion:
-                    Entity = new Persona();
-                    Entity.State = BusinessEntity.States.Modified;
-                    LoadEntity(Entity);
-                    SaveEntity(Entity);
-                    break;
-                case FormModes.Baja:
-                    DeleteEntity(SelectedID);
-                    break;
-                default:
-                    break;
-            }
-            
-            LoadGrid();
-            formPanel.Visible = false;
-            }
-        }
+        }        
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedID = (int)gridView.SelectedValue;
-        }
-
-        protected void btnNuevo_Click(object sender, EventArgs e)
-        {
-            formPanel.Visible = true;
-            FormMode = FormModes.Alta;
-            ClearForm();
-            EnableForm(true);
-        }
-
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            LoadGrid();
-            formPanel.Visible = false;
-        }
+            SelectedID = (int)gridPersonas.SelectedValue;
+        }      
     }
 }
