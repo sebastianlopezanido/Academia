@@ -9,7 +9,7 @@ using BusinessLogic;
 
 namespace UI.Web
 {
-    public partial class Comisiones : ApplicationForm
+    public partial class Cursos : ApplicationForm
     {
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -24,35 +24,35 @@ namespace UI.Web
             if (!IsPostBack)
             {
                 LoadGrid();
-                PlanLogic pl = new PlanLogic();
-                cbxPlan.DataSource = pl.GetAll();
-                cbxPlan.DataValueField = "ID";
-                cbxPlan.DataTextField = "Descripcion";
-                cbxPlan.DataBind();
+                ComisionLogic cl = new ComisionLogic();
+                cbxComision.DataSource = cl.GetAll();
+                cbxComision.DataValueField = "ID";
+                cbxComision.DataTextField = "Descripcion";
+                cbxComision.DataBind();
             }
         }
 
         private void LoadGrid()
         {
-            gridComisiones.DataSource = Logic.GetAll();
-            gridComisiones.DataBind();
+            gridCursos.DataSource = Logic.GetAll();
+            gridCursos.DataBind();
         }
 
-        ComisionLogic _logic;
-        private ComisionLogic Logic
+        CursoLogic _logic;
+        private CursoLogic Logic
         {
             get
             {
                 if (_logic == null)
                 {
-                    _logic = new ComisionLogic();
+                    _logic = new CursoLogic();
                 }
                 return _logic;
             }
         }
 
-        private Comision _Entity;
-        public Comision Entity
+        private Curso _Entity;
+        public Curso Entity
         {
             set { _Entity = value; }
             get { return _Entity; }
@@ -62,9 +62,10 @@ namespace UI.Web
         {
             Entity = Logic.GetOne(id);
             txtID.Text = Entity.ID.ToString();
-            txtDescripcion.Text = Entity.Descripcion;
-            txtAño.Text = Entity.AnioEspecialidad.ToString();
-            cbxPlan.SelectedValue = Entity.IDPlan.ToString();
+            cbxComision.SelectedValue = Entity.IDComision.ToString();
+            txtAño.Text = Entity.AnioCalendario.ToString();
+            txtCupo.Text = Entity.Cupo.ToString();
+            txtMateria.Text = Entity.IDMateria.ToString();
         }
 
         private void LoadEntity()
@@ -72,36 +73,39 @@ namespace UI.Web
             switch (FormMode)
             {
                 case FormModes.Alta:
-                    Entity = new Comision();
+                    Entity = new Curso();
                     Entity.State = BusinessEntity.States.New;
-                    Entity.Descripcion = txtDescripcion.Text;
-                    Entity.AnioEspecialidad = int.Parse(txtAño.Text);
-                    Entity.IDPlan = int.Parse(cbxPlan.SelectedValue);                    
+                    Entity.IDComision = int.Parse(cbxComision.SelectedValue);
+                    Entity.AnioCalendario = int.Parse(txtAño.Text);
+                    Entity.IDMateria = int.Parse(txtMateria.Text);
+                    Entity.Cupo = int.Parse(txtCupo.Text);
                     break;
                 case FormModes.Modificacion:
-                    Entity = new Comision();
+                    Entity = new Curso();
                     Entity.ID = int.Parse(txtID.Text);
                     Entity.State = BusinessEntity.States.Modified;
-                    Entity.Descripcion = txtDescripcion.Text;
-                    Entity.AnioEspecialidad = int.Parse(txtAño.Text);
-                    Entity.IDPlan = int.Parse(cbxPlan.SelectedValue);                    
-                    break;                
+                    Entity.IDComision = int.Parse(cbxComision.SelectedValue);
+                    Entity.AnioCalendario = int.Parse(txtAño.Text);
+                    Entity.IDMateria = int.Parse(txtMateria.Text);
+                    Entity.Cupo = int.Parse(txtCupo.Text);
+                    break;
                 default:
                     break;
-            }            
+            }
         }
 
-        private void SaveEntity(Comision comision)
+        private void SaveEntity(Curso curso)
         {
-            Logic.Save(comision);
+            Logic.Save(curso);
         }
 
         private void EnableForm(bool enable)
         {
             txtID.Enabled = enable;
-            txtDescripcion.Enabled = enable;
+            txtMateria.Enabled = enable;
             txtAño.Enabled = enable;
-            cbxPlan.Enabled = enable;
+            cbxComision.Enabled = enable;
+            txtCupo.Enabled = enable;
         }
 
         private void DeleteEntity(int id)
@@ -112,17 +116,17 @@ namespace UI.Web
         private void ClearForm()
         {
             txtID.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
+            txtMateria.Text = string.Empty;
             txtAño.Text = string.Empty;
+            txtCupo.Text = string.Empty;
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
+        protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (IsEntitySelected)
-            {
-                DeleteEntity(SelectedID);
-                LoadGrid();
-            }
+            formPanel.Visible = true;
+            FormMode = FormModes.Alta;
+            ClearForm();
+            EnableForm(true);
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -136,12 +140,13 @@ namespace UI.Web
             }
         }
 
-        protected void btnNuevo_Click(object sender, EventArgs e)
+        protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            formPanel.Visible = true;
-            FormMode = FormModes.Alta;
-            ClearForm();
-            EnableForm(true);
+            if (IsEntitySelected)
+            {
+                DeleteEntity(SelectedID);
+                LoadGrid();
+            }
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -152,7 +157,7 @@ namespace UI.Web
                 SaveEntity(Entity);
                 LoadGrid();
                 formPanel.Visible = false;
-            }           
+            }            
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -161,14 +166,14 @@ namespace UI.Web
             formPanel.Visible = false;
         }
 
-        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
+        protected void gridCursos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedID = (int)gridComisiones.SelectedValue;
+            SelectedID = (int)gridCursos.SelectedValue;
         }
 
         public bool Validar()
         {
-            if (string.IsNullOrEmpty(txtAño.Text) || cbxPlan.SelectedValue == null || string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtAño.Text))
+            if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtMateria.Text) || cbxComision.SelectedValue == null || string.IsNullOrEmpty(txtCupo.Text))
             {
                 lblError.Visible = true;
                 lblError.Text = "Debe llenar todos los campos";
@@ -179,6 +184,13 @@ namespace UI.Web
             {
                 lblError.Visible = true;
                 lblError.Text = "Ingrese correctamente el año";
+                return false;
+            }            
+
+            if (Logic.EstaAgregado(int.Parse(txtMateria.Text), int.Parse(cbxComision.SelectedValue), int.Parse(txtAño.Text)))
+            {
+                lblError.Visible = true;
+                lblError.Text = "Ya existe ese curso en esa comision";
                 return false;
             }
 
