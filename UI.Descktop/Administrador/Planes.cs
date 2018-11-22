@@ -111,5 +111,23 @@ namespace UI.Desktop
         {
             Close();
         }
+
+        private void tspReporte_Click(object sender, EventArgs e)
+        {
+            Planes_Reporte rep = new Planes_Reporte();
+            for (int i = 0; i < dgvPlanes.Rows.Count; i++)
+            {
+                Plan_Reporte linea = new Plan_Reporte();
+                linea.ID = dgvPlanes.Rows[i].Cells[0].Value.ToString();
+                linea.Descripcion = dgvPlanes.Rows[i].Cells[1].Value.ToString();
+
+                EspecialidadLogic el = new EspecialidadLogic();
+                EspecialidadActual = el.GetOne((int)dgvPlanes.Rows[i].Cells[2].Value);
+                linea.Especialidad = EspecialidadActual.Descripcion;               
+
+                rep.Datos.Add(linea);
+            }
+            rep.ShowDialog();
+        }
     }
 }
