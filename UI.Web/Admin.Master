@@ -29,7 +29,7 @@
                                 <asp:Menu ID="Menu2" runat="server" Visible="False">
                                     <Items>
                                         <asp:MenuItem Text="Inscripciones" Value="Inscripciones" NavigateUrl="~/FindPages/FindMateria.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="Cursada" Value="Cursada"></asp:MenuItem>
+                                        <asp:MenuItem Text="Cursada" Value="Cursada" NavigateUrl="~/AlumnoPages/cursado.aspx"></asp:MenuItem>
                                     </Items>
                                 </asp:Menu>
                                 <asp:Menu ID="Menu3" runat="server" Visible="False">
