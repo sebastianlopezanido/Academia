@@ -28,7 +28,7 @@ namespace UI.Web
                 cbxComision.DataSource = cl.GetAll();
                 cbxComision.DataValueField = "ID";
                 cbxComision.DataTextField = "Descripcion";
-                cbxComision.DataBind();
+                cbxComision.DataBind();                
 
                 if (string.IsNullOrEmpty(Request.QueryString["IDMateria"]) == false)
                 {
@@ -41,6 +41,29 @@ namespace UI.Web
                             SelectedID = int.Parse(Request.QueryString["IDCurso"]);
                             txtID.Text = SelectedID.ToString();
                             txtMateria.Text = Request.QueryString["IDMateria"].ToString();
+                            txtProfesor.Text = Request.QueryString["IDProfesor"].ToString();
+                            txtAño.Text = Request.QueryString["Año"].ToString();
+                            txtCupo.Text = Request.QueryString["Cupo"].ToString();
+                            cbxComision.SelectedValue = Request.QueryString["IDComision"].ToString();
+                            break;
+                    }
+
+                    formPanel.Visible = true;
+                    EnableForm(true);
+                }
+
+                if (string.IsNullOrEmpty(Request.QueryString["IDProfesor"]) == false)
+                {
+                    switch (Session["FormMode"])
+                    {
+                        case FormModes.Alta:
+                            txtProfesor.Text = Request.QueryString["IDProfesor"].ToString();
+                            break;
+                        case FormModes.Modificacion:
+                            SelectedID = int.Parse(Request.QueryString["IDCurso"]);
+                            txtID.Text = SelectedID.ToString();
+                            txtMateria.Text = Request.QueryString["IDMateria"].ToString();
+                            txtProfesor.Text = Request.QueryString["IDProfesor"].ToString();
                             txtAño.Text = Request.QueryString["Año"].ToString();
                             txtCupo.Text = Request.QueryString["Cupo"].ToString();
                             cbxComision.SelectedValue = Request.QueryString["IDComision"].ToString();
@@ -108,6 +131,13 @@ namespace UI.Web
             get { return _Entity; }
         }
 
+        private int _IDCurso;
+        public int IDCurso
+        {
+            get { return _IDCurso; }
+            set { _IDCurso = value; }
+        }
+
         private void LoadGrid()
         {
             gridCursos.DataSource = Logic.GetAll();
@@ -122,6 +152,10 @@ namespace UI.Web
             txtAño.Text = Entity.AnioCalendario.ToString();
             txtCupo.Text = Entity.Cupo.ToString();
             txtMateria.Text = Entity.IDMateria.ToString();
+
+            DocenteCursoLogic dc = new DocenteCursoLogic();
+            DocenteCursoActual = dc.GetOneByCurso(SelectedID);
+            txtProfesor.Text = DocenteCursoActual.IDDocente.ToString();
         }
 
         private void LoadEntity()
@@ -169,6 +203,35 @@ namespace UI.Web
             txtAño.Enabled = enable;
             cbxComision.Enabled = enable;
             txtCupo.Enabled = enable;
+            txtProfesor.Enabled = enable;
+        }
+
+        public void MapearADatosDocenteCurso()
+        {
+            switch (Session["FormMode"])
+            {
+                case FormModes.Alta:
+                    DocenteCursoActual = new DocenteCurso();
+                    DocenteCursoActual.IDDocente = int.Parse(txtProfesor.Text);
+                    DocenteCursoActual.IDCurso = IDCurso;
+                    //DocenteCursoActual.Cargo = (DocenteCurso.TiposCargos)cbxCargo.SelectedItem;
+                    DocenteCursoActual.State = BusinessEntity.States.New;
+                    break;
+                case FormModes.Modificacion:
+                    DocenteCursoActual = new DocenteCurso();
+                    DocenteCursoActual.IDCurso = SelectedID;
+                    DocenteCursoActual.IDDocente = int.Parse(txtProfesor.Text);
+                    //DocenteCursoActual.Cargo = (DocenteCurso.TiposCargos)cbxCargo.SelectedItem;
+                    DocenteCursoActual.State = BusinessEntity.States.Modified;
+                    break;
+            }
+        }
+
+        public void GuardarCambiosDocenteCurso()
+        {
+            MapearADatosDocenteCurso();
+            DocenteCursoLogic dc = new DocenteCursoLogic();
+            dc.Save(DocenteCursoActual);
         }
 
         private void DeleteEntity(int id)
@@ -189,6 +252,7 @@ namespace UI.Web
             txtMateria.Text = string.Empty;
             txtAño.Text = string.Empty;
             txtCupo.Text = string.Empty;
+            txtProfesor.Text = string.Empty;
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
@@ -224,7 +288,19 @@ namespace UI.Web
             if (Validar())
             {
                 LoadEntity();
-                SaveEntity(Entity);
+
+                switch (Session["FormMode"])
+                {
+                    case FormModes.Alta:
+                        IDCurso = Logic.Insert(Entity);
+                        GuardarCambiosDocenteCurso();
+                        break;
+                    case FormModes.Modificacion:
+                        Logic.Save(Entity);
+                        GuardarCambiosDocenteCurso();
+                        break;
+                }
+                
                 LoadGrid();
                 formPanel.Visible = false;
             }            
@@ -262,7 +338,7 @@ namespace UI.Web
                 return false;
             }
 
-            if (Logic.EstaAgregado(int.Parse(txtMateria.Text), int.Parse(cbxComision.SelectedValue), int.Parse(txtAño.Text)))
+            if ((Logic.EstaAgregado(int.Parse(txtMateria.Text), int.Parse(cbxComision.SelectedValue), int.Parse(txtAño.Text))) && (FormModes)Session["FormMode"] == FormModes.Alta)
             {
                 lblError.Visible = true;
                 lblError.Text = "Ya existe ese curso en esa comision";
@@ -274,7 +350,7 @@ namespace UI.Web
 
         protected void gridCursos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedID = (int)gridCursos.SelectedValue;
+            SelectedID = (int)gridCursos.SelectedValue;            
         }
 
         protected void gridCursos_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -305,25 +381,38 @@ namespace UI.Web
                     PersonaActual = pl.GetOne(UsuarioActual.IDPersona);
                     e.Row.Cells[5].Text = PersonaActual.Apellido;
                 }
-
             }
         }
 
-        protected void btnFind_Click(object sender, EventArgs e)
+        protected void btnMateria_Click(object sender, EventArgs e)
         {
             switch(Session["FormMode"])
             {
                 case FormModes.Alta:                    
                     Response.Redirect("http://localhost:57900/FindPages/FindMateria.aspx?Cupo=" + txtCupo.Text + "&Año=" +
-                        txtAño.Text + "&IDComision=" + cbxComision.SelectedValue);
+                        txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDProfesor=" + txtProfesor.Text);
                     break;
                 case FormModes.Modificacion:                    
-                    Response.Redirect("http://localhost:57900/FindPages/FindMateria.aspx?IDCurso=" + gridCursos.SelectedRow.Cells[0].Text
-                + "&Cupo=" + txtCupo.Text + "&Año=" + txtAño.Text + "&IDComision=" + cbxComision.SelectedValue);
+                    Response.Redirect("http://localhost:57900/FindPages/FindMateria.aspx?IDCurso=" + SelectedID.ToString()
+                + "&Cupo=" + txtCupo.Text + "&Año=" + txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDProfesor=" + txtProfesor.Text);
                     break;
-
             }
             
+        }
+
+        protected void btnProfesor_Click(object sender, EventArgs e)
+        {
+            switch (Session["FormMode"])
+            {
+                case FormModes.Alta:
+                    Response.Redirect("http://localhost:57900/FindPages/FindProfesor.aspx?Cupo=" + txtCupo.Text + "&Año=" +
+                        txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDMateria=" + txtMateria.Text);
+                    break;
+                case FormModes.Modificacion:
+                    Response.Redirect("http://localhost:57900/FindPages/FindProfesor.aspx?IDCurso=" + SelectedID.ToString()
+                + "&Cupo=" + txtCupo.Text + "&Año=" + txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDMateria=" + txtMateria.Text);
+                    break;
+            }
         }
     }
 }

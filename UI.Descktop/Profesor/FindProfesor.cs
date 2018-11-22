@@ -32,12 +32,13 @@ namespace UI.Desktop.Profesor
             get { return _PersonaActual; }
             set { _PersonaActual = value; }
         }
+
         public void Listar()
         {
             try
             {
-                UsuarioLogic pl = new UsuarioLogic();
-                dgvProfesor.DataSource = pl.GetAllDocentes();
+                UsuarioLogic ul = new UsuarioLogic();
+                dgvProfesor.DataSource = ul.GetAllDocentes();
             }
             catch (Exception Ex)
             {
@@ -67,11 +68,12 @@ namespace UI.Desktop.Profesor
 
         private void dgvProfesor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            PersonaLogic pl = new PersonaLogic();
+
             if (dgvProfesor.Columns[e.ColumnIndex].Name == "Apellido")
             {
                 if (e.Value != null)
                 {
-                    PersonaLogic pl = new PersonaLogic();
                     PersonaActual = pl.GetOne((int)e.Value);
                     e.Value = PersonaActual.Apellido;
                 }
@@ -80,7 +82,6 @@ namespace UI.Desktop.Profesor
             {
                 if (e.Value != null)
                 {
-                    PersonaLogic pl = new PersonaLogic();
                     PersonaActual = pl.GetOne((int)e.Value);
                     e.Value = PersonaActual.Nombre;
                 }
@@ -89,7 +90,6 @@ namespace UI.Desktop.Profesor
             {
                 if (e.Value != null)
                 {
-                    PersonaLogic pl = new PersonaLogic();
                     PersonaActual = pl.GetOne((int)e.Value);
                     e.Value = PersonaActual.Legajo;
                 }
