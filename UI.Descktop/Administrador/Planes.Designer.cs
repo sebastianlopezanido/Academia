@@ -42,12 +42,12 @@
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.tspReporte = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tspReporte = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -169,7 +169,7 @@
             this.tspReporte});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(164, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(135, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnNuevo
@@ -201,6 +201,16 @@
             this.btnEliminar.Size = new System.Drawing.Size(23, 22);
             this.btnEliminar.ToolTipText = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
+            // 
+            // tspReporte
+            // 
+            this.tspReporte.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tspReporte.Image = ((System.Drawing.Image)(resources.GetObject("tspReporte.Image")));
+            this.tspReporte.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tspReporte.Name = "tspReporte";
+            this.tspReporte.Size = new System.Drawing.Size(23, 22);
+            this.tspReporte.Text = "Reporte";
+            this.tspReporte.Click += new System.EventHandler(this.tspReporte_Click);
             // 
             // contextMenuStrip1
             // 
@@ -236,16 +246,6 @@
             this.asdToolStripMenuItem3.Name = "asdToolStripMenuItem3";
             this.asdToolStripMenuItem3.Size = new System.Drawing.Size(92, 22);
             this.asdToolStripMenuItem3.Text = "asd";
-            // 
-            // tspReporte
-            // 
-            this.tspReporte.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tspReporte.Image = ((System.Drawing.Image)(resources.GetObject("tspReporte.Image")));
-            this.tspReporte.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tspReporte.Name = "tspReporte";
-            this.tspReporte.Size = new System.Drawing.Size(52, 22);
-            this.tspReporte.Text = "Reporte";
-            this.tspReporte.Click += new System.EventHandler(this.tspReporte_Click);
             // 
             // Planes
             // 
