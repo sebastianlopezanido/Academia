@@ -5,15 +5,27 @@
         <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
-            DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged">
+            DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField HeaderText="ID" DataField="ID" />
-                <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
-                <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                <asp:BoundField DataField="ID" HeaderText="ID" />
+                <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                 <asp:BoundField DataField="Legajo" HeaderText="Legajo" />
-                <asp:CommandField SelectText="Seleccionar" ShowSelectButton="True" />
+                <asp:CommandField SelectText="Seleccionar" ShowSelectButton="True">
+                <ControlStyle Font-Bold="True" />
+                </asp:CommandField>
             </Columns>
-            <SelectedRowStyle BackColor="Black" ForeColor="White" />
+            <EditRowStyle BackColor="#2461BF" />
+            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#EFF3FB" />
+            <SelectedRowStyle BackColor="#D1DDF1" ForeColor="#333333" Font-Bold="True" />
+            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+            <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
         <asp:Panel ID="Panel1" runat="server">
             <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" OnClick="btnNuevo_Click" />

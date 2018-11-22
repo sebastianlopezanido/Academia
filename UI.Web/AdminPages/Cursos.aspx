@@ -31,7 +31,7 @@
             <br />
             <br />
             <br />
-            <asp:Panel ID="formPanel" runat="server" style="margin-top: 0px" Visible="False">
+            <asp:Panel ID="formPanel" runat="server" style="margin-top: 0px" Visible="False" Height="256px">
                 <table dir="ltr">
                 <tr>
                     <td dir="rtl">
@@ -87,14 +87,16 @@
                     </td>
                     <td>
                         <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
-                    </td>                    
+                    </td>
+                    <tr><td></td></tr>
                 </tr> 
-                </table>    
-                         
-                <br />
-                <br />
-
-                <asp:Label ID="lblError" runat="server" Font-Color="Red" Font-Bold="True" Text="Label" Visible="False"></asp:Label>
+                    <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError" runat="server"></asp:Label>
+                    </td>
+                </tr> 
+                </table>  
+                             
             </asp:Panel>
         </asp:Panel>
     </asp:Panel></center>

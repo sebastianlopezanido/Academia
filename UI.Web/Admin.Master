@@ -42,14 +42,10 @@
                                         <asp:MenuItem NavigateUrl="~/AdminPages/Usuarios.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
                                         <asp:MenuItem NavigateUrl="~/AdminPages/Personas.aspx" Text="Personas" Value="Personas"></asp:MenuItem>
                                         <asp:MenuItem NavigateUrl="~/AdminPages/Especialidades.aspx" Text="Especialidades" Value="Especialidades"></asp:MenuItem>
-                                        <asp:MenuItem Text="Planes" Value="Planes"></asp:MenuItem>
-                                        <asp:MenuItem Text="Materias" Value="Materias"></asp:MenuItem>
-                                        <asp:MenuItem Text="Personas" Value="Personas"></asp:MenuItem>
-                                        <asp:MenuItem Text="Especialidades" Value="Especialidades"></asp:MenuItem>
                                         <asp:MenuItem Text="Planes" Value="Planes" NavigateUrl="~/AdminPages/Planes.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="Materias" Value="Materias" NavigateUrl="~/AdminPages/Materias.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="Comisiones" Value="Comisiones"></asp:MenuItem>
-                                        <asp:MenuItem Text="Cursos" Value="Cursos"></asp:MenuItem>
+                                        <asp:MenuItem Text="Comisiones" Value="Comisiones" NavigateUrl="~/AdminPages/Comisiones.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="Cursos" Value="Cursos" NavigateUrl="~/AdminPages/Cursos.aspx"></asp:MenuItem>
                                     </Items>
                                 </asp:Menu>
                             </td>

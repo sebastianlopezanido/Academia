@@ -73,12 +73,15 @@
                     </td>
                     <td>
                         <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
-                    </td>                    
-                </tr> 
-                </table>  
-                
-                <br />
-                <asp:Label ID="lblError" runat="server" Font-Bold="True" Text="Label" Visible="False"></asp:Label>
+                    </td>
+                    <tr><td></td></tr>
+                <tr> 
+                    <td colspan="2" style="color: #FF0000">
+                        <asp:Label ID="lblError" runat="server"></asp:Label>
+                    </td>
+                </tr>                
+                    </table>
+                <br />                
                 <br />
                 <br />
             </asp:Panel>
