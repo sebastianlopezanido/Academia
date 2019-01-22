@@ -137,6 +137,12 @@ namespace UI.Desktop
         {
             Cursos cursosForm = new Cursos();
             cursosForm.ShowDialog();
-        }        
+        }
+
+        private void Menu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Login log = Program.login;
+            log.Show();
+        }
     }
 }

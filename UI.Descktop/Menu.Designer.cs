@@ -158,6 +158,7 @@ namespace UI.Desktop
             this.Controls.Add(this.salir);
             this.Name = "Menu";
             this.Text = "Menu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
