@@ -6,22 +6,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.26715in</Width>
+              <Width>1.03167in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26715in</Width>
+              <Width>1.03167in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26715in</Width>
+              <Width>1.03167in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26715in</Width>
+              <Width>1.03167in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26715in</Width>
+              <Width>1.03167in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26715in</Width>
+              <Width>1.03167in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -429,7 +429,7 @@
           <BreakLocation>StartAndEnd</BreakLocation>
         </PageBreak>
         <Height>0.5in</Height>
-        <Width>7.6029in</Width>
+        <Width>6.19in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -444,7 +444,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>7.6029in</Width>
+  <Width>6.19in</Width>
   <Page>
     <PageHeader>
       <Height>0.38417in</Height>
@@ -470,7 +470,7 @@
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.13417in</Top>
           <Height>0.25in</Height>
-          <Width>7.6029in</Width>
+          <Width>6.19in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -489,7 +489,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.25in</Height>
+      <Height>0.37847in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -501,18 +501,19 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Now()</Value>
-                  <Style>
-                    <Format>d</Format>
-                  </Style>
+                  <Style />
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
-          <Left>6.6029in</Left>
+          <Top>0.06944in</Top>
+          <Left>4.71083in</Left>
           <Height>0.25in</Height>
-          <Width>1in</Width>
+          <Width>1.47917in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -534,10 +535,13 @@
                   <Style />
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
+          <Top>0.06944in</Top>
           <Height>0.25in</Height>
           <Width>1in</Width>
           <ZIndex>1</ZIndex>
