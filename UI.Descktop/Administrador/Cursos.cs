@@ -208,6 +208,7 @@ namespace UI.Desktop
                 linea.Profesor = PersonaActual.Apellido;
 
                 rep.Datos.Add(linea);
+                
             }
             rep.ShowDialog();
         }
