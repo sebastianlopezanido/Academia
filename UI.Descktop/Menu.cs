@@ -37,13 +37,22 @@ namespace UI.Desktop
             switch(UsuarioActual.Tipo)
             {
                 case Usuario.TiposUsuario.Alumno:
-                    btn1.Text = "Inscripcion";
-                    btn2.Text = "Cursado y Notas";
+                    btn1.Text = "Inscripcion";                    
+                    btn2.Text = "Cursado y Notas";                    
                     btnAdmCom.Hide();
                     btnAdmPla.Hide();
                     btnAdmCur.Hide();
                     btnAdmEsp.Hide();
                     btnAdmMat.Hide();
+
+                    usuariosToolStripMenuItem.Text = "Inscripcion";
+                    personasToolStripMenuItem.Text = "Cursado y notas";
+                    comisionesToolStripMenuItem.Visible = false;
+                    planesToolStripMenuItem.Visible = false;
+                    cursosToolStripMenuItem.Visible = false;
+                    especialidadesToolStripMenuItem.Visible = false;
+                    materiasToolStripMenuItem.Visible = false;
+
                     break;
                 case Usuario.TiposUsuario.Profesor:
                     btn1.Text = "Cursos";
@@ -53,6 +62,14 @@ namespace UI.Desktop
                     btnAdmCur.Hide();
                     btnAdmEsp.Hide();
                     btnAdmMat.Hide();
+
+                    usuariosToolStripMenuItem.Text = "Cursos";
+                    personasToolStripMenuItem.Visible = false;
+                    comisionesToolStripMenuItem.Visible = false;
+                    planesToolStripMenuItem.Visible = false;
+                    cursosToolStripMenuItem.Visible = false;
+                    especialidadesToolStripMenuItem.Visible = false;
+                    materiasToolStripMenuItem.Visible = false;
                     break;
                 case Usuario.TiposUsuario.Administrador:
                     btn1.Text = "Usuarios";

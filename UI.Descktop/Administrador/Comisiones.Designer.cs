@@ -56,11 +56,11 @@
             // tcComisiones.ContentPanel
             // 
             this.tcComisiones.ContentPanel.Controls.Add(this.tlComisiones);
-            this.tcComisiones.ContentPanel.Size = new System.Drawing.Size(800, 425);
+            this.tcComisiones.ContentPanel.Size = new System.Drawing.Size(450, 425);
             this.tcComisiones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcComisiones.Location = new System.Drawing.Point(0, 0);
             this.tcComisiones.Name = "tcComisiones";
-            this.tcComisiones.Size = new System.Drawing.Size(800, 450);
+            this.tcComisiones.Size = new System.Drawing.Size(450, 450);
             this.tcComisiones.TabIndex = 0;
             this.tcComisiones.Text = "toolStripContainer1";
             // 
@@ -82,7 +82,7 @@
             this.tlComisiones.RowCount = 2;
             this.tlComisiones.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlComisiones.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlComisiones.Size = new System.Drawing.Size(800, 425);
+            this.tlComisiones.Size = new System.Drawing.Size(450, 425);
             this.tlComisiones.TabIndex = 0;
             // 
             // dgvComisiones
@@ -102,7 +102,7 @@
             this.dgvComisiones.Name = "dgvComisiones";
             this.dgvComisiones.ReadOnly = true;
             this.dgvComisiones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvComisiones.Size = new System.Drawing.Size(794, 390);
+            this.dgvComisiones.Size = new System.Drawing.Size(444, 390);
             this.dgvComisiones.TabIndex = 0;
             this.dgvComisiones.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvComisiones_CellFormatting);
             // 
@@ -137,7 +137,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(641, 399);
+            this.btnAceptar.Location = new System.Drawing.Point(291, 399);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 1;
@@ -147,7 +147,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(722, 399);
+            this.btnSalir.Location = new System.Drawing.Point(372, 399);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 2;
@@ -164,7 +164,7 @@
             this.btnEliminar});
             this.tsComisiones.Location = new System.Drawing.Point(3, 0);
             this.tsComisiones.Name = "tsComisiones";
-            this.tsComisiones.Size = new System.Drawing.Size(112, 25);
+            this.tsComisiones.Size = new System.Drawing.Size(81, 25);
             this.tsComisiones.TabIndex = 0;
             // 
             // btnNuevo
@@ -201,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(450, 450);
             this.Controls.Add(this.tcComisiones);
             this.Name = "Comisiones";
             this.Text = "Comisiones";

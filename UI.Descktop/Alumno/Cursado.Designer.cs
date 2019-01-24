@@ -31,11 +31,11 @@
             this.tsCursos = new System.Windows.Forms.ToolStripContainer();
             this.tlCursos = new System.Windows.Forms.TableLayoutPanel();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.id_curso1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_curso2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.tsCursos.ContentPanel.SuspendLayout();
             this.tsCursos.SuspendLayout();
             this.tlCursos.SuspendLayout();
@@ -48,11 +48,11 @@
             // tsCursos.ContentPanel
             // 
             this.tsCursos.ContentPanel.Controls.Add(this.tlCursos);
-            this.tsCursos.ContentPanel.Size = new System.Drawing.Size(800, 450);
+            this.tsCursos.ContentPanel.Size = new System.Drawing.Size(449, 425);
             this.tsCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsCursos.Location = new System.Drawing.Point(0, 0);
             this.tsCursos.Name = "tsCursos";
-            this.tsCursos.Size = new System.Drawing.Size(800, 450);
+            this.tsCursos.Size = new System.Drawing.Size(449, 450);
             this.tsCursos.TabIndex = 2;
             this.tsCursos.Text = "toolStripContainer1";
             // 
@@ -69,7 +69,7 @@
             this.tlCursos.RowCount = 2;
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlCursos.Size = new System.Drawing.Size(800, 450);
+            this.tlCursos.Size = new System.Drawing.Size(449, 425);
             this.tlCursos.TabIndex = 0;
             // 
             // dgvCursos
@@ -89,19 +89,9 @@
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.ReadOnly = true;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCursos.Size = new System.Drawing.Size(794, 415);
+            this.dgvCursos.Size = new System.Drawing.Size(443, 390);
             this.dgvCursos.TabIndex = 0;
             this.dgvCursos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCursos_CellFormatting);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(722, 424);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // id_curso1
             // 
@@ -131,11 +121,21 @@
             this.condicion.Name = "condicion";
             this.condicion.ReadOnly = true;
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(371, 399);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.TabIndex = 2;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // Cursado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(449, 450);
             this.Controls.Add(this.tsCursos);
             this.Name = "Cursado";
             this.Text = "Cursado";

@@ -40,11 +40,21 @@ namespace UI.Desktop
             this.btnAdmCur = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblSesion = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.personasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.especialidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materiasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comisionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // salir
             // 
-            this.salir.Location = new System.Drawing.Point(336, 218);
+            this.salir.Location = new System.Drawing.Point(336, 232);
             this.salir.Name = "salir";
             this.salir.Size = new System.Drawing.Size(88, 23);
             this.salir.TabIndex = 0;
@@ -54,7 +64,7 @@ namespace UI.Desktop
             // 
             // btn1
             // 
-            this.btn1.Location = new System.Drawing.Point(24, 13);
+            this.btn1.Location = new System.Drawing.Point(12, 27);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(87, 23);
             this.btn1.TabIndex = 2;
@@ -64,7 +74,7 @@ namespace UI.Desktop
             // 
             // btn2
             // 
-            this.btn2.Location = new System.Drawing.Point(24, 42);
+            this.btn2.Location = new System.Drawing.Point(12, 56);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(87, 23);
             this.btn2.TabIndex = 3;
@@ -74,7 +84,7 @@ namespace UI.Desktop
             // 
             // btnAdmEsp
             // 
-            this.btnAdmEsp.Location = new System.Drawing.Point(24, 71);
+            this.btnAdmEsp.Location = new System.Drawing.Point(12, 85);
             this.btnAdmEsp.Name = "btnAdmEsp";
             this.btnAdmEsp.Size = new System.Drawing.Size(87, 23);
             this.btnAdmEsp.TabIndex = 4;
@@ -84,7 +94,7 @@ namespace UI.Desktop
             // 
             // btnAdmPla
             // 
-            this.btnAdmPla.Location = new System.Drawing.Point(24, 101);
+            this.btnAdmPla.Location = new System.Drawing.Point(12, 115);
             this.btnAdmPla.Name = "btnAdmPla";
             this.btnAdmPla.Size = new System.Drawing.Size(87, 23);
             this.btnAdmPla.TabIndex = 5;
@@ -94,7 +104,7 @@ namespace UI.Desktop
             // 
             // btnAdmMat
             // 
-            this.btnAdmMat.Location = new System.Drawing.Point(24, 131);
+            this.btnAdmMat.Location = new System.Drawing.Point(12, 145);
             this.btnAdmMat.Name = "btnAdmMat";
             this.btnAdmMat.Size = new System.Drawing.Size(87, 23);
             this.btnAdmMat.TabIndex = 6;
@@ -104,7 +114,7 @@ namespace UI.Desktop
             // 
             // btnAdmCom
             // 
-            this.btnAdmCom.Location = new System.Drawing.Point(24, 161);
+            this.btnAdmCom.Location = new System.Drawing.Point(12, 175);
             this.btnAdmCom.Name = "btnAdmCom";
             this.btnAdmCom.Size = new System.Drawing.Size(87, 23);
             this.btnAdmCom.TabIndex = 7;
@@ -114,7 +124,7 @@ namespace UI.Desktop
             // 
             // btnAdmCur
             // 
-            this.btnAdmCur.Location = new System.Drawing.Point(24, 191);
+            this.btnAdmCur.Location = new System.Drawing.Point(12, 205);
             this.btnAdmCur.Name = "btnAdmCur";
             this.btnAdmCur.Size = new System.Drawing.Size(87, 23);
             this.btnAdmCur.TabIndex = 8;
@@ -140,12 +150,85 @@ namespace UI.Desktop
             this.lblSesion.TabIndex = 10;
             this.lblSesion.Text = "label2";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(433, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.usuariosToolStripMenuItem,
+            this.personasToolStripMenuItem,
+            this.especialidadesToolStripMenuItem,
+            this.planesToolStripMenuItem,
+            this.materiasToolStripMenuItem,
+            this.comisionesToolStripMenuItem,
+            this.cursosToolStripMenuItem});
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // usuariosToolStripMenuItem
+            // 
+            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.usuariosToolStripMenuItem.Text = "Usuarios";
+            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.btn1_Click);
+            // 
+            // personasToolStripMenuItem
+            // 
+            this.personasToolStripMenuItem.Name = "personasToolStripMenuItem";
+            this.personasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.personasToolStripMenuItem.Text = "Personas";
+            this.personasToolStripMenuItem.Click += new System.EventHandler(this.btn2_Click);
+            // 
+            // especialidadesToolStripMenuItem
+            // 
+            this.especialidadesToolStripMenuItem.Name = "especialidadesToolStripMenuItem";
+            this.especialidadesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.especialidadesToolStripMenuItem.Text = "Especialidades";
+            this.especialidadesToolStripMenuItem.Click += new System.EventHandler(this.btnAdmEsp_Click);
+            // 
+            // planesToolStripMenuItem
+            // 
+            this.planesToolStripMenuItem.Name = "planesToolStripMenuItem";
+            this.planesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.planesToolStripMenuItem.Text = "Planes";
+            this.planesToolStripMenuItem.Click += new System.EventHandler(this.btnAdmPla_Click);
+            // 
+            // materiasToolStripMenuItem
+            // 
+            this.materiasToolStripMenuItem.Name = "materiasToolStripMenuItem";
+            this.materiasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.materiasToolStripMenuItem.Text = "Materias";
+            this.materiasToolStripMenuItem.Click += new System.EventHandler(this.btnAdmMat_Click);
+            // 
+            // comisionesToolStripMenuItem
+            // 
+            this.comisionesToolStripMenuItem.Name = "comisionesToolStripMenuItem";
+            this.comisionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.comisionesToolStripMenuItem.Text = "Comisiones";
+            this.comisionesToolStripMenuItem.Click += new System.EventHandler(this.btnAdmCom_Click);
+            // 
+            // cursosToolStripMenuItem
+            // 
+            this.cursosToolStripMenuItem.Name = "cursosToolStripMenuItem";
+            this.cursosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cursosToolStripMenuItem.Text = "Cursos";
+            this.cursosToolStripMenuItem.Click += new System.EventHandler(this.btnAdmCur_Click);
+            // 
             // Menu
             // 
             this.AcceptButton = this.btn1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 253);
+            this.ClientSize = new System.Drawing.Size(433, 262);
             this.Controls.Add(this.lblSesion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAdmCur);
@@ -156,9 +239,14 @@ namespace UI.Desktop
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
             this.Controls.Add(this.salir);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Menu";
             this.Text = "Menu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,5 +266,14 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnAdmCur;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblSesion;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem personasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem especialidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem planesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem materiasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem comisionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosToolStripMenuItem;
     }
 }

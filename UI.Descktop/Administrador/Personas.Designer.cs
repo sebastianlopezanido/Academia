@@ -56,11 +56,11 @@
             // tcPersonas.ContentPanel
             // 
             this.tcPersonas.ContentPanel.Controls.Add(this.tlPersonas);
-            this.tcPersonas.ContentPanel.Size = new System.Drawing.Size(550, 425);
+            this.tcPersonas.ContentPanel.Size = new System.Drawing.Size(450, 425);
             this.tcPersonas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcPersonas.Location = new System.Drawing.Point(0, 0);
             this.tcPersonas.Name = "tcPersonas";
-            this.tcPersonas.Size = new System.Drawing.Size(550, 450);
+            this.tcPersonas.Size = new System.Drawing.Size(450, 450);
             this.tcPersonas.TabIndex = 0;
             this.tcPersonas.Text = "toolStripContainer1";
             // 
@@ -82,7 +82,7 @@
             this.tlPersonas.RowCount = 2;
             this.tlPersonas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlPersonas.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlPersonas.Size = new System.Drawing.Size(550, 425);
+            this.tlPersonas.Size = new System.Drawing.Size(450, 425);
             this.tlPersonas.TabIndex = 0;
             // 
             // dgvPersonas
@@ -102,7 +102,7 @@
             this.dgvPersonas.Name = "dgvPersonas";
             this.dgvPersonas.ReadOnly = true;
             this.dgvPersonas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersonas.Size = new System.Drawing.Size(544, 390);
+            this.dgvPersonas.Size = new System.Drawing.Size(444, 390);
             this.dgvPersonas.TabIndex = 0;
             // 
             // id
@@ -136,7 +136,7 @@
             // btnActualizar
             // 
             this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnActualizar.Location = new System.Drawing.Point(391, 399);
+            this.btnActualizar.Location = new System.Drawing.Point(291, 399);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
             this.btnActualizar.TabIndex = 1;
@@ -146,7 +146,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(472, 399);
+            this.btnSalir.Location = new System.Drawing.Point(372, 399);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 2;
@@ -163,7 +163,7 @@
             this.tsbEliminar});
             this.tsPersonas.Location = new System.Drawing.Point(3, 0);
             this.tsPersonas.Name = "tsPersonas";
-            this.tsPersonas.Size = new System.Drawing.Size(112, 25);
+            this.tsPersonas.Size = new System.Drawing.Size(81, 25);
             this.tsPersonas.TabIndex = 0;
             // 
             // tsbNuevo
@@ -203,7 +203,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 450);
+            this.ClientSize = new System.Drawing.Size(450, 450);
             this.Controls.Add(this.tcPersonas);
             this.Name = "Personas";
             this.Text = "Personas";
