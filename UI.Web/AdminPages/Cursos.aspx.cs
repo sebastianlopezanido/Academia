@@ -7,8 +7,10 @@ using System.Web.UI.WebControls;
 using BusinessEntities;
 using BusinessLogic;
 
+
 namespace UI.Web
 {
+
     public partial class Cursos : ApplicationForm
     {
         protected void Page_Init(object sender, EventArgs e)
@@ -73,6 +75,7 @@ namespace UI.Web
                     formPanel.Visible = true;
                     EnableForm(true);
                 }
+                ReportViewer1.ShowReportBody = false;
             }            
         }
 
@@ -413,6 +416,41 @@ namespace UI.Web
                 + "&Cupo=" + txtCupo.Text + "&Año=" + txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDMateria=" + txtMateria.Text);
                     break;
             }
+        }
+
+        
+        protected void btnReporte_Click(object sender, EventArgs e)
+        {
+            gridCursos.Visible = false;
+            Panel2.Visible = false;
+
+            List<BusinessEntities.Curso_Reporte> Datos = new List<BusinessEntities.Curso_Reporte>();
+            for (int i = 0; i < gridCursos.Rows.Count; i++)
+            {
+                BusinessEntities.Curso_Reporte linea = new BusinessEntities.Curso_Reporte();
+
+                linea.ID = gridCursos.Rows[i].Cells[0].Text;
+                linea.Materia = gridCursos.Rows[i].Cells[1].Text;
+                linea.Comision = gridCursos.Rows[i].Cells[2].Text;
+                linea.Año = gridCursos.Rows[i].Cells[3].Text;
+                linea.Cupo = gridCursos.Rows[i].Cells[4].Text;
+                linea.Profesor = gridCursos.Rows[i].Cells[5].Text;
+
+                Datos.Add(linea);
+            }
+
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource("DataSet1", Datos));
+            ReportViewer1.LocalReport.Refresh();
+            ReportViewer1.DataBind();
+            ReportViewer1.Visible = true;
+            ReportViewer1.ShowReportBody = true;
+            btnVolver_Reporte.Visible = true;
+        }
+
+        protected void btnVolver_Reporte_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AdminPages/Cursos.aspx");
         }
     }
 }

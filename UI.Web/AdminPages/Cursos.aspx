@@ -1,6 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Cursos.aspx.cs" Inherits="UI.Web.Cursos" %>
+<%@ Register assembly="Microsoft.ReportViewer.WebForms" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
-    <center><asp:Panel ID="gridPanel" runat="server" Height="161px">
+    
+    <center><asp:Panel ID="reportPanel" runat="server">    
+    <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" BorderStyle="None" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" ShowBackButton="False" ShowFindControls="False" ShowZoomControl="False" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Visible="False" Width="6.6in">
+            <LocalReport ReportPath="AdminPages\Cursos_report.rdlc">
+            </LocalReport>
+        </rsweb:ReportViewer>
+        <br />
+        <asp:Button ID="btnVolver_Reporte" runat="server" OnClick="btnVolver_Reporte_Click" Text="Volver" Visible="False" />
+        </asp:Panel>
+    <asp:Panel ID="gridPanel" runat="server" Height="161px">
         <asp:GridView ID="gridCursos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" OnSelectedIndexChanged="gridCursos_SelectedIndexChanged" OnRowDataBound="gridCursos_RowDataBound">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -25,10 +35,14 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:Panel ID="Panel2" runat="server" Height="37px">
+        </asp:Panel>
+        <asp:Panel ID="Panel2" runat="server" Height="55px">
             <asp:Button ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" Text="Nuevo" />
             <asp:Button ID="btnEditar" runat="server" OnClick="btnEditar_Click" Text="Editar" />
             <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" />
+            <br />
+            <asp:Button ID="btnReporte" runat="server" OnClick="btnReporte_Click" Text="Generar Reporte" />
+            </asp:Panel>
             <br />
             <br />
             <table dir="ltr">
@@ -36,6 +50,7 @@
                     <td colspan="2" style="color: #FF0000">
                         <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
                     </td></table>
+            
             <asp:Panel ID="formPanel" runat="server" style="margin-top: 0px" Visible="False" Height="256px">
                 <table dir="ltr">
                 <tr>
@@ -117,7 +132,10 @@
                 </tr> 
                 </table>  
                              
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+                             
             </asp:Panel>
-        </asp:Panel>
-    </asp:Panel></center>
+        
+    </center>
 </asp:Content>
