@@ -203,7 +203,6 @@
     <Content Include="AlumnoPages\Inscripciones.aspx" />
     <Content Include="AlumnoPages\Cursado.aspx" />
     <Content Include="FindPages\FindProfesor.aspx" />
-    <Content Include="WebForm1.aspx" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -469,13 +468,6 @@
     <Compile Include="FindPages\FindProfesor.aspx.designer.cs">
       <DependentUpon>FindProfesor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -506,7 +498,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AdminPages\Cursos_report.rdlc" />
-    <EmbeddedResource Include="AdminPages\Report1.rdlc" />
+    <EmbeddedResource Include="AdminPages\Planes_Report.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

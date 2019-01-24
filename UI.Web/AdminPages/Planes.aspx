@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Planes.aspx.cs" Inherits="UI.Web.Planes" %>
+
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <center><asp:Panel ID="gridPanel" runat="server">
         <asp:GridView ID="gridPlanes" runat="server" AutoGenerateColumns="False"
@@ -29,6 +31,8 @@
                 <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" OnClick="btnNuevo_Click" />
                 <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
                 <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
+                <br />
+                <asp:Button ID="btnReporte" runat="server" OnClick="btnReporte_Click" Text="Generar Reporte" />
             </asp:Panel>
 
             <br />
@@ -38,10 +42,10 @@
                     <td colspan="2" style="color: #FF0000">
                         <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
                     </td></table>
-    </asp:Panel> </center>
-        <asp:Panel ID="formPanel" runat="server" Height="265px" Visible="False">
-            <br />
-            <center>
+    </asp:Panel> 
+    <asp:Panel ID="formPanel" runat="server" Height="265px" Visible="False">
+        <br />
+        
             <table dir="ltr" style="width: 80px; height: 100px">
                 <tr>
                     <td>
@@ -81,9 +85,20 @@
                 <tr> 
                     <td colspan="2" style="color: #FF0000">
                         <asp:Label ID="lblError" runat="server"></asp:Label>
+                        
                     </td>
                 </tr>                
                     </table>
-            </center>
-        </asp:Panel>
+    </asp:Panel>
+    <asp:Panel ID="reportPanel" runat="server" Visible="False">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" BorderStyle="None" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" ShowBackButton="False" ShowFindControls="False" ShowZoomControl="False" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="6.6in">
+            <LocalReport ReportPath="AdminPages\Planes_Report.rdlc">
+            </LocalReport>
+        </rsweb:ReportViewer>
+        <br />
+        <asp:Button ID="btnVolver_Reporte" runat="server" OnClick="btnVolver_Reporte_Click" Text="Volver" />
+    </asp:Panel>
+    </center>
 </asp:Content>

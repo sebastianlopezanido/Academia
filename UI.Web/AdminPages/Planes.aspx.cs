@@ -208,5 +208,35 @@ namespace UI.Web
                 }
             }
         }
+
+        protected void btnReporte_Click(object sender, EventArgs e)
+        {
+            gridPanel.Visible = false;
+            List<BusinessEntities.Plan_Reporte> Datos = new List<BusinessEntities.Plan_Reporte>();
+
+            for (int i = 0; i < gridPlanes.Rows.Count; i++)
+            {
+                BusinessEntities.Plan_Reporte linea = new BusinessEntities.Plan_Reporte();
+
+                linea.ID = gridPlanes.Rows[i].Cells[0].Text;
+                linea.Descripcion = gridPlanes.Rows[i].Cells[1].Text;
+                linea.Especialidad = gridPlanes.Rows[i].Cells[2].Text;                
+
+                Datos.Add(linea);
+            }
+
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource("DataSet1", Datos));
+            ReportViewer1.LocalReport.Refresh();
+            ReportViewer1.DataBind();
+            reportPanel.Visible = true;
+            ReportViewer1.ShowReportBody = true;
+            //btnVolver_Reporte.Visible = true;
+        }
+
+        protected void btnVolver_Reporte_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AdminPages/Planes.aspx");
+        }
     }
 }

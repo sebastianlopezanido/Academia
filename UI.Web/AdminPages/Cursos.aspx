@@ -35,7 +35,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        </asp:Panel>
+        
         <asp:Panel ID="Panel2" runat="server" Height="55px">
             <asp:Button ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" Text="Nuevo" />
             <asp:Button ID="btnEditar" runat="server" OnClick="btnEditar_Click" Text="Editar" />
@@ -43,6 +43,7 @@
             <br />
             <asp:Button ID="btnReporte" runat="server" OnClick="btnReporte_Click" Text="Generar Reporte" />
             </asp:Panel>
+        </asp:Panel>
             <br />
             <br />
             <table dir="ltr">

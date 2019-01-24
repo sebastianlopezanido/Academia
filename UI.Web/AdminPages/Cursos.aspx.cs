@@ -421,8 +421,7 @@ namespace UI.Web
         
         protected void btnReporte_Click(object sender, EventArgs e)
         {
-            gridCursos.Visible = false;
-            Panel2.Visible = false;
+            gridPanel.Visible = false;
 
             List<BusinessEntities.Curso_Reporte> Datos = new List<BusinessEntities.Curso_Reporte>();
             for (int i = 0; i < gridCursos.Rows.Count; i++)
