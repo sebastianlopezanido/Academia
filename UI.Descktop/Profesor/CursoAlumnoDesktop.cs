@@ -70,12 +70,25 @@ namespace UI.Desktop.Profesor
     
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(txtNota.Text) == false && (int.Parse(txtNota.Text) > 10 || int.Parse(txtNota.Text) < 0))
+
+            int t;
+            if ( !int.TryParse(txtNota.Text, out t) ||
+                string.IsNullOrEmpty(txtNota.Text) == false && (int.Parse(txtNota.Text) > 10 ||
+                int.Parse(txtNota.Text) < 1))
             {
-                Notificar("Error", "Ingrese Nota valida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar("Error", "Ingrese Nota valida (del 1 al 10)", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }
+
+            if (((AlumnoInscripcion.TiposCondiciones)cbxCondicion.SelectedValue == AlumnoInscripcion.TiposCondiciones.Regular  ||
+                (AlumnoInscripcion.TiposCondiciones)cbxCondicion.SelectedValue == AlumnoInscripcion.TiposCondiciones.Promovido) &&
+                int.Parse(txtNota.Text) < 7)
+            {
+                Notificar("Error", "Para tener condición regular o promovido, debe tener nota mayor o igual a 6", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
 
             return true;
         }
