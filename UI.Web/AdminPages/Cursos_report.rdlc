@@ -6,22 +6,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.07333in</Width>
+              <Width>0.46916in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.07333in</Width>
+              <Width>1.26083in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.07333in</Width>
+              <Width>0.6775in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.07333in</Width>
+              <Width>0.56291in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.07333in</Width>
+              <Width>0.56291in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.07333in</Width>
+              <Width>1.43791in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -429,7 +429,7 @@
           <BreakLocation>StartAndEnd</BreakLocation>
         </PageBreak>
         <Height>0.5in</Height>
-        <Width>6.44in</Width>
+        <Width>4.97123in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -440,14 +440,15 @@
     <Height>0.5in</Height>
     <Style>
       <Border>
-        <Style>Solid</Style>
+        <Color>White</Color>
+        <Style>None</Style>
       </Border>
     </Style>
   </Body>
   <Width>6.44in</Width>
   <Page>
     <PageHeader>
-      <Height>0.38417in</Height>
+      <Height>0.4675in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -459,16 +460,19 @@
               <TextRuns>
                 <TextRun>
                   <Value>CURSOS</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>14pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Center</TextAlign>
+                <TextAlign>Left</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.13417in</Top>
+          <Top>0.06473in</Top>
           <Height>0.25in</Height>
           <Width>6.44in</Width>
           <Style>

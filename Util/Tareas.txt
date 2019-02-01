@@ -19,7 +19,20 @@ Cambios en la Database
 condicion de alumnosinscripcion puede ser NULL
 cambiar fk de id_alumno en alumnos_inscripcion a id_usuario en usuarios (estaba con id_persona)
 
+lichi
+cursos prof
+cursado y notas alumno
+cursos admin
+
+seba
+usuarios
+materias
+planes
+personas
 
 
-
+fela
+inscripcion alumno
+especialidades
+comisiones
 
