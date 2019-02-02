@@ -54,7 +54,7 @@
             this.tlPersonas.RowCount = 2;
             this.tlPersonas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlPersonas.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlPersonas.Size = new System.Drawing.Size(800, 450);
+            this.tlPersonas.Size = new System.Drawing.Size(449, 450);
             this.tlPersonas.TabIndex = 1;
             // 
             // dgvPersonas
@@ -74,8 +74,9 @@
             this.dgvPersonas.Name = "dgvPersonas";
             this.dgvPersonas.ReadOnly = true;
             this.dgvPersonas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersonas.Size = new System.Drawing.Size(794, 415);
+            this.dgvPersonas.Size = new System.Drawing.Size(443, 415);
             this.dgvPersonas.TabIndex = 0;
+            this.dgvPersonas.DoubleClick += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // id
             // 
@@ -108,7 +109,7 @@
             // btnSeleccionar
             // 
             this.btnSeleccionar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSeleccionar.Location = new System.Drawing.Point(641, 424);
+            this.btnSeleccionar.Location = new System.Drawing.Point(290, 424);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
             this.btnSeleccionar.TabIndex = 1;
@@ -118,7 +119,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(722, 424);
+            this.btnCancelar.Location = new System.Drawing.Point(371, 424);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 2;
@@ -130,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(449, 450);
             this.Controls.Add(this.tlPersonas);
             this.Name = "FindPersona";
             this.Text = "FindPersona";

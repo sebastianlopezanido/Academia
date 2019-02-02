@@ -77,6 +77,7 @@
             this.dgvProfesor.Size = new System.Drawing.Size(443, 415);
             this.dgvProfesor.TabIndex = 0;
             this.dgvProfesor.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProfesor_CellFormatting);
+            this.dgvProfesor.DoubleClick += new System.EventHandler(this.btnSeleccionar_Click_1);
             // 
             // id
             // 

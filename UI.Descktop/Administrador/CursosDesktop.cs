@@ -30,6 +30,7 @@ namespace UI.Desktop
         {
             Modo = modo;
             Text = CambiarTextos(btnAceptar);
+
         }
 
         public CursosDesktop(int id, ModoForm modo) : this()
@@ -37,9 +38,15 @@ namespace UI.Desktop
             Modo = modo;
             CursoLogic cu = new CursoLogic(); //controlador :)
             DocenteCursoLogic dc = new DocenteCursoLogic();
+            MateriaLogic ml = new MateriaLogic();
+            UsuarioLogic ul = new UsuarioLogic();
             CursoActual = cu.GetOne(id);
             DocenteCursoActual = dc.GetOneByCurso(CursoActual.ID);
+            MateriaActual = ml.GetOne(CursoActual.IDMateria);
+            DocenteActual = ul.GetOne(DocenteCursoActual.IDDocente);
             Text = CambiarTextos(btnAceptar);
+            cbxIDComision.Enabled = false;
+            btnFindMateria.Enabled = false;
             MapearDeDatos();
         }
 
@@ -58,6 +65,20 @@ namespace UI.Desktop
             set { _CursoActual = value; }
         }
 
+        private Materia _MateriaActual;
+        public Materia MateriaActual
+        {
+            get { return _MateriaActual; }
+            set { _MateriaActual = value; }
+        }
+
+        private Usuario _DocenteActual;
+        public Usuario DocenteActual
+        {
+            get { return _DocenteActual; }
+            set { _DocenteActual = value; }
+        }
+
         private int _IDCurso;
         public int IDCurso
         {
@@ -68,11 +89,12 @@ namespace UI.Desktop
         public override void MapearDeDatos()
         {
             txtID.Text = CursoActual.ID.ToString();
-            txtIDMateria.Text = CursoActual.IDMateria.ToString();
+            txtIDMateria.Text = MateriaActual.Descripcion;
             cbxIDComision.SelectedValue = CursoActual.IDComision;
             txtAño.Text = CursoActual.AnioCalendario.ToString();
             txtCupo.Text = CursoActual.Cupo.ToString();
-            txtIDDocente.Text = DocenteCursoActual.IDDocente.ToString();
+            PersonaLogic pl = new PersonaLogic();
+            txtIDDocente.Text = pl.GetOne(DocenteActual.IDPersona).Apellido;            
             cbxCargo.SelectedItem = DocenteCursoActual.Cargo;
         }
 
@@ -84,14 +106,14 @@ namespace UI.Desktop
                     CursoActual = new Curso();
                     DocenteCursoActual = new DocenteCurso();
                     CursoActual.IDComision = (int)cbxIDComision.SelectedValue;
-                    CursoActual.IDMateria = int.Parse(txtIDMateria.Text);
+                    CursoActual.IDMateria = MateriaActual.ID;
                     CursoActual.AnioCalendario = int.Parse(txtAño.Text);
                     CursoActual.Cupo = int.Parse(txtCupo.Text);
                     CursoActual.State = BusinessEntity.States.New;                   
                     break;
                 case ModoForm.Modificacion:
                     CursoActual.IDComision = (int)cbxIDComision.SelectedValue;
-                    CursoActual.IDMateria = int.Parse(txtIDMateria.Text);
+                    CursoActual.IDMateria = MateriaActual.ID;
                     CursoActual.AnioCalendario = int.Parse(txtAño.Text);
                     CursoActual.Cupo = int.Parse(txtCupo.Text);
                     CursoActual.State = BusinessEntity.States.Modified;
@@ -127,13 +149,13 @@ namespace UI.Desktop
             {
                 case ModoForm.Alta:
                     DocenteCursoActual = new DocenteCurso();
-                    DocenteCursoActual.IDDocente = int.Parse(txtIDDocente.Text);
+                    DocenteCursoActual.IDDocente = DocenteActual.ID;
                     DocenteCursoActual.IDCurso = IDCurso;
                     DocenteCursoActual.Cargo = (DocenteCurso.TiposCargos)cbxCargo.SelectedItem;
                     DocenteCursoActual.State = BusinessEntity.States.New;
                     break;
                 case ModoForm.Modificacion:
-                    DocenteCursoActual.IDDocente = int.Parse(txtIDDocente.Text);
+                    DocenteCursoActual.IDDocente = DocenteActual.ID;
                     DocenteCursoActual.Cargo = (DocenteCurso.TiposCargos)cbxCargo.SelectedItem;
                     DocenteCursoActual.State = BusinessEntity.States.Modified;
                     break;               
@@ -149,7 +171,10 @@ namespace UI.Desktop
 
         public override bool Validar()
         {
-            if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtIDMateria.Text) || cbxIDComision.SelectedValue == null || string.IsNullOrEmpty(txtCupo.Text))
+            if (string.IsNullOrEmpty(txtAño.Text) ||
+                string.IsNullOrEmpty(txtIDMateria.Text) ||
+                cbxIDComision.SelectedValue == null ||
+                string.IsNullOrEmpty(txtCupo.Text))
             {
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -157,15 +182,18 @@ namespace UI.Desktop
             }
 
             int num;
-
-            if (txtAño.Text.Length != 4 || !(int.TryParse(txtAño.Text, out num)))
+            if (txtAño.Text.Length != 4 ||
+                !(int.TryParse(txtAño.Text, out num)) ||
+                int.Parse(txtAño.Text) < 2000 ||
+                int.Parse(txtAño.Text) > 2100)
             {
                 Notificar("Error","Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }
 
-            if (!(int.TryParse(txtCupo.Text, out num)))
+            if (!(int.TryParse(txtCupo.Text, out num)) ||
+                int.Parse(txtCupo.Text)>100)
             {
                 Notificar("Error", "Ingrese correctamente el cupo", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -174,7 +202,8 @@ namespace UI.Desktop
 
             CursoLogic cl = new CursoLogic();
 
-            if(cl.EstaAgregado(int.Parse(txtIDMateria.Text), (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)) && Modo == ModoForm.Alta )
+            if(cl.EstaAgregado(MateriaActual.ID, (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)) &&
+                Modo == ModoForm.Alta )
             {
                 Notificar("Error", "Ya existe ese curso en esa comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -204,9 +233,10 @@ namespace UI.Desktop
             findMateriaForm.ShowDialog();
         }
 
-        public void Ejecutar(int id)
+        public void Ejecutar(Materia materia)
         {
-            txtIDMateria.Text = id.ToString();
+            MateriaActual = materia;
+            txtIDMateria.Text = materia.Descripcion;
         }
 
         private void btnFindProfesor_Click(object sender, EventArgs e)
@@ -215,9 +245,12 @@ namespace UI.Desktop
             findProfesorForm.pasado += new FindProfesor.pasar(Ejecutar2);
             findProfesorForm.ShowDialog();
         }
-        public void Ejecutar2(int id)
+        public void Ejecutar2(Usuario docente)
         {
-            txtIDDocente.Text = id.ToString();
+            DocenteActual = docente;
+            PersonaLogic pl = new PersonaLogic();
+            txtIDDocente.Text = pl.GetOne(docente.IDPersona).Apellido;
+
         }
     }
 }

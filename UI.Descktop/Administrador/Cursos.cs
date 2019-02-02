@@ -20,6 +20,7 @@ namespace UI.Desktop
             InitializeComponent();
             dgvCursos.AutoGenerateColumns = false;
             CenterToScreen();
+
         }
 
         private Curso _CursoActual;

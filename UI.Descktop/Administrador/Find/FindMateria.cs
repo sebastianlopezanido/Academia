@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessEntities;
 
 namespace UI.Desktop
 {
@@ -28,7 +29,7 @@ namespace UI.Desktop
             set { _PlanActual = value; }
         }
 
-        public delegate void pasar(int id);
+        public delegate void pasar(Materia materia);
         public event pasar pasado;
 
         public void Listar()
@@ -69,7 +70,7 @@ namespace UI.Desktop
                     {
                         if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
                         {
-                            pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
+                            pasado((Materia)dgvMaterias.SelectedRows[0].DataBoundItem);
                         }
 
                         Close();
@@ -83,7 +84,7 @@ namespace UI.Desktop
                 case Usuario.TiposUsuario.Administrador:
                     if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
                     {
-                        pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
+                        pasado((Materia)dgvMaterias.SelectedRows[0].DataBoundItem);
                     }
                     Close();
 

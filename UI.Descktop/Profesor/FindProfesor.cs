@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessEntities;
 
 namespace UI.Desktop.Profesor
 {
@@ -23,7 +24,7 @@ namespace UI.Desktop.Profesor
 
         }
 
-        public delegate void pasar(int dato);
+        public delegate void pasar(Usuario docente);
         public event pasar pasado;
 
         private Persona _PersonaActual;
@@ -55,7 +56,7 @@ namespace UI.Desktop.Profesor
         {
             if (dgvProfesor.SelectedRows != null && dgvProfesor.MultiSelect == false && dgvProfesor.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                pasado(((Usuario)dgvProfesor.SelectedRows[0].DataBoundItem).ID);
+                pasado((Usuario)dgvProfesor.SelectedRows[0].DataBoundItem);
             }
 
             Close();
@@ -100,7 +101,7 @@ namespace UI.Desktop.Profesor
         {
             if (dgvProfesor.SelectedRows != null && dgvProfesor.MultiSelect == false && dgvProfesor.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                pasado(((Usuario)dgvProfesor.SelectedRows[0].DataBoundItem).ID);
+                pasado(((Usuario)dgvProfesor.SelectedRows[0].DataBoundItem));
             }
             Close();
         }

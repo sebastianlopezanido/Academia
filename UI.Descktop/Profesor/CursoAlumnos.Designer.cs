@@ -99,7 +99,7 @@
             this.tlUsuarios.RowCount = 2;
             this.tlUsuarios.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlUsuarios.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlUsuarios.Size = new System.Drawing.Size(650, 425);
+            this.tlUsuarios.Size = new System.Drawing.Size(649, 425);
             this.tlUsuarios.TabIndex = 0;
             // 
             // dgvAlumnos
@@ -120,14 +120,15 @@
             this.dgvAlumnos.Name = "dgvAlumnos";
             this.dgvAlumnos.ReadOnly = true;
             this.dgvAlumnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAlumnos.Size = new System.Drawing.Size(644, 390);
+            this.dgvAlumnos.Size = new System.Drawing.Size(643, 390);
             this.dgvAlumnos.TabIndex = 0;
             this.dgvAlumnos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvAlumnos_CellFormatting);
+            this.dgvAlumnos.DoubleClick += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // btnSeleccionar
             // 
             this.btnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeleccionar.Location = new System.Drawing.Point(491, 399);
+            this.btnSeleccionar.Location = new System.Drawing.Point(490, 399);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
             this.btnSeleccionar.TabIndex = 1;
@@ -137,7 +138,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(572, 399);
+            this.btnSalir.Location = new System.Drawing.Point(571, 399);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 2;
@@ -151,11 +152,11 @@
             // tcUsuarios.ContentPanel
             // 
             this.tcUsuarios.ContentPanel.Controls.Add(this.tlUsuarios);
-            this.tcUsuarios.ContentPanel.Size = new System.Drawing.Size(650, 425);
+            this.tcUsuarios.ContentPanel.Size = new System.Drawing.Size(649, 425);
             this.tcUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcUsuarios.Location = new System.Drawing.Point(0, 0);
             this.tcUsuarios.Name = "tcUsuarios";
-            this.tcUsuarios.Size = new System.Drawing.Size(650, 450);
+            this.tcUsuarios.Size = new System.Drawing.Size(649, 450);
             this.tcUsuarios.TabIndex = 1;
             this.tcUsuarios.Text = "toolStripContainer1";
             // 
@@ -165,6 +166,7 @@
             this.apellido.HeaderText = "Apellido";
             this.apellido.Name = "apellido";
             this.apellido.ReadOnly = true;
+            this.apellido.Width = 150;
             // 
             // Nombre
             // 
@@ -172,6 +174,7 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 150;
             // 
             // nota
             // 
@@ -198,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 450);
+            this.ClientSize = new System.Drawing.Size(649, 450);
             this.Controls.Add(this.tcUsuarios);
             this.Name = "CursoAlumnos";
             this.Text = "CursoAlumnos";

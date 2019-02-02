@@ -22,7 +22,7 @@ namespace UI.Desktop
             InitializeComponent();
             CenterToScreen();
             Ocultar();
-            lblSesion.Text = UsuarioActual.NombreUsuario;           
+            lblSesion.Text = "Sesión: " + UsuarioActual.NombreUsuario;           
         }
 
         private Usuario _UsuarioActual;
@@ -37,13 +37,13 @@ namespace UI.Desktop
             switch(UsuarioActual.Tipo)
             {
                 case Usuario.TiposUsuario.Alumno:
-                    btn1.Text = "Inscripcion";                    
-                    btn2.Text = "Cursado y Notas";                    
-                    btnAdmCom.Hide();
-                    btnAdmPla.Hide();
-                    btnAdmCur.Hide();
-                    btnAdmEsp.Hide();
-                    btnAdmMat.Hide();
+                    //btn1.Text = "Inscripcion";                    
+                    //btn2.Text = "Cursado y Notas";                    
+                    //btnAdmCom.Hide();
+                    //btnAdmPla.Hide();
+                    //btnAdmCur.Hide();
+                    //btnAdmEsp.Hide();
+                    //btnAdmMat.Hide();
 
                     usuariosToolStripMenuItem.Text = "Inscripcion";
                     personasToolStripMenuItem.Text = "Cursado y notas";
@@ -55,13 +55,13 @@ namespace UI.Desktop
 
                     break;
                 case Usuario.TiposUsuario.Profesor:
-                    btn1.Text = "Cursos";
-                    btn2.Hide();
-                    btnAdmCom.Hide();
-                    btnAdmPla.Hide();
-                    btnAdmCur.Hide();
-                    btnAdmEsp.Hide();
-                    btnAdmMat.Hide();
+                    //btn1.Text = "Cursos";
+                    //btn2.Hide();
+                    //btnAdmCom.Hide();
+                    //btnAdmPla.Hide();
+                    //btnAdmCur.Hide();
+                    //btnAdmEsp.Hide();
+                    //btnAdmMat.Hide();
 
                     usuariosToolStripMenuItem.Text = "Cursos";
                     personasToolStripMenuItem.Visible = false;
@@ -72,8 +72,8 @@ namespace UI.Desktop
                     materiasToolStripMenuItem.Visible = false;
                     break;
                 case Usuario.TiposUsuario.Administrador:
-                    btn1.Text = "Usuarios";
-                    btn2.Text = "Personas";
+                    //btn1.Text = "Usuarios";
+                    //btn2.Text = "Personas";
                     break;
             }
         }
@@ -105,9 +105,9 @@ namespace UI.Desktop
             }
         }
 
-        public void Ejecutar(int dato)
+        public void Ejecutar(Materia materia)
         {
-            Inscripciones insForm = new Inscripciones(dato);
+            Inscripciones insForm = new Inscripciones(materia.ID);
             insForm.ShowDialog();
         }
 

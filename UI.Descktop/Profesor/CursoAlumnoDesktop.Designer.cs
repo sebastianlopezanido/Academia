@@ -66,7 +66,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(471, 119);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(443, 119);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // label1
@@ -90,7 +90,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(237, 0);
+            this.label3.Location = new System.Drawing.Point(223, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 2;
@@ -99,7 +99,7 @@
             // lbel12
             // 
             this.lbel12.AutoSize = true;
-            this.lbel12.Location = new System.Drawing.Point(237, 39);
+            this.lbel12.Location = new System.Drawing.Point(223, 39);
             this.lbel12.Name = "lbel12";
             this.lbel12.Size = new System.Drawing.Size(54, 13);
             this.lbel12.TabIndex = 3;
@@ -108,7 +108,7 @@
             // txtNombre
             // 
             this.txtNombre.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtNombre.Location = new System.Drawing.Point(103, 3);
+            this.txtNombre.Location = new System.Drawing.Point(97, 3);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
@@ -116,14 +116,14 @@
             // 
             // txtNota
             // 
-            this.txtNota.Location = new System.Drawing.Point(103, 42);
+            this.txtNota.Location = new System.Drawing.Point(97, 42);
             this.txtNota.Name = "txtNota";
             this.txtNota.Size = new System.Drawing.Size(100, 20);
             this.txtNota.TabIndex = 5;
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(355, 3);
+            this.txtApellido.Location = new System.Drawing.Point(334, 3);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.ReadOnly = true;
             this.txtApellido.Size = new System.Drawing.Size(93, 20);
@@ -132,7 +132,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(274, 81);
+            this.btnAceptar.Location = new System.Drawing.Point(253, 81);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 8;
@@ -142,7 +142,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(355, 81);
+            this.btnCancelar.Location = new System.Drawing.Point(334, 81);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 9;
@@ -152,8 +152,8 @@
             // 
             // cbxCondicion
             // 
-            this.cbxCondicion.FormattingEnabled = true;
-            this.cbxCondicion.Location = new System.Drawing.Point(355, 42);
+            this.cbxCondicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCondicion.Location = new System.Drawing.Point(334, 42);
             this.cbxCondicion.Name = "cbxCondicion";
             this.cbxCondicion.Size = new System.Drawing.Size(93, 21);
             this.cbxCondicion.TabIndex = 10;
@@ -162,11 +162,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 119);
+            this.ClientSize = new System.Drawing.Size(443, 119);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CursoAlumnoDesktop";
-            this.Text = "CursoAlumnoDesktop";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
