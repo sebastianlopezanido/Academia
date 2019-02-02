@@ -186,22 +186,21 @@ namespace UI.Desktop
             for (int i = 0; i<dgvCursos.Rows.Count; i++ )
             {
                 Curso_Reporte linea = new Curso_Reporte();
-                linea.ID = dgvCursos.Rows[i].Cells[0].Value.ToString();
 
                 MateriaLogic ml = new MateriaLogic();
-                MateriaActual = ml.GetOne((int)dgvCursos.Rows[i].Cells[1].Value);
+                MateriaActual = ml.GetOne((int)dgvCursos.Rows[i].Cells[0].Value);
                 linea.Materia = MateriaActual.Descripcion;
 
                 
                 ComisionLogic cl = new ComisionLogic();
-                ComisionActual = cl.GetOne((int)dgvCursos.Rows[i].Cells[2].Value);
+                ComisionActual = cl.GetOne((int)dgvCursos.Rows[i].Cells[1].Value);
                 linea.Comision = ComisionActual.Descripcion;
                 
-                linea.Año = dgvCursos.Rows[i].Cells[3].Value.ToString();
-                linea.Cupo = dgvCursos.Rows[i].Cells[4].Value.ToString();
+                linea.Año = dgvCursos.Rows[i].Cells[2].Value.ToString();
+                linea.Cupo = dgvCursos.Rows[i].Cells[3].Value.ToString();
 
                 DocenteCursoLogic dcl = new DocenteCursoLogic();
-                DocenteCursoActual = dcl.GetOneByCurso((int)dgvCursos.Rows[i].Cells[5].Value);
+                DocenteCursoActual = dcl.GetOneByCurso((int)dgvCursos.Rows[i].Cells[4].Value);
                 UsuarioLogic ul = new UsuarioLogic();
                 UsuarioActual = ul.GetOne(DocenteCursoActual.IDDocente);
                 PersonaLogic pl = new PersonaLogic();

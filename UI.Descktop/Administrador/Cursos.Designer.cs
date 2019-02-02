@@ -58,11 +58,11 @@
             // tsCursos.ContentPanel
             // 
             this.tsCursos.ContentPanel.Controls.Add(this.tlCursos);
-            this.tsCursos.ContentPanel.Size = new System.Drawing.Size(650, 425);
+            this.tsCursos.ContentPanel.Size = new System.Drawing.Size(549, 425);
             this.tsCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsCursos.Location = new System.Drawing.Point(0, 0);
             this.tsCursos.Name = "tsCursos";
-            this.tsCursos.Size = new System.Drawing.Size(650, 450);
+            this.tsCursos.Size = new System.Drawing.Size(549, 450);
             this.tsCursos.TabIndex = 0;
             this.tsCursos.Text = "toolStripContainer1";
             // 
@@ -84,7 +84,7 @@
             this.tlCursos.RowCount = 2;
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlCursos.Size = new System.Drawing.Size(650, 425);
+            this.tlCursos.Size = new System.Drawing.Size(549, 425);
             this.tlCursos.TabIndex = 0;
             // 
             // dgvCursos
@@ -105,7 +105,7 @@
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.ReadOnly = true;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCursos.Size = new System.Drawing.Size(644, 390);
+            this.dgvCursos.Size = new System.Drawing.Size(543, 390);
             this.dgvCursos.TabIndex = 0;
             this.dgvCursos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCursos_CellFormatting);
             this.dgvCursos.DoubleClick += new System.EventHandler(this.btnEditar_Click);
@@ -148,7 +148,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(491, 399);
+            this.btnAceptar.Location = new System.Drawing.Point(390, 399);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 1;
@@ -158,7 +158,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(572, 399);
+            this.btnSalir.Location = new System.Drawing.Point(471, 399);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 2;
@@ -223,7 +223,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 450);
+            this.ClientSize = new System.Drawing.Size(549, 450);
             this.Controls.Add(this.tsCursos);
             this.Name = "Cursos";
             this.Text = "Cursos";

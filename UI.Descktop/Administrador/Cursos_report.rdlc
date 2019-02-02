@@ -6,60 +6,25 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.03167in</Width>
+              <Width>1.238in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.03167in</Width>
+              <Width>1.238in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.03167in</Width>
+              <Width>1.238in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.03167in</Width>
+              <Width>1.238in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.03167in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.03167in</Width>
+              <Width>1.238in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
               <Height>0.25in</Height>
               <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox2">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>ID</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox2</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightSteelBlue</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox4">
@@ -227,35 +192,6 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ID">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!ID.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>ID</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Materia">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -410,7 +346,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -429,7 +364,7 @@
           <BreakLocation>StartAndEnd</BreakLocation>
         </PageBreak>
         <Height>0.5in</Height>
-        <Width>6.19002in</Width>
+        <Width>6.19in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -440,11 +375,11 @@
     <Height>0.5in</Height>
     <Style>
       <Border>
-        <Style>Solid</Style>
+        <Style>None</Style>
       </Border>
     </Style>
   </Body>
-  <Width>6.19002in</Width>
+  <Width>6.19in</Width>
   <Page>
     <PageHeader>
       <Height>0.38417in</Height>
