@@ -157,6 +157,15 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtMateria;
         
         /// <summary>
+        /// txtMateria_Desc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMateria_Desc;
+        
+        /// <summary>
         /// btnMateria control.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,15 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtProfesor;
+        
+        /// <summary>
+        /// txtProfesor_Desc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProfesor_Desc;
         
         /// <summary>
         /// btnProfesor control.

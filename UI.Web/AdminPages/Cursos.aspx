@@ -36,30 +36,28 @@
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
         
-        <asp:Panel ID="Panel2" runat="server" Height="55px">
+        <asp:Panel ID="Panel2" runat="server" Height="95px">
             <asp:Button ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" Text="Nuevo" />
             <asp:Button ID="btnEditar" runat="server" OnClick="btnEditar_Click" Text="Editar" />
             <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" />
             <br />
             <asp:Button ID="btnReporte" runat="server" OnClick="btnReporte_Click" Text="Imprimir" />
+            <br />
+            <br />
+            <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
             </asp:Panel>
         </asp:Panel>
             <br />
             <br />
-            <table dir="ltr">
-                <tr> 
-                    <td colspan="2" style="color: #FF0000">
-                        <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
-                    </td></table>
             
-            <asp:Panel ID="formPanel" runat="server" style="margin-top: 0px" Visible="False" Height="256px">
+            <asp:Panel ID="formPanel" runat="server" style="margin-top: 72px" Visible="False" Height="256px">
                 <table dir="ltr">
                 <tr>
                     <td dir="rtl">
                         <asp:Label ID="Label6" runat="server" Text="ID"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtID" runat="server" ReadOnly="True"></asp:TextBox>
+                        <asp:TextBox ID="txtID" runat="server" ReadOnly="True" Width="144px"></asp:TextBox>
                     </td>
                     
                 </tr>
@@ -68,7 +66,8 @@
                         <asp:Label ID="Label8" runat="server" Text="Materia"></asp:Label>
                     </td>
                     <td style="height: 26px">
-                        <asp:TextBox ID="txtMateria" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtMateria" runat="server" Width="16px"></asp:TextBox>
+                        <asp:TextBox ID="txtMateria_Desc" runat="server" ReadOnly="True"></asp:TextBox>
                     </td>
                     <td style="height: 26px">
                         <asp:Button ID="btnMateria" runat="server" OnClick="btnMateria_Click" Text="..." />
@@ -80,7 +79,8 @@
                         <asp:Label ID="Label1" runat="server" Text="Profesor"></asp:Label>
                     </td>
                     <td style="height: 26px">
-                        <asp:TextBox ID="txtProfesor" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtProfesor" runat="server" Width="16px"></asp:TextBox>
+                        <asp:TextBox ID="txtProfesor_Desc" runat="server" ReadOnly="True"></asp:TextBox>
                     </td>
                     <td style="height: 26px">
                         <asp:Button ID="btnProfesor" runat="server" OnClick="btnProfesor_Click" Text="..." />
@@ -88,11 +88,11 @@
                     
                 </tr>
                 <tr>
-                    <td dir="rtl">
+                    <td dir="rtl" style="height: 26px">
                         <asp:Label ID="Label7" runat="server" Text="Cupo"></asp:Label>
                     </td>
-                    <td>
-                        <asp:TextBox ID="txtCupo" runat="server"></asp:TextBox>
+                    <td style="height: 26px">
+                        <asp:TextBox ID="txtCupo" runat="server" Width="144px"></asp:TextBox>
                     </td>
                     
                 </tr>
@@ -101,7 +101,7 @@
                         <asp:Label ID="Label9" runat="server" Text="Año"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtAño" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtAño" runat="server" Width="144px"></asp:TextBox>
                     </td>
                     
                 </tr>
