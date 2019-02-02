@@ -177,6 +177,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\UTNFIN.png" />
     <Content Include="favicon.ico" />
+    <Content Include="FindPages\FindPersona.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -331,6 +332,13 @@
     </Compile>
     <Compile Include="especialidade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FindPages\FindPersona.aspx.cs">
+      <DependentUpon>FindPersona.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FindPages\FindPersona.aspx.designer.cs">
+      <DependentUpon>FindPersona.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

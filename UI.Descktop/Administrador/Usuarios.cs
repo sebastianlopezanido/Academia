@@ -105,8 +105,16 @@ namespace UI.Desktop
                 
                 if (dr == DialogResult.Yes)
                 {
-                    UsuarioActual.State = BusinessEntity.States.Deleted;
-                    ul.Save(UsuarioActual);
+                    try
+                    {
+                        UsuarioActual.State = BusinessEntity.States.Deleted;
+                        ul.Save(UsuarioActual);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message,"Error", MessageBoxButtons.OK);
+                    }
+                    
                 }
                                 
                 Listar();

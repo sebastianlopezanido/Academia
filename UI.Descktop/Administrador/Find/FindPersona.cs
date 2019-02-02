@@ -18,6 +18,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvPersonas.AutoGenerateColumns = false;
+            CenterToParent();
         }        
 
         public delegate void pasar(int dato);

@@ -23,6 +23,7 @@ namespace UI.Desktop
             cbxIDPlan.DataSource = pl.GetAll();
             cbxIDPlan.ValueMember = "ID";
             cbxIDPlan.DisplayMember = "Descripcion";
+            CenterToParent();
         }
 
         public UsuariosDesktop(ModoForm modo):this() //aca entra el Nuevo
@@ -54,8 +55,9 @@ namespace UI.Desktop
             chkHabilitado.Checked = UsuarioActual.Habilitado;
             txtIdPersona.Text = UsuarioActual.IDPersona.ToString();
             cbxTipo.SelectedItem = UsuarioActual.Tipo;
-            cbxIDPlan.SelectedValue = UsuarioActual.IDPlan.ToString();
+            cbxIDPlan.SelectedValue = UsuarioActual.IDPlan;
             txtClave.Text = UsuarioActual.Clave;
+            txtConfirmarClave.Text = UsuarioActual.Clave;
             txtUsuario.Text = UsuarioActual.NombreUsuario;            
         }
 

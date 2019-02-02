@@ -29,6 +29,32 @@ namespace UI.Web
                 ddlPlan.DataValueField = "ID";
                 ddlPlan.DataTextField = "Descripcion";
                 ddlPlan.DataBind();
+
+                if (string.IsNullOrEmpty(Request.QueryString["IDPersona"]) == false)
+                {
+                    switch (Session["FormMode"])
+                    {
+                        case FormModes.Alta:
+                            txtIdPersona.Text = Request.QueryString["IDPersona"].ToString();
+                            break;
+                        case FormModes.Modificacion:
+                            txtIdPersona.Text = Request.QueryString["IDPersona"].ToString();
+                            SelectedID = int.Parse(Request.QueryString["IDUsuario"]);
+                            txtId.Text = SelectedID.ToString();
+                            txtUsuario.Text = Request.QueryString["Usuario"].ToString();
+                            ddlPlan.SelectedValue = Request.QueryString["IDPlan"].ToString();
+                            txtClave.Text = Request.QueryString["Clave"].ToString();
+                            txtConfirmarClave.Text = Request.QueryString["Clave"].ToString();
+                            ckbHabilitado.Checked = bool.Parse(Request.QueryString["Habilitado"]);
+                            ddlTipo.SelectedValue = Request.QueryString["TipoUsuario"].ToString();
+                            break;
+                    }
+
+                    formPanel.Visible = true;
+                    EnableForm(true);
+                }
+
+
             }            
         }
 
@@ -79,7 +105,7 @@ namespace UI.Web
 
         private void LoadEntity()
         {
-            switch (FormMode)
+            switch (Session["FormMode"])
             {
                 case FormModes.Alta:
                     Entity = new Usuario();
@@ -141,6 +167,7 @@ namespace UI.Web
             catch (Exception ex)
             {
                 lblError1.Text = ex.Message;
+                lblError1.Visible = true;
             }
         }
 
@@ -159,6 +186,7 @@ namespace UI.Web
         {
             formPanel.Visible = true;
             FormMode = FormModes.Alta;
+            Session["FormMode"] = FormModes.Alta;
             ClearForm();
             EnableForm(true);
         }       
@@ -169,6 +197,7 @@ namespace UI.Web
             {
                 formPanel.Visible = true;
                 FormMode = FormModes.Modificacion;
+                Session["FormMode"] = FormModes.Modificacion;
                 EnableForm(true);
                 LoadForm(SelectedID);
             }
@@ -229,6 +258,7 @@ namespace UI.Web
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int)gridUsuarios.SelectedValue;
+            lblError1.Visible = false;
         }
 
         protected void gridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -242,6 +272,25 @@ namespace UI.Web
                     e.Row.Cells[3].Text = PersonaActual.Legajo.ToString();
                 }
             }
+        }
+        protected void btnPersona_Click(object sender, EventArgs e)
+        {
+
+            switch (Session["FormMode"])
+            {
+                case FormModes.Alta:
+                    Response.Redirect("~/FindPages/FindPersona.aspx");
+                    break;
+                case FormModes.Modificacion:
+                    Response.Redirect("~/FindPages/FindPersona.aspx?IDUsuario=" + SelectedID.ToString()
+                + "&Usuario=" + txtUsuario.Text + "&IDPlan=" + ddlPlan.SelectedValue + "&Clave=" + txtClave.Text + "&Habilitado=" + ckbHabilitado.Checked + "&TipoUsuario=" + ddlTipo.SelectedValue);
+                    break;
+            }
+
+
+            
+                 
+          
         }
     }
 }

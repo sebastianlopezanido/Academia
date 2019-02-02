@@ -37,7 +37,7 @@
             <table dir="ltr">
                 <tr> 
                     <td colspan="2" style="color: #FF0000">
-                        <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
+                        <asp:Label ID="lblError1" runat="server"></asp:Label>
                     </td></table>
     </asp:Panel> </center>
         <asp:Panel ID="formPanel" runat="server" Height="265px" Visible="False">
@@ -57,6 +57,7 @@
                     <td>
                         <asp:TextBox ID="txtUsuario" runat="server"></asp:TextBox>
                     </td>
+                    
                 </tr>
                 <tr>
                     <td>
@@ -64,6 +65,9 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtIdPersona" runat="server"></asp:TextBox>
+                    </td>
+                    <td style="height: 26px">
+                        <asp:Button ID="btnPersona" runat="server" OnClick="btnPersona_Click" Text="..." />
                     </td>
                 </tr>
                 <tr>
