@@ -83,7 +83,7 @@ namespace UI.Desktop.Profesor
 
             if (((AlumnoInscripcion.TiposCondiciones)cbxCondicion.SelectedValue == AlumnoInscripcion.TiposCondiciones.Regular  ||
                 (AlumnoInscripcion.TiposCondiciones)cbxCondicion.SelectedValue == AlumnoInscripcion.TiposCondiciones.Promovido) &&
-                int.Parse(txtNota.Text) < 7)
+                int.Parse(txtNota.Text) < 6)
             {
                 Notificar("Error", "Para tener condición regular o promovido, debe tener nota mayor o igual a 6", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

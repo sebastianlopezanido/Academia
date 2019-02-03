@@ -194,7 +194,8 @@ namespace UI.Desktop
             }
 
             if (!(int.TryParse(txtCupo.Text, out num)) ||
-                int.Parse(txtCupo.Text)>100)
+                int.Parse(txtCupo.Text) > 100 ||
+                int.Parse(txtCupo.Text) < 0)
             {
                 Notificar("Error", "Ingrese correctamente el cupo", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -202,13 +203,21 @@ namespace UI.Desktop
             }
 
             CursoLogic cl = new CursoLogic();
-            Curso curso = cl.GetOne(int.Parse(txtID.Text));
+            if (Modo == ModoForm.Modificacion)
+            {                
+                Curso curso = cl.GetOne(int.Parse(txtID.Text));
 
-            if((( Modo == ModoForm.Modificacion && 
-                (curso.AnioCalendario != int.Parse(txtAño.Text) ||
+                if ((curso.AnioCalendario != int.Parse(txtAño.Text) ||
                 curso.IDComision != (int)cbxIDComision.SelectedValue ||
-                curso.IDMateria != MateriaActual.ID) ) || Modo == ModoForm.Alta ) &&
-               cl.EstaAgregado(MateriaActual.ID, (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)))
+                curso.IDMateria != MateriaActual.ID) 
+                && cl.EstaAgregado(MateriaActual.ID, (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)))
+                {
+                    Notificar("Error", "Ya existe ese curso en esa comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            if (Modo == ModoForm.Alta && cl.EstaAgregado(MateriaActual.ID, (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)))
             {
                 Notificar("Error", "Ya existe ese curso en esa comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
