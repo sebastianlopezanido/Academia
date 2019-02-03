@@ -153,7 +153,7 @@ namespace UI.Web
         private void LoadEntity()
         {            
             AlumnoInscripcionActual = new AlumnoInscripcion();
-            AlumnoInscripcionActual.Nota = int.Parse(txtNota.Text);
+            AlumnoInscripcionActual.Nota = (txtNota.Text != "") ? int.Parse(txtNota.Text) : 0;             
             AlumnoInscripcionActual.Condicion = (AlumnoInscripcion.TiposCondiciones)ddlCondicion.SelectedIndex;
             AlumnoInscripcionActual.ID = SelectedIDInscripcion;
             AlumnoInscripcionActual.State = BusinessEntity.States.Modified;
@@ -229,13 +229,21 @@ namespace UI.Web
 
         public bool Validar()
         {
-            if (string.IsNullOrEmpty(txtNota.Text) == false && (int.Parse(txtNota.Text) > 10 || int.Parse(txtNota.Text) < 0))
+            int num;
+            if (!string.IsNullOrEmpty(txtNota.Text) && 
+               (!int.TryParse(txtNota.Text, out num) || int.Parse(txtNota.Text) > 10 || int.Parse(txtNota.Text) < 0))
             {
                 lblError.Text = "Ingrese Nota valida";
-
                 return false;
             }
 
+            if (!string.IsNullOrEmpty(txtNota.Text) && 
+               ((ddlCondicion.SelectedValue == "Regular" || ddlCondicion.SelectedValue == "Promovido") && int.Parse(txtNota.Text) < 6))
+            {
+                lblError.Text = "Debe tener nota mayor o igual a 6 para regularizar/promover";
+                return false;
+            }
+            lblError.Text = "";
             return true;
         }
 
