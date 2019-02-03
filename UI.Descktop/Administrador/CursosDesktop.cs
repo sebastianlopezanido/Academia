@@ -45,8 +45,9 @@ namespace UI.Desktop
             MateriaActual = ml.GetOne(CursoActual.IDMateria);
             DocenteActual = ul.GetOne(DocenteCursoActual.IDDocente);
             Text = CambiarTextos(btnAceptar);
-            cbxIDComision.Enabled = false;
-            btnFindMateria.Enabled = false;
+
+            //cbxIDComision.Enabled = false;
+            //btnFindMateria.Enabled = false;
             MapearDeDatos();
         }
 
@@ -201,9 +202,13 @@ namespace UI.Desktop
             }
 
             CursoLogic cl = new CursoLogic();
+            Curso curso = cl.GetOne(int.Parse(txtID.Text));
 
-            if(cl.EstaAgregado(MateriaActual.ID, (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)) &&
-                Modo == ModoForm.Alta )
+            if((( Modo == ModoForm.Modificacion && 
+                (curso.AnioCalendario != int.Parse(txtAño.Text) ||
+                curso.IDComision != (int)cbxIDComision.SelectedValue ||
+                curso.IDMateria != MateriaActual.ID) ) || Modo == ModoForm.Alta ) &&
+               cl.EstaAgregado(MateriaActual.ID, (int)cbxIDComision.SelectedValue, int.Parse(txtAño.Text)))
             {
                 Notificar("Error", "Ya existe ese curso en esa comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

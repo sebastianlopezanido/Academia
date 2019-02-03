@@ -31,7 +31,7 @@
                                 
                                 </h1></center> 
                             </td>
-                            <td class="auto-style6"> <asp:Button ID="Button1" runat="server" Text="Cerrar Sesión" OnClick="Button1_Click" /> </td>
+                            <td class="auto-style6" dir="ltr"><center><asp:Button ID="Button1" runat="server" Text="Cerrar Sesión" OnClick="Button1_Click" /> </center> </td>
                         </tr>
                         <tr height ="800">
                             <td width ="100" style="background-color:#B5C7DE">

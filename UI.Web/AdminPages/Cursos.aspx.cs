@@ -31,7 +31,7 @@ namespace UI.Web
                 cbxComision.DataValueField = "ID";
                 cbxComision.DataTextField = "Descripcion";
                 cbxComision.DataBind();
-
+                                
                 if (!string.IsNullOrEmpty(Request.QueryString["IDCurso"]))
                 {
                     SelectedID = int.Parse(Request.QueryString["IDCurso"]);
@@ -46,7 +46,6 @@ namespace UI.Web
                     txtMateria.Text = Request.QueryString["IDMateria"];
                     formPanel.Visible = true;
                     EnableForm(true);
-
                 }
 
                 if (!string.IsNullOrEmpty(Request.QueryString["IDProfesor"]))
@@ -74,13 +73,8 @@ namespace UI.Web
                 if (!string.IsNullOrEmpty(Request.QueryString["IDComision"]))
                 {
                     cbxComision.SelectedValue = Request.QueryString["IDComision"].ToString();
-                }
-
-
-               
-                
-
-                
+                }         
+                                              
                 ReportViewer1.ShowReportBody = false;
             }            
         }
@@ -240,9 +234,10 @@ namespace UI.Web
             txtID.Enabled = enable;
             txtMateria_Desc.Enabled = enable;
             txtAño.Enabled = enable;
-            cbxComision.Enabled = enable;
             txtCupo.Enabled = enable;
             txtProfesor_Desc.Enabled = enable;
+            btnMateria.Enabled = enable;
+            cbxComision.Enabled = enable;            
         }
 
         public void MapearADatosDocenteCurso()
@@ -294,13 +289,14 @@ namespace UI.Web
             txtProfesor_Desc.Text = string.Empty;
             txtMateria.Text = string.Empty;
             txtProfesor.Text = string.Empty;
+            cbxComision.SelectedValue = null;
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             formPanel.Visible = true;
             Session["FormMode"] = FormModes.Alta;
-            ClearForm();
+            ClearForm();            
             EnableForm(true);
         }
 
@@ -310,6 +306,7 @@ namespace UI.Web
             {
                 formPanel.Visible = true;
                 Session["FormMode"] = FormModes.Modificacion;
+                
                 EnableForm(true);
                 LoadForm(SelectedID);
             }
@@ -319,6 +316,7 @@ namespace UI.Web
         {
             if (IsEntitySelected)
             {
+                
                 DeleteEntity(SelectedID);
                 LoadGrid();
             }
@@ -355,7 +353,11 @@ namespace UI.Web
 
         public bool Validar()
         {
-            if (string.IsNullOrEmpty(txtAño.Text) || string.IsNullOrEmpty(txtMateria.Text) || cbxComision.SelectedValue == null || string.IsNullOrEmpty(txtCupo.Text))
+            if (string.IsNullOrEmpty(txtAño.Text) ||
+                string.IsNullOrEmpty(txtMateria.Text) ||
+                cbxComision.SelectedValue == null ||
+                string.IsNullOrEmpty(txtCupo.Text) ||
+                string.IsNullOrEmpty(txtProfesor.Text))
             {
                 lblError.Visible = true;
                 lblError.Text = "Debe llenar todos los campos";
@@ -363,29 +365,40 @@ namespace UI.Web
             }
 
             int num;
-
-            if (txtAño.Text.Length != 4 || !(int.TryParse(txtAño.Text, out num)))
+            if (txtAño.Text.Length != 4 ||
+                !int.TryParse(txtAño.Text, out num ) ||
+                int.Parse(txtAño.Text) < 2000 ||
+                int.Parse(txtAño.Text) > 2100)
             {
                 lblError.Visible = true;
                 lblError.Text = "Ingrese correctamente el año";
                 return false;
             }
 
-            if (!(int.TryParse(txtCupo.Text, out num)))
+            if (!(int.TryParse(txtCupo.Text, out num)) ||
+                int.Parse(txtCupo.Text)<1 ||
+                int.Parse(txtCupo.Text) >100)
             {
                 lblError.Visible = true;
-                lblError.Text = "Ingrese correctamente el cupo";
+                lblError.Text = "Ingrese correctamente el cupo (1-100)";
 
                 return false;
             }
 
-            if ((Logic.EstaAgregado(int.Parse(txtMateria.Text), int.Parse(cbxComision.SelectedValue), int.Parse(txtAño.Text))) && (FormModes)Session["FormMode"] == FormModes.Alta)
+            Curso curso = Logic.GetOne(SelectedID);
+
+            if ((((FormModes)Session["FormMode"] == FormModes.Modificacion &&
+                (curso.AnioCalendario != int.Parse(txtAño.Text) ||
+                curso.IDComision != int.Parse(cbxComision.SelectedValue) ||
+                curso.IDMateria != int.Parse(txtMateria.Text)) ) || (FormModes)Session["FormMode"] == FormModes.Alta) &&
+
+                Logic.EstaAgregado(int.Parse(txtMateria.Text), int.Parse(cbxComision.SelectedValue), int.Parse(txtAño.Text)))
             {
                 lblError.Visible = true;
                 lblError.Text = "Ya existe ese curso en esa comision";
                 return false;
             }
-
+            lblError.Text = "";
             return true;
         }
 
@@ -435,7 +448,7 @@ namespace UI.Web
                     break;
                 case FormModes.Modificacion:                    
                     Response.Redirect("~/FindPages/FindMateria.aspx?IDCurso=" + SelectedID.ToString()
-                + "&Cupo=" + txtCupo.Text + "&Año=" + txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDProfesor=" + txtProfesor + "&IDProfesor_Desc=" + txtProfesor_Desc.Text);
+                + "&Cupo=" + txtCupo.Text + "&Año=" + txtAño.Text + "&IDComision=" + cbxComision.SelectedValue + "&IDProfesor=" + txtProfesor.Text + "&IDProfesor_Desc=" + txtProfesor_Desc.Text);
                     break;
             }
             
