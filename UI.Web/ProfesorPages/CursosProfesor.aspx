@@ -4,7 +4,7 @@
         <asp:GridView ID="gridCursos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" OnSelectedIndexChanged="gridCursos_SelectedIndexChanged" OnRowDataBound="gridCursos_RowDataBound" EmptyDataText="No hay cursos disponibles">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField DataField="ID" HeaderText="ID" />
+                <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                 <asp:BoundField DataField="IDCurso" HeaderText="Materia" />
                 <asp:BoundField DataField="IDCurso" HeaderText="Comision" />
                 <asp:BoundField DataField="IDCurso" HeaderText="Año" />
@@ -26,7 +26,7 @@
         <asp:GridView ID="gridAlumnos" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" ForeColor="#333333" GridLines="None" OnRowDataBound="GridAlumnos_RowDataBound" OnSelectedIndexChanged="gridAlumnos_SelectedIndexChanged" EmptyDataText="No hay alumnos inscriptos">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField DataField="ID" HeaderText="ID" />
+                <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                 <asp:BoundField DataField="IDAlumno" HeaderText="Legajo" />
                 <asp:BoundField DataField="IDAlumno" HeaderText="Nombre" />
                 <asp:BoundField DataField="IDAlumno" HeaderText="Apellido" />

@@ -30,13 +30,13 @@
             <asp:Panel ID="Panel1" runat="server">
                 <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" OnClick="btnNuevo_Click" />
                 <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
-                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" OnClientClick="return confirm('¿Seguro que desea eliminar materia?')"/>
             </asp:Panel>           
             <br />
             <table dir="ltr">
                 <tr> 
                     <td colspan="2" style="color: #FF0000">
-                        <asp:Label ID="lblError1" runat="server" Visible="False"></asp:Label>
+                        <asp:Label ID="lblError1" runat="server"></asp:Label>
                     </td></table>
     </asp:Panel> </center>
         <asp:Panel ID="formPanel" runat="server" Height="265px" Visible="False">

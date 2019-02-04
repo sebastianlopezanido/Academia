@@ -25,6 +25,7 @@ namespace UI.Web
             {
                 LoadGrid();                
             }
+            lblError.Text = "";
         }     
         
         protected int SelectedIDInscripcion
@@ -139,9 +140,17 @@ namespace UI.Web
             PersonaLogic pl = new PersonaLogic();
             UsuarioLogic ul = new UsuarioLogic();
             InscripcionLogic il = new InscripcionLogic();
-            UsuarioActual = ul.GetOne(id);
-            PersonaActual = pl.GetOne(UsuarioActual.IDPersona);
-            AlumnoInscripcionActual = il.GetOne(SelectedIDInscripcion);
+            try
+            {
+                UsuarioActual = ul.GetOne(id);
+                PersonaActual = pl.GetOne(UsuarioActual.IDPersona);
+                AlumnoInscripcionActual = il.GetOne(SelectedIDInscripcion);
+            }
+            catch (Exception Ex)
+            {
+                lblError.Text = Ex.Message;
+            }
+            
 
             txtApellido.Text = PersonaActual.Apellido;
             txtNombre.Text = PersonaActual.Nombre;
@@ -153,7 +162,7 @@ namespace UI.Web
         private void LoadEntity()
         {            
             AlumnoInscripcionActual = new AlumnoInscripcion();
-            AlumnoInscripcionActual.Nota = (txtNota.Text != "") ? int.Parse(txtNota.Text) : 0;             
+            AlumnoInscripcionActual.Nota = (txtNota.Text != "") ? int.Parse(txtNota.Text) : 0;           
             AlumnoInscripcionActual.Condicion = (AlumnoInscripcion.TiposCondiciones)ddlCondicion.SelectedIndex;
             AlumnoInscripcionActual.ID = SelectedIDInscripcion;
             AlumnoInscripcionActual.State = BusinessEntity.States.Modified;
@@ -237,12 +246,13 @@ namespace UI.Web
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(txtNota.Text) && 
-               ((ddlCondicion.SelectedValue == "Regular" || ddlCondicion.SelectedValue == "Promovido") && int.Parse(txtNota.Text) < 6))
+            if (string.IsNullOrEmpty(txtNota.Text) || ( !string.IsNullOrEmpty(txtNota.Text) && 
+               ((ddlCondicion.SelectedValue == "Regular" || ddlCondicion.SelectedValue == "Promovido") && int.Parse(txtNota.Text) < 6)))
             {
                 lblError.Text = "Debe tener nota mayor o igual a 6 para regularizar/promover";
                 return false;
             }
+                        
             lblError.Text = "";
             return true;
         }

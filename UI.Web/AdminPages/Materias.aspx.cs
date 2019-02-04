@@ -25,11 +25,21 @@ namespace UI.Web
             {
                 LoadGrid();
                 PlanLogic pl = new PlanLogic();
-                ddlPlan.DataSource = pl.GetAll();
+                try
+                {
+                    ddlPlan.DataSource = pl.GetAll();
+                }
+                catch (Exception ex)
+                {
+                    lblError1.Text = ex.Message;
+                }
+                
+
                 ddlPlan.DataValueField = "ID";
                 ddlPlan.DataTextField = "Descripcion";
                 ddlPlan.DataBind();
             }
+            lblError1.Text = "";
         }
 
         public Materia _Entity;
@@ -61,13 +71,27 @@ namespace UI.Web
 
         private void LoadGrid()
         {
-            gridMaterias.DataSource = Logic.GetAll();
+            try
+            {
+                gridMaterias.DataSource = Logic.GetAll();
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }            
             gridMaterias.DataBind();
         }     
 
         private void LoadForm(int id)
         {
-            Entity = Logic.GetOne(id);
+            try
+            {
+                Entity = Logic.GetOne(id);
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+            }            
             txtId.Text = Entity.ID.ToString();
             txtDescripcion.Text = Entity.Descripcion.ToString();
             ddlPlan.SelectedValue = Entity.IDPlan.ToString();
@@ -166,7 +190,12 @@ namespace UI.Web
         {
             if (IsEntitySelected)
             {
+                
+                
                 DeleteEntity(SelectedID);
+                
+               
+                
                 LoadGrid();
             }
         }
@@ -201,9 +230,12 @@ namespace UI.Web
 
             int num;
 
-            if (!(int.TryParse(txtHsSemanales.Text,out num)) || !(int.TryParse(txtHsTotales.Text, out num)))
+            if (!(int.TryParse(txtHsSemanales.Text,out num)) ||
+                !(int.TryParse(txtHsTotales.Text, out num)) ||
+                int.Parse(txtHsTotales.Text) < 0 || int.Parse(txtHsTotales.Text) > 1000 ||
+                int.Parse(txtHsSemanales.Text) < 0 || int.Parse(txtHsSemanales.Text) > 100)
             {
-                lblError.Text = "Horas debe ser un numero entero";
+                lblError.Text = "Ingrese correctamente la cantidad de horas";
                 return false;
             }
 
@@ -222,7 +254,15 @@ namespace UI.Web
                 if (e.Row.Cells[4].Text != null)
                 {
                     PlanLogic pl = new PlanLogic();
-                    PlanActual = pl.GetOne(int.Parse(e.Row.Cells[4].Text));
+                    try
+                    {
+                        PlanActual = pl.GetOne(int.Parse(e.Row.Cells[4].Text));
+                    }
+                    catch (Exception ex)
+                    {
+                        lblError1.Text = ex.Message;
+                    }
+                    
                     e.Row.Cells[4].Text = PlanActual.Descripcion;
                 }
             }
