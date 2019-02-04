@@ -86,12 +86,31 @@ namespace UI.Desktop
 
                 if (dr == DialogResult.Yes)
                 {
-                    PersonaActual.State = BusinessEntity.States.Deleted;
-                    pl.Save(PersonaActual);
+                    try
+                    {
+                        PersonaActual.State = BusinessEntity.States.Deleted;
+                        pl.Save(PersonaActual);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                 }
 
                 Listar();
             }
-        }        
+        }
+
+        private void dgvPersonas_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(dgvPersonas.SelectedRows != null && dgvPersonas.MultiSelect == false && dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            {
+                int ID = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
+                PersonasDesktop ud = new PersonasDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ud.ShowDialog();
+                Listar();
+            }
+        }
     }
 }

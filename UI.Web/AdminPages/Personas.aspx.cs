@@ -3,6 +3,7 @@ using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -134,6 +135,7 @@ namespace UI.Web.AdminPages
             catch(Exception ex)
             {
                 lblError1.Text = ex.Message;
+                lblError1.Visible = true;
             }            
         }
 
@@ -173,7 +175,15 @@ namespace UI.Web.AdminPages
         {
             if (IsEntitySelected)
             {
-                DeleteEntity(SelectedID);
+                try
+                {
+                    DeleteEntity(SelectedID);
+                }
+                catch(Exception ex)
+                {
+                    lblError1.Text = ex.Message;
+                    lblError1.Visible = true;
+                }
                 LoadGrid();
             }
         }
@@ -216,6 +226,16 @@ namespace UI.Web.AdminPages
                 lblError.Text = "Legajo debe ser un numero entero";
                 return false;
             }
+            try
+            {
+                new MailAddress(txtEmail.Text);
+            }
+            catch (FormatException)
+            {
+                lblError.Text = "Ingrese un mail valido";
+
+                return false;
+            }
 
             return true;
         }        
@@ -223,6 +243,7 @@ namespace UI.Web.AdminPages
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int)gridPersonas.SelectedValue;
+            lblError1.Visible = false;
         }      
     }
 }

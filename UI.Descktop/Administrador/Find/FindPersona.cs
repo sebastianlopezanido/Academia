@@ -18,9 +18,10 @@ namespace UI.Desktop
         {
             InitializeComponent();
             dgvPersonas.AutoGenerateColumns = false;
+            CenterToParent();
         }        
 
-        public delegate void pasar(int dato);
+        public delegate void pasar(Persona persona);
         public event pasar pasado;
 
         public void Listar()
@@ -45,7 +46,7 @@ namespace UI.Desktop
         {
             if (dgvPersonas.SelectedRows != null && dgvPersonas.MultiSelect == false && dgvPersonas.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
-                pasado(((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID);  
+                pasado(((Persona)dgvPersonas.SelectedRows[0].DataBoundItem));  
             }
 
             Close();

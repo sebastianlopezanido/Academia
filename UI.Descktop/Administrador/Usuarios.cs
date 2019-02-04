@@ -105,12 +105,33 @@ namespace UI.Desktop
                 
                 if (dr == DialogResult.Yes)
                 {
-                    UsuarioActual.State = BusinessEntity.States.Deleted;
-                    ul.Save(UsuarioActual);
+                    try
+                    {
+                        UsuarioActual.State = BusinessEntity.States.Deleted;
+                        ul.Save(UsuarioActual);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                 }
                                 
                 Listar();
             }
         }
+
+        private void dgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvUsuarios.SelectedRows != null && dgvUsuarios.MultiSelect == false && dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            {
+                int ID = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                UsuariosDesktop ud = new UsuariosDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ud.ShowDialog();
+                Listar();
+            }
+        }
+
+        
     }
 }

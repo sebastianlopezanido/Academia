@@ -29,6 +29,40 @@ namespace UI.Web
                 ddlPlan.DataValueField = "ID";
                 ddlPlan.DataTextField = "Descripcion";
                 ddlPlan.DataBind();
+                if (txtIdPersona.Text != "")
+                {
+                    PersonaLogic pelo = new PersonaLogic();
+                    Persona per = pelo.GetOne(int.Parse(txtIdPersona.Text));
+                    txtApellido.Text = per.Apellido.ToString();
+
+                }
+
+                if (string.IsNullOrEmpty(Request.QueryString["IDPersona"]) == false)
+                {
+                    
+                            txtIdPersona.Text = Request.QueryString["IDPersona"].ToString();
+                            SelectedID = int.Parse(Request.QueryString["IDUsuario"]);
+                            txtId.Text = SelectedID.ToString();
+                            txtUsuario.Text = Request.QueryString["Usuario"].ToString();
+                            ddlPlan.SelectedValue = Request.QueryString["IDPlan"].ToString();
+                            txtClave.Text = Request.QueryString["Clave"].ToString();
+                            txtConfirmarClave.Text = Request.QueryString["Clave"].ToString();
+                            ckbHabilitado.Checked = bool.Parse(Request.QueryString["Habilitado"]);
+                            ddlTipo.SelectedValue = Request.QueryString["TipoUsuario"].ToString();
+                   
+
+                    
+                    formPanel.Visible = true;
+                    EnableForm(true);
+                }
+
+                if (txtIdPersona.Text != "")
+                {
+                    PersonaLogic pelo = new PersonaLogic();
+                    Persona per = pelo.GetOne(int.Parse(txtIdPersona.Text));
+                    txtApellido.Text = per.Apellido.ToString();
+
+                }
             }            
         }
 
@@ -75,11 +109,18 @@ namespace UI.Web
             txtId.Text = Entity.ID.ToString();
             ddlTipo.SelectedIndex = (int)Entity.Tipo ;
             ddlPlan.SelectedValue = Entity.IDPlan.ToString();
+            if (txtIdPersona.Text != "")
+            {
+                PersonaLogic pelo = new PersonaLogic();
+                Persona per = pelo.GetOne(int.Parse(txtIdPersona.Text));
+                txtApellido.Text = per.Apellido.ToString();
+
+            }
         }
 
         private void LoadEntity()
         {
-            switch (FormMode)
+            switch (Session["FormMode"])
             {
                 case FormModes.Alta:
                     Entity = new Usuario();
@@ -121,15 +162,30 @@ namespace UI.Web
 
         private void EnableForm(bool enable)
         {
+            
             txtClave.Enabled = enable;
             txtConfirmarClave.Enabled = enable;
-            txtId.Enabled = enable;
-            txtIdPersona.Enabled = enable;            
+            txtId.Visible = false;
+            Label1.Visible = false;
+            txtIdPersona.Enabled = enable;
+            txtApellido.Enabled = enable;
             txtUsuario.Enabled = enable;
             ckbHabilitado.Enabled = enable;
             ddlTipo.Enabled = enable;
             ddlPlan.Enabled = enable;
             lblError.Text = "";
+            btnPersona.Visible = enable;
+            if ((FormModes)Session["FormMode"] == FormModes.Modificacion)
+            {
+                txtIdPersona.Enabled = false;
+                txtApellido.Enabled = false;
+                btnPersona.Visible = false;
+                txtId.Visible = true;
+                Label1.Visible = true;
+                ddlTipo.Enabled = false;
+
+            }
+
         }
 
         private void DeleteEntity(int id)
@@ -141,6 +197,7 @@ namespace UI.Web
             catch (Exception ex)
             {
                 lblError1.Text = ex.Message;
+                lblError1.Visible = true;
             }
         }
 
@@ -149,7 +206,8 @@ namespace UI.Web
             txtClave.Text = string.Empty;
             txtConfirmarClave.Text = string.Empty;
             txtId.Text = string.Empty;
-            txtIdPersona.Text = string.Empty;            
+            txtIdPersona.Text = string.Empty;
+            txtApellido.Text = string.Empty;
             txtUsuario.Text = string.Empty;
             ckbHabilitado.Checked = false;
             ddlPlan.ClearSelection();
@@ -159,6 +217,7 @@ namespace UI.Web
         {
             formPanel.Visible = true;
             FormMode = FormModes.Alta;
+            Session["FormMode"] = FormModes.Alta;
             ClearForm();
             EnableForm(true);
         }       
@@ -169,9 +228,11 @@ namespace UI.Web
             {
                 formPanel.Visible = true;
                 FormMode = FormModes.Modificacion;
+                Session["FormMode"] = FormModes.Modificacion;
                 EnableForm(true);
                 LoadForm(SelectedID);
             }
+            
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -229,6 +290,7 @@ namespace UI.Web
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int)gridUsuarios.SelectedValue;
+            lblError1.Visible = false;
         }
 
         protected void gridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -242,6 +304,19 @@ namespace UI.Web
                     e.Row.Cells[3].Text = PersonaActual.Legajo.ToString();
                 }
             }
+        }
+        protected void btnPersona_Click(object sender, EventArgs e)
+        {
+
+            
+                    Response.Redirect("~/FindPages/FindPersona.aspx?IDUsuario=" + SelectedID.ToString()
+                + "&Usuario=" + txtUsuario.Text + "&IDPlan=" + ddlPlan.SelectedValue + "&Clave=" + txtClave.Text + "&Habilitado=" + ckbHabilitado.Checked + "&TipoUsuario=" + ddlTipo.SelectedValue);
+            
+
+
+            
+                 
+          
         }
     }
 }

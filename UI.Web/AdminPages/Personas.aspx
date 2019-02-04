@@ -8,7 +8,7 @@
             DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField DataField="ID" HeaderText="ID" />
+                <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                 <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                 <asp:BoundField DataField="Legajo" HeaderText="Legajo" />
@@ -30,7 +30,7 @@
         <asp:Panel ID="Panel1" runat="server">
             <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" OnClick="btnNuevo_Click" />
             <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
-            <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
+            <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" OnClientClick="return confirm('¿Seguro que desea eliminar curso?')"/>
             <br />
             <br />
             <table dir="ltr">

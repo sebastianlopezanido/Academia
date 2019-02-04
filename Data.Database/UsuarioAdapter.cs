@@ -192,6 +192,43 @@ namespace Data.Database
             return usr;
         }
 
+        public Boolean GetOne(string nombreUsuario)
+        {
+            Usuario usr = new Usuario();
+            Boolean resultado;
+            try
+            {
+                OpenConnection();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM usuarios WHERE nombre_usuario = @usuario ", sqlConn);
+                cmd.Parameters.Add("@usuario", SqlDbType.VarChar, 50).Value = nombreUsuario;
+                
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    resultado = true;
+
+                }
+                else
+                {
+                    resultado = false;
+                }
+
+                dr.Close();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar datos de Usuario", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return resultado;
+        }
+
         public void Delete(int ID)
         {
             try
@@ -222,6 +259,7 @@ namespace Data.Database
                 cmd.Parameters.Add("@nombre_usuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
                 cmd.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
                 cmd.Parameters.Add("@habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
+                
                 if (usuario.IDPlan == null)
                 {
                     cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = DBNull.Value;
@@ -248,29 +286,41 @@ namespace Data.Database
         {
             try
             {
-                OpenConnection();
-                SqlCommand cmd = new SqlCommand("INSERT INTO usuarios(nombre_usuario,clave,habilitado,id_persona,id_plan,tipo_usuario) " +
-                    "VALUES(@nombre_usuario,@clave,@habilitado,@id_persona,@id_plan,@tipo_usuario) SELECT @@identity", sqlConn);
-                cmd.Parameters.Add("@nombre_usuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
-                cmd.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
-                cmd.Parameters.Add("@habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
-                cmd.Parameters.Add("@id_persona", SqlDbType.Int).Value = usuario.IDPersona;
-                cmd.Parameters.Add("@tipo_usuario", SqlDbType.Int).Value = usuario.Tipo;
-                if (usuario.IDPlan == null)
+                if (! this.GetOne(usuario.NombreUsuario))
                 {
-                    cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = DBNull.Value;
+                    OpenConnection();
+                    SqlCommand cmd = new SqlCommand("INSERT INTO usuarios(nombre_usuario,clave,habilitado,id_persona,id_plan,tipo_usuario) " +
+                        "VALUES(@nombre_usuario,@clave,@habilitado,@id_persona,@id_plan,@tipo_usuario) SELECT @@identity", sqlConn);
+                    cmd.Parameters.Add("@nombre_usuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
+                    cmd.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
+                    cmd.Parameters.Add("@habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
+                    cmd.Parameters.Add("@id_persona", SqlDbType.Int).Value = usuario.IDPersona;
+                    cmd.Parameters.Add("@tipo_usuario", SqlDbType.Int).Value = usuario.Tipo;
+                    if (usuario.IDPlan == null)
+                    {
+                        cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = usuario.IDPlan;
+                    }
+
+                    cmd.ExecuteNonQuery();
                 }
+
                 else
                 {
-                    cmd.Parameters.Add("@id_plan", SqlDbType.Int).Value = usuario.IDPlan;
+                    Exception ExcepcionManejada = new Exception("Ya existe un usuario con ese nombre de usuario");
+                    throw ExcepcionManejada;
+
                 }
-                             
-                cmd.ExecuteNonQuery();
             }
+                
+
+               
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada = new Exception("Error al crear usuario", Ex);
-                throw ExcepcionManejada;
+                throw Ex;
             }
             finally
             {
@@ -280,18 +330,21 @@ namespace Data.Database
 
         public void Save(Usuario usuario)
         {
-            switch (usuario.State)
-            {
-                case BusinessEntity.States.New:
-                    Insert(usuario);
-                    break;
-                case BusinessEntity.States.Modified:
-                    Update(usuario);
-                    break;
-                case BusinessEntity.States.Deleted:
-                    Delete(usuario.ID);
-                    break;
-            }
+            
+                switch (usuario.State)
+                {
+                    case BusinessEntity.States.New:
+                        Insert(usuario);
+                        break;
+                    case BusinessEntity.States.Modified:
+                        Update(usuario);
+                        break;
+                    case BusinessEntity.States.Deleted:
+                        Delete(usuario.ID);
+                        break;
+                }
+            
+            
         }        
     }
 }

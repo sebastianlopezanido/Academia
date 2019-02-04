@@ -95,8 +95,16 @@ namespace UI.Desktop
 
                 if (dr == DialogResult.Yes)
                 {
-                    MateriaActual.State = BusinessEntity.States.Deleted;
-                    ml.Save(MateriaActual);
+                    try
+                    {
+                        MateriaActual.State = BusinessEntity.States.Deleted;
+                        ml.Save(MateriaActual);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                 }
 
                 Listar();
@@ -111,6 +119,17 @@ namespace UI.Desktop
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
-        }        
+        }
+
+        private void dgvMaterias_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            {
+                int ID = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+                MateriasDesktop md = new MateriasDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                md.ShowDialog();
+                Listar();
+            }
+        }
     }
 }
