@@ -18,6 +18,7 @@ namespace UI.Web
             if (!IsPostBack)
             {
                 LoadGrid();
+                gridCursos.Columns[0].Visible = false;
             }
         }
 
@@ -71,10 +72,12 @@ namespace UI.Web
 
         public void MapearADatos()
         {
+            gridCursos.Columns[0].Visible = true;
             InscripcionActual = new AlumnoInscripcion();
             InscripcionActual.IDAlumno = (int)Session["ID"];
             InscripcionActual.IDCurso = int.Parse(gridCursos.SelectedRow.Cells[0].Text);
             InscripcionActual.State = BusinessEntity.States.New;
+            gridCursos.Columns[0].Visible = false;
         }
 
         protected void gridCursos_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,7 +102,15 @@ namespace UI.Web
 
         protected void btnSalir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Home.aspx");
+            if(lblInfo.Visible == true)
+            {
+                Response.Redirect("~/Home.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/FindPages/FindMateria.aspx");
+            }
+                
         }
 
         protected void gridCursos_RowDataBound(object sender, GridViewRowEventArgs e)

@@ -70,10 +70,8 @@ namespace UI.Desktop
                     {
                         if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
                         {
-                            pasado((Materia)dgvMaterias.SelectedRows[0].DataBoundItem);
-                        }
-
-                        Close();
+                            pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
+                        }                        
                     }
                     else
                     {
@@ -84,9 +82,8 @@ namespace UI.Desktop
                 case Usuario.TiposUsuario.Administrador:
                     if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
                     {
-                        pasado((Materia)dgvMaterias.SelectedRows[0].DataBoundItem);
-                    }
-                    Close();
+                        pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
+                    }                    
 
                     break;
             }

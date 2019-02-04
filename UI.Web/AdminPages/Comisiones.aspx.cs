@@ -23,13 +23,24 @@ namespace UI.Web
         {
             if (!IsPostBack)
             {
-                LoadGrid();
+                LoadGrid();                
                 PlanLogic pl = new PlanLogic();
-                cbxPlan.DataSource = pl.GetAll();
-                cbxPlan.DataValueField = "ID";
-                cbxPlan.DataTextField = "Descripcion";
-                cbxPlan.DataBind();
+                try
+                {
+                    cbxPlan.DataSource = pl.GetAll();
+                    cbxPlan.DataValueField = "ID";
+                    cbxPlan.DataTextField = "Descripcion";
+                    cbxPlan.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    lblError1.Visible = true;
+                    lblError1.Text = ex.Message;
+                }                
             }
+
+            lblError1.Visible = false;
+            lblError.Visible = false;
         }
 
         ComisionLogic _logic;
@@ -61,17 +72,34 @@ namespace UI.Web
 
         private void LoadGrid()
         {
-            gridComisiones.DataSource = Logic.GetAll();
-            gridComisiones.DataBind();
+            try
+            {
+                gridComisiones.DataSource = Logic.GetAll();
+                gridComisiones.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+                lblError1.Visible = true;
+            }
+            
         }
 
         private void LoadForm(int id)
         {
-            Entity = Logic.GetOne(id);
-            txtID.Text = Entity.ID.ToString();
-            txtDescripcion.Text = Entity.Descripcion;
-            txtAño.Text = Entity.AnioEspecialidad.ToString();
-            cbxPlan.SelectedValue = Entity.IDPlan.ToString();
+            try
+            {
+                Entity = Logic.GetOne(id);
+                txtID.Text = Entity.ID.ToString();
+                txtDescripcion.Text = Entity.Descripcion;
+                txtAño.Text = Entity.AnioEspecialidad.ToString();
+                cbxPlan.SelectedValue = Entity.IDPlan.ToString();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+                lblError.Visible = true;
+            }
         }
 
         private void LoadEntity()
@@ -107,6 +135,7 @@ namespace UI.Web
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
+                lblError.Visible = true;
             }
         }
 
@@ -127,6 +156,7 @@ namespace UI.Web
             catch (Exception ex)
             {
                 lblError1.Text = ex.Message;
+                lblError1.Visible = true;
             }
         }
 
@@ -160,8 +190,17 @@ namespace UI.Web
         {
             if (IsEntitySelected)
             {
-                DeleteEntity(SelectedID);
-                LoadGrid();
+                try
+                {
+                    DeleteEntity(SelectedID);
+                    LoadGrid();
+                }
+                catch (Exception ex)
+                {
+                    lblError1.Text = ex.Message;
+                    lblError1.Visible = true;                    
+                }               
+                
             }
         }
 
@@ -169,34 +208,46 @@ namespace UI.Web
         {
             if (Validar())
             {
-                LoadEntity();
-                SaveEntity(Entity);
-                LoadGrid();
-                formPanel.Visible = false;
+                try
+                {
+                    LoadEntity();
+                    SaveEntity(Entity);
+                    LoadGrid();
+                    formPanel.Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                
             }           
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            LoadGrid();
-            formPanel.Visible = false;
+            try
+            {
+                LoadGrid();
+                formPanel.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+                lblError1.Visible = true;
+            }
         }
+    
 
         public bool Validar()
         {
             if (string.IsNullOrEmpty(txtAño.Text) || cbxPlan.SelectedValue == null || string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtAño.Text))
             {
-                lblError.Visible = true;
+               
                 lblError.Text = "Debe llenar todos los campos";
-                return false;
-            }
-
-            if (txtAño.Text.Length != 4)
-            {
                 lblError.Visible = true;
-                lblError.Text = "Ingrese correctamente el año";
                 return false;
-            }
+            }           
 
             return true;
         }
@@ -204,6 +255,7 @@ namespace UI.Web
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int)gridComisiones.SelectedValue;
+            formPanel.Visible = false;
         }        
 
         protected void gridComisiones_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -213,8 +265,16 @@ namespace UI.Web
                 if (e.Row.Cells[2].Text != null)
                 {
                     PlanLogic pl = new PlanLogic();
-                    PlanActual = pl.GetOne(int.Parse(e.Row.Cells[2].Text));
-                    e.Row.Cells[2].Text = PlanActual.Descripcion;
+                    try
+                    {
+                        PlanActual = pl.GetOne(int.Parse(e.Row.Cells[2].Text));
+                        e.Row.Cells[2].Text = PlanActual.Descripcion;
+                    }
+                    catch (Exception ex)
+                    {
+                        lblError1.Text = ex.Message;
+                        lblError1.Visible = true;
+                    }
                 }
             }
         }

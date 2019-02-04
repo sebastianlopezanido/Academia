@@ -24,6 +24,7 @@ namespace UI.Web
             if (!IsPostBack)
             {
                 LoadGrid();
+                gridMaterias.Columns[0].Visible = false;
             }
         }
 
@@ -73,6 +74,7 @@ namespace UI.Web
             switch(Session["tipo"])
             {
                 case Usuario.TiposUsuario.Alumno:
+                    gridMaterias.Columns[0].Visible = true;
                     InscripcionLogic il = new InscripcionLogic();
                     if (il.EstaInscripto((int)Session["ID"],int.Parse(gridMaterias.SelectedRow.Cells[0].Text)) == false)
                     {
@@ -80,6 +82,7 @@ namespace UI.Web
                     }
                     else
                     {
+                        gridMaterias.Columns[0].Visible = false;
                         lblError.Visible = true;
                         lblError.Text = "Ya esta inscripto a la materia";
                     }

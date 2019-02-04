@@ -90,8 +90,16 @@ namespace UI.Desktop.Alumno
                 {
                     MapearADatos();
                     InscripcionLogic il = new InscripcionLogic();
-                    il.Save(InscripcionActual);
-                    Close();
+                    try
+                    {
+                        il.Save(InscripcionActual);
+                        MessageBox.Show("La inscripcion fue exitosa", "Inscripcion a cursado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Close();
+                    }
+                    catch (Exception Ex)
+                    {
+                        MessageBox.Show(Ex.Message);
+                    }                    
                 }
             }            
         }

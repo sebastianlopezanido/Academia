@@ -31,13 +31,13 @@
             this.tsCursos = new System.Windows.Forms.ToolStripContainer();
             this.tlCursos = new System.Windows.Forms.TableLayoutPanel();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.tsCursos.ContentPanel.SuspendLayout();
             this.tsCursos.SuspendLayout();
             this.tlCursos.SuspendLayout();
@@ -50,11 +50,11 @@
             // tsCursos.ContentPanel
             // 
             this.tsCursos.ContentPanel.Controls.Add(this.tlCursos);
-            this.tsCursos.ContentPanel.Size = new System.Drawing.Size(549, 425);
+            this.tsCursos.ContentPanel.Size = new System.Drawing.Size(449, 450);
             this.tsCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsCursos.Location = new System.Drawing.Point(0, 0);
             this.tsCursos.Name = "tsCursos";
-            this.tsCursos.Size = new System.Drawing.Size(549, 450);
+            this.tsCursos.Size = new System.Drawing.Size(449, 450);
             this.tsCursos.TabIndex = 1;
             this.tsCursos.Text = "toolStripContainer1";
             // 
@@ -72,7 +72,7 @@
             this.tlCursos.RowCount = 2;
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlCursos.Size = new System.Drawing.Size(549, 425);
+            this.tlCursos.Size = new System.Drawing.Size(449, 450);
             this.tlCursos.TabIndex = 0;
             // 
             // dgvCursos
@@ -93,9 +93,30 @@
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.ReadOnly = true;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCursos.Size = new System.Drawing.Size(543, 390);
+            this.dgvCursos.Size = new System.Drawing.Size(443, 415);
             this.dgvCursos.TabIndex = 0;
             this.dgvCursos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCursos_CellFormatting);
+            // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSeleccionar.Location = new System.Drawing.Point(290, 424);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
+            this.btnSeleccionar.TabIndex = 1;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(371, 424);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.TabIndex = 2;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // id
             // 
@@ -103,6 +124,7 @@
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Visible = false;
             // 
             // id_materia
             // 
@@ -132,32 +154,11 @@
             this.cupo.Name = "cupo";
             this.cupo.ReadOnly = true;
             // 
-            // btnSeleccionar
-            // 
-            this.btnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeleccionar.Location = new System.Drawing.Point(390, 399);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
-            this.btnSeleccionar.TabIndex = 1;
-            this.btnSeleccionar.Text = "Seleccionar";
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
-            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(471, 399);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
             // Inscripciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 450);
+            this.ClientSize = new System.Drawing.Size(449, 450);
             this.Controls.Add(this.tsCursos);
             this.Name = "Inscripciones";
             this.Text = "Inscripcion a cursado";
@@ -176,12 +177,12 @@
         private System.Windows.Forms.ToolStripContainer tsCursos;
         private System.Windows.Forms.TableLayoutPanel tlCursos;
         private System.Windows.Forms.DataGridView dgvCursos;
+        private System.Windows.Forms.Button btnSeleccionar;
+        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_materia;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_comision;
         private System.Windows.Forms.DataGridViewTextBoxColumn año;
         private System.Windows.Forms.DataGridViewTextBoxColumn cupo;
-        private System.Windows.Forms.Button btnSeleccionar;
-        private System.Windows.Forms.Button btnSalir;
     }
 }

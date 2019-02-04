@@ -12,7 +12,7 @@ using BusinessEntities;
 
 namespace UI.Desktop
 {
-    public partial class Comisiones : Form
+    public partial class Comisiones : ApplicationForm
     {
         public Comisiones()
         {
@@ -44,7 +44,7 @@ namespace UI.Desktop
             }
             catch (Exception Ex)
             {
-                MessageBox.Show(Ex.Message);
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -54,23 +54,46 @@ namespace UI.Desktop
             {
                 if (e.Value != null)
                 {
-                    PlanLogic pl = new PlanLogic();
-                    PlanActual = pl.GetOne((int)e.Value);
-                    e.Value = PlanActual.Descripcion;                    
+                    try
+                    {
+                        PlanLogic pl = new PlanLogic();
+                        PlanActual = pl.GetOne((int)e.Value);
+                        e.Value = PlanActual.Descripcion;
+                    }
+                    catch (Exception Ex)
+                    {
+                        Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
 
         private void Comisiones_Load(object sender, EventArgs e)
         {
-            Listar();
+            try
+            {
+                Listar();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            ComisionesDesktop cd = new ComisionesDesktop(ApplicationForm.ModoForm.Alta);
+            ComisionesDesktop cd = new ComisionesDesktop(ModoForm.Alta);
             cd.ShowDialog();
-            Listar();
+
+            try
+            {
+                Listar();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -78,9 +101,17 @@ namespace UI.Desktop
             if (dgvComisiones.SelectedRows != null && dgvComisiones.MultiSelect == false && dgvComisiones.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
-                ComisionesDesktop pd = new ComisionesDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ComisionesDesktop pd = new ComisionesDesktop(ID, ModoForm.Modificacion);
                 pd.ShowDialog();
-                Listar();
+
+                try
+                {
+                    Listar();
+                }
+                catch (Exception Ex)
+                {
+                    Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -90,22 +121,52 @@ namespace UI.Desktop
             {
                 int ID = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
                 ComisionLogic cl = new ComisionLogic(); //controlador :)
-                ComisionActual = cl.GetOne(ID);
+
+                try
+                {
+                    ComisionActual = cl.GetOne(ID);
+                }
+                catch (Exception Ex)
+                {
+                    Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
                 DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar la comisión?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dr == DialogResult.Yes)
                 {
                     ComisionActual.State = BusinessEntity.States.Deleted;
-                    cl.Save(ComisionActual);
+                    try
+                    {
+                        cl.Save(ComisionActual);
+                    }
+                    catch (Exception Ex)
+                    {
+                        Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }                    
                 }
 
-                Listar();
+                try
+                {
+                    Listar();
+                }
+                catch (Exception Ex)
+                {
+                    Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Listar();
+            try
+            {
+                Listar();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

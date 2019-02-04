@@ -5,7 +5,7 @@
         <asp:GridView ID="gridEspecialidades" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
-            DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
+            DataKeyNames="ID" OnSelectedIndexChanged="gridView_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None" EmptyDataText="No hay especialidades disponibles">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField HeaderText="ID" DataField="ID" />
@@ -25,10 +25,12 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+          <br />
          <asp:Panel ID="Panel1" runat="server">
              <asp:Button ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" Text="Nuevo" />
              <asp:Button ID="btnEditar" runat="server" OnClick="btnEditar_Click" Text="Editar" />
-             <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" />
+             <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" 
+                 OnClientClick="return confirm('¿Seguro que desea eliminar la especialidad?')"/>
              <br />
              <br />
              <table dir="ltr">
