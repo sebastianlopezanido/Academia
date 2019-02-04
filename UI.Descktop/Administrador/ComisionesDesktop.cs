@@ -116,7 +116,14 @@ namespace UI.Desktop
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
-            }           
+            }
+
+            int i;
+            if (!int.TryParse(txtAño.Text, out i))
+            {
+                Notificar("Error", "Ingrese año correctamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
             return true;
         }        

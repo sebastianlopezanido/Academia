@@ -216,6 +216,7 @@ namespace UI.Web
             if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 lblError.Text = "Debe llenar todos los campos";
+                lblError.Visible = true;
 
                 return false;
             }

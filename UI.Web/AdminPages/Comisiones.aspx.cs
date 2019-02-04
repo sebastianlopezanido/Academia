@@ -242,12 +242,21 @@ namespace UI.Web
         public bool Validar()
         {
             if (string.IsNullOrEmpty(txtAño.Text) || cbxPlan.SelectedValue == null || string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtAño.Text))
-            {
-               
+            {               
                 lblError.Text = "Debe llenar todos los campos";
                 lblError.Visible = true;
                 return false;
-            }           
+            }
+
+            int num;
+            if (!int.TryParse(txtAño.Text, out num) ||
+                int.Parse(txtAño.Text) < 1 ||
+                int.Parse(txtAño.Text) > 6)
+            {
+                lblError.Visible = true;
+                lblError.Text = "Ingrese correctamente el año (1-6)";
+                return false;
+            }
 
             return true;
         }

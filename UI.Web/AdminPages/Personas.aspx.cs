@@ -236,6 +236,12 @@ namespace UI.Web.AdminPages
 
                 return false;
             }
+            int i;
+            if (!int.TryParse(txtTelefono.Text, out i))
+            {
+                lblError.Text = "Ingrese un telefono valido";
+                return false;
+            }
 
             return true;
         }        

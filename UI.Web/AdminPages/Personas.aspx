@@ -124,6 +124,7 @@
                 <tr> 
                     <td colspan="2" style="color: #FF0000">
                         <asp:Label ID="lblError" runat="server"></asp:Label>
+                        <br />
                         <asp:CompareValidator Runat="Server" ControlToValidate="txtFechaNac" Display="Dynamic" Operator="DataTypeCheck" Text="Ingrese correctamente la fecha" Type="Date" />
                     </td>
                 </tr>                

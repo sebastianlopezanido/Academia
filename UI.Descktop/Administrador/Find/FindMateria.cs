@@ -13,7 +13,7 @@ using BusinessEntities;
 
 namespace UI.Desktop
 {
-    public partial class FindMateria : Form
+    public partial class FindMateria : ApplicationForm
     {
         public FindMateria()
         {
@@ -66,24 +66,36 @@ namespace UI.Desktop
             {
                 case Usuario.TiposUsuario.Alumno:
                     InscripcionLogic il = new InscripcionLogic();
-                    if (il.EstaInscripto(LoginSession.ID,((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID) == false)
+                    try
                     {
-                        if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+                        if (il.EstaInscripto(LoginSession.ID, ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID) == false)
                         {
-                            pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
-                        }                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ya esta inscripto a la materia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                            if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+                            {
+                                pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem));
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ya esta inscripto a la materia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
 
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }                    
+                    
                     break;
+                    
+                    
                 case Usuario.TiposUsuario.Administrador:
                     if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
                     {
-                        pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
-                    }                    
+                        pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem));
+                    }
+                    Close();
 
                     break;
             }

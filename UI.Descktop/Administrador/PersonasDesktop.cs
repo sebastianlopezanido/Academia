@@ -129,7 +129,16 @@ namespace UI.Desktop
                 Notificar("Legajo no valido", "Ingrese un legajo numerico", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+
+            if (!int.TryParse(txtTelefono.Text, out i))
+            {
+                Notificar("Telefono no válido", "Ingrese un telefono numerico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
             return true;
+
+
 
         }
         
