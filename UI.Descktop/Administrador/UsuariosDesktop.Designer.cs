@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtIdPersona = new System.Windows.Forms.TextBox();
             this.chkHabilitado = new System.Windows.Forms.CheckBox();
             this.cbxTipo = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnBuscarPersona = new System.Windows.Forms.Button();
             this.cbxIDPlan = new System.Windows.Forms.ComboBox();
+            this.txtIdPersona = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,6 +101,7 @@
             // 
             this.txtClave.Location = new System.Drawing.Point(69, 85);
             this.txtClave.Name = "txtClave";
+            this.txtClave.PasswordChar = '*';
             this.txtClave.Size = new System.Drawing.Size(92, 20);
             this.txtClave.TabIndex = 3;
             // 
@@ -139,14 +140,6 @@
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "ID";
-            // 
-            // txtIdPersona
-            // 
-            this.txtIdPersona.Location = new System.Drawing.Point(69, 29);
-            this.txtIdPersona.Name = "txtIdPersona";
-            this.txtIdPersona.ReadOnly = true;
-            this.txtIdPersona.Size = new System.Drawing.Size(92, 20);
-            this.txtIdPersona.TabIndex = 1;
             // 
             // chkHabilitado
             // 
@@ -247,6 +240,14 @@
             this.cbxIDPlan.Size = new System.Drawing.Size(92, 21);
             this.cbxIDPlan.TabIndex = 19;
             // 
+            // txtIdPersona
+            // 
+            this.txtIdPersona.Location = new System.Drawing.Point(69, 29);
+            this.txtIdPersona.Name = "txtIdPersona";
+            this.txtIdPersona.ReadOnly = true;
+            this.txtIdPersona.Size = new System.Drawing.Size(92, 20);
+            this.txtIdPersona.TabIndex = 1;
+            // 
             // UsuariosDesktop
             // 
             this.AcceptButton = this.btnAceptar;
@@ -256,6 +257,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UsuariosDesktop";
             this.Text = "UsuariosDesktop";
+            this.Load += new System.EventHandler(this.UsuariosDesktop_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

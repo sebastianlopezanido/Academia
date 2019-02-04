@@ -64,7 +64,10 @@ namespace BusinessLogic
 
         public void Save(Usuario usuario)
         {
-            UsuarioData.Save(usuario);
+
+                UsuarioData.Save(usuario);
+             
+
         }
 
         public void Delete(int ID)

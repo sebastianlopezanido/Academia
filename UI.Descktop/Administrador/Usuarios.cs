@@ -112,7 +112,7 @@ namespace UI.Desktop
                     }
                     catch(Exception ex)
                     {
-                        MessageBox.Show(ex.Message,"Error", MessageBoxButtons.OK);
+                        MessageBox.Show(ex.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     
                 }
@@ -120,5 +120,18 @@ namespace UI.Desktop
                 Listar();
             }
         }
+
+        private void dgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvUsuarios.SelectedRows != null && dgvUsuarios.MultiSelect == false && dgvUsuarios.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            {
+                int ID = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                UsuariosDesktop ud = new UsuariosDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ud.ShowDialog();
+                Listar();
+            }
+        }
+
+        
     }
 }

@@ -122,6 +122,13 @@ namespace UI.Desktop
                 Notificar("Fecha no valida", "Ingrese una Fecha válida", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            
+            int i;
+            if (!int.TryParse(txtLegajo.Text, out i))
+            {
+                Notificar("Legajo no valido", "Ingrese un legajo numerico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             return true;
 
         }

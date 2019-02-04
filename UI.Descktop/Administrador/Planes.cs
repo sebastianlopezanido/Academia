@@ -94,8 +94,16 @@ namespace UI.Desktop
 
                 if (dr == DialogResult.Yes)
                 {
-                    PlanActual.State = BusinessEntity.States.Deleted;
-                    pl.Save(PlanActual);
+                    try
+                    {
+                        PlanActual.State = BusinessEntity.States.Deleted;
+                        pl.Save(PlanActual);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                 }
 
                 Listar();
@@ -128,6 +136,17 @@ namespace UI.Desktop
                 rep.Datos.Add(linea);
             }
             rep.ShowDialog();
+        }
+
+        private void dgvPlanes_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvPlanes.SelectedRows != null && dgvPlanes.MultiSelect == false && dgvPlanes.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            {
+                int ID = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+                PlanesDesktop pd = new PlanesDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                pd.ShowDialog();
+                Listar();
+            }
         }
     }
 }

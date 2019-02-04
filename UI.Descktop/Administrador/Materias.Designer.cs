@@ -32,17 +32,17 @@
             this.tcMaterias = new System.Windows.Forms.ToolStripContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvMaterias = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hs_semanales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hs_totales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hs_semanales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hs_totales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcMaterias.ContentPanel.SuspendLayout();
             this.tcMaterias.TopToolStripPanel.SuspendLayout();
             this.tcMaterias.SuspendLayout();
@@ -106,42 +106,8 @@
             this.dgvMaterias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMaterias.Size = new System.Drawing.Size(543, 390);
             this.dgvMaterias.TabIndex = 0;
+            this.dgvMaterias.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterias_CellContentDoubleClick);
             this.dgvMaterias.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMaterias_CellFormatting);
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // descripcion
-            // 
-            this.descripcion.DataPropertyName = "Descripcion";
-            this.descripcion.HeaderText = "Descripción";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // hs_semanales
-            // 
-            this.hs_semanales.DataPropertyName = "HSSemanales";
-            this.hs_semanales.HeaderText = "Hs Semanales";
-            this.hs_semanales.Name = "hs_semanales";
-            this.hs_semanales.ReadOnly = true;
-            // 
-            // hs_totales
-            // 
-            this.hs_totales.DataPropertyName = "HSTotales";
-            this.hs_totales.HeaderText = "Hs Totales";
-            this.hs_totales.Name = "hs_totales";
-            this.hs_totales.ReadOnly = true;
-            // 
-            // idplan
-            // 
-            this.idplan.DataPropertyName = "IDPlan";
-            this.idplan.HeaderText = "Plan";
-            this.idplan.Name = "idplan";
-            this.idplan.ReadOnly = true;
             // 
             // btnActualizar
             // 
@@ -205,6 +171,42 @@
             this.btnEliminar.Size = new System.Drawing.Size(23, 22);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // descripcion
+            // 
+            this.descripcion.DataPropertyName = "Descripcion";
+            this.descripcion.HeaderText = "Descripción";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // hs_semanales
+            // 
+            this.hs_semanales.DataPropertyName = "HSSemanales";
+            this.hs_semanales.HeaderText = "Hs Semanales";
+            this.hs_semanales.Name = "hs_semanales";
+            this.hs_semanales.ReadOnly = true;
+            // 
+            // hs_totales
+            // 
+            this.hs_totales.DataPropertyName = "HSTotales";
+            this.hs_totales.HeaderText = "Hs Totales";
+            this.hs_totales.Name = "hs_totales";
+            this.hs_totales.ReadOnly = true;
+            // 
+            // idplan
+            // 
+            this.idplan.DataPropertyName = "IDPlan";
+            this.idplan.HeaderText = "Plan";
+            this.idplan.Name = "idplan";
+            this.idplan.ReadOnly = true;
             // 
             // Materias
             // 

@@ -29,15 +29,17 @@ namespace UI.Web
                 ddlPlan.DataValueField = "ID";
                 ddlPlan.DataTextField = "Descripcion";
                 ddlPlan.DataBind();
+                if (txtIdPersona.Text != "")
+                {
+                    PersonaLogic pelo = new PersonaLogic();
+                    Persona per = pelo.GetOne(int.Parse(txtIdPersona.Text));
+                    txtApellido.Text = per.Apellido.ToString();
+
+                }
 
                 if (string.IsNullOrEmpty(Request.QueryString["IDPersona"]) == false)
                 {
-                    switch (Session["FormMode"])
-                    {
-                        case FormModes.Alta:
-                            txtIdPersona.Text = Request.QueryString["IDPersona"].ToString();
-                            break;
-                        case FormModes.Modificacion:
+                    
                             txtIdPersona.Text = Request.QueryString["IDPersona"].ToString();
                             SelectedID = int.Parse(Request.QueryString["IDUsuario"]);
                             txtId.Text = SelectedID.ToString();
@@ -47,14 +49,20 @@ namespace UI.Web
                             txtConfirmarClave.Text = Request.QueryString["Clave"].ToString();
                             ckbHabilitado.Checked = bool.Parse(Request.QueryString["Habilitado"]);
                             ddlTipo.SelectedValue = Request.QueryString["TipoUsuario"].ToString();
-                            break;
-                    }
+                   
 
+                    
                     formPanel.Visible = true;
                     EnableForm(true);
                 }
 
+                if (txtIdPersona.Text != "")
+                {
+                    PersonaLogic pelo = new PersonaLogic();
+                    Persona per = pelo.GetOne(int.Parse(txtIdPersona.Text));
+                    txtApellido.Text = per.Apellido.ToString();
 
+                }
             }            
         }
 
@@ -101,6 +109,13 @@ namespace UI.Web
             txtId.Text = Entity.ID.ToString();
             ddlTipo.SelectedIndex = (int)Entity.Tipo ;
             ddlPlan.SelectedValue = Entity.IDPlan.ToString();
+            if (txtIdPersona.Text != "")
+            {
+                PersonaLogic pelo = new PersonaLogic();
+                Persona per = pelo.GetOne(int.Parse(txtIdPersona.Text));
+                txtApellido.Text = per.Apellido.ToString();
+
+            }
         }
 
         private void LoadEntity()
@@ -147,15 +162,30 @@ namespace UI.Web
 
         private void EnableForm(bool enable)
         {
+            
             txtClave.Enabled = enable;
             txtConfirmarClave.Enabled = enable;
-            txtId.Enabled = enable;
-            txtIdPersona.Enabled = enable;            
+            txtId.Visible = false;
+            Label1.Visible = false;
+            txtIdPersona.Enabled = enable;
+            txtApellido.Enabled = enable;
             txtUsuario.Enabled = enable;
             ckbHabilitado.Enabled = enable;
             ddlTipo.Enabled = enable;
             ddlPlan.Enabled = enable;
             lblError.Text = "";
+            btnPersona.Visible = enable;
+            if ((FormModes)Session["FormMode"] == FormModes.Modificacion)
+            {
+                txtIdPersona.Enabled = false;
+                txtApellido.Enabled = false;
+                btnPersona.Visible = false;
+                txtId.Visible = true;
+                Label1.Visible = true;
+                ddlTipo.Enabled = false;
+
+            }
+
         }
 
         private void DeleteEntity(int id)
@@ -176,7 +206,8 @@ namespace UI.Web
             txtClave.Text = string.Empty;
             txtConfirmarClave.Text = string.Empty;
             txtId.Text = string.Empty;
-            txtIdPersona.Text = string.Empty;            
+            txtIdPersona.Text = string.Empty;
+            txtApellido.Text = string.Empty;
             txtUsuario.Text = string.Empty;
             ckbHabilitado.Checked = false;
             ddlPlan.ClearSelection();
@@ -201,6 +232,7 @@ namespace UI.Web
                 EnableForm(true);
                 LoadForm(SelectedID);
             }
+            
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -276,16 +308,10 @@ namespace UI.Web
         protected void btnPersona_Click(object sender, EventArgs e)
         {
 
-            switch (Session["FormMode"])
-            {
-                case FormModes.Alta:
-                    Response.Redirect("~/FindPages/FindPersona.aspx");
-                    break;
-                case FormModes.Modificacion:
+            
                     Response.Redirect("~/FindPages/FindPersona.aspx?IDUsuario=" + SelectedID.ToString()
                 + "&Usuario=" + txtUsuario.Text + "&IDPlan=" + ddlPlan.SelectedValue + "&Clave=" + txtClave.Text + "&Habilitado=" + ckbHabilitado.Checked + "&TipoUsuario=" + ddlTipo.SelectedValue);
-                    break;
-            }
+            
 
 
             

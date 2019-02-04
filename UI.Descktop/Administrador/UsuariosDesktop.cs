@@ -24,6 +24,7 @@ namespace UI.Desktop
             cbxIDPlan.ValueMember = "ID";
             cbxIDPlan.DisplayMember = "Descripcion";
             CenterToParent();
+            
         }
 
         public UsuariosDesktop(ModoForm modo):this() //aca entra el Nuevo
@@ -49,13 +50,27 @@ namespace UI.Desktop
             set { _UsuarioActual = value; }
         }
 
+        private Persona _PersonaActual;
+        public Persona PersonaActual
+        {
+            get { return _PersonaActual; }
+            set { _PersonaActual = value; }
+        }
+        
+
         public override void MapearDeDatos()
         {
+            PersonaLogic pl = new PersonaLogic();
+            PersonaActual = pl.GetOne(UsuarioActual.IDPersona);
+
             txtID.Text = UsuarioActual.ID.ToString();
             chkHabilitado.Checked = UsuarioActual.Habilitado;
-            txtIdPersona.Text = UsuarioActual.IDPersona.ToString();
+            txtIdPersona.Text = PersonaActual.Apellido;
             cbxTipo.SelectedItem = UsuarioActual.Tipo;
-            cbxIDPlan.SelectedValue = UsuarioActual.IDPlan;
+            if ((Usuario.TiposUsuario)cbxTipo.SelectedValue != Usuario.TiposUsuario.Administrador)
+            {
+                cbxIDPlan.SelectedValue = UsuarioActual.IDPlan;
+            }
             txtClave.Text = UsuarioActual.Clave;
             txtConfirmarClave.Text = UsuarioActual.Clave;
             txtUsuario.Text = UsuarioActual.NombreUsuario;            
@@ -68,8 +83,8 @@ namespace UI.Desktop
                 case ModoForm.Alta:
                     UsuarioActual = new Usuario();
                     UsuarioActual.Habilitado = chkHabilitado.Checked;
-                    UsuarioActual.IDPersona = int.Parse(txtIdPersona.Text);
-                    UsuarioActual.IDPlan = (int)cbxIDPlan.SelectedValue;
+                    UsuarioActual.IDPersona = PersonaActual.ID;                   
+                    UsuarioActual.IDPlan = (int)cbxIDPlan.SelectedValue;  
                     UsuarioActual.Tipo = (Usuario.TiposUsuario)cbxTipo.SelectedItem;
                     UsuarioActual.Clave = txtClave.Text;
                     UsuarioActual.NombreUsuario = txtUsuario.Text;
@@ -78,7 +93,7 @@ namespace UI.Desktop
                 case ModoForm.Modificacion:
                     UsuarioActual.ID = int.Parse(txtID.Text);
                     UsuarioActual.Habilitado = chkHabilitado.Checked;
-                    UsuarioActual.IDPersona = int.Parse(txtIdPersona.Text);
+                    UsuarioActual.IDPersona = PersonaActual.ID;
                     UsuarioActual.IDPlan = (int)cbxIDPlan.SelectedValue;
                     UsuarioActual.Tipo = (Usuario.TiposUsuario)cbxTipo.SelectedItem;
                     UsuarioActual.Clave = txtClave.Text;
@@ -104,7 +119,15 @@ namespace UI.Desktop
             MapearADatos();
             EsAdmin();
             UsuarioLogic ul = new UsuarioLogic();
-            ul.Save(UsuarioActual);
+            try
+            {
+                ul.Save(UsuarioActual);
+            }
+            catch(Exception e)
+            {
+                Notificar("Error", "Ya existe un usuario con ese nombre de usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         public override bool Validar()
@@ -156,13 +179,34 @@ namespace UI.Desktop
         private void btnBuscarPersona_Click(object sender, EventArgs e)
         {
             FindPersona findPersonaForm = new FindPersona();
-            findPersonaForm.pasado += new FindPersona.pasar(Ejecutar);
+            findPersonaForm.pasado += new FindPersona.pasar(Ejecutar2);
             findPersonaForm.ShowDialog();
         }
 
         public void Ejecutar(int dato)
         {
             txtIdPersona.Text = dato.ToString();
+        }
+        private void btnFindPersona_Click(object sender, EventArgs e)
+        {
+            FindPersona findPersonaForm = new FindPersona();
+            findPersonaForm.pasado += new FindPersona.pasar(Ejecutar2);
+            findPersonaForm.ShowDialog();
+        }
+        public void Ejecutar2(Persona persona)
+        {
+            PersonaActual = persona;
+            PersonaLogic pl = new PersonaLogic();
+            txtIdPersona.Text = pl.GetOne(persona.ID).Apellido;
+
+        }
+
+        private void UsuariosDesktop_Load(object sender, EventArgs e)
+        {
+            if(Modo == ModoForm.Modificacion)
+            {
+                cbxTipo.Enabled = false;
+            }
         }
     }
 }
