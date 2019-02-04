@@ -4,7 +4,7 @@
         <asp:GridView ID="gridInscripciones" runat="server" AutoGenerateColumns="False"
             SelectedRowStyle-BackColor="Black"
             SelectedRowStyle-ForeColor="White"
-            CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDataBound="gridView_RowDataBound">
+            CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDataBound="gridView_RowDataBound" EmptyDataText="No se encuentra inscripto a ningún curso">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="IDCurso" HeaderText="Materia" AccessibleHeaderText="Materia" />

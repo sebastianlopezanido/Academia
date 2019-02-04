@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="FindMateria.aspx.cs" Inherits="UI.Web.FindMateria" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <asp:Panel ID="Panel1" runat="server" Height="199px">
-        <center><asp:GridView ID="gridMaterias" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="ID" OnSelectedIndexChanged="gridMaterias_SelectedIndexChanged" OnRowDataBound="gridMaterias_RowDataBound">
+        <center><asp:GridView ID="gridMaterias" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="ID" OnSelectedIndexChanged="gridMaterias_SelectedIndexChanged" OnRowDataBound="gridMaterias_RowDataBound" EmptyDataText="No hay materias disponibles">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />

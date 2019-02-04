@@ -11,7 +11,7 @@
         <asp:Button ID="btnVolver_Reporte" runat="server" OnClick="btnVolver_Reporte_Click" Text="Volver" Visible="False" />
         </asp:Panel>
     <asp:Panel ID="gridPanel" runat="server" Height="161px">
-        <asp:GridView ID="gridCursos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" OnSelectedIndexChanged="gridCursos_SelectedIndexChanged" OnRowDataBound="gridCursos_RowDataBound">
+        <asp:GridView ID="gridCursos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" OnSelectedIndexChanged="gridCursos_SelectedIndexChanged" OnRowDataBound="gridCursos_RowDataBound" EmptyDataText="No hay cursos disponibles">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />

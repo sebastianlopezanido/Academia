@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="CursosProfesor.aspx.cs" Inherits="UI.Web.CursosProfesor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <center><asp:Panel ID="gridPanel" runat="server" Height="161px">
-        <asp:GridView ID="gridCursos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" OnSelectedIndexChanged="gridCursos_SelectedIndexChanged" OnRowDataBound="gridCursos_RowDataBound">
+        <asp:GridView ID="gridCursos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" OnSelectedIndexChanged="gridCursos_SelectedIndexChanged" OnRowDataBound="gridCursos_RowDataBound" EmptyDataText="No hay cursos disponibles">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
@@ -23,7 +23,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:GridView ID="gridAlumnos" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" ForeColor="#333333" GridLines="None" OnRowDataBound="GridAlumnos_RowDataBound" OnSelectedIndexChanged="gridAlumnos_SelectedIndexChanged">
+        <asp:GridView ID="gridAlumnos" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" ForeColor="#333333" GridLines="None" OnRowDataBound="GridAlumnos_RowDataBound" OnSelectedIndexChanged="gridAlumnos_SelectedIndexChanged" EmptyDataText="No hay alumnos inscriptos">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
