@@ -30,7 +30,16 @@ namespace UI.Desktop
         {
             Modo = modo;
             EspecialidadLogic el = new EspecialidadLogic(); //controlador :)
-            EspecialidadActual = el.GetOne(id);
+
+            try
+            {
+                EspecialidadActual = el.GetOne(id);
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             Text = CambiarTextos(btnAceptar);
             MapearDeDatos();
         }
@@ -82,8 +91,15 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            EspecialidadLogic el = new EspecialidadLogic();           
-            el.Save(EspecialidadActual);           
+            EspecialidadLogic el = new EspecialidadLogic();
+            try
+            {
+                el.Save(EspecialidadActual);
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }                 
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

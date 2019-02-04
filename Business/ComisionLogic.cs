@@ -24,7 +24,15 @@ namespace BusinessLogic
 
         public Comision GetOne(int ID)
         {
-            return ComisionData.GetOne(ID);
+            try
+            {
+                return ComisionData.GetOne(ID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         public List<Comision> GetAll()
@@ -41,12 +49,26 @@ namespace BusinessLogic
 
         public void Save(Comision comision)
         {
-            ComisionData.Save(comision);
-        }
+            try
+            {
+                ComisionData.Save(comision);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }    
 
         public void Delete(int ID)
         {
-            ComisionData.Delete(ID);
+            try
+            {
+                ComisionData.Delete(ID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
         }
     }
 }

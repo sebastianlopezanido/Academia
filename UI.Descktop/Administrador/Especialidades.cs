@@ -12,7 +12,7 @@ using BusinessEntities;
 
 namespace UI.Desktop
 {
-    public partial class Especialidades : Form
+    public partial class Especialidades : ApplicationForm
     {
         public Especialidades()
         {
@@ -31,17 +31,39 @@ namespace UI.Desktop
         public void Listar()
         {
             EspecialidadLogic el = new EspecialidadLogic();
-            dgvEspecialidades.DataSource = el.GetAll();
+            
+            try
+            {
+                dgvEspecialidades.DataSource = el.GetAll();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Especialidades_Load(object sender, EventArgs e)
         {
-            Listar();
+            try
+            {
+                Listar();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            Listar();
+            try
+            {
+                Listar();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -51,9 +73,17 @@ namespace UI.Desktop
 
         private void tbsNuevo_Click(object sender, EventArgs e)
         {
-            EspecialidadesDesktop ed = new EspecialidadesDesktop(ApplicationForm.ModoForm.Alta);
+            EspecialidadesDesktop ed = new EspecialidadesDesktop(ModoForm.Alta);
             ed.ShowDialog();
-            Listar();
+
+            try
+            {
+                Listar();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
@@ -61,9 +91,17 @@ namespace UI.Desktop
             if (dgvEspecialidades.SelectedRows != null && dgvEspecialidades.MultiSelect == false && dgvEspecialidades.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
             {
                 int ID = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
-                EspecialidadesDesktop ud = new EspecialidadesDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                EspecialidadesDesktop ud = new EspecialidadesDesktop(ID, ModoForm.Modificacion);
                 ud.ShowDialog();
-                Listar();
+
+                try
+                {
+                    Listar();
+                }
+                catch (Exception Ex)
+                {
+                    Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }            
         }
 
@@ -73,16 +111,39 @@ namespace UI.Desktop
             {
                 int ID = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
                 EspecialidadLogic el = new EspecialidadLogic(); //controlador :)
-                EspecialidadActual = el.GetOne(ID);
+
+                try
+                {
+                    EspecialidadActual = el.GetOne(ID);
+                }
+                catch (Exception Ex)
+                {
+                    Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
                 DialogResult dr = MessageBox.Show("¿Seguro que quiere eliminar la especialidad?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dr == DialogResult.Yes)
-                {
-                    EspecialidadActual.State = BusinessEntity.States.Deleted;
-                    el.Save(EspecialidadActual);
+                {                    
+                    try
+                    {                        
+                        el.Delete(EspecialidadActual.ID);
+                        EspecialidadActual.State = BusinessEntity.States.Deleted;
+                    }
+                    catch (Exception Ex)
+                    {
+                        Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
 
-                Listar();
+                try
+                {
+                    Listar();
+                }
+                catch (Exception Ex)
+                {
+                    Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

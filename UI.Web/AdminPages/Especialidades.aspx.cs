@@ -24,8 +24,11 @@ namespace UI.Web
         {
             if (!IsPostBack)
             {
-                LoadGrid();
+                LoadGrid();                
             }
+
+            lblError1.Visible = false;
+            lblError.Visible = false;
         }
 
         EspecialidadLogic _logic;
@@ -50,15 +53,31 @@ namespace UI.Web
 
         private void LoadGrid()
         {
-            gridEspecialidades.DataSource = Logic.GetAll();
-            gridEspecialidades.DataBind();
+            try
+            {
+                gridEspecialidades.DataSource = Logic.GetAll();
+                gridEspecialidades.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+                lblError1.Visible = true;
+            }            
         }
 
         private void LoadForm(int id)
         {
-            Entity = Logic.GetOne(id);
-            txtDescripcion.Text = Entity.Descripcion;
-            txtId.Text = Entity.ID.ToString();            
+            try
+            {
+                Entity = Logic.GetOne(id);
+                txtDescripcion.Text = Entity.Descripcion;
+                txtId.Text = Entity.ID.ToString();
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+                lblError1.Visible = true;
+            }
         }
 
         private void LoadEntity()
@@ -90,6 +109,7 @@ namespace UI.Web
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
+                lblError.Visible = true;
             }
             
         }
@@ -110,6 +130,7 @@ namespace UI.Web
             catch (Exception ex)
             {
                 lblError1.Text = ex.Message;
+                lblError1.Visible = true;
             }            
         }
 
@@ -121,10 +142,20 @@ namespace UI.Web
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            formPanel.Visible = false;
+
             if (IsEntitySelected)
             {
-                DeleteEntity(SelectedID);
-                LoadGrid();
+                try
+                {
+                    DeleteEntity(SelectedID);
+                    LoadGrid();
+                }
+                catch (Exception ex)
+                {
+                    lblError1.Text = ex.Message;
+                    lblError1.Visible = true;
+                }                  
             }
         }
 
@@ -151,17 +182,33 @@ namespace UI.Web
         {
             if (Validar())
             {
-                LoadEntity();
-                SaveEntity(Entity);
-                LoadGrid();
-                formPanel.Visible = false;
+                try
+                {
+                    LoadEntity();
+                    SaveEntity(Entity);
+                    LoadGrid();
+                    formPanel.Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
             }           
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            LoadGrid();
-            formPanel.Visible = false;
+            try
+            {
+                LoadGrid();
+                formPanel.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+                lblError1.Visible = true;
+            }
         }
 
         private bool Validar()
@@ -179,6 +226,7 @@ namespace UI.Web
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int)gridEspecialidades.SelectedValue;
+            formPanel.Visible = false;
         }      
     }
 }

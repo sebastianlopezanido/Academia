@@ -12,7 +12,7 @@ namespace BusinessLogic
     {        
         public EspecialidadLogic()
         {
-            EspecialidadData = new Data.Database.EspecialidadAdapter();
+            EspecialidadData = new EspecialidadAdapter();
         }
         
         private EspecialidadAdapter _EspecialidadData;
@@ -24,7 +24,14 @@ namespace BusinessLogic
 
         public Especialidad GetOne(int ID)
         {
-            return EspecialidadData.GetOne(ID);
+            try
+            {
+                return EspecialidadData.GetOne(ID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
         }       
 
         public List<Especialidad> GetAll()
@@ -41,7 +48,10 @@ namespace BusinessLogic
 
         public void Save(Especialidad especialidad)
         {
-            try { EspecialidadData.Save(especialidad); }
+            try
+            {
+                EspecialidadData.Save(especialidad);
+            }
             catch (Exception ex)
             {
                 throw ex;
@@ -50,10 +60,15 @@ namespace BusinessLogic
         }
 
         public void Delete(int ID)
-        {
-            EspecialidadData.Delete(ID);
-           
-            
+        {            
+            try
+            {
+                EspecialidadData.Delete(ID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }        
     }
 }

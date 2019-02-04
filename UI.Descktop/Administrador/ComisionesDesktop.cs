@@ -16,12 +16,20 @@ namespace UI.Desktop
     {
         public ComisionesDesktop()
         {
-            InitializeComponent();
-            PlanLogic pl = new PlanLogic();
-            cbxIDPlan.DataSource = pl.GetAll();
-            cbxIDPlan.ValueMember = "ID";
-            cbxIDPlan.DisplayMember = "Descripcion";
-            CenterToScreen();
+            InitializeComponent();            
+
+            try
+            {
+                PlanLogic pl = new PlanLogic();
+                cbxIDPlan.DataSource = pl.GetAll();
+                cbxIDPlan.ValueMember = "ID";
+                cbxIDPlan.DisplayMember = "Descripcion";
+                CenterToScreen();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
 
         public ComisionesDesktop(ModoForm modo) : this()
@@ -33,10 +41,19 @@ namespace UI.Desktop
         public ComisionesDesktop(int id, ModoForm modo) : this()
         {
             Modo = modo;
-            ComisionLogic cu = new ComisionLogic(); //controlador :)
-            ComisionActual = cu.GetOne(id);
-            Text = CambiarTextos(btnAceptar);            
-            MapearDeDatos();
+            ComisionLogic cu = new ComisionLogic();
+
+            try
+            {
+                ComisionActual = cu.GetOne(id);
+                Text = CambiarTextos(btnAceptar);
+                MapearDeDatos();
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private Comision _ComisionActual;
@@ -51,7 +68,7 @@ namespace UI.Desktop
             txtID.Text = ComisionActual.ID.ToString();
             txtAño.Text = ComisionActual.AnioEspecialidad.ToString();
             txtDescripcion.Text = ComisionActual.Descripcion;
-            cbxIDPlan.SelectedValue = ComisionActual.IDPlan.ToString();
+            cbxIDPlan.SelectedValue = ComisionActual.IDPlan;
         }
 
         public override void MapearADatos()
@@ -82,7 +99,14 @@ namespace UI.Desktop
         {
             MapearADatos();
             ComisionLogic cl = new ComisionLogic();
-            cl.Save(ComisionActual);
+            try
+            {
+                cl.Save(ComisionActual);
+            }
+            catch (Exception Ex)
+            {
+                Notificar("Error", Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
 
         public override bool Validar()
@@ -92,14 +116,7 @@ namespace UI.Desktop
                 Notificar("Campos incompletos", "Debe llenar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
-            }
-            int num;
-            if ((txtAño.Text.Length != 4) || (!(int.TryParse(txtAño.Text, out num))))
-            {
-                Notificar("Error","Ingrese correctamente el año", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return false;
-            }
+            }           
 
             return true;
         }        

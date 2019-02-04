@@ -146,18 +146,26 @@ namespace Data.Database
 
         public void Save(Comision comision)
         {
-            switch(comision.State)
+            try
             {
-                case BusinessEntity.States.New:
-                    Insert(comision);
-                    break;
-                case BusinessEntity.States.Modified:
-                    Update(comision);
-                    break;
-                case BusinessEntity.States.Deleted:
-                    Delete(comision.ID);
-                    break;                
+                switch (comision.State)
+                {
+                    case BusinessEntity.States.New:
+                        Insert(comision);
+                        break;
+                    case BusinessEntity.States.Modified:
+                        Update(comision);
+                        break;
+                    case BusinessEntity.States.Deleted:
+                        Delete(comision.ID);
+                        break;
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
             }
         }
+            
     }
 }

@@ -70,9 +70,7 @@ namespace UI.Desktop
                         if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
                         {
                             pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
-                        }
-
-                        Close();
+                        }                        
                     }
                     else
                     {
@@ -84,8 +82,7 @@ namespace UI.Desktop
                     if (dgvMaterias.SelectedRows != null && dgvMaterias.MultiSelect == false && dgvMaterias.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
                     {
                         pasado(((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID);
-                    }
-                    Close();
+                    }                    
 
                     break;
             }

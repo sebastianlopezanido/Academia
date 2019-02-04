@@ -32,7 +32,7 @@ personas
 
 
 fela
-inscripcion alumno
-especialidades
-comisiones
+inscripcion alumno done
+especialidades done
+comisiones done
 

@@ -30,7 +30,8 @@
             <asp:Panel ID="Panel1" runat="server">
                 <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" OnClick="btnNuevo_Click" />
                 <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" />
-                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click"
+                    OnClientClick="return confirm('¿Seguro que desea eliminar el plan?')"/>
                 <br />
                 <asp:Button ID="btnReporte" runat="server" OnClick="btnReporte_Click" Text="Imprimir" />
             </asp:Panel>

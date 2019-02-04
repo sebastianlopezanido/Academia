@@ -25,11 +25,22 @@ namespace UI.Web
             {
                 LoadGrid();
                 EspecialidadLogic el = new EspecialidadLogic();
-                ddlEsp.DataSource = el.GetAll();
-                ddlEsp.DataValueField = "ID";
-                ddlEsp.DataTextField = "Descripcion";
-                ddlEsp.DataBind();
+                try
+                {
+                    ddlEsp.DataSource = el.GetAll();
+                    ddlEsp.DataValueField = "ID";
+                    ddlEsp.DataTextField = "Descripcion";
+                    ddlEsp.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    lblError1.Visible = true;
+                    lblError1.Text = ex.Message;
+                }
             }
+
+            lblError1.Visible = false;
+            lblError.Visible = false;
         }        
 
         private Especialidad _EspecialidadActual;
@@ -61,16 +72,32 @@ namespace UI.Web
 
         private void LoadGrid()
         {
-            gridPlanes.DataSource = Logic.GetAll();
-            gridPlanes.DataBind();
+            try
+            {
+                gridPlanes.DataSource = Logic.GetAll();
+                gridPlanes.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+                lblError1.Visible = true;
+            }            
         }
 
         private void LoadForm(int id)
         {
-            Entity = Logic.GetOne(id);
-            txtId.Text = Entity.ID.ToString();
-            txtDescripcion.Text = Entity.Descripcion.ToString();
-            ddlEsp.SelectedValue = Entity.IDEspecialidad.ToString();                        
+            try
+            {
+                Entity = Logic.GetOne(id);
+                txtId.Text = Entity.ID.ToString();
+                txtDescripcion.Text = Entity.Descripcion.ToString();
+                ddlEsp.SelectedValue = Entity.IDEspecialidad.ToString();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+                lblError.Visible = true;
+            }                                
         }
 
         private void LoadEntity()
@@ -104,6 +131,7 @@ namespace UI.Web
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
+                lblError.Visible = true;
             }
         }
 
@@ -123,6 +151,7 @@ namespace UI.Web
             catch (Exception ex)
             {
                 lblError1.Text = ex.Message;
+                lblError1.Visible = true;
             }
         }
 
@@ -158,8 +187,16 @@ namespace UI.Web
         {
             if (IsEntitySelected)
             {
-                DeleteEntity(SelectedID);
-                LoadGrid();
+                try
+                {
+                    DeleteEntity(SelectedID);
+                    LoadGrid();
+                }
+                catch (Exception ex)
+                {
+                    lblError1.Text = ex.Message;
+                    lblError1.Visible = true;
+                }
             }
         }
 
@@ -167,24 +204,42 @@ namespace UI.Web
         {
             if (Validar())
             {
-                LoadEntity();
-                SaveEntity(Entity);
-                LoadGrid();
-                formPanel.Visible = false;
+                try
+                {
+                    LoadEntity();
+                    SaveEntity(Entity);
+                    LoadGrid();
+                    formPanel.Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
             }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            LoadGrid();
-            formPanel.Visible = false;
+            try
+            {
+                LoadGrid();
+                formPanel.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                lblError1.Text = ex.Message;
+                lblError1.Visible = true;
+            }
         }
+    
 
         private bool Validar()
         {
             if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 lblError.Text = "Debe llenar todos los campos";
+                lblError.Visible = true;
                 return false;
             }
 
@@ -194,6 +249,7 @@ namespace UI.Web
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int)gridPlanes.SelectedValue;
+            formPanel.Visible = false;
         }
 
         protected void gridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -203,8 +259,16 @@ namespace UI.Web
                 if (e.Row.Cells[2].Text != null)
                 {
                     EspecialidadLogic pl = new EspecialidadLogic();
-                    EspecialidadActual = pl.GetOne(int.Parse(e.Row.Cells[2].Text));
-                    e.Row.Cells[2].Text = EspecialidadActual.Descripcion;
+                    try
+                    {
+                        EspecialidadActual = pl.GetOne(int.Parse(e.Row.Cells[2].Text));
+                        e.Row.Cells[2].Text = EspecialidadActual.Descripcion;
+                    }
+                    catch (Exception ex)
+                    {
+                        lblError1.Text = ex.Message;
+                        lblError1.Visible = true;
+                    }                    
                 }
             }
         }
@@ -212,11 +276,12 @@ namespace UI.Web
         protected void btnReporte_Click(object sender, EventArgs e)
         {
             gridPanel.Visible = false;
-            List<BusinessEntities.Plan_Reporte> Datos = new List<BusinessEntities.Plan_Reporte>();
+            formPanel.Visible = false;
+            List<Plan_Reporte> Datos = new List<Plan_Reporte>();
 
             for (int i = 0; i < gridPlanes.Rows.Count; i++)
             {
-                BusinessEntities.Plan_Reporte linea = new BusinessEntities.Plan_Reporte();
+                Plan_Reporte linea = new Plan_Reporte();
 
                 linea.ID = gridPlanes.Rows[i].Cells[0].Text;
                 linea.Descripcion = gridPlanes.Rows[i].Cells[1].Text;

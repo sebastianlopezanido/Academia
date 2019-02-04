@@ -180,7 +180,7 @@ namespace Data.Database
                 SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM alumnos_inscripciones WHERE id_alumno=@idUsr AND id_curso=(SELECT id_curso FROM cursos WHERE id_materia=@idMat AND anio_calendario=YEAR(getdate()))", sqlConn);
                 cmd.Parameters.Add("@idUsr", SqlDbType.Int).Value = idUsr;
                 cmd.Parameters.Add("@idMat", SqlDbType.Int).Value = idMat;
-                cant = Convert.ToInt32(cmd.ExecuteScalar());
+                cant = (int)cmd.ExecuteScalar();
                 if (cant == 0) return false; else return true;                
             }
             catch (Exception Ex)
